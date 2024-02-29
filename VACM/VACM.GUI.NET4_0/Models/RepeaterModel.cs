@@ -419,6 +419,63 @@ namespace VACM.GUI.NET4_0.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Compiles a terminal command, to create and start an audio repeater.
+        /// Also, use in batch script.
+        /// </summary>
+        /// <returns>The terminal command</returns>
+        public string ToCommand()
+        {
+            return $"start " +
+                $"/min \"audiorepeater\" \"{PathName}\" " +
+                $"/SamplingRate:{SamplingRate} " +
+                $"/BitsPerSample:{BitsPerSample} " +
+                $"/Channels:{ChannelList.Count} " +
+                $"/ChanCfg:custom={ChannelMask} " +
+                $"/BufferMs:{BufferMs} " +
+                $"/Prefill:{Prefill} " +
+                $"/ResyncAt:{ResyncAt} " +
+                $"/AutoStart";
+        }
+
+        /// <summary>
+        /// Compiles output for a canvas graph file.
+        /// </summary>
+        /// <returns>The output</returns>
+        public string ToSaveData()
+        {
+            return
+                $"{SamplingRate}\n" +
+                $"{BitsPerSample}\n" +
+                $"{ChannelMask}\n" +
+                $"{(int)ChannelConfig}\n" +
+                $"{BufferMs}\n" +
+                $"{Buffers}\n" +
+                $"{Prefill}\n" +
+                $"{ResyncAt}";
+        }
+
+        /// <summary>
+        /// Sets the Constructor properties.
+        /// </summary>
+        /// <param name="infoList">The info list</param>
+        public void SetConstructorProperties(List<string> infoList)
+        {
+            if (infoList is null)
+            {
+                return;
+            }
+
+            BitsPerSample = byte.Parse(infoList[1]);
+            BufferMs = ushort.Parse(infoList[4]);
+            Buffers = byte.Parse(infoList[5]);
+            ChannelMask = uint.Parse(infoList[2]);
+            ChannelConfig = (ChannelConfig)int.Parse(infoList[3]);
+            Prefill = byte.Parse(infoList[6]);
+            ResyncAt = byte.Parse(infoList[7]);
+            SamplingRate = uint.Parse(infoList[0]);
+        }
+
         #endregion
     }
 }
