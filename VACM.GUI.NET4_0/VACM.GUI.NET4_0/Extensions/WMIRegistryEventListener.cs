@@ -9,8 +9,20 @@ using System.Threading.Tasks;
 
 namespace VACM.NET4.Extensions
 {
-    public class WMIRegistryEventListener
+    public class WMIRegistryEventListener : IDisposable
     {
+        // TODO: add on value change event.
+        // TODO: how to know when event signals a change, and to retrieve that value?
+
+
+        // TODO: create new thread with async tasks, monitor for new event on registry
+        //  key, and check for new value on event, and retrieve value.
+
+        // TODO: add logic to watch for given sub key and its values.
+        //  Track the values changed, or if it does change (boolean).
+
+
+
         #region Parameters
 
         private WindowsIdentity currentWindowsIdentity;
@@ -114,10 +126,6 @@ namespace VACM.NET4.Extensions
             ConstructorHelper();
         }
 
-        //TODO: add start and stop watcher methods.
-
-        // TODO: add on value change event.
-
         /// <summary>
         /// Constructor helper logic
         /// </summary>
@@ -132,9 +140,16 @@ namespace VACM.NET4.Extensions
             registryKeyPathAndValueNameAndManagementEventWatcherDictionary =
                 new Dictionary<string, Dictionary<string, ManagementEventWatcher>>();
 
-            //TODO: create value dict here.
-            
-            //TODO: start all watchers here.
+            registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary =
+                new Dictionary<RegistryHive, Dictionary
+                    <string, Dictionary<string, string>>>();
+
+            currentWindowsIdentity = WindowsIdentity.GetCurrent();
+            ParseConstructorDictionaryAndSetDictionaries();
+            StartAllManagementEventWatchers();
+
+            Thread.Sleep(10000);
+            StopAllManagementEventWatchers();
         }
 
         /// <summary>
@@ -303,7 +318,8 @@ namespace VACM.NET4.Extensions
                     [registryKeyPath].Add(registryValueName, managementEventWatcher);
             }
 
-            //TODO: set value dict here.
+            SetSubKeyValueInDictionary
+                (registryHive, registryKeyPath, registryValueName);
         }
 
         /// <summary>
@@ -367,6 +383,116 @@ namespace VACM.NET4.Extensions
              */
         }
 
+        /// <summary>
+        /// Get sub key value in the dictionary.
+        /// </summary>
+        /// <param name="registryHive">The registry hive</param>
+        /// <param name="registryKeyPath">The registry key path</param>
+        /// <param name="registryValueName">The registry value name</param>
+        internal void SetSubKeyValueInDictionary(RegistryHive registryHive,
+            string registryKeyPath, string registryValueName)
+        {
+            string subKeyValue = GetSubKeyValueOfRegistryKey
+                (registryHive, registryKeyPath, registryValueName);
+
+            if (!registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
+                .ContainsKey(registryHive))
+            {
+                registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary.Add
+                    (registryHive,
+                    new Dictionary<string, Dictionary<string, string>>()
+                        {
+                            { registryKeyPath, new Dictionary<string, string>()
+                                {
+                                    { registryValueName, subKeyValue },
+                                }
+                            }
+                        });
+
+                return;
+            }
+            else if (!registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
+                [registryHive][registryKeyPath][registryValueName]
+                .Contains(subKeyValue))
+            {
+                registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
+                    [registryHive][registryKeyPath].Add(registryValueName, subKeyValue);
+            }
+            else
+            {
+                registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
+                    [registryHive][registryKeyPath][registryValueName] = subKeyValue;
+            }
+        }
+
+        /// <summary>
+        /// Start all management event watchers.
+        /// </summary>
+        internal void StartAllManagementEventWatchers()
+        {
+            if (managementEventWatcherList is null
+                || managementEventWatcherList.Count == 0)
+            {
+                return;
+            }
+
+            managementEventWatcherList.ForEach(managementEventWatcher =>
+                StartManagementEventWatcher(managementEventWatcher));
+        }
+
+        /// <summary>
+        /// Start management event watcher.
+        /// </summary>
+        /// <param name="managementEventWatcher">The management event watcher</param>
+        internal void StartManagementEventWatcher
+            (ManagementEventWatcher managementEventWatcher)
+        {
+            if (managementEventWatcher is null)
+            {
+                return;
+            }
+
+            managementEventWatcher.Start();
+            //TODO: add logger here. Check status (if started or not).
+        }
+
+        /// <summary>
+        /// Stop all management event watchers.
+        /// </summary>
+        internal void StopAllManagementEventWatchers()
+        {
+            if (registryKeyPathAndValueNameAndManagementEventWatcherDictionary
+                is null)
+            {
+                return;
+            }
+
+            if (registryKeyPathAndValueNameAndManagementEventWatcherDictionary is null
+                || registryKeyPathAndValueNameAndManagementEventWatcherDictionary.Count == 0)
+            {
+                return;
+            }
+
+            managementEventWatcherList.ForEach(managementEventWatcher =>
+                StopManagementEventWatcher(managementEventWatcher));
+        }
+
+        /// <summary>
+        /// Stop management event watcher.
+        /// </summary>
+        /// <param name="managementEventWatcher">The management event watcher</param>
+        internal void StopManagementEventWatcher
+            (ManagementEventWatcher managementEventWatcher)
+        {
+            if (managementEventWatcher is null)
+            {
+                return;
+            }
+
+            managementEventWatcher.Stop();
+            //TODO: add logger here. Check status (if stopped or not).
+        }
+
         #endregion
 
         #region Logic
@@ -403,10 +529,9 @@ namespace VACM.NET4.Extensions
         /// </summary>
         public void Dispose()
         {
-            //TODO: stop all watchers on exit.
+            this.StopAllManagementEventWatchers();
         }
 
         #endregion
-
     }
 }
