@@ -15,7 +15,7 @@ namespace VACM.GUI.NET4_0
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //TODO: add new form.
         }
     }
 }
