@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using VACM.NET4.Extensions;
 
 namespace VACM.GUI.NET4_0
 {
@@ -141,6 +143,7 @@ namespace VACM.GUI.NET4_0
         #region File logic
 
         //TODO: add settings.ini ?
+        private static byte applicationProblemEventCounter = 0;
 
         private static string currentDirectory
         {
@@ -154,10 +157,86 @@ namespace VACM.GUI.NET4_0
 
         public readonly string DefaultGraphEmptyValue = "\\";
 
+        public static readonly string CatchAllErrorMessage =
+            $"If problem persists, please restart\"{ApplicationNameAsAbbreviation}\".";
+
         public static readonly string SavePath =
             $"{currentDirectory}{SavePartialPath}\\";                                   //NOTE: "C:\Program Files\VACM\save"
 
         #endregion File logic
 
+        #region Problem event counter logic
+
+        private const byte maxProblemEventCount = 3;
+
+        /// <summary>
+        /// Check if application problem event counter has exceeded set value.
+        /// If not, return immediately.
+        /// If yes, create a messageText box to warn the user, and offer to either reset
+        /// counter, or save file and exit application.
+        /// </summary>
+        internal static void WarnAndAskUserToExitIfProblemCounterExceededMaxValue()
+        {
+            if (applicationProblemEventCounter < maxProblemEventCount)
+            {
+                return;
+            }
+
+            string messageText = $"Unexpected behavior detected." +
+                $"Do you wish to exit {ApplicationNameAsAbbreviation}?" +
+                "\n\nTo prevent data loss," +
+                " you will be prompted to save your latest changes.";
+
+            bool doExitApplication = MessageBoxWrapper.ShowYesNoAndReturnTrueFalse
+                (messageText, ApplicationNameAsAbbreviation);
+
+            if (!doExitApplication)
+            {
+                ResetProblemEventCounter();
+                return;
+            }
+
+            //TODO: add logic here to save changes to file.
+
+            Process.GetCurrentProcess().Kill();
+        }
+
+        /// <summary>
+        /// Increment problem counter.
+        /// </summary>
+        internal static void IncrementProblemEventCounter()
+        {
+            //TODO: add logger here.
+
+            if (applicationProblemEventCounter <= byte.MaxValue)
+            {
+                return;
+            }
+
+            applicationProblemEventCounter++;
+        }
+
+        /// <summary>
+        /// Reset problem counter to zero.
+        /// </summary>
+        internal static void ResetProblemEventCounter()
+        {
+            applicationProblemEventCounter = 0;
+            //TODO: add logger here.
+        }
+
+        /// <summary>
+        /// Increments problem event counter, logs counter and stack trace,
+        /// and checks if counter has exceeded max value. If yes, warn user.
+        /// </summary>
+        /// <param name="stackTrace"></param>
+        public static void HasHadProblem(StackTrace stackTrace)
+        {
+            IncrementProblemEventCounter();
+            //TODO: add logger here for increment counter, and stack trace.
+            WarnAndAskUserToExitIfProblemCounterExceededMaxValue();
+        }
+
+        #endregion Problem event counter logic
     }
 }
