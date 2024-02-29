@@ -9,6 +9,8 @@ namespace VACM.GUI.NET4_0.Models
 {
     public class RepeaterDataModel
     {
+        //TODO: validate user control validation works as intended!
+
         #region Parameters
 
         public Dictionary<DeviceControl, Dictionary<DeviceControl, RepeaterModel>>
