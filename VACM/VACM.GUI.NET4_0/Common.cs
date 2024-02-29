@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -87,6 +88,55 @@ namespace VACM.GUI.NET4_0
         }
 
         #endregion Application support logic
+
+        #region Executable path logic
+
+        private readonly static string executableName = "audiorepeater.exe";
+
+        private readonly static string firstParentAndBasePathName =
+            $"{ReferencedApplicationName}\\{executableName}";                           //NOTE: "Virtual Audio Cable\audiorepeater.exe"
+
+        private readonly static string programFilesPathName = "Program Files\\";
+
+        private readonly static string x86ProgramFilesOnX64SystemPathName =
+            "Program Files (x86)\\";
+
+        private static string possibleExecutableFullPath1 = $"{systemRootPathName}" +   //NOTE: "C:\Program Files\Virtual Audio Cable\audiorepeater.exe"
+            $"{programFilesPathName}{firstParentAndBasePathName}";
+
+        private static string possibleExecutableFullPath2 = $"{systemRootPathName}" +   //NOTE: "C:\Program Files (x86)\Virtual Audio Cable\audiorepeater.exe"
+            $"{x86ProgramFilesOnX64SystemPathName}{firstParentAndBasePathName}";
+
+        private static string systemRootPathName = Path.GetPathRoot                     //NOTE: expect "C:\"
+            (Environment.GetFolderPath(Environment.SpecialFolder.System));
+
+        public static string ExpectedExecutableFullPath
+        {
+            get
+            {
+                if (Environment.Is64BitProcess == Environment.Is64BitOperatingSystem)   //NOTE: ARM, x86, and x64 Windows, the default is "Program Files".
+                {
+                    return possibleExecutableFullPath1;
+                }
+
+                return possibleExecutableFullPath2;                                     //NOTE: x86 executable on x64 Windows.
+            }
+        }
+
+        public static bool DoesExecutableExist
+        {
+            get
+            {
+                if (systemRootPathName is null)
+                {
+                    return false;
+                }
+
+                return File.Exists(ExpectedExecutableFullPath);
+            }
+        }
+
+        #endregion Executable path logic
 
     }
 }
