@@ -67,10 +67,74 @@ namespace VACM.NET4.Extensions
         //TODO: add start and stop watcher methods.
 
         //TODO: add dispose.
-        
+
         // TODO: add on value change event.
 
+        /// <summary>
+        /// Get the registry key from the valid hive.
+        /// </summary>
+        /// <param name="registryHive">The registry hive</param>
+        /// <returns>The registry key</returns>
+        internal RegistryKey GetRegistryKeyFromHive(RegistryHive registryHive)
+        {
+            if (!validRegistryHiveObjectAndValueDictionary.ContainsKey(registryHive))
+            {
+                return null;
+            }
+
+            switch (registryHive)
+            {
+                case RegistryHive.LocalMachine:
+                    return Registry.LocalMachine;
+
+                case RegistryHive.Users:
+                    return Registry.CurrentUser;
+
+                default:
+                    return null;
+            }
+        }
 
         #endregion
+
+        #region Logic
+
+        /// <summary>
+        /// Get sub key value of the registry key.
+        /// </summary>
+        /// <param name="registryHive">The registry hive</param>
+        /// <param name="registryKeyPath">The registry key path</param>
+        /// <param name="registryValueName">The registry value name</param>
+        public string GetSubKeyValueOfRegistryKey(RegistryHive registryHive,
+            string registryKeyPath, string registryValueName)
+        {
+            RegistryKey registryKey = GetRegistryKeyFromHive(registryHive);
+
+            if (registryKey is null)
+            {
+                return null;
+            }
+
+            registryKey.OpenSubKey(registryKeyPath);
+            var subKeyValue = registryKey?.GetValue(registryValueName);
+
+            if (subKeyValue is null)
+            {
+                return null;
+            }
+
+            return subKeyValue.ToString();
+        }
+
+        /// <summary>
+        /// Dispose the constructor object.
+        /// </summary>
+        public void Dispose()
+        {
+            //TODO: stop all watchers on exit.
+        }
+
+        #endregion
+
     }
 }
