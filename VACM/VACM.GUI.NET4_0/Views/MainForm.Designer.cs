@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using VACM.GUI.NET4_0.ViewModels.Accessors;
@@ -564,6 +565,8 @@ namespace VACM.GUI.NET4_0.Views
 
             this.fileExitToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
             this.fileExitToolStripMenuItem.Text = "Exit";
+            this.fileExitToolStripMenuItem.Click +=
+                new System.EventHandler(fileExitToolStripMenuItem_Click);
             // 
             // fileNewToolStripMenuItem
             // 
@@ -584,6 +587,8 @@ namespace VACM.GUI.NET4_0.Views
 
             this.fileOpenToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
             this.fileOpenToolStripMenuItem.Text = "Open...";
+            this.fileOpenToolStripMenuItem.Click +=
+                new System.EventHandler(fileOpenToolStripMenuItem_Click);
             // 
             // fileSaveToolStripMenuItem
             // 
