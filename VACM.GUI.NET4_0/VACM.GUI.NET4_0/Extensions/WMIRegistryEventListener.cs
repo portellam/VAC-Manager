@@ -5,7 +5,6 @@ using System.Linq;
 using System.Management;
 using System.Security.Principal;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace VACM.NET4.Extensions
 {
