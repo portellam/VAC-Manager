@@ -60,7 +60,8 @@ namespace VACM.GUI.NET4_0
 
         public const byte AudioRepeaterMaxCountForWindowsNT5 = 32;
         public const byte AudioRepeaterMaxCountForWindowsNT6AndAbove = byte.MaxValue;
-        
+        public const ushort UserControlMaxCount = ushort.MaxValue;
+
         public static bool IsWindowsNT5
         {
             get
