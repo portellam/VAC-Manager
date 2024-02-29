@@ -86,6 +86,40 @@ namespace VACM.GUI.NET4_0.ViewModels
             }
         }
 
+        public static WMIRegistryEventListener WMIRegistryEventListener;
+
+        #endregion
+
+        #region Logic
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public LightThemeValidator()
+        {
+            if (Program.DoesArgumentForceColorTheme)
+            {
+                return;
+            }
+
+            List<string> valueNameList = new List<string>()
+            {
+                appsUseLightThemeRegistryValueName,
+                systemUsesLightThemeRegistryValueName,
+            };
+
+            WMIRegistryEventListener = new WMIRegistryEventListener
+                (RegistryHive.Users, darkModeRegistryKeyPath, valueNameList);
+        }
+
+        /// <summary>
+        /// Dispose the constructor object.
+        /// </summary>
+        public void Dispose()
+        {
+            WMIRegistryEventListener.Dispose();
+        }
+
         #endregion
     }
 }
