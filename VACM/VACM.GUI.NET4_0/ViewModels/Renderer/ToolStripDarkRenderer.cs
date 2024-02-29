@@ -3,7 +3,7 @@ using VACM.GUI.NET4_0.ViewModels.ColorTable;
 
 namespace VACM.GUI.NET4_0.ViewModels.Renderer
 {
-    public class ToolStripDarkRenderer
+    public class ToolStripDarkRenderer : ToolStripProfessionalRenderer
     {
         #region Parameters
 
