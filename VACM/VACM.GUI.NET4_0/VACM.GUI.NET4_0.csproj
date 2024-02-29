@@ -56,6 +56,7 @@
     <Compile Include="Models\RepeaterDataModel.cs" />
     <Compile Include="Models\RepeaterModel.cs" />
     <Compile Include="Structs\Channel.cs" />
+    <Compile Include="Structs\ChannelConfig.cs" />
     <Compile Include="ViewModels\Accessors\AssemblyInformationAccessor.cs" />
     <Compile Include="Views\AboutForm.cs">
       <SubType>Form</SubType>
