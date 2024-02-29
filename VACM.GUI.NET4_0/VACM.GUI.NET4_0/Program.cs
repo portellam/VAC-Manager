@@ -26,9 +26,18 @@ namespace VACM.GUI.NET4_0
         internal static void Main(string[] arguments)
         {
             Arguments = arguments;
+            ParseArguments();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+        }
+
+        /// <summary>
+        /// Parse arguments passed by command line.
+        /// </summary>
+        internal static void ParseArguments()
+        {
+            
         }
 
         #endregion
