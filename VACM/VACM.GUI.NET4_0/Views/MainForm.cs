@@ -17,6 +17,7 @@ namespace VACM.GUI.NET4_0.Views
     {
         #region Parameters
 
+        private bool toggleDeviceAddSelectAllToolStripMenuItem;
         private string fileName;
         private DeviceListModel deviceListModel;
         private DeviceControl inputDeviceControl { get; set; }
@@ -36,8 +37,18 @@ namespace VACM.GUI.NET4_0.Views
         [ExcludeFromCodeCoverage]
         public MainForm()
         {
+            toggleDeviceAddSelectAllToolStripMenuItem = false;
+            SetDeviceList();
             InitializeComponent();
             PostInitializeComponent();
+        }
+
+        /// <summary>
+        /// Set the device list.
+        /// </summary>
+        internal void SetDeviceList()
+        {
+            deviceListModel = new DeviceListModel();
         }
 
         #endregion
