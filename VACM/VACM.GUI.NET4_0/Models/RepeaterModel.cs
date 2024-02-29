@@ -6,7 +6,9 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Windows.Media;
 using System.Windows.Shapes;
+using VACM.GUI.NET4_0.Extensions;
 using VACM.GUI.NET4_0.Structs;
 using VACM.GUI.NET4_0.ViewModels;
 
@@ -469,6 +471,9 @@ namespace VACM.GUI.NET4_0.Models
 
             Link = new Line
             {
+                Stroke = new SolidColorBrush(ColorExtension.ToMediaColor
+                    (FormColorUpdater.ForeColor)),
+
                 StrokeThickness = 2
             };
 
