@@ -59,16 +59,66 @@ namespace VACM.NET4.Extensions
                     },
                 };
 
-            //TODO: add constuctor helper here.
+            ConstructorHelper();
         }
 
-        //TODO: add multiple constructors for ease of use.
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="registryHive">The registry hive</param>
+        /// <param name="registryKeyPathAndValueNameListDictionary">The registry key
+        /// path and value name list dictionary</param>
+        public WMIRegistryEventListener(RegistryHive registryHive,
+            Dictionary<string, List<string>> registryKeyPathAndValueNameListDictionary)
+        {
+            this.registryHiveAndKeyPathAndValueNameListDictionary =
+                new Dictionary<RegistryHive, Dictionary<string, List<string>>>()
+                {
+                    {
+                        registryHive, registryKeyPathAndValueNameListDictionary
+                    },
+                };
+
+            ConstructorHelper();
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="registryHiveAndKeyPathAndValueNameListDictionary">The registry
+        /// hive, key path, and value name list dictionary</param>
+        public WMIRegistryEventListener
+            (Dictionary<RegistryHive, Dictionary<string, List<string>>>
+            registryHiveAndKeyPathAndValueNameListDictionary)
+        {
+            this.registryHiveAndKeyPathAndValueNameListDictionary =
+                registryHiveAndKeyPathAndValueNameListDictionary;
+
+            ConstructorHelper();
+        }
 
         //TODO: add start and stop watcher methods.
 
-        //TODO: add dispose.
-
         // TODO: add on value change event.
+
+        /// <summary>
+        /// Constructor helper logic
+        /// </summary>
+        internal void ConstructorHelper()
+        {
+            if (registryHiveAndKeyPathAndValueNameListDictionary is null
+                || registryHiveAndKeyPathAndValueNameListDictionary.Count == 0)
+            {
+                throw new ArgumentNullException();
+            }
+
+            registryKeyPathAndValueNameAndManagementEventWatcherDictionary =
+                new Dictionary<string, Dictionary<string, ManagementEventWatcher>>();
+
+            //TODO: create value dict here.
+            
+            //TODO: start all watchers here.
+        }
 
         /// <summary>
         /// Get the registry key from the valid hive.
