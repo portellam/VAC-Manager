@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using VACM.GUI.NET4_0.Views;
 
 namespace VACM.GUI.NET4_0
 {
