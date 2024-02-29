@@ -138,5 +138,26 @@ namespace VACM.GUI.NET4_0
 
         #endregion Executable path logic
 
+        #region File logic
+
+        //TODO: add settings.ini ?
+
+        private static string currentDirectory
+        {
+            get
+            {
+                return Directory.GetCurrentDirectory();                                 //NOTE: expected "C:\Program Files\VACM"
+            }
+        }
+
+        private static readonly string SavePartialPath = @"\graphs";
+
+        public readonly string DefaultGraphEmptyValue = "\\";
+
+        public static readonly string SavePath =
+            $"{currentDirectory}{SavePartialPath}\\";                                   //NOTE: "C:\Program Files\VACM\save"
+
+        #endregion File logic
+
     }
 }
