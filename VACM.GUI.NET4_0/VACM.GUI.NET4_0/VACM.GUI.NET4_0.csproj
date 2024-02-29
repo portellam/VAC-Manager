@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\MessageBoxWrapper.cs" />
-    <Compile Include="Extensions\WMIEventRegistryListener.cs" />
+    <Compile Include="Extensions\WMIRegistryEventListener.cs" />
     <Compile Include="Models\DeviceListModel.cs" />
     <Compile Include="Models\RepeaterDataModel.cs" />
     <Compile Include="Models\RepeaterModel.cs" />
