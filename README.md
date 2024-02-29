@@ -35,18 +35,18 @@ VAC Manager GPL-3.0, Copyleft © 2024 Alexander Portell.
 
 ## TO DO (subject to change)
 - Development:
- - [ ] Choose GUI type: WinForms
-	- [ ] Choose design pattern: Model-ViewModel-View
-		- [ ] Models
-			- [ ] Audio device model
+ - [x] Choose GUI type: WinForms
+	- [x] Choose design pattern: Model-ViewModel-View
+		- [x] Models
+			- [x] Audio device model
 			- [ ] Repeater model
-			- [ ] Repeater data model
-		- [ ] Views
-			- [ ] Main form
-				- [ ] Create GUI layout.
+			- [x] Repeater data model
+		- [x] Views
+			- [x] Main form
+				- [x] Create GUI layout.
 				- [ ] Create all hotkeys.
 				- [ ] Create all backend logic for accesing and manipulating model data and other forms.
-			- [ ] About form
+			- [x] About form
 			- [ ] Grid table
 				- [ ] Present audio devices and repeaters in heirarchical list format.
 				- [ ] Validate Main form logic works here.
