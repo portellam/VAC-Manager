@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using VACM.GUI.NET4_0.ViewModels.Accessors;
 
