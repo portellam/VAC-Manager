@@ -14,14 +14,11 @@ namespace VACM.NET4.Extensions
         // TODO: add on value change event.
         // TODO: how to know when event signals a change, and to retrieve that value?
 
-
         // TODO: create new thread with async tasks, monitor for new event on registry
         //  key, and check for new value on event, and retrieve value.
 
         // TODO: add logic to watch for given sub key and its values.
         //  Track the values changed, or if it does change (boolean).
-
-
 
         #region Parameters
 
