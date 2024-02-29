@@ -9,16 +9,11 @@ using System.Windows.Forms;
 
 namespace VACM.GUI.NET4_0.ViewModels
 {
-    public partial class DeviceControl : Control
+    public partial class DeviceControl : UserControl
     {
         public DeviceControl()
         {
             InitializeComponent();
-        }
-
-        protected override void OnPaint(PaintEventArgs pe)
-        {
-            base.OnPaint(pe);
         }
     }
 }
