@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.CoreAudioApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,22 @@ namespace VACM.GUI.NET4_0.Models
         public Dictionary<DeviceControl, Dictionary<DeviceControl, RepeaterModel>>
             RepeaterData
         { get; private set; }
+
+        public List<MMDevice> LinkWaveInMMDeviceList
+        {
+            get
+            {
+                return GetLinkMMDeviceList(DataFlow.Capture);
+            }
+        }
+
+        public List<MMDevice> LinkWaveOutMMDeviceList
+        {
+            get
+            {
+                return GetLinkMMDeviceList(DataFlow.Render);
+            }
+        }
 
         #endregion
 
@@ -75,6 +92,18 @@ namespace VACM.GUI.NET4_0.Models
                     new RepeaterModel(firstDeviceControl, secondDeviceControl)
                 },
             };
+        }
+
+        /// <summary>
+        /// Get the linked MMDevice list, given the data flow.
+        /// </summary>
+        /// <param name="dataFlow">The data flow</param>
+        /// <returns>The linked MMDevice list</returns>
+        internal List<MMDevice> GetLinkMMDeviceList(DataFlow dataFlow)
+        {
+            return RepeaterData.Keys
+                .Where(x => x.MMDevice.DataFlow == dataFlow)
+                .Select(x => x.MMDevice).Distinct().ToList();
         }
 
         /// <summary>
