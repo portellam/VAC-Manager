@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace VACM.GUI.NET4_0
 {
-    internal static class Program
+    internal class Program
     {
         /// <summary>
         /// The main entry point for the application.
