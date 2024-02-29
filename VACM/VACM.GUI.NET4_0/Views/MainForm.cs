@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,13 @@ namespace VACM.GUI.NET4_0.Views
         #region Logic
 
         /// <summary>
-        /// Main form view
+        /// Constructor
         /// </summary>
+        [ExcludeFromCodeCoverage]
         public MainForm()
         {
             InitializeComponent();
+            PostInitializeComponent();
         }
 
         #endregion
