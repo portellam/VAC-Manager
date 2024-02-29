@@ -28,7 +28,7 @@ namespace VACM.GUI.NET4_0
             Arguments = arguments;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //TODO: add new form.
+            Application.Run(new MainForm());
         }
 
         #endregion
