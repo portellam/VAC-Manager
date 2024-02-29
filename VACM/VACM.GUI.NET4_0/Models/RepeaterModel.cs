@@ -7,6 +7,16 @@ namespace VACM.GUI.NET4_0.Models
 {
     public class RepeaterModel
     {
+        /*
+         * TODO:
+         * -add constructor, logic.
+         * -add params.
+         * -add getter logic.
+         * 
+         */
+
+
+
         #region Parameters
 
         #endregion
