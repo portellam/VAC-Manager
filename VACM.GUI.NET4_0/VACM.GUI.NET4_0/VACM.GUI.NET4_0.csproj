@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\MessageBoxWrapper.cs" />
+    <Compile Include="Extensions\WMIEventRegistryListener.cs" />
     <Compile Include="Models\DeviceListModel.cs" />
     <Compile Include="Models\RepeaterDataModel.cs" />
     <Compile Include="Models\RepeaterModel.cs" />
@@ -92,6 +94,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="NewFolder1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
