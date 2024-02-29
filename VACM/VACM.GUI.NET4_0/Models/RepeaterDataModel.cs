@@ -1,8 +1,6 @@
 ﻿using NAudio.CoreAudioApi;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using VACM.GUI.NET4_0.ViewModels;
 
 namespace VACM.GUI.NET4_0.Models
