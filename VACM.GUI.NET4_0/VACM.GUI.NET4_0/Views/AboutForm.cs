@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
-using VACM.GUI.NET4_0.ViewModels.Accessors;
 
 namespace VACM.GUI.NET4_0.Views
 {
+    /// <summary>
+    /// About form view
+    /// </summary>
     partial class AboutForm : Form
     {
         #region Logic
@@ -19,24 +16,17 @@ namespace VACM.GUI.NET4_0.Views
         public AboutForm()
         {
             InitializeComponent();
+            PostInitializeComponent();
+        }
 
-            this.Text = String.Format
-                ("About {0}", AssemblyInformationAccessor.AssemblyTitle);
-
-            this.labelProductName.Text =
-                AssemblyInformationAccessor.AssemblyProduct;
-
-            this.labelVersion.Text = String.Format("Version {0}",
-                AssemblyInformationAccessor.AssemblyVersion);
-
-            this.labelCopyright.Text =
-                AssemblyInformationAccessor.AssemblyCopyright;
-
-            this.labelCompanyName.Text =
-                AssemblyInformationAccessor.AssemblyCompany;
-
-            this.textBoxDescription.Text =
-                AssemblyInformationAccessor.AssemblyDescription;
+        /// <summary>
+        /// Click event logic for OkButton_Click.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        private void OkButton_Click(object sender, EventArgs eventArgs)
+        {
+            this.Close();
         }
 
         #endregion
