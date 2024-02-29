@@ -1,4 +1,4 @@
-﻿namespace VACM.GUI.NET4_0
+﻿namespace VACM.GUI.NET4_0.Views
 {
     partial class MainForm
     {

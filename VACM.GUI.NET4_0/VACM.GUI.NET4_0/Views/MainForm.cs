@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace VACM.GUI.NET4_0
+namespace VACM.GUI.NET4_0.Views
 {
     public partial class MainForm : Form
     {
