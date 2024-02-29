@@ -52,5 +52,43 @@ namespace VACM.GUI.NET4_0.Views
         }
 
         #endregion
+
+        #region 1. File menu logic
+
+
+
+        #endregion
+
+        #region 2. Device menu logic
+
+
+
+
+        #endregion
+
+        #region 3. Link menu logic
+
+
+
+
+        #endregion
+
+        #region 4. Repeater menu logic
+
+
+
+        #endregion
+
+        #region 5. View menu logic
+
+
+
+        #endregion
+
+        #region 6. Help menu logic
+
+
+
+        #endregion
     }
 }
