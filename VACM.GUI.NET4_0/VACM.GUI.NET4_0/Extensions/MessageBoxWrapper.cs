@@ -14,6 +14,34 @@ namespace VACM.NET4.Extensions
         private readonly static string warningCaption = "Warning";
 
         /// <summary>
+        /// Return True if question is answered with Yes.
+        /// False if No.
+        /// </summary>
+        /// <param name="messageBoxText">The message box text</param>
+        /// <returns>True/False</returns>
+        public static bool ShowYesNoAndReturnTrueFalse(string messageBoxText)
+        {
+            return MessageBox.Show(messageBoxText,
+                AssemblyInformationAccessor.AssemblyTitle, MessageBoxButton.YesNo)
+                is MessageBoxResult.Yes;
+        }
+
+        /// <summary>
+        /// Return True if question is answered with Yes.
+        /// False if No.
+        /// </summary>
+        /// <param name="messageBoxText">The message box text</param>
+        /// <param name="messageBoxCaption">The message box caption</param>
+        /// <returns>True/False</returns>
+        public static bool ShowYesNoAndReturnTrueFalse
+            (string messageBoxText, string messageBoxCaption)
+        {
+            return MessageBox.Show
+                (messageBoxText, messageBoxCaption, MessageBoxButton.YesNo)
+                is MessageBoxResult.Yes;
+        }
+
+        /// <summary>
         /// Show MessageBox which user must close.
         /// Predefined caption.
         /// </summary>
