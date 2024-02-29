@@ -1,15 +1,37 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
+using VACM.GUI.NET4_0.ViewModels.Accessors;
 
 namespace VACM.GUI.NET4_0.Views
 {
     partial class MainForm
     {
+        #region Parameters
+
+        private string darkModeText
+        {
+            get
+            {
+                string text = "Dark Mode";
+
+                if (!viewToggleDarkModeToolStripMenuItem.Checked)
+                {
+                    return $"Enable {text}";
+                }
+
+                return $"Disable {text}";
+            }
+        }
+
+        #endregion
+
+        #region Windows Form Designer generated parameters
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
+
         private System.ComponentModel.IContainer components = null;
 
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -117,6 +139,9 @@ namespace VACM.GUI.NET4_0.Views
         private System.Windows.Forms.ToolStripSeparator repeaterToolStripSeparator2;
         private TableLayoutPanel gridTableLayoutPanel;
         private ToolStripRenderer initialMenuStrip1Renderer;
+        private BackgroundWorker backgroundWorker1;
+
+        #endregion
 
         #region Windows Form Designer generated code
 
@@ -979,17 +1004,85 @@ namespace VACM.GUI.NET4_0.Views
 
         #endregion
 
+        #region Logic
+
+        /// <summary>
+        /// Set the ability of the DeviceAdd and DeviceAddAll menu items.
+        /// </summary>
+        internal void DeviceAddMenuItemAbility()
+        {
+            bool isEnabled = deviceAddSelectWaveInToolStripMenuItem.Enabled
+                || deviceAddSelectWaveOutToolStripMenuItem.Enabled;
+            deviceAddSelectToolStripMenuItem.Enabled = isEnabled;
+            deviceAddSelectAllToolStripMenuItem.Enabled = isEnabled;
+        }
+
+        /// <summary>
+        /// Set the ability of the DeviceRemove and DeviceRemoveAll menu items.
+        /// </summary>
+        internal void DeviceRemoveMenuItemAbility()
+        {
+            bool isEnabled = deviceRemoveWaveInToolStripMenuItem.Enabled
+                || deviceRemoveWaveOutToolStripMenuItem.Enabled;
+            deviceRemoveToolStripMenuItem.Enabled = isEnabled;
+            deviceRemoveAllToolStripMenuItem.Enabled = isEnabled;
+        }
+
+        /// <summary>
+        /// Logic to execute before InitializeLists.
+        /// </summary>
+        internal void ModifyListItemsBeforeInitialization()
+        {
+            //TODO: intialize device drop down collections here.
+            DeviceAddMenuItemAbility();
+            DeviceRemoveMenuItemAbility();
+        }
+
+        /// <summary>
+        /// Code to run after generated code.
+        /// </summary>
+        internal void PostInitializeComponent()
+        {
+            ModifyListItemsBeforeInitialization();
+            SetInitialChanges();
+
+            //TODO: add logic to set color theme.
+        }
+
+        /// <summary>
+        /// Save renderer to new parameter before making changes.
+        /// </summary>
+        internal void SaveInitialRenderer()
+        {
+            initialMenuStrip1Renderer = menuStrip1.Renderer;
+        }
+
+        /// <summary>
+        /// Set initial changes to form and its children.
+        /// </summary>
+        internal void SetInitialChanges()
+        {
+            Text = AssemblyInformationAccessor.AssemblyTitle;
+
+            viewToggleDarkModeToolStripMenuItem.Enabled =
+                !Program.DoesArgumentForceColorTheme;
+        }
+
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        /// <param name="doDispose">true if managed resources should be disposed; 
+        /// otherwise, false.</param>
+        protected override void Dispose(bool doDispose)
         {
-            if (disposing && (components != null))
+            if (doDispose && (components != null))
             {
                 components.Dispose();
             }
-            base.Dispose(disposing);
+
+            base.Dispose(doDispose);
         }
+
+        #endregion
     }
 }
