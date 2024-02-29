@@ -60,6 +60,12 @@
     <Compile Include="Structs\Channel.cs" />
     <Compile Include="Structs\ChannelConfig.cs" />
     <Compile Include="ViewModels\Accessors\AssemblyInformationAccessor.cs" />
+    <Compile Include="ViewModels\DeviceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DeviceControl.Designer.cs">
+      <DependentUpon>DeviceControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
