@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -383,9 +384,36 @@ namespace VACM.GUI.NET4_0.Models
         #region Logic
 
         /// <summary>
-		/// Logs event when property has changed.
-		/// </summary>
-		/// <param name="propertyName">The property name</param>
+        /// Constructor
+        /// </summary>
+        /// <param name="inputDeviceControl">The input device control</param>
+        /// <param name="outputDeviceControl">The output device control</param>
+        [ExcludeFromCodeCoverage]
+        public RepeaterModel
+            (DeviceControl inputDeviceControl, DeviceControl outputDeviceControl)
+        {
+            BitsPerSample = defaultBitsPerSample;
+            BufferMs = defaultBufferMs;
+            Buffers = defaultBuffers;
+            ChannelConfig = channelConfig;
+            InputDeviceControl = inputDeviceControl;
+
+            Link = new Line
+            {
+                StrokeThickness = 2
+            };
+
+            OutputDeviceControl = outputDeviceControl;
+            PathName = defaultPathName;
+            Prefill = defaultPrefill;
+            ResyncAt = defaultResyncAt;
+            SamplingRate = defaultSamplingRate;
+        }
+
+        /// <summary>
+        /// Logs event when property has changed.
+        /// </summary>
+        /// <param name="propertyName">The property name</param>
         internal void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
