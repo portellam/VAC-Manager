@@ -11,9 +11,23 @@ namespace VACM.GUI.NET4_0.Views
 {
     public partial class MainForm : Form
     {
+        #region Parameters
+
+        public const string WaveInAsString = "Wave In";
+        public const string WaveOutAsString = "Wave Out";
+
+        #endregion
+
+        #region Logic
+
+        /// <summary>
+        /// Main form view
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
         }
+
+        #endregion
     }
 }
