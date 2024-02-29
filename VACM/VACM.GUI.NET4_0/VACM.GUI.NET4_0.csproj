@@ -38,6 +38,7 @@
     <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Extensions\MessageBoxWrapper.cs" />
     <Compile Include="Extensions\WMIRegistryEventListener.cs" />
     <Compile Include="Models\DeviceListModel.cs" />
@@ -61,12 +63,16 @@
     <Compile Include="Structs\Channel.cs" />
     <Compile Include="Structs\ChannelConfig.cs" />
     <Compile Include="ViewModels\Accessors\AssemblyInformationAccessor.cs" />
+    <Compile Include="ViewModels\ColorTable\DarkColorTable.cs" />
     <Compile Include="ViewModels\DeviceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ViewModels\DeviceControl.Designer.cs">
       <DependentUpon>DeviceControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FormColorUpdater.cs" />
+    <Compile Include="ViewModels\LightThemeValidator.cs" />
+    <Compile Include="ViewModels\Renderer\ToolStripDarkRenderer.cs" />
     <Compile Include="Views\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
