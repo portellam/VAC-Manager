@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Shapes;
 using VACM.GUI.NET4_0.Structs;
 using VACM.GUI.NET4_0.ViewModels;
@@ -205,6 +204,60 @@ namespace VACM.GUI.NET4_0.Models
         public List<Channel> ChannelList;
 
         /// <summary>
+        /// The wave in audio device.
+        /// </summary>
+        public MMDevice InputMMDevice
+        {
+            get
+            {
+                return InputDeviceControl.MMDevice;
+            }
+        }
+
+        /// <summary>
+        /// The wave out audio device.
+        /// </summary>
+        public MMDevice OutputMMDevice
+        {
+            get
+            {
+                return OutputDeviceControl.MMDevice;
+            }
+        }
+
+        /// <summary>
+        /// The input devices's display name.
+        /// </summary>
+        public string Input
+        {
+            get
+            {
+                if (InputMMDevice.FriendlyName.Length > 31)
+                {
+                    return InputMMDevice.FriendlyName.Substring(0, 31);
+                }
+
+                return InputMMDevice.FriendlyName;
+            }
+        }
+
+        /// <summary>
+        /// The output device's display name.
+        /// </summary>
+        public string Output
+        {
+            get
+            {
+                if (OutputMMDevice.FriendlyName.Length > 31)
+                {
+                    return OutputMMDevice.FriendlyName.Substring(0, 31);
+                }
+
+                return OutputMMDevice.FriendlyName;
+            }
+        }
+
+        /// <summary>
         /// The file pathname.
         /// </summary>
         public string PathName
@@ -222,6 +275,22 @@ namespace VACM.GUI.NET4_0.Models
 
                 pathName = value;
                 OnPropertyChanged(nameof(PathName));
+            }
+        }
+
+        /// <summary>
+        /// The window name.
+        /// </summary>
+        public string WindowName
+        {
+            get
+            {
+                return windowName;
+            }
+            set
+            {
+                windowName = value.Replace("{0}", Input).Replace("{1}", Output);
+                OnPropertyChanged(nameof(WindowName));
             }
         }
 
@@ -408,6 +477,7 @@ namespace VACM.GUI.NET4_0.Models
             Prefill = defaultPrefill;
             ResyncAt = defaultResyncAt;
             SamplingRate = defaultSamplingRate;
+            WindowName = defaultWindowName;
         }
 
         /// <summary>
@@ -428,6 +498,8 @@ namespace VACM.GUI.NET4_0.Models
         {
             return $"start " +
                 $"/min \"audiorepeater\" \"{PathName}\" " +
+                $"/Input:\"{Input}\" " +
+                $"/Output:\"{Output}\" " +
                 $"/SamplingRate:{SamplingRate} " +
                 $"/BitsPerSample:{BitsPerSample} " +
                 $"/Channels:{ChannelList.Count} " +
@@ -435,6 +507,7 @@ namespace VACM.GUI.NET4_0.Models
                 $"/BufferMs:{BufferMs} " +
                 $"/Prefill:{Prefill} " +
                 $"/ResyncAt:{ResyncAt} " +
+                $"/WindowName:\"{WindowName}\" " +
                 $"/AutoStart";
         }
 
