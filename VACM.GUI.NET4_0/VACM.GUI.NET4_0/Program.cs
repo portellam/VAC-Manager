@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace VACM.GUI.NET4_0
 {
-    internal class Program
+    public class Program
     {
         #region Arguments
 
