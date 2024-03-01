@@ -4,21 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management;
 using System.Security.Principal;
-using System.Threading;
+using VACM.GUI.NET4_0.Extensions;
+using VACM.GUI.NET4_0.Extensions.RegistrySubKeyChanged;
+using VACM.GUI.NET4_0.Extensions.PropertyValueChanged;
 
 namespace VACM.NET4.Extensions
 {
     public class WMIRegistryEventListener : IDisposable
     {
-        // TODO: add on value change event.
-        // TODO: how to know when event signals a change, and to retrieve that value?
-
-        // TODO: create new thread with async tasks, monitor for new event on registry
-        //  key, and check for new value on event, and retrieve value.
-
-        // TODO: add logic to watch for given sub key and its values.
-        //  Track the values changed, or if it does change (boolean).
-
         #region Parameters
 
         private WindowsIdentity currentWindowsIdentity;
@@ -41,11 +34,9 @@ namespace VACM.NET4.Extensions
         private Dictionary<RegistryHive, Dictionary<string, List<string>>>
             registryHiveAndKeyPathAndValueNameListDictionary;
 
-        private Dictionary<RegistryHive, Dictionary<string, Dictionary<string, string>>>
-            registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary;
-
         /// <summary>
-        /// Valid hive objects and values for RegistryEvent class and derivatives.
+        /// Targeted, valid hive objects and values for RegistryEvent class and
+        /// derivatives.
         /// URL: https://learn.microsoft.com/en-us/previous-versions/windows/desktop/regprov/registrykeychangeevent
         /// </summary>
         private static Dictionary<RegistryHive, string>
@@ -60,9 +51,39 @@ namespace VACM.NET4.Extensions
                 },
             };
 
+        public event RegistrySubKeyChangedDelegate RegistrySubKeyChangedDelegate;
+
         #endregion
 
         #region Constructor Logic
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="registryHive">The registry hive</param>
+        /// <param name="registryKeyPath">The registry key path</param>
+        /// <param name="registryValueName">The registry value name</param>
+        public WMIRegistryEventListener(RegistryHive registryHive,
+            string registryKeyPath, string registryValueName)
+        {
+            this.registryHiveAndKeyPathAndValueNameListDictionary =
+                new Dictionary<RegistryHive, Dictionary<string, List<string>>>()
+                {
+                    {
+                        registryHive, new Dictionary<string, List<string>>
+                        {
+                            {
+                                registryKeyPath, new List<string>()
+                                {
+                                    registryValueName
+                                }
+                            }
+                        }
+                    },
+                };
+
+            ConstructorHelper();
+        }
 
         /// <summary>
         /// Constructor
@@ -79,7 +100,9 @@ namespace VACM.NET4.Extensions
                     {
                         registryHive, new Dictionary<string, List<string>>
                         {
-                            { registryKeyPath, registryValueNameList }
+                            {
+                                registryKeyPath, registryValueNameList
+                            }
                         }
                     },
                 };
@@ -136,16 +159,9 @@ namespace VACM.NET4.Extensions
             registryKeyPathAndValueNameAndManagementEventWatcherDictionary =
                 new Dictionary<string, Dictionary<string, ManagementEventWatcher>>();
 
-            registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary =
-                new Dictionary<RegistryHive, Dictionary
-                    <string, Dictionary<string, string>>>();
-
             currentWindowsIdentity = WindowsIdentity.GetCurrent();
             ParseConstructorDictionaryAndSetDictionaries();
             StartAllManagementEventWatchers();
-
-            Thread.Sleep(10000);
-            StopAllManagementEventWatchers();
         }
 
         /// <summary>
@@ -171,28 +187,23 @@ namespace VACM.NET4.Extensions
         }
 
         /// <summary>
-        /// Get the registry key from the valid hive.
+        /// Get a modified registry key path if the hive is users.
         /// </summary>
         /// <param name="registryHive">The registry hive</param>
-        /// <returns>The registry key</returns>
-        internal RegistryKey GetRegistryKeyFromHive(RegistryHive registryHive)
+        /// <param name="registryKeyPath">The registry key path</param>
+        /// <returns>The registry key path</returns>
+        internal string GetModifiedRegistryKeyPathIfHiveIsUsers
+            (RegistryHive registryHive, string registryKeyPath)
         {
-            if (!validRegistryHiveObjectAndValueDictionary.ContainsKey(registryHive))
+            if (registryHive != RegistryHive.Users)
             {
-                return null;
+                return registryKeyPath;
             }
 
-            switch (registryHive)
-            {
-                case RegistryHive.LocalMachine:
-                    return Registry.LocalMachine;
+            registryKeyPath = string.Format
+                ("{0}\\{1}", currentWindowsIdentity.User.Value, registryKeyPath);
 
-                case RegistryHive.Users:
-                    return Registry.CurrentUser;
-
-                default:
-                    return null;
-            }
+            return registryKeyPath.Replace("\\", "\\\\");
         }
 
         /// <summary>
@@ -214,13 +225,8 @@ namespace VACM.NET4.Extensions
             string registryHiveAsString =
                 validRegistryHiveObjectAndValueDictionary[registryHive];
 
-            if (registryHive == RegistryHive.Users)
-            {
-                registryKeyPath = string.Format("{0}\\{1}",
-                    currentWindowsIdentity.User.Value, registryKeyPath);
-
-                registryKeyPath = registryKeyPath.Replace("\\", "\\\\");
-            }
+            registryKeyPath = GetModifiedRegistryKeyPathIfHiveIsUsers
+                (registryHive, registryKeyPath);
 
             string table = "RegistryValueChangeEvent";
 
@@ -269,7 +275,8 @@ namespace VACM.NET4.Extensions
         }
 
         /// <summary>
-        /// Parse registry key path and set dictionaries.
+        /// Parse registry key path and set dictionaries. Replace registry hive with
+        /// users if current user.
         /// </summary>
         /// <param name="registryHive">The registry hive</param>
         /// <param name="registryKeyPath">The registry key path</param>
@@ -283,6 +290,11 @@ namespace VACM.NET4.Extensions
                 return;
             }
 
+            if (registryHive == RegistryHive.CurrentUser)
+            {
+                registryHive = RegistryHive.Users;
+            }
+
             if (!validRegistryHiveObjectAndValueDictionary
                 .ContainsKey(registryHive))
             {
@@ -293,9 +305,6 @@ namespace VACM.NET4.Extensions
             }
 
             SetManagementEventWatcherInDictionary
-                (registryHive, registryKeyPath, registryValueName);
-
-            SetSubKeyValueInDictionary
                 (registryHive, registryKeyPath, registryValueName);
         }
 
@@ -349,15 +358,7 @@ namespace VACM.NET4.Extensions
             RegistryHive registryHive = validRegistryHiveObjectAndValueDictionary
                 .FirstOrDefault(x => x.Value == registryHiveAsString).Key;
 
-            SetSubKeyValueInDictionary
-                (registryHive, registryKeyPath, registryValueName);
-
-            //TODO:
-            /* 
-             * -when the actual subkey value changes, how do I tell this class to
-             * update the relevant boolean value in another class?
-             * 
-             */
+            OnRegistrySubKeyChanged(registryHive, registryKeyPath, registryValueName);
         }
 
         /// <summary>
@@ -399,52 +400,25 @@ namespace VACM.NET4.Extensions
         }
 
         /// <summary>
-        /// Set sub key value in the dictionary.
+        /// Inform observers of a registry sub key that it has changed.
         /// </summary>
-        /// <param name="registryHive">The registry hive</param>
+        /// <param name="registryHive">The registry key</param>
         /// <param name="registryKeyPath">The registry key path</param>
         /// <param name="registryValueName">The registry value name</param>
-        internal void SetSubKeyValueInDictionary(RegistryHive registryHive,
+        internal void OnRegistrySubKeyChanged(RegistryHive registryHive,
             string registryKeyPath, string registryValueName)
         {
-            string subKeyValue = GetSubKeyValueOfRegistryKey
-                (registryHive, registryKeyPath, registryValueName);
+            if (string.IsNullOrWhiteSpace(registryKeyPath)
+                || string.IsNullOrWhiteSpace(registryValueName))
+            {
+                return;
+            }
 
-            if (!registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary.ContainsKey
-                (registryHive))
-            {
-                registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary.Add
-                    (registryHive,
-                    new Dictionary<string, Dictionary<string, string>>()
-                    {
-                        { registryValueName, new Dictionary<string, string>()
-                            {
-                                { registryValueName, subKeyValue }
-                            }
-                        }
-                    });
-            }
-            else if (!registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
-                [registryHive].ContainsKey(registryKeyPath))
-            {
-                registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
-                    [registryHive].Add(registryValueName,
-                        new Dictionary<string, string>()
-                        {
-                            { registryValueName, subKeyValue }
-                        });
-            }
-            else if (!registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
-                [registryHive][registryKeyPath].ContainsKey(registryValueName))
-            {
-                registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
-                    [registryHive][registryKeyPath].Add(registryValueName, subKeyValue);
-            }
-            else
-            {
-                registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
-                    [registryHive][registryKeyPath][registryValueName] = subKeyValue;
-            }
+            RegistrySubKeyChangedEventArgs registrySubKeyChangedEventArgs =
+                new RegistrySubKeyChangedEventArgs
+                    (registryHive, registryKeyPath, registryValueName);
+
+            RegistrySubKeyChangedDelegate?.Invoke(this, registrySubKeyChangedEventArgs);
         }
 
         /// <summary>
@@ -490,7 +464,8 @@ namespace VACM.NET4.Extensions
             }
 
             if (registryKeyPathAndValueNameAndManagementEventWatcherDictionary is null
-                || registryKeyPathAndValueNameAndManagementEventWatcherDictionary.Count == 0)
+                || registryKeyPathAndValueNameAndManagementEventWatcherDictionary.Count
+                    == 0)
             {
                 return;
             }
@@ -518,33 +493,6 @@ namespace VACM.NET4.Extensions
         #endregion
 
         #region Logic
-
-        /// <summary>
-        /// Get sub key value of the registry key.
-        /// </summary>
-        /// <param name="registryHive">The registry hive</param>
-        /// <param name="registryKeyPath">The registry key path</param>
-        /// <param name="registryValueName">The registry value name</param>
-        public string GetSubKeyValueOfRegistryKey(RegistryHive registryHive,
-            string registryKeyPath, string registryValueName)
-        {
-            RegistryKey registryKey = GetRegistryKeyFromHive(registryHive);
-
-            if (registryKey is null)
-            {
-                return null;
-            }
-
-            registryKey.OpenSubKey(registryKeyPath);
-            var subKeyValue = registryKey?.GetValue(registryValueName);
-
-            if (subKeyValue is null)
-            {
-                return null;
-            }
-
-            return subKeyValue.ToString();
-        }
 
         /// <summary>
         /// Dispose the constructor object.
