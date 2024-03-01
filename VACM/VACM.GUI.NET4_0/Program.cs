@@ -53,7 +53,7 @@ namespace VACM.GUI.NET4_0
             ParseArguments();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new Window();
+            new GraphicsWindow();
         }
 
         /// <summary>
