@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Windows.Forms;
 using VACM.GUI.NET4_0.ViewModels;
 using VACM.GUI.NET4_0.ViewModels.Accessors;
@@ -241,6 +242,8 @@ namespace VACM.GUI.NET4_0.Views
             this.fileToolStripSeparator1 =
                 new System.Windows.Forms.ToolStripSeparator();
 
+            this.graphTab = new Manina.Windows.Forms.Tab();
+            this.gridTab = new Manina.Windows.Forms.Tab();
             this.gridTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 
             this.helpAboutToolStripMenuItem =
