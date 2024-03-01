@@ -15,6 +15,9 @@ namespace VACM.GUI.NET4_0.Views
     {
         #region Parameters
 
+        private BackgroundWorker backgroundWorker1;
+        private LightThemeValidator lightThemeValidator;
+
         private string darkModeText
         {
             get
@@ -29,9 +32,6 @@ namespace VACM.GUI.NET4_0.Views
                 return $"Disable {text}";
             }
         }
-
-        private BackgroundWorker backgroundWorker1;
-        private LightThemeValidator lightThemeValidator;
 
         private List<Control> controlList = new List<Control>();
         private List<ToolStripItem> toolStripItemList = new List<ToolStripItem>();
