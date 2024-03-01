@@ -8,6 +8,14 @@ namespace VACM.GUI.NET4_0.ViewModels
     {
         #region Parameters
 
+        private static bool IsLightThemeEnabled
+        {
+            get
+            {
+                return GraphicsWindow.LightThemeValidator.IsLightThemeEnabled;
+            }
+        }
+
         private readonly static Color darkBackColor = Color.FromArgb(60, 63, 65);
         private readonly static Color darkTextColor = Color.White;
         private readonly static Color lightBackColor = Color.White;
@@ -17,7 +25,7 @@ namespace VACM.GUI.NET4_0.ViewModels
         {
             get
             {
-                if (!LightThemeValidator.IsLightThemeEnabled)
+                if (!IsLightThemeEnabled)
                 {
                     return darkBackColor;
                 }
@@ -32,7 +40,7 @@ namespace VACM.GUI.NET4_0.ViewModels
         {
             get
             {
-                if (!LightThemeValidator.IsLightThemeEnabled)
+                if (!IsLightThemeEnabled)
                 {
                     return darkTextColor;
                 }
