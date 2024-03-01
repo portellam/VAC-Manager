@@ -18,10 +18,18 @@ namespace VACM.GUI.NET4_0.Models
     {
         /*
          * TODO:
-         * -add constructor, logic.
-         * -add params.
-         * -add getter logic.
-         * 
+         * -add logic to determine lesser property value between Input and output,
+         *      and set max value to that.
+         * -parse the VAC manual and reference it for this app README and popups.
+         * -review the manual to create recommended values and new drop downs
+         *      (process priority).
+         * -as normal create graph file and data file. Also, create bat script and
+         * task for windows task manager. Also update said task or remove it.
+         *      Educate user.
+         *      Create icon to save and run task or pause and delete it.
+         * -fix audio crackle, recommended settings?
+         * -allow repeaters to run without GUI or warn to leave open or close repeaters
+         *      after exit of GUI.
          */
 
         #region Parameters
