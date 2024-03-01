@@ -16,7 +16,18 @@ namespace VACM.GUI.NET4_0.Views
         #region Parameters
 
         private BackgroundWorker backgroundWorker1;
-        private LightThemeValidator lightThemeValidator;
+
+        private bool IsLightThemeEnabled
+        {
+            get
+            {
+                return Window.LightThemeValidator.IsLightThemeEnabled;
+            }
+            set
+            {
+                Window.LightThemeValidator.IsLightThemeEnabled = value;
+            }
+        }
 
         private string darkModeText
         {
@@ -1411,18 +1422,12 @@ namespace VACM.GUI.NET4_0.Views
         /// </summary>
         internal void PostInitializeComponent()
         {
-            lightThemeValidator = new LightThemeValidator();
-
+            SetIsLightThemeEnabledValueChangedEventArgs();
             SetRepeaterDataModel();
             ModifyListItemsBeforeInitialization();
             InitializeLists();
             SetInitialChanges();
-            SetColorTheme();
-
-            if (aboutForm != null)
-            {
-                aboutForm.SetColorTheme();
-            }
+            SetColorTheme(); 
         }
 
         /// <summary>
@@ -1446,6 +1451,11 @@ namespace VACM.GUI.NET4_0.Views
             FormColorUpdater.SetColorsOfControlList(controlList);
             FormColorUpdater.SetColorsOfToolStripItemList(toolStripItemList);
 
+            if (aboutForm != null)
+            {
+                aboutForm.SetColorTheme();
+            }
+
             Invalidate();
         }
 
@@ -1455,9 +1465,29 @@ namespace VACM.GUI.NET4_0.Views
         internal void SetInitialChanges()
         {
             Text = AssemblyInformationAccessor.AssemblyTitle;
+            SetViewToggleDarkModeToolStripMenuItem();
+        }
 
+        /// <summary>
+        /// Set IsLightThemEnabledValueChanged event arguments.
+        /// </summary>
+        internal void SetIsLightThemeEnabledValueChangedEventArgs()
+        {
+            Window.LightThemeValidator.IsLightThemeEnabledValueChanged +=
+                (sender, valueUpdatedEventArgs) =>
+                {
+                    SetViewToggleDarkModeToolStripMenuItem();
+                    SetColorTheme();
+                };
+        }
+
+        /// <summary>
+        /// Set properties of viewToggleDarkModeToolStripMenuItem.
+        /// </summary>
+        internal void SetViewToggleDarkModeToolStripMenuItem()
+        {
             viewToggleDarkModeToolStripMenuItem.Checked =
-                !LightThemeValidator.IsLightThemeEnabled;
+                !IsLightThemeEnabled;
 
             viewToggleDarkModeToolStripMenuItem.Enabled =
                 !Program.DoesArgumentForceColorTheme;
@@ -1468,7 +1498,7 @@ namespace VACM.GUI.NET4_0.Views
         /// </summary>
         internal void ToggleDarkModeRenderer()
         {
-            if (!viewToggleDarkModeToolStripMenuItem.Checked)
+            if (!IsLightThemeEnabled)
             {
                 menuStrip1.RenderMode = ToolStripRenderMode.ManagerRenderMode;
                 menuStrip1.Renderer = initialMenuStrip1Renderer;
@@ -1495,7 +1525,6 @@ namespace VACM.GUI.NET4_0.Views
             }
 
             base.Dispose(doDispose);
-            lightThemeValidator.Dispose();
         }
 
         #endregion
