@@ -70,7 +70,8 @@ VAC Manager GPL-3.0, Copyleft © 2024 Alexander Portell.
 		- [ ] Repeaters
 			- [ ] Generate automation scripts (.bat files).
 			- [ ] Generate Window task (.xml file ?).
-		- [ ] Dark mode
+		- [x] Dark mode
+			- [ ] Dark mode compatible with Windows registry calls.
 	- [ ] Windows 32-bit support
 		- [ ] Windows NT 5.x:	.NET 4.0 compatible C# code and NuGet dependencies.
 		- [ ] Windows NT 6.x:	.NET 4.8 compatible C# code and NuGet dependencies.
