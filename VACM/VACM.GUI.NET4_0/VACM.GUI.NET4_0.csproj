@@ -62,7 +62,13 @@
     <Compile Include="Common.cs" />
     <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Extensions\MessageBoxWrapper.cs" />
+    <Compile Include="Extensions\RegistryKeyChanged\RegistrySubKeyChangedEventArgs.cs" />
+    <Compile Include="Extensions\RegistryKeyChanged\RegistryKeyChangedDelegate.cs" />
+    <Compile Include="Extensions\RegistryKeyPropertyGetter.cs" />
+    <Compile Include="Extensions\PropertyValueChanged\PropertyValueChangedDelegate.cs" />
+    <Compile Include="Extensions\PropertyValueChanged\PropertyValueChangedEventArgs.cs" />
     <Compile Include="Extensions\WMIRegistryEventListener.cs" />
+    <Compile Include="Window.cs" />
     <Compile Include="Models\DeviceListModel.cs" />
     <Compile Include="Models\RepeaterDataModel.cs" />
     <Compile Include="Models\RepeaterModel.cs" />
