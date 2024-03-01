@@ -6,6 +6,7 @@ using VACM.GUI.NET4_0.Extensions;
 using VACM.GUI.NET4_0.Extensions.RegistrySubKeyChanged;
 using VACM.GUI.NET4_0.Extensions.PropertyValueChanged;
 using VACM.NET4.Extensions;
+using System.Threading.Tasks;
 
 namespace VACM.GUI.NET4_0.ViewModels
 {
@@ -87,7 +88,7 @@ namespace VACM.GUI.NET4_0.ViewModels
             {
                 return appsUseLightTheme;
 
-                //return AppsUseLightTheme || SystemUsesLightTheme;
+                //return appsUseLightTheme || systemUsesLightTheme;
             }
         }
 
@@ -120,8 +121,23 @@ namespace VACM.GUI.NET4_0.ViewModels
             registrySubKeyNameAndPropertyDictionary =
                 new Dictionary<string, object>();
 
-            SetIsLightThemeEnabledValueByRegistry();
-            InitializeWMIRegistryEventListenerAndEventArgs();
+            ConstructorHelperRunParallelTasks();
+        }
+
+        /// <summary>
+        /// Constructor helper method to run tasks parallel.
+        /// </summary>
+        internal void ConstructorHelperRunParallelTasks()
+        {
+            Task task1 = Task.Factory.StartNew(() =>
+            {
+                SetIsLightThemeEnabledValueByRegistry();
+            });
+
+            Task task2 = Task.Factory.StartNew(() =>
+            {
+                InitializeWMIRegistryEventListenerAndEventArgs();
+            });
         }
 
         /// <summary>
