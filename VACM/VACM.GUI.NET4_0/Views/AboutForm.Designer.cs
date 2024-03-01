@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using VACM.GUI.NET4_0.ViewModels;
 using VACM.GUI.NET4_0.ViewModels.Accessors;
 
 namespace VACM.GUI.NET4_0.Views
@@ -21,6 +23,7 @@ namespace VACM.GUI.NET4_0.Views
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private TextBox textBoxDescription;
+        private List<Control> controlList = new List<Control>();
 
         #endregion
 
@@ -197,11 +200,27 @@ namespace VACM.GUI.NET4_0.Views
         #region Logic
 
         /// <summary>
+        /// Add all controls to list.
+        /// </summary>
+        internal void AddControlsToList()
+        {
+            controlList.Add(labelCompanyName);
+            controlList.Add(labelCopyright);
+            controlList.Add(labelProductName);
+            controlList.Add(labelVersion);
+            controlList.Add(okButton);
+            controlList.Add(tableLayoutPanel);
+            controlList.Add(textBoxDescription);
+        }
+
+        /// <summary>
         /// Code to run after generated code.
         /// </summary>
         internal void PostInitializeComponent()
         {
             SetAssemblyInformation();
+            AddControlsToList();
+            SetColorTheme();
             CenterToScreen();
         }
 
@@ -218,6 +237,17 @@ namespace VACM.GUI.NET4_0.Views
             Text = String.Format
                 ("About {0}", AssemblyInformationAccessor.AssemblyTitle);
             textBoxDescription.Text = AssemblyInformationAccessor.AssemblyDescription;
+        }
+
+        /// <summary>
+        /// Set color theme given dark mode is enabled or not.
+        /// </summary>
+        public void SetColorTheme()
+        {
+            FormColorUpdater.SetColorsOfConstructor(this);
+            FormColorUpdater.SetColorsOfControlCollection(Controls);
+            FormColorUpdater.SetColorsOfControlList(controlList);
+            Invalidate();
         }
 
         /// <summary>
