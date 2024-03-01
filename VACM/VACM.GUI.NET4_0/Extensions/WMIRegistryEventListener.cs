@@ -292,27 +292,8 @@ namespace VACM.NET4.Extensions
                 throw new ArgumentException(message);
             }
 
-            string query =
-                GetQuery(registryHive, registryKeyPath, registryValueName);
-
-            ManagementEventWatcher managementEventWatcher =
-                GetManagementEventWatcher(query);
-
-            if (!registryKeyPathAndValueNameAndManagementEventWatcherDictionary
-                .ContainsKey(registryKeyPath))
-            {
-                registryKeyPathAndValueNameAndManagementEventWatcherDictionary.Add
-                    (registryKeyPath,
-                    new Dictionary<string, ManagementEventWatcher>()
-                        {
-                            { registryValueName, managementEventWatcher },
-                        });
-            }
-            else
-            {
-                registryKeyPathAndValueNameAndManagementEventWatcherDictionary
-                    [registryKeyPath].Add(registryValueName, managementEventWatcher);
-            }
+            SetManagementEventWatcherInDictionary
+                (registryHive, registryKeyPath, registryValueName);
 
             SetSubKeyValueInDictionary
                 (registryHive, registryKeyPath, registryValueName);
@@ -380,7 +361,45 @@ namespace VACM.NET4.Extensions
         }
 
         /// <summary>
-        /// Get sub key value in the dictionary.
+        /// Set management event watcher in the dictionary.
+        /// </summary>
+        /// <param name="registryHive">The registry hive</param>
+        /// <param name="registryKeyPath">The registry key path</param>
+        /// <param name="registryValueName">The registry value name</param>
+        internal void SetManagementEventWatcherInDictionary(RegistryHive registryHive,
+            string registryKeyPath, string registryValueName)
+        {
+            string query =
+                GetQuery(registryHive, registryKeyPath, registryValueName);
+
+            ManagementEventWatcher managementEventWatcher =
+                GetManagementEventWatcher(query);
+
+            if (!registryKeyPathAndValueNameAndManagementEventWatcherDictionary
+                .ContainsKey(registryKeyPath))
+            {
+                registryKeyPathAndValueNameAndManagementEventWatcherDictionary.Add
+                    (registryKeyPath,
+                    new Dictionary<string, ManagementEventWatcher>()
+                        {
+                            { registryValueName, managementEventWatcher },
+                        });
+            }
+            else if (!registryKeyPathAndValueNameAndManagementEventWatcherDictionary
+                [registryKeyPath].ContainsKey(registryValueName))
+            {
+                registryKeyPathAndValueNameAndManagementEventWatcherDictionary
+                    [registryKeyPath].Add(registryValueName, managementEventWatcher);
+            }
+            else
+            {
+                registryKeyPathAndValueNameAndManagementEventWatcherDictionary
+                    [registryKeyPath][registryValueName] = managementEventWatcher;
+            }
+        }
+
+        /// <summary>
+        /// Set sub key value in the dictionary.
         /// </summary>
         /// <param name="registryHive">The registry hive</param>
         /// <param name="registryKeyPath">The registry key path</param>
@@ -391,25 +410,32 @@ namespace VACM.NET4.Extensions
             string subKeyValue = GetSubKeyValueOfRegistryKey
                 (registryHive, registryKeyPath, registryValueName);
 
-            if (!registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
-                .ContainsKey(registryHive))
+            if (!registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary.ContainsKey
+                (registryHive))
             {
                 registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary.Add
                     (registryHive,
                     new Dictionary<string, Dictionary<string, string>>()
-                        {
-                            { registryKeyPath, new Dictionary<string, string>()
-                                {
-                                    { registryValueName, subKeyValue },
-                                }
+                    {
+                        { registryValueName, new Dictionary<string, string>()
+                            {
+                                { registryValueName, subKeyValue }
                             }
-                        });
-
-                return;
+                        }
+                    });
             }
             else if (!registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
-                [registryHive][registryKeyPath][registryValueName]
-                .Contains(subKeyValue))
+                [registryHive].ContainsKey(registryKeyPath))
+            {
+                registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
+                    [registryHive].Add(registryValueName,
+                        new Dictionary<string, string>()
+                        {
+                            { registryValueName, subKeyValue }
+                        });
+            }
+            else if (!registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
+                [registryHive][registryKeyPath].ContainsKey(registryValueName))
             {
                 registryHiveAndKeyPathAndValueNameAndSubKeyValueDictionary
                     [registryHive][registryKeyPath].Add(registryValueName, subKeyValue);
