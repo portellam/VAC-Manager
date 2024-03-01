@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using VACM.GUI.NET4_0.Views;
 
 namespace VACM.GUI.NET4_0
 {
@@ -9,35 +8,35 @@ namespace VACM.GUI.NET4_0
     {
         #region Arguments
 
-        /// <summary>
-        /// The command line arguments.
-        /// </summary>
-        public static string[] Arguments { get; private set; }
+        private static bool? doForceDarkTheme;
+        private static bool? doForceLightTheme;
 
         public static bool DoesArgumentForceColorTheme
         {
             get
             {
-                return doForceDarkThemeAtStart.HasValue
-                    || doForceLightThemeAtStart.HasValue;
+                return doForceDarkTheme.HasValue
+                    || doForceLightTheme.HasValue;
             }
         }
 
-        public static bool ForcedLightTheme
+        public static bool IsLightThemeEnabled
         {
             get
             {
-                if (doForceLightThemeAtStart.HasValue)
+                if (doForceLightTheme.HasValue)
                 {
-                    return doForceLightThemeAtStart.Value;
+                    return doForceLightTheme.Value;
                 }
 
                 return false;
             }
         }
 
-        private static bool? doForceDarkThemeAtStart;
-        private static bool? doForceLightThemeAtStart;
+        /// <summary>
+        /// The command line arguments.
+        /// </summary>
+        public static string[] Arguments { get; private set; }
 
         #endregion
 
@@ -54,7 +53,7 @@ namespace VACM.GUI.NET4_0
             ParseArguments();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            new Window();
         }
 
         /// <summary>
@@ -74,14 +73,14 @@ namespace VACM.GUI.NET4_0
                     return;
                 }
 
-                switch (argument)
+                switch (argument.ToLower())
                 {
                     case "/forcedarkmode":
-                        doForceDarkThemeAtStart = true;
+                        doForceDarkTheme = true;
                         break;
 
                     case "/forcelightmode":
-                        doForceLightThemeAtStart = true;
+                        doForceLightTheme = true;
                         break;
 
                     default:
