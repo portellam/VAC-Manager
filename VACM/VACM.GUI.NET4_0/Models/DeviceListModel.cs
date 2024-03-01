@@ -8,15 +8,6 @@ namespace VACM.NET4.Models
 {
     public class DeviceListModel
     {
-        /*
-         * -create constructor helper logic.    DONE
-         * -set and sort device lists.          DONE
-         * -set unselected lists.               DONE
-         * -add interaction logic for form.     DONE?
-         * -???
-         * 
-         */
-
         #region Parameters
 
         public List<MMDevice> AllDeviceList { get; private set; }
