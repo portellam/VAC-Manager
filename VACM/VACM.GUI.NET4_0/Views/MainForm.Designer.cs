@@ -21,11 +21,11 @@ namespace VACM.GUI.NET4_0.Views
         {
             get
             {
-                return Window.LightThemeValidator.IsLightThemeEnabled;
+                return GraphicsWindow.LightThemeValidator.IsLightThemeEnabled;
             }
             set
             {
-                Window.LightThemeValidator.IsLightThemeEnabled = value;
+                GraphicsWindow.LightThemeValidator.IsLightThemeEnabled = value;
             }
         }
 
@@ -1473,7 +1473,7 @@ namespace VACM.GUI.NET4_0.Views
         /// </summary>
         internal void SetIsLightThemeEnabledValueChangedEventArgs()
         {
-            Window.LightThemeValidator.IsLightThemeEnabledValueChanged +=
+            GraphicsWindow.LightThemeValidator.IsLightThemeEnabledValueChanged +=
                 (sender, valueUpdatedEventArgs) =>
                 {
                     SetViewToggleDarkModeToolStripMenuItem();

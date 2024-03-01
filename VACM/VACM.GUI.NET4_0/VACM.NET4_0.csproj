@@ -68,7 +68,7 @@
     <Compile Include="Extensions\PropertyValueChanged\PropertyValueChangedDelegate.cs" />
     <Compile Include="Extensions\PropertyValueChanged\PropertyValueChangedEventArgs.cs" />
     <Compile Include="Extensions\WMIRegistryEventListener.cs" />
-    <Compile Include="Window.cs" />
+    <Compile Include="GraphicsWindow.cs" />
     <Compile Include="Models\DeviceListModel.cs" />
     <Compile Include="Models\RepeaterDataModel.cs" />
     <Compile Include="Models\RepeaterModel.cs" />
