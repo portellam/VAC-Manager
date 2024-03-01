@@ -490,9 +490,7 @@ namespace VACM.GUI.NET4_0.Views
         internal void viewToggleDarkModeToolStripMenuItem_Click
             (object sender, EventArgs eventArgs)
         {
-            LightThemeValidator.IsLightThemeEnabled =
-                !viewToggleDarkModeToolStripMenuItem.Checked;
-
+            IsLightThemeEnabled = !viewToggleDarkModeToolStripMenuItem.Checked;
             SetColorTheme();
         }
 
