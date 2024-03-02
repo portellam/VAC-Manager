@@ -1278,7 +1278,7 @@ namespace VACM.NET4_0.Views
         /// <summary>
         /// Set color theme given dark mode is enabled or not.
         /// </summary>
-        internal void SetColorTheme()                                                   //NOTE: while debugging when the event is handled for IsLightThemeEnabled.*     //FIXME
+        internal void SetColorTheme()                                                   //NOTE: while debugging when the event is handled for IsLightThemeEnabled.*
         {
             ToggleDarkModeRenderer();                                                   //NOTE: this will break.*
 
