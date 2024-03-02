@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using NAudio.CoreAudioApi;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using NAudio.CoreAudioApi;
 
 namespace VACM.NET4.Models
 {

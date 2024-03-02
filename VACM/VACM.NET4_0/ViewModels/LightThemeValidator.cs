@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using VACM.NET4_0.Extensions;
 using System.Threading.Tasks;
+using VACM.NET4_0.Extensions;
 using VACM.NET4_0.Extensions.PropertyValueChanged;
 
 namespace VACM.NET4_0.ViewModels
