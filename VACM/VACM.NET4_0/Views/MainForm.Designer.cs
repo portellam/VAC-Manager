@@ -1259,7 +1259,7 @@ namespace VACM.NET4_0.Views
 
             viewToggleDarkModeToolStripMenuItem.Enabled = !DoForceColorTheme;
 
-            //SetIsLightThemeEnabledValueChangedEventArgs();                            //NOTE: Disabling this for now. FIXME: see SetColorTheme.
+            SetIsLightThemeEnabledValueChangedEventArgs();                              //FIXME: See SetColorTheme.
             SetRepeaterDataModel();
             ModifyListItemsBeforeInitialization();
             InitializeLists();
