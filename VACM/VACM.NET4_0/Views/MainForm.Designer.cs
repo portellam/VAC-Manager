@@ -417,9 +417,6 @@ namespace VACM.NET4_0.Views
 
             this.deviceAddConfirmToolStripMenuItem.Click += new System.EventHandler
                 (this.deviceAddConfirmToolStripMenuItem_Click);
-
-            this.deviceAddConfirmToolStripMenuItem.Enabled =
-                doAddSelectedWaveInOrWaveOutContainCheckedMenuItem;
             // 
             // deviceAddSelectToolStripMenuItem
             // 
@@ -447,7 +444,6 @@ namespace VACM.NET4_0.Views
                 new System.Drawing.Size(156, 26);
 
             this.deviceAddSelectWaveInToolStripMenuItem.Tag = "";
-            this.deviceAddSelectWaveInToolStripMenuItem.Text = WaveInAsString;
             // 
             // deviceAddSelectWaveOutToolStripMenuItem
             // 
@@ -458,7 +454,6 @@ namespace VACM.NET4_0.Views
                 new System.Drawing.Size(156, 26);
 
             this.deviceAddSelectWaveOutToolStripMenuItem.Tag = "";
-            this.deviceAddSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
             // 
             // deviceAddAllToolStripMenuItem
             // 
@@ -543,7 +538,6 @@ namespace VACM.NET4_0.Views
                 new System.Drawing.Size(156, 26);
 
             this.deviceRemoveWaveInToolStripMenuItem.Tag = "";
-            this.deviceRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
             // 
             // deviceRemoveWaveOutToolStripMenuItem
             // 
@@ -554,7 +548,6 @@ namespace VACM.NET4_0.Views
                 new System.Drawing.Size(156, 26);
 
             this.deviceRemoveWaveOutToolStripMenuItem.Tag = "";
-            this.deviceRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
             // 
             // deviceToolStripSeparator1
             // 
@@ -715,7 +708,6 @@ namespace VACM.NET4_0.Views
             this.linkAddWaveInToolStripMenuItem.Name = "linkAddWaveInToolStripMenuItem";
             this.linkAddWaveInToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.linkAddWaveInToolStripMenuItem.Tag = "";
-            this.linkAddWaveInToolStripMenuItem.Text = WaveInAsString;
             // 
             // linkAddWaveOutToolStripMenuItem
             // 
@@ -726,7 +718,6 @@ namespace VACM.NET4_0.Views
                 new System.Drawing.Size(156, 26);
 
             this.linkAddWaveOutToolStripMenuItem.Tag = "";
-            this.linkAddWaveOutToolStripMenuItem.Text = WaveOutAsString;
             // 
             // linkRemoveToolStripMenuItem
             // 
@@ -758,7 +749,6 @@ namespace VACM.NET4_0.Views
                 new System.Drawing.Size(156, 26);
 
             this.linkRemoveWaveInToolStripMenuItem.Tag = "";
-            this.linkRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
             // 
             // linkRemoveWaveOutToolStripMenuItem
             // 
@@ -769,7 +759,6 @@ namespace VACM.NET4_0.Views
                 new System.Drawing.Size(156, 26);
 
             this.linkRemoveWaveOutToolStripMenuItem.Tag = "";
-            this.linkRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
             // 
             // linkDefaultBitRateToolStripMenuItem
             // 
@@ -1019,9 +1008,6 @@ namespace VACM.NET4_0.Views
             // 
             this.helpAboutToolStripMenuItem.Name = "helpAboutToolStripMenuItem";
             this.helpAboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
-
-            this.helpAboutToolStripMenuItem.Text =
-                $"About {Common.ApplicationNameAsAbbreviation}";
 
             this.helpAboutToolStripMenuItem.Click +=
                 new System.EventHandler(this.helpAboutToolStripMenuItem_Click);
