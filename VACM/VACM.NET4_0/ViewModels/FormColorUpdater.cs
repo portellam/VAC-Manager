@@ -12,7 +12,7 @@ namespace VACM.NET4_0.ViewModels
         {
             get
             {
-                return GraphicsWindow.LightThemeValidator.IsLightThemeEnabled;
+                return GraphicsWindow.IsLightThemeEnabled;
             }
         }
 
