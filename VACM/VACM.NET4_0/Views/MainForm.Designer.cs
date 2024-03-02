@@ -1435,24 +1435,22 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void SetColorTheme()                                                   //NOTE: while debugging when the event is handled for IsLightThemeEnabled.*
         {
-            ToggleDarkModeRenderer();                                                   //NOTE: this will execute.*
+            ToggleDarkModeRenderer();                                                   //NOTE: this will break.*
 
-            viewToggleDarkModeToolStripMenuItem.Checked = !IsLightThemeEnabled;         //NOTE: this will execute.*
-            viewToggleDarkModeToolStripMenuItem.Text = darkModeText;                    //NOTE: this will execute.*
+            viewToggleDarkModeToolStripMenuItem.Checked = !IsLightThemeEnabled;         //NOTE: this will break.*
+            viewToggleDarkModeToolStripMenuItem.Text = darkModeText;                    //NOTE: this will break.*
 
-            FormColorUpdater.SetColorsOfConstructor(this);                              //NOTE: this will NOT execute.*
-            FormColorUpdater.SetColorsOfControlCollection(Controls);                    //NOTE: this will NOT execute.*
-            FormColorUpdater.SetColorsOfControlList(controlList);                       //NOTE: this will NOT execute.*
-            FormColorUpdater.SetColorsOfToolStripItemList(toolStripItemList);           //NOTE: this will NOT execute.*
+            FormColorUpdater.SetColorsOfConstructor(this);                              //NOTE: this will NOT break.*
+            FormColorUpdater.SetColorsOfControlCollection(Controls);                    //NOTE: this will NOT break.*
+            FormColorUpdater.SetColorsOfControlList(controlList);                       //NOTE: this will NOT break.*
+            FormColorUpdater.SetColorsOfToolStripItemList(toolStripItemList);           //NOTE: this will NOT break.*
 
             if (aboutForm != null)
             {
-                aboutForm.SetColorTheme();                                              //NOTE: this will NOT execute.*
+                aboutForm.SetColorTheme();                                              //NOTE: this will NOT break.*
             }
 
-            MessageBoxWrapper.Show("SHALOME");                                          //NOTE: this will NOT execute.*
-
-            Invalidate();                                                               //NOTE: this will NOT execute.*
+            Invalidate();                                                               //NOTE: this will NOT break.*
         }
 
         /// <summary>
