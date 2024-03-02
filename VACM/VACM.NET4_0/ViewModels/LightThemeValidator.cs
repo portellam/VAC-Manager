@@ -146,7 +146,7 @@ namespace VACM.NET4_0.ViewModels
         /// </summary>
         internal void SetIsLightThemeEnabledValueByRegistry()
         {
-            //IsLightThemeEnabled = appsUseLightTheme || systemUsesLightTheme;
+            //IsLightThemeEnabled = appsUseLightTheme || systemUsesLightTheme;          //NOTE: Is SystemUsesLightTheme even necessary?
             IsLightThemeEnabled = appsUseLightTheme;
         }
 
