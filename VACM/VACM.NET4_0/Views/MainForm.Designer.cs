@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using VACM.NET4.Extensions;
 using VACM.NET4_0.ViewModels;
 using VACM.NET4_0.ViewModels.Accessors;
 using VACM.NET4_0.ViewModels.ColorTable;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace VACM.NET4_0.Views
 {
@@ -1307,27 +1311,6 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Set mouse properties of drop down tool strip menu item.
-        /// </summary>
-        /// <param name="toolStripMenuItem">The drop down tool strip menu item</param>
-        internal void SetMousePropertiesOfToolStripMenuItemDropDown
-            (ref ToolStripMenuItem toolStripMenuItem)
-        {
-            if (toolStripMenuItem is null)
-            {
-                return;
-            }
-
-            toolStripMenuItem.DropDown.MouseEnter +=
-                new System.EventHandler
-                (this.SetAutoClosePropertyOfToolStripDropDown_MouseEnter);
-
-            toolStripMenuItem.DropDown.MouseLeave +=
-                new System.EventHandler
-                (this.SetAutoClosePropertyOfToolStripDropDown_MouseLeave);
-        }
-
-        /// <summary>
         /// Initialize device drop down collections.
         /// </summary>
         internal void InitializeDeviceDropDownCollections()
@@ -1457,7 +1440,9 @@ namespace VACM.NET4_0.Views
         {
             ToggleDarkModeRenderer();
 
+            viewToggleDarkModeToolStripMenuItem.Checked = !IsLightThemeEnabled;
             viewToggleDarkModeToolStripMenuItem.Text = darkModeText;
+
             FormColorUpdater.SetColorsOfConstructor(this);
             FormColorUpdater.SetColorsOfControlCollection(Controls);
             FormColorUpdater.SetColorsOfControlList(controlList);
@@ -1468,6 +1453,8 @@ namespace VACM.NET4_0.Views
                 aboutForm.SetColorTheme();
             }
 
+            MessageBoxWrapper.Show("SHALOME");
+
             Invalidate();
         }
 
@@ -1477,7 +1464,6 @@ namespace VACM.NET4_0.Views
         internal void SetInitialChanges()
         {
             Text = AssemblyInformationAccessor.AssemblyTitle;
-            SetCheckedPropertyOfViewToggleDarkModeToolStripMenuItem();
         }
 
         /// <summary>
@@ -1493,18 +1479,28 @@ namespace VACM.NET4_0.Views
             GraphicsWindow.LightThemeValidator.IsLightThemeEnabledValueChanged +=
                 (sender, valueUpdatedEventArgs) =>
                 {
-                    SetCheckedPropertyOfViewToggleDarkModeToolStripMenuItem();
+                    MessageBoxWrapper.Show("OY VEY");                                   //NOTE: When selecting Color Theme in registry (Windows settings), this messagebox appears twice. However, the following code in SetColorTheme does not execute. Why?
                     SetColorTheme();
                 };
         }
 
         /// <summary>
-        /// Set checked property of viewToggleDarkModeToolStripMenuItem.
+        /// Set mouse properties of drop down tool strip menu item.
         /// </summary>
-        internal void SetCheckedPropertyOfViewToggleDarkModeToolStripMenuItem()
+        /// <param name="toolStripMenuItem">The drop down tool strip menu item</param>
+        internal void SetMousePropertiesOfToolStripMenuItemDropDown
+            (ref ToolStripMenuItem toolStripMenuItem)
         {
-            viewToggleDarkModeToolStripMenuItem.Checked =
-                !IsLightThemeEnabled;
+            if (toolStripMenuItem is null)
+            {
+                return;
+            }
+
+            toolStripMenuItem.DropDown.MouseEnter += new System.EventHandler
+                (this.SetAutoClosePropertyOfToolStripDropDown_MouseEnter);
+
+            toolStripMenuItem.DropDown.MouseLeave += new System.EventHandler
+                (this.SetAutoClosePropertyOfToolStripDropDown_MouseLeave);
         }
 
         /// <summary>
