@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Text.RegularExpressions;
 
 namespace VACM.NET4_0.Extensions
 {
