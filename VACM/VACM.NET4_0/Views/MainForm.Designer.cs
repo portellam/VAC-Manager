@@ -1422,6 +1422,22 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void PostInitializeComponent()
         {
+            this.deviceAddConfirmToolStripMenuItem.Enabled =
+                doAddSelectedWaveInOrWaveOutContainCheckedMenuItem;
+
+            this.deviceAddSelectWaveInToolStripMenuItem.Text = WaveInAsString;
+            this.deviceAddSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
+            this.deviceRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
+            this.deviceRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
+
+            this.helpAboutToolStripMenuItem.Text =
+                $"About {Common.ApplicationNameAsAbbreviation}";
+
+            this.linkAddWaveInToolStripMenuItem.Text = WaveInAsString;
+            this.linkAddWaveOutToolStripMenuItem.Text = WaveOutAsString;
+            this.linkRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
+            this.linkRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
+
             SetIsLightThemeEnabledValueChangedEventArgs();
             SetRepeaterDataModel();
             ModifyListItemsBeforeInitialization();
