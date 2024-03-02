@@ -1,4 +1,6 @@
 ﻿using Microsoft.Win32;
+using System;
+using System.Text.RegularExpressions;
 
 namespace VACM.NET4_0.Extensions
 {
@@ -7,65 +9,29 @@ namespace VACM.NET4_0.Extensions
         # region Logic
 
         /// <summary>
-        /// Get the registry key from the registry hive.
-        /// </summary>
-        /// <param name="registryHive">The registry hive</param>
-        /// <returns>The registry key</returns>
-        public static RegistryKey GetRegistryKeyFromHive(RegistryHive registryHive)
-        {
-            switch (registryHive)
-            {
-                case RegistryHive.ClassesRoot:
-                    return Registry.ClassesRoot;
-
-                case RegistryHive.CurrentConfig:
-                    return Registry.CurrentConfig;
-
-                case RegistryHive.CurrentUser:
-                    return Registry.CurrentUser;
-
-                case RegistryHive.DynData:
-                    return Registry.PerformanceData;                                            //NOTE: Changed due to CS0618.
-
-                case RegistryHive.LocalMachine:
-                    return Registry.LocalMachine;
-
-                case RegistryHive.PerformanceData:
-                    return Registry.PerformanceData;
-
-                case RegistryHive.Users:
-                    return Registry.Users;
-
-                default:
-                    return null;
-            }
-        }
-
-        /// <summary>
         /// Get the sub key value of a registry key.
         /// </summary>
         /// <param name="registryHive">The registry hive</param>
         /// <param name="registryKeyPath">The registry key path</param>
         /// <param name="registryValueName">The registry value name</param>
-        public static string GetRegistrySubKeyValue(RegistryHive registryHive,
+        public static object GetRegistrySubKeyValue(RegistryHive registryHive,
             string registryKeyPath, string registryValueName)
         {
-            RegistryKey registryKey = GetRegistryKeyFromHive(registryHive);
+            RegistryView registryView = Environment.Is64BitOperatingSystem ?
+                RegistryView.Registry64 : RegistryView.Registry32;
 
-            if (registryKey is null)
+            RegistryKey baseRegistryKey =
+                RegistryKey.OpenBaseKey(registryHive, registryView);
+
+            if (baseRegistryKey is null)
             {
                 return null;
             }
 
-            registryKey.OpenSubKey(registryKeyPath);
-            var subKeyValue = registryKey?.GetValue(registryValueName);
+            RegistryKey registryKey =
+                baseRegistryKey.OpenSubKey(registryKeyPath, false);
 
-            if (subKeyValue is null)
-            {
-                return null;
-            }
-
-            return subKeyValue.ToString();
+            return registryKey?.GetValue(registryValueName);
         }
 
         #endregion
