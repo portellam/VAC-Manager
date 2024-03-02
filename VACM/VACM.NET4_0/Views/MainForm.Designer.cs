@@ -1476,7 +1476,7 @@ namespace VACM.NET4_0.Views
             GraphicsWindow.LightThemeValidator.IsLightThemeEnabledValueChanged +=
                 (sender, propertyValueChangedEventArgs) =>
                 {
-                    SetColorTheme();
+                    SetColorTheme();                                                    //FIXME: why is this being called but not really executing? TODO: debug!
                 };
         }
 
