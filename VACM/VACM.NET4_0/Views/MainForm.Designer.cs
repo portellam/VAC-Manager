@@ -1259,7 +1259,7 @@ namespace VACM.NET4_0.Views
 
             viewToggleDarkModeToolStripMenuItem.Enabled = !DoForceColorTheme;
 
-            SetIsLightThemeEnabledValueChangedEventArgs();
+            //SetIsLightThemeEnabledValueChangedEventArgs();                            //NOTE: Disabling this for now. FIXME: see SetColorTheme.
             SetRepeaterDataModel();
             ModifyListItemsBeforeInitialization();
             InitializeLists();
@@ -1278,19 +1278,19 @@ namespace VACM.NET4_0.Views
         /// <summary>
         /// Set color theme given dark mode is enabled or not.
         /// </summary>
-        internal void SetColorTheme()                                                   //NOTE: while debugging when the event is handled for IsLightThemeEnabled.*
+        internal void SetColorTheme()                                                   //NOTE: while debugging when the event is handled for IsLightThemeEnabled.*     //FIXME
         {
             ToggleDarkModeRenderer();                                                   //NOTE: this will break.*
 
-            viewToggleDarkModeToolStripMenuItem.Checked = !IsLightThemeEnabled;         //NOTE: this will break.*
-            viewToggleDarkModeToolStripMenuItem.Text = darkModeText;                    //NOTE: this will break.*
+            viewToggleDarkModeToolStripMenuItem.Checked = !IsLightThemeEnabled;         //NOTE: this will sometimes break.*
+            viewToggleDarkModeToolStripMenuItem.Text = darkModeText;                    //NOTE: this will sometimes break.*
 
             FormColorUpdater.SetColorsOfConstructor(this);                              //NOTE: this will NOT break.*
             FormColorUpdater.SetColorsOfControlCollection(Controls);                    //NOTE: this will NOT break.*
             FormColorUpdater.SetColorsOfControlList(controlList);                       //NOTE: this will NOT break.*
             FormColorUpdater.SetColorsOfToolStripItemList(toolStripItemList);           //NOTE: this will NOT break.*
 
-            if (aboutForm != null)
+            if (aboutForm != null)                                                      //NOTE: this will NOT break.*
             {
                 aboutForm.SetColorTheme();                                              //NOTE: this will NOT break.*
             }
