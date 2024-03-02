@@ -37,7 +37,6 @@ namespace VACM.NET4_0
             }
         }
 
-
         public static FormColorUpdater FormColorUpdater { get; private set; }
         public static LightThemeValidator LightThemeValidator { get; private set; }
 
