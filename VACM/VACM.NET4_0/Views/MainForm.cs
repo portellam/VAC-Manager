@@ -489,7 +489,7 @@ namespace VACM.NET4_0.Views
         private void viewRefreshToolStripMenuItem_Click
             (object sender, EventArgs eventArgs)
         {
-            Refresh();
+            SetColorTheme();
         }
 
         /// <summary>
