@@ -68,16 +68,12 @@ namespace VACM.NET4_0.ViewModels
         {
             get
             {
-                if (Program.DoesArgumentForceColorTheme)
-                {
-                    return Program.IsLightThemeEnabled;
-                }
-
                 return isLightThemeEnabled;
             }
-            set
+            private set
             {
                 isLightThemeEnabled = value;
+                GraphicsWindow.IsLightThemeEnabled = value;
                 OnLightThemeIsEnabledValueChanged();
             }
         }
@@ -110,17 +106,14 @@ namespace VACM.NET4_0.ViewModels
         /// <summary>
         /// Constructor
         /// </summary>
-        public LightThemeValidator(bool doForceColorTheme, bool isLightThemeEnforced)
+        public LightThemeValidator()
         {
-            if (doForceColorTheme)
+            if (GraphicsWindow.DoForceColorTheme)
             {
-                IsLightThemeEnabled = isLightThemeEnforced;
                 return;
             }
 
-            registrySubKeyNameAndPropertyDictionary =
-                new Dictionary<string, object>();
-
+            registrySubKeyNameAndPropertyDictionary = new Dictionary<string, object>();
             ConstructorHelperRunParallelTasks();
         }
 

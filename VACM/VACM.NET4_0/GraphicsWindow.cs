@@ -8,7 +8,35 @@ namespace VACM.NET4_0
     {
         #region Parameters
 
+        private static bool isLightThemeEnabled;
         private static MainForm mainForm;
+
+        public static bool IsLightThemeEnabled
+        {
+            get
+            {
+                return isLightThemeEnabled;
+            }
+
+            set
+            {
+                if (DoForceColorTheme)
+                {
+                    return;
+                }
+
+                isLightThemeEnabled = value;
+            }
+        }
+
+        public static bool DoForceColorTheme
+        {
+            get
+            {
+                return Program.DoesArgumentForceColorTheme;
+            }
+        }
+
 
         public static FormColorUpdater FormColorUpdater { get; private set; }
         public static LightThemeValidator LightThemeValidator { get; private set; }
@@ -19,12 +47,9 @@ namespace VACM.NET4_0
 
         public GraphicsWindow()
         {
-            LightThemeValidator = new LightThemeValidator
-                (Program.DoesArgumentForceColorTheme, Program.IsLightThemeEnabled);
-
+            LightThemeValidator = new LightThemeValidator();
             FormColorUpdater = new FormColorUpdater();
             mainForm = new MainForm();
-
             Application.Run(mainForm);
         }
 
