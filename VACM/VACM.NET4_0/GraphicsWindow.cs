@@ -58,6 +58,11 @@ namespace VACM.NET4_0
             FormColorUpdater = new FormColorUpdater();
             mainForm = new MainForm();
             Application.Run(mainForm);
+
+            if (LightThemeValidator != null)
+            {
+                LightThemeValidator.Dispose();
+            }
         }
 
         #endregion
