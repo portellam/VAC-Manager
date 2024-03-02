@@ -45,9 +45,16 @@ namespace VACM.NET4_0
 
         #region Logic
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public GraphicsWindow()
         {
-            LightThemeValidator = new LightThemeValidator();
+            if (!DoForceColorTheme)
+            {
+                LightThemeValidator = new LightThemeValidator();
+            }
+
             FormColorUpdater = new FormColorUpdater();
             mainForm = new MainForm();
             Application.Run(mainForm);
