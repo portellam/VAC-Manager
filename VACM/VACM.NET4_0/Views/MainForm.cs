@@ -482,17 +482,6 @@ namespace VACM.NET4_0.Views
         #region 5. View menu logic
 
         /// <summary>
-        /// Click event logic for viewRefreshToolStripMenuItem.
-        /// </summary>
-        /// <param name="sender">The sender object</param>
-        /// <param name="eventArgs">The event arguments</param>
-        private void viewRefreshToolStripMenuItem_Click
-            (object sender, EventArgs eventArgs)
-        {
-            SetColorTheme();
-        }
-
-        /// <summary>
         /// Click event logic for viewToggleDarkModeToolStripMenuItem.
         /// Set the ToggleDarkModeText.
         /// </summary>

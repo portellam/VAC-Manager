@@ -114,7 +114,6 @@ namespace VACM.NET4_0.Views
         private ToolStripMenuItem repeaterStopAllToolStripMenuItem;
         private ToolStripMenuItem repeaterStopToolStripMenuItem;
         private ToolStripMenuItem repeaterToolStripMenuItem;
-        private ToolStripMenuItem viewRefreshToolStripMenuItem;
         private ToolStripMenuItem viewToggleDarkModeToolStripMenuItem;
         private ToolStripMenuItem viewToolStripMenuItem;
         private ToolStripRenderer initialMenuStrip1Renderer;
@@ -195,7 +194,6 @@ namespace VACM.NET4_0.Views
             this.repeaterToolStripSeparator1 = new ToolStripSeparator();
             this.repeaterToolStripSeparator2 = new ToolStripSeparator();
             this.tabControl1 = new Manina.Windows.Forms.TabControl();
-            this.viewRefreshToolStripMenuItem = new ToolStripMenuItem();
             this.viewToggleDarkModeToolStripMenuItem = new ToolStripMenuItem();
             this.viewToolStripMenuItem = new ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -893,8 +891,7 @@ namespace VACM.NET4_0.Views
             this.viewToolStripMenuItem.DropDownItems
                 .AddRange(new ToolStripItem[]
                 {
-                    this.viewToggleDarkModeToolStripMenuItem,
-                    this.viewRefreshToolStripMenuItem
+                    this.viewToggleDarkModeToolStripMenuItem
                 });
 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
@@ -904,14 +901,6 @@ namespace VACM.NET4_0.Views
 
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.viewToolStripMenuItem.Text = "View";
-            // 
-            // viewRefreshToolStripMenuItem
-            // 
-            this.viewRefreshToolStripMenuItem.Name = "viewRefreshToolStripMenuItem";
-            this.viewRefreshToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.viewRefreshToolStripMenuItem.Text = "Refresh";
-            this.viewRefreshToolStripMenuItem.Click += new System.EventHandler
-                (this.viewRefreshToolStripMenuItem_Click);
             // 
             // viewToggleDarkModeToolStripMenuItem
             // 
