@@ -15,6 +15,11 @@ namespace VACM.NET4_0
         {
             get
             {
+                if (DoForceColorTheme)
+                {
+                    return Program.IsLightThemeEnabled;
+                }
+
                 return isLightThemeEnabled;
             }
 
@@ -33,7 +38,7 @@ namespace VACM.NET4_0
         {
             get
             {
-                return Program.DoesArgumentForceColorTheme;
+                return Program.DoForceColorTheme;
             }
         }
 
