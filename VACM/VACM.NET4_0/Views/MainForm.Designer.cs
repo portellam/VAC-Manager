@@ -21,11 +21,19 @@ namespace VACM.NET4_0.Views
         {
             get
             {
-                return GraphicsWindow.LightThemeValidator.IsLightThemeEnabled;
+                return GraphicsWindow.IsLightThemeEnabled;
             }
             set
             {
-                GraphicsWindow.LightThemeValidator.IsLightThemeEnabled = value;
+                GraphicsWindow.IsLightThemeEnabled = value;
+            }
+        }
+
+        private bool DoForceColorTheme
+        {
+            get
+            {
+                return GraphicsWindow.DoForceColorTheme;
             }
         }
 
@@ -1408,28 +1416,30 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void PostInitializeComponent()
         {
-            this.deviceAddConfirmToolStripMenuItem.Enabled =
+            deviceAddConfirmToolStripMenuItem.Enabled =
                 doAddSelectedWaveInOrWaveOutContainCheckedMenuItem;
 
-            this.deviceAddSelectWaveInToolStripMenuItem.Text = WaveInAsString;
-            this.deviceAddSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
-            this.deviceRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
-            this.deviceRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
+            deviceAddSelectWaveInToolStripMenuItem.Text = WaveInAsString;
+            deviceAddSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
+            deviceRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
+            deviceRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
 
-            this.helpAboutToolStripMenuItem.Text =
+            helpAboutToolStripMenuItem.Text =
                 $"About {Common.ApplicationNameAsAbbreviation}";
 
-            this.linkAddWaveInToolStripMenuItem.Text = WaveInAsString;
-            this.linkAddWaveOutToolStripMenuItem.Text = WaveOutAsString;
-            this.linkRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
-            this.linkRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
+            linkAddWaveInToolStripMenuItem.Text = WaveInAsString;
+            linkAddWaveOutToolStripMenuItem.Text = WaveOutAsString;
+            linkRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
+            linkRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
+
+            viewToggleDarkModeToolStripMenuItem.Enabled = !DoForceColorTheme;
 
             SetIsLightThemeEnabledValueChangedEventArgs();
             SetRepeaterDataModel();
             ModifyListItemsBeforeInitialization();
             InitializeLists();
             SetInitialChanges();
-            SetColorTheme(); 
+            SetColorTheme();
         }
 
         /// <summary>
@@ -1467,7 +1477,7 @@ namespace VACM.NET4_0.Views
         internal void SetInitialChanges()
         {
             Text = AssemblyInformationAccessor.AssemblyTitle;
-            SetViewToggleDarkModeToolStripMenuItem();
+            SetCheckedPropertyOfViewToggleDarkModeToolStripMenuItem();
         }
 
         /// <summary>
@@ -1475,24 +1485,26 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void SetIsLightThemeEnabledValueChangedEventArgs()
         {
+            if (GraphicsWindow.LightThemeValidator is null)
+            {
+                return;
+            }
+
             GraphicsWindow.LightThemeValidator.IsLightThemeEnabledValueChanged +=
                 (sender, valueUpdatedEventArgs) =>
                 {
-                    SetViewToggleDarkModeToolStripMenuItem();
+                    SetCheckedPropertyOfViewToggleDarkModeToolStripMenuItem();
                     SetColorTheme();
                 };
         }
 
         /// <summary>
-        /// Set properties of viewToggleDarkModeToolStripMenuItem.
+        /// Set checked property of viewToggleDarkModeToolStripMenuItem.
         /// </summary>
-        internal void SetViewToggleDarkModeToolStripMenuItem()
+        internal void SetCheckedPropertyOfViewToggleDarkModeToolStripMenuItem()
         {
             viewToggleDarkModeToolStripMenuItem.Checked =
                 !IsLightThemeEnabled;
-
-            viewToggleDarkModeToolStripMenuItem.Enabled =
-                !Program.DoesArgumentForceColorTheme;
         }
 
         /// <summary>
