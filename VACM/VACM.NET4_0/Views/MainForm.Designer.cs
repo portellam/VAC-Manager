@@ -1433,26 +1433,26 @@ namespace VACM.NET4_0.Views
         /// <summary>
         /// Set color theme given dark mode is enabled or not.
         /// </summary>
-        internal void SetColorTheme()
+        internal void SetColorTheme()                                                   //NOTE: while debugging when the event is handled for IsLightThemeEnabled.*
         {
-            ToggleDarkModeRenderer();
+            ToggleDarkModeRenderer();                                                   //NOTE: this will execute.*
 
-            viewToggleDarkModeToolStripMenuItem.Checked = !IsLightThemeEnabled;
-            viewToggleDarkModeToolStripMenuItem.Text = darkModeText;
+            viewToggleDarkModeToolStripMenuItem.Checked = !IsLightThemeEnabled;         //NOTE: this will execute.*
+            viewToggleDarkModeToolStripMenuItem.Text = darkModeText;                    //NOTE: this will execute.*
 
-            FormColorUpdater.SetColorsOfConstructor(this);
-            FormColorUpdater.SetColorsOfControlCollection(Controls);
-            FormColorUpdater.SetColorsOfControlList(controlList);
-            FormColorUpdater.SetColorsOfToolStripItemList(toolStripItemList);
+            FormColorUpdater.SetColorsOfConstructor(this);                              //NOTE: this will NOT execute.*
+            FormColorUpdater.SetColorsOfControlCollection(Controls);                    //NOTE: this will NOT execute.*
+            FormColorUpdater.SetColorsOfControlList(controlList);                       //NOTE: this will NOT execute.*
+            FormColorUpdater.SetColorsOfToolStripItemList(toolStripItemList);           //NOTE: this will NOT execute.*
 
             if (aboutForm != null)
             {
-                aboutForm.SetColorTheme();
+                aboutForm.SetColorTheme();                                              //NOTE: this will NOT execute.*
             }
 
-            MessageBoxWrapper.Show("SHALOME");
+            MessageBoxWrapper.Show("SHALOME");                                          //NOTE: this will NOT execute.*
 
-            Invalidate();
+            Invalidate();                                                               //NOTE: this will NOT execute.*
         }
 
         /// <summary>
