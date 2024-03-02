@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Forms;
-using VACM.NET4_0.Extensions;
 using VACM.NET4_0.ViewModels;
 using VACM.NET4_0.ViewModels.Accessors;
 using VACM.NET4_0.ViewModels.ColorTable;
@@ -161,10 +160,12 @@ namespace VACM.NET4_0.Views
         private System.Windows.Forms.ToolStripMenuItem repeaterStopToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem repeaterToolStripMenuItem;
 
+        private System.Windows.Forms.ToolStripMenuItem viewRefreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem
             viewToggleDarkModeToolStripMenuItem;
 
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+
         private System.Windows.Forms.ToolStripSeparator deviceToolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator deviceToolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator fileToolStripSeparator1;
@@ -346,6 +347,9 @@ namespace VACM.NET4_0.Views
                 new System.Windows.Forms.ToolStripSeparator();
 
             this.tabControl1 = new Manina.Windows.Forms.TabControl();
+
+            this.viewRefreshToolStripMenuItem =
+                new System.Windows.Forms.ToolStripMenuItem();
 
             this.viewToggleDarkModeToolStripMenuItem =
                 new System.Windows.Forms.ToolStripMenuItem();
@@ -1046,7 +1050,8 @@ namespace VACM.NET4_0.Views
             this.viewToolStripMenuItem.DropDownItems
                 .AddRange(new System.Windows.Forms.ToolStripItem[]
                 {
-                    this.viewToggleDarkModeToolStripMenuItem
+                    this.viewToggleDarkModeToolStripMenuItem,
+                    this.viewRefreshToolStripMenuItem
                 });
 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
@@ -1056,6 +1061,14 @@ namespace VACM.NET4_0.Views
 
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.viewToolStripMenuItem.Text = "View";
+            // 
+            // viewRefreshToolStripMenuItem
+            // 
+            this.viewRefreshToolStripMenuItem.Name = "viewRefreshToolStripMenuItem";
+            this.viewRefreshToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewRefreshToolStripMenuItem.Text = "Refresh";
+            this.viewRefreshToolStripMenuItem.Click += new System.EventHandler
+                (this.viewRefreshToolStripMenuItem_Click);
             // 
             // viewToggleDarkModeToolStripMenuItem
             // 

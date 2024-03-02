@@ -67,7 +67,7 @@ namespace VACM.NET4_0.Views
         #region 1. File menu logic
 
         /// <summary>
-        /// Click event logic for openToolStripMenuItem.
+        /// Click event logic for fileOpenToolStripMenuItem.
         /// Get filename if dialog result is OK.
         /// </summary>
         /// <param name="sender">The sender object</param>
@@ -92,7 +92,7 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Click event logic for exitToolStripMenuItem.
+        /// Click event logic for fileExitToolStripMenuItem.
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="eventArgs">The event arguments</param>
@@ -193,7 +193,7 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Click event logic for reloadAllToolStripMenuItem.
+        /// Click event logic for deviceReloadAllToolStripMenuItem.
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="eventArgs">The event arguments</param>
@@ -482,7 +482,18 @@ namespace VACM.NET4_0.Views
         #region 5. View menu logic
 
         /// <summary>
-        /// Click event logic for aboutToolStripMenuItem.
+        /// Click event logic for viewRefreshToolStripMenuItem.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        private void viewRefreshToolStripMenuItem_Click
+            (object sender, EventArgs eventArgs)
+        {
+            Refresh();
+        }
+
+        /// <summary>
+        /// Click event logic for viewToggleDarkModeToolStripMenuItem.
         /// Set the ToggleDarkModeText.
         /// </summary>
         /// <param name="sender">The sender object</param>
@@ -499,7 +510,7 @@ namespace VACM.NET4_0.Views
         #region 6. Help menu logic
 
         /// <summary>
-        /// Click event logic for aboutToolStripMenuItem.
+        /// Click event logic for helpAboutToolStripMenuItem.
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="eventArgs">The event arguments</param>
