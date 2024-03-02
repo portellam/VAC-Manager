@@ -4,14 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using VACM.NET4.Extensions;
+using VACM.NET4_0.Extensions;
 using VACM.NET4_0.ViewModels;
 using VACM.NET4_0.ViewModels.Accessors;
 using VACM.NET4_0.ViewModels.ColorTable;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace VACM.NET4_0.Views
 {
@@ -1477,9 +1474,8 @@ namespace VACM.NET4_0.Views
             }
 
             GraphicsWindow.LightThemeValidator.IsLightThemeEnabledValueChanged +=
-                (sender, valueUpdatedEventArgs) =>
+                (sender, propertyValueChangedEventArgs) =>
                 {
-                    MessageBoxWrapper.Show("OY VEY");                                   //NOTE: When selecting Color Theme in registry (Windows settings), this messagebox appears twice. However, the following code in SetColorTheme does not execute. Why?
                     SetColorTheme();
                 };
         }
