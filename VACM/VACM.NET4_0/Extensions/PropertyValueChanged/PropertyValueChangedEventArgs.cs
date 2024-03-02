@@ -4,9 +4,9 @@
     {
         #region Parameters
 
-        private string propertyValue;
+        private object propertyValue;
 
-        public string PropertyValue
+        public object PropertyValue
         {
             get
             {
@@ -22,7 +22,7 @@
         /// Constructor
         /// </summary>
         /// <param name="propertyValue">The property value</param>
-        public PropertyValueChangedEventArgs(string propertyValue)
+        public PropertyValueChangedEventArgs(object propertyValue)
         {
             this.propertyValue = propertyValue;
         }

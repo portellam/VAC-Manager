@@ -86,7 +86,7 @@ namespace VACM.NET4_0.ViewModels
         }
 
         public WMIRegistryEventListener WMIRegistryEventListener;
-        public event PropertyValueChanged IsLightThemeEnabledValueChanged;
+        public event PropertyValueChangedDelegate IsLightThemeEnabledValueChanged;
 
         #endregion
 
@@ -165,7 +165,7 @@ namespace VACM.NET4_0.ViewModels
         internal void OnLightThemeIsEnabledValueChanged()
         {
             PropertyValueChangedEventArgs propertyValueChangedEventArgs =
-                new PropertyValueChangedEventArgs(nameof(IsLightThemeEnabled));
+                new PropertyValueChangedEventArgs(IsLightThemeEnabled);
 
             IsLightThemeEnabledValueChanged?.Invoke
                 (this, propertyValueChangedEventArgs);
