@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using VACM.NET4_0.Extensions;
-using VACM.NET4_0.Extensions.RegistrySubKeyChanged;
 using VACM.NET4_0.Extensions.PropertyValueChanged;
 using VACM.NET4.Extensions;
 using System.Threading.Tasks;
@@ -29,8 +28,9 @@ namespace VACM.NET4_0.ViewModels
             {
                 try
                 {
-                    var value = registrySubKeyNameAndPropertyDictionary?
-                    [appsUseLightThemeRegistryValueName];
+                    var value = RegistryKeyPropertyGetter.GetRegistrySubKeyValue
+                        (registryHive, darkModeRegistryKeyPath,
+                        appsUseLightThemeRegistryValueName);
 
                     return Convert.ToBoolean(value, CultureInfo.InvariantCulture);
                 }
@@ -49,8 +49,9 @@ namespace VACM.NET4_0.ViewModels
             {
                 try
                 {
-                    var value = registrySubKeyNameAndPropertyDictionary?
-                        [systemUsesLightThemeRegistryValueName];
+                    var value = RegistryKeyPropertyGetter.GetRegistrySubKeyValue
+                        (registryHive, darkModeRegistryKeyPath,
+                        systemUsesLightThemeRegistryValueName);
 
                     return Convert.ToBoolean(value, CultureInfo.InvariantCulture);
                 }
@@ -61,7 +62,6 @@ namespace VACM.NET4_0.ViewModels
             }
         }
 
-        private Dictionary<string, object> registrySubKeyNameAndPropertyDictionary;
         private readonly RegistryHive registryHive = RegistryHive.CurrentUser;
 
         public bool IsLightThemeEnabled
@@ -75,16 +75,6 @@ namespace VACM.NET4_0.ViewModels
                 isLightThemeEnabled = value;
                 GraphicsWindow.IsLightThemeEnabled = value;
                 OnLightThemeIsEnabledValueChanged();
-            }
-        }
-
-        public bool IsLightThemeEnabledInRegistry
-        {
-            get
-            {
-                return appsUseLightTheme;
-
-                //return appsUseLightTheme || systemUsesLightTheme;
             }
         }
 
@@ -113,7 +103,6 @@ namespace VACM.NET4_0.ViewModels
                 return;
             }
 
-            registrySubKeyNameAndPropertyDictionary = new Dictionary<string, object>();
             ConstructorHelperRunParallelTasks();
         }
 
@@ -150,9 +139,6 @@ namespace VACM.NET4_0.ViewModels
             WMIRegistryEventListener.RegistrySubKeyChangedDelegate +=
                 (sender, registrySubKeyChangedEventArgs) =>
                 {
-                    SetRegistrySubKeyValueNameProperty
-                        (registrySubKeyChangedEventArgs);
-
                     SetIsLightThemeEnabledValueByRegistry();
                 };
         }
@@ -162,73 +148,8 @@ namespace VACM.NET4_0.ViewModels
         /// </summary>
         internal void SetIsLightThemeEnabledValueByRegistry()
         {
-            var subKeyValue = RegistryKeyPropertyGetter.GetRegistrySubKeyValue
-                (registryHive, darkModeRegistryKeyPath,
-            systemUsesLightThemeRegistryValueName);
-
-            SetRegistrySubKeyValueNameAndPropertyDictionary
-                (appsUseLightThemeRegistryValueName, subKeyValue);
-
-            subKeyValue = RegistryKeyPropertyGetter.GetRegistrySubKeyValue
-                (registryHive, darkModeRegistryKeyPath,
-                systemUsesLightThemeRegistryValueName);
-
-            SetRegistrySubKeyValueNameAndPropertyDictionary
-                (systemUsesLightThemeRegistryValueName, subKeyValue);
-
-            IsLightThemeEnabled = IsLightThemeEnabledInRegistry;
-        }
-
-        /// <summary>
-        /// Set the registry sub key value name and property dictionary.
-        /// </summary>
-        /// <param name="registrySubKeyValueName">The registry sub key value name
-        /// </param>
-        /// <param name="propertyValue">The property value</param>
-        internal void SetRegistrySubKeyValueNameAndPropertyDictionary
-            (string registrySubKeyValueName, string propertyValue)
-        {
-            if (registrySubKeyNameAndPropertyDictionary is null)
-            {
-                registrySubKeyNameAndPropertyDictionary =
-                    new Dictionary<string, object>();
-            }
-
-            if (registrySubKeyNameAndPropertyDictionary.Count == 0
-                || string.IsNullOrEmpty(registrySubKeyValueName))
-            {
-                return;
-            }
-
-            if (!registrySubKeyNameAndPropertyDictionary.ContainsKey
-                (registrySubKeyValueName))
-            {
-                registrySubKeyNameAndPropertyDictionary.Add
-                    (registrySubKeyValueName, propertyValue);
-
-                return;
-            }
-
-            registrySubKeyNameAndPropertyDictionary[registrySubKeyValueName] =
-                propertyValue;
-        }
-
-        /// <summary>
-        /// Set the registry sub key value name property.
-        /// </summary>
-        /// <param name="registrySubKeyChangedEventArgs">The registry sub key changed
-        /// event args</param>
-        internal void SetRegistrySubKeyValueNameProperty
-            (RegistrySubKeyChangedEventArgs registrySubKeyChangedEventArgs)
-        {
-            string registryValueName = registrySubKeyChangedEventArgs.RegistryValueName;
-
-            var subKeyValue = RegistryKeyPropertyGetter.GetRegistrySubKeyValue
-                (registrySubKeyChangedEventArgs.RegistryHive,
-                registrySubKeyChangedEventArgs.RegistryKeyPath, registryValueName);
-
-            SetRegistrySubKeyValueNameAndPropertyDictionary
-                (registryValueName, subKeyValue);
+            //IsLightThemeEnabled = appsUseLightTheme || systemUsesLightTheme;
+            IsLightThemeEnabled = appsUseLightTheme;
         }
 
         /// <summary>
