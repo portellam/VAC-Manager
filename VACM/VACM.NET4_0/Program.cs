@@ -8,31 +8,9 @@ namespace VACM.NET4_0
     {
         #region Arguments
 
-        private static bool? doRunInConsole;
-        private static bool? doForceDarkTheme;
-        private static bool? doForceLightTheme;
-
-        public static bool DoesArgumentForceColorTheme
-        {
-            get
-            {
-                return doForceDarkTheme.HasValue
-                    || doForceLightTheme.HasValue;
-            }
-        }
-
-        public static bool IsLightThemeEnabled
-        {
-            get
-            {
-                if (doForceLightTheme.HasValue)
-                {
-                    return doForceLightTheme.Value;
-                }
-
-                return false;
-            }
-        }
+        private static bool doRunInConsole = false;
+        public static bool DoForceColorTheme { get; private set; } = false;
+        public static bool IsLightThemeEnabled { get; private set; } = false;
 
         /// <summary>
         /// The command line arguments.
@@ -55,7 +33,7 @@ namespace VACM.NET4_0
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (doRunInConsole.Value)
+            if (doRunInConsole)
             {
                 //TODO: create console mode.
             }
@@ -89,11 +67,13 @@ namespace VACM.NET4_0
                     //    break;
 
                     case "/forcedarkmode":
-                        doForceDarkTheme = true;
+                        DoForceColorTheme = true;
+                        IsLightThemeEnabled = false;
                         break;
 
                     case "/forcelightmode":
-                        doForceLightTheme = true;
+                        DoForceColorTheme = true;
+                        IsLightThemeEnabled = true;
                         break;
 
                     default:
