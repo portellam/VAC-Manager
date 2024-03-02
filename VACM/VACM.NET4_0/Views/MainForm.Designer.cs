@@ -1512,7 +1512,7 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void ToggleDarkModeRenderer()
         {
-            if (!IsLightThemeEnabled)
+            if (IsLightThemeEnabled)
             {
                 menuStrip1.RenderMode = ToolStripRenderMode.ManagerRenderMode;
                 menuStrip1.Renderer = initialMenuStrip1Renderer;
