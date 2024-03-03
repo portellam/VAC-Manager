@@ -442,6 +442,58 @@ namespace VACM.NET4_0.Models
             SortSelectedMMDeviceLists();
         }
 
+        /// <summary>
+        /// Parse MMDevice name list and move each valid MMDevice to the relevant
+        /// selected list.
+        /// </summary>
+        /// <param name="mMDeviceNameList">The MMDevice name list</param>
+        public void MoveMMDeviceNameListFromSelectedList
+            (List<string> mMDeviceNameList)
+        {
+            if (mMDeviceNameList is null || mMDeviceNameList.Count == 0)
+            {
+                return;
+            }
+
+            foreach (string mMDeviceName in mMDeviceNameList)
+            {
+                MMDevice mMDevice = GetMMDevice(mMDeviceName);
+
+                if (mMDevice is null)
+                {
+                    continue;
+                }
+
+                MoveMMDeviceFromSelectedList(mMDevice.DataFlow, mMDeviceName);
+            }
+        }
+
+        /// <summary>
+        /// Parse MMDevice name list and move each valid MMDevice to the relevant
+        /// selected list.
+        /// </summary>
+        /// <param name="mMDeviceNameList">The MMDevice name list</param>
+        public void MoveMMDeviceNameListToSelectedList
+            (List<string> mMDeviceNameList)
+        {
+            if (mMDeviceNameList is null || mMDeviceNameList.Count == 0)
+            {
+                return;
+            }
+
+            foreach (string mMDeviceName in mMDeviceNameList)
+            {
+                MMDevice mMDevice = GetMMDevice(mMDeviceName);
+
+                if (mMDevice is null)
+                {
+                    continue;
+                }
+
+                MoveMMDeviceToSelectedList(mMDevice.DataFlow, mMDeviceName);
+            }
+        }
+
         #endregion
     }
 }
