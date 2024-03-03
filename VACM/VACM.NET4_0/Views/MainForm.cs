@@ -7,11 +7,11 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using VACM.NET4_0.Models;
 using VACM.NET4_0.ViewModels;
-using VACM.NET4.Models;
 using VACM.NET4_0.ViewModels.Accessors;
 using VACM.NET4_0.ViewModels.ColorTable;
 using VACM.NET4_0.Extensions.PropertyValueChanged;
-using PropertyValueChangedEventArgs = VACM.NET4_0.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
+using PropertyValueChangedEventArgs =
+    VACM.NET4_0.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
 
 namespace VACM.NET4_0.Views
 {
@@ -20,17 +20,6 @@ namespace VACM.NET4_0.Views
         #region Parameters
 
         private AboutForm aboutForm;
-
-        private bool doAddSelectedWaveInOrWaveOutContainCheckedMenuItem
-        {
-            get
-            {
-                return DoesToolStripItemCollectionContainCheckedMenuItem
-                    (deviceAddSelectWaveInToolStripMenuItem.DropDownItems)
-                    || DoesToolStripItemCollectionContainCheckedMenuItem
-                    (deviceAddSelectWaveOutToolStripMenuItem.DropDownItems);
-            }
-        }
 
         private bool DoForceColorTheme
         {
@@ -68,7 +57,6 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool toggleDeviceAddSelectAllToolStripMenuItem;
         private string fileName;
         private DeviceListModel deviceListModel;
         private DeviceControl inputDeviceControl { get; set; }
@@ -92,7 +80,6 @@ namespace VACM.NET4_0.Views
         [ExcludeFromCodeCoverage]
         public MainForm()
         {
-            toggleDeviceAddSelectAllToolStripMenuItem = false;
             SetDeviceList();
             InitializeComponent();
             PostInitializeComponent();
@@ -109,28 +96,6 @@ namespace VACM.NET4_0.Views
         #endregion
 
         #region Windows Form Designer custom code
-
-        /// <summary>
-        /// Set the ability of the DeviceAdd and DeviceAddAll menu items.
-        /// </summary>
-        internal void DeviceAddMenuItemAbility()
-        {
-            bool isEnabled = deviceAddSelectWaveInToolStripMenuItem.Enabled
-                || deviceAddSelectWaveOutToolStripMenuItem.Enabled;
-            deviceAddSelectToolStripMenuItem.Enabled = isEnabled;
-            deviceAddSelectAllToolStripMenuItem.Enabled = isEnabled;
-        }
-
-        /// <summary>
-        /// Set the ability of the DeviceRemove and DeviceRemoveAll menu items.
-        /// </summary>
-        internal void DeviceRemoveMenuItemAbility()
-        {
-            bool isEnabled = deviceRemoveWaveInToolStripMenuItem.Enabled
-                || deviceRemoveWaveOutToolStripMenuItem.Enabled;
-            deviceRemoveToolStripMenuItem.Enabled = isEnabled;
-            deviceRemoveAllToolStripMenuItem.Enabled = isEnabled;
-        }
 
         /// <summary>
         /// Add all controls to list.
@@ -156,12 +121,13 @@ namespace VACM.NET4_0.Views
             toolStripItemList.Add(deviceAddSelectWaveOutToolStripMenuItem);
             toolStripItemList.Add(deviceAddToolStripMenuItem);
             toolStripItemList.Add(deviceReloadAllToolStripMenuItem);
-            toolStripItemList.Add(deviceRemoveAllLinkedToolStripMenuItem);
-            toolStripItemList.Add(deviceRemoveAllToolStripMenuItem);
-            toolStripItemList.Add(deviceRemoveAllUnlinkedToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveConfirmToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveSelectAllLinkedToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveSelectAllToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveSelectAllUnlinkedToolStripMenuItem);
             toolStripItemList.Add(deviceRemoveToolStripMenuItem);
-            toolStripItemList.Add(deviceRemoveWaveInToolStripMenuItem);
-            toolStripItemList.Add(deviceRemoveWaveOutToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveSelectWaveInToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveSelectWaveOutToolStripMenuItem);
             toolStripItemList.Add(deviceToolStripSeparator1);
             toolStripItemList.Add(deviceToolStripSeparator2);
             toolStripItemList.Add(deviceToolStripSeparator2);
@@ -246,7 +212,7 @@ namespace VACM.NET4_0.Views
 
             if (eventHandler != null)
             {
-                toolStripMenuItem.Click += new System.EventHandler(eventHandler);
+                toolStripMenuItem.Click += new EventHandler(eventHandler);
             }
 
             toolStripMenuItem.CheckOnClick = true;
@@ -328,8 +294,8 @@ namespace VACM.NET4_0.Views
         {
             deviceAddSelectWaveInToolStripMenuItem.DropDownItems.Clear();
             deviceAddSelectWaveOutToolStripMenuItem.DropDownItems.Clear();
-            deviceRemoveWaveInToolStripMenuItem.DropDownItems.Clear();
-            deviceRemoveWaveOutToolStripMenuItem.DropDownItems.Clear();
+            deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems.Clear();
+            deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems.Clear();
             linkAddWaveInToolStripMenuItem.DropDownItems.Clear();
             linkAddWaveOutToolStripMenuItem.DropDownItems.Clear();
             linkRemoveWaveInToolStripMenuItem.DropDownItems.Clear();
@@ -352,12 +318,12 @@ namespace VACM.NET4_0.Views
 
             InitializeDeviceItemCollection
                 (deviceRemoveWaveInToolStripMenuItemDropDown_Click,
-                ref deviceRemoveWaveInToolStripMenuItem,
+                ref deviceRemoveSelectWaveInToolStripMenuItem,
                 deviceListModel.SelectedWaveInMMDeviceList);
 
             InitializeDeviceItemCollection
                 (deviceRemoveWaveOutToolStripMenuItemDropDown_Click,
-                ref deviceRemoveWaveOutToolStripMenuItem,
+                ref deviceRemoveSelectWaveOutToolStripMenuItem,
                 deviceListModel.SelectedWaveOutMMDeviceList);
 
             InitializeDeviceItemCollection
@@ -401,8 +367,6 @@ namespace VACM.NET4_0.Views
         internal void ModifyListItemsBeforeInitialization()
         {
             InitializeDeviceDropDownCollections();
-            DeviceAddMenuItemAbility();
-            DeviceRemoveMenuItemAbility();
         }
 
         /// <summary>
@@ -410,13 +374,10 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void PostInitializeComponent()
         {
-            deviceAddConfirmToolStripMenuItem.Enabled =
-                doAddSelectedWaveInOrWaveOutContainCheckedMenuItem;
-
             deviceAddSelectWaveInToolStripMenuItem.Text = WaveInAsString;
             deviceAddSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
-            deviceRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
-            deviceRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
+            deviceRemoveSelectWaveInToolStripMenuItem.Text = WaveInAsString;
+            deviceRemoveSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
 
             helpAboutToolStripMenuItem.Text =
                 $"About {Common.ApplicationNameAsAbbreviation}";
@@ -610,17 +571,18 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            ToggleDeviceAddSelectAllToolStripMenuItem();
-
             SetCheckedPropertyForEachToolStripMenuItem
                 (ref deviceAddSelectWaveInToolStripMenuItem,
-                toggleDeviceAddSelectAllToolStripMenuItem);
+                deviceAddSelectAllToolStripMenuItem.Checked);
 
             SetCheckedPropertyForEachToolStripMenuItem
                 (ref deviceAddSelectWaveOutToolStripMenuItem,
-                toggleDeviceAddSelectAllToolStripMenuItem);
+                deviceAddSelectAllToolStripMenuItem.Checked);
 
-            SetEnabledPropertyOfDeviceAddConfirmToolStripMenuItem();
+            SetPropertiesOfDeviceAddAndRemoveDropDowns();
+
+            RecursivelyShowDropDownForEveryParentToolStripItem
+                (deviceAddSelectAllToolStripMenuItem);
         }
 
         /// <summary>
@@ -638,18 +600,14 @@ namespace VACM.NET4_0.Views
 
             MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
                 (ref deviceAddSelectWaveInToolStripMenuItem,
-                ref deviceRemoveWaveInToolStripMenuItem);
+                ref deviceRemoveSelectWaveInToolStripMenuItem);
 
             MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
                 (ref deviceAddSelectWaveOutToolStripMenuItem,
-                ref deviceRemoveWaveOutToolStripMenuItem);
+                ref deviceRemoveSelectWaveOutToolStripMenuItem);
 
             //deviceListModel.MoveMMDeviceToSelectedList()                              //FIXME
-
-            SetEnabledPropertyOfDeviceAddConfirmToolStripMenuItem();
-            SetEnabledPropertyOfDeviceAddSelectAllToolStripMenuItem();
-            SetEnabledPropertyOfDeviceAddSelectToolStripMenuItem();
-            SetEnabledPropertyOfDeviceAddToolStripMenuItem();
+            SetPropertiesOfDeviceAddAndRemoveDropDowns();
         }
 
         /// <summary>
@@ -665,7 +623,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            SetEnabledPropertyOfDeviceAddConfirmToolStripMenuItem();
+            SetPropertiesOfDeviceAddAndRemoveDropDowns();
         }
 
         /// <summary>
@@ -678,19 +636,60 @@ namespace VACM.NET4_0.Views
         {
             SetDeviceList();
             InitializeLists();
-            SetEnabledPropertyOfDeviceAddConfirmToolStripMenuItem();
+            SetPropertiesOfDeviceAddAndRemoveDropDowns();
         }
 
         /// <summary>
-        /// Click event logic for deviceRemoveAllToolStripMenuItem.
+        /// Click event logic for deviceRemoveSelectAllToolStripMenuItem.
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="eventArgs">The event arguments</param>
-        internal void deviceRemoveAllToolStripMenuItem_Click
+        internal void deviceRemoveSelectAllToolStripMenuItem_Click
             (object sender, EventArgs eventArgs)
         {
             SetDeviceList();
             InitializeLists();
+
+            deviceRemoveSelectAllToolStripMenuItem.Checked =
+                !deviceRemoveSelectAllToolStripMenuItem.Checked;
+
+            SetCheckedPropertyForEachToolStripMenuItem
+                (ref deviceRemoveSelectWaveInToolStripMenuItem,
+                deviceRemoveSelectAllToolStripMenuItem.Checked);
+
+            SetCheckedPropertyForEachToolStripMenuItem
+                (ref deviceRemoveSelectWaveOutToolStripMenuItem,
+                deviceRemoveSelectAllToolStripMenuItem.Checked);
+
+            SetPropertiesOfDeviceAddAndRemoveDropDowns();
+
+            RecursivelyShowDropDownForEveryParentToolStripItem
+                (deviceAddSelectAllToolStripMenuItem);
+        }
+
+        /// <summary>
+        /// Click event logic for deviceRemoveConfirmToolStripMenuItem.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        internal void deviceRemoveConfirmToolStripMenuItem_Click
+            (object sender, EventArgs eventArgs)
+        {
+            if (sender is null || !(sender is ToolStripMenuItem))
+            {
+                return;
+            }
+
+            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                (ref deviceRemoveSelectWaveInToolStripMenuItem,
+                ref deviceAddSelectWaveInToolStripMenuItem);
+
+            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                (ref deviceRemoveSelectWaveOutToolStripMenuItem,
+                ref deviceAddSelectWaveOutToolStripMenuItem);
+
+            //deviceListModel.MoveMMDeviceFromSelectedList()                              //FIXME
+            SetPropertiesOfDeviceAddAndRemoveDropDowns();
         }
 
         /// <summary>
@@ -708,7 +707,9 @@ namespace VACM.NET4_0.Views
 
             deviceListModel.MoveMMDeviceFromSelectedList
                 (DataFlow.Capture, (sender as ToolStripMenuItem).ToolTipText);
+
             InitializeLists();
+            SetPropertiesOfDeviceAddAndRemoveDropDowns();
         }
 
         /// <summary>
@@ -726,52 +727,54 @@ namespace VACM.NET4_0.Views
 
             deviceListModel.MoveMMDeviceFromSelectedList
                 (DataFlow.Render, (sender as ToolStripMenuItem).ToolTipText);
+
             InitializeLists();
+            SetPropertiesOfDeviceAddAndRemoveDropDowns();
         }
 
         /// <summary>
-        /// Set Enable property of deviceAddConfirmToolStripMenuItem.
+        /// Set properties of device Add and Remove drop downs.
         /// </summary>
-        internal void SetEnabledPropertyOfDeviceAddConfirmToolStripMenuItem()
+        internal void SetPropertiesOfDeviceAddAndRemoveDropDowns()
         {
-            deviceAddConfirmToolStripMenuItem.Enabled =
-                doAddSelectedWaveInOrWaveOutContainCheckedMenuItem;
-        }
+            bool isDeviceAddDropDownEnabled =
+                deviceAddSelectWaveInToolStripMenuItem.Enabled
+                || deviceAddSelectWaveOutToolStripMenuItem.Enabled;
 
-        /// <summary>
-        /// Set Enable property of deviceAddSelectAllToolStripMenuItem.
-        /// </summary>
-        internal void SetEnabledPropertyOfDeviceAddSelectAllToolStripMenuItem()
-        {
-            deviceAddSelectAllToolStripMenuItem.Enabled =
-                doAddSelectedWaveInOrWaveOutContainCheckedMenuItem;
-        }
+            deviceAddConfirmToolStripMenuItem.Enabled = isDeviceAddDropDownEnabled;
+            deviceAddSelectAllToolStripMenuItem.Enabled = isDeviceAddDropDownEnabled;
+            deviceAddSelectToolStripMenuItem.Enabled = isDeviceAddDropDownEnabled;
+            deviceAddToolStripMenuItem.Enabled = isDeviceAddDropDownEnabled;
 
-        /// <summary>
-        /// Set Enable property of deviceAddSelectToolStripMenuItem.
-        /// </summary>
-        internal void SetEnabledPropertyOfDeviceAddSelectToolStripMenuItem()
-        {
-            deviceAddSelectToolStripMenuItem.Enabled =
-                doAddSelectedWaveInOrWaveOutContainCheckedMenuItem;
-        }
+            deviceAddSelectAllToolStripMenuItem.Checked =
+                DoesToolStripItemCollectionContainAllCheckedMenuItems
+                    (deviceAddSelectWaveInToolStripMenuItem.DropDownItems)
+                && DoesToolStripItemCollectionContainAllCheckedMenuItems
+                    (deviceAddSelectWaveOutToolStripMenuItem.DropDownItems);
 
-        /// <summary>
-        /// Set Enable property of deviceAddToolStripMenuItem.
-        /// </summary>
-        internal void SetEnabledPropertyOfDeviceAddToolStripMenuItem()
-        {
-            deviceAddToolStripMenuItem.Enabled =
-                doAddSelectedWaveInOrWaveOutContainCheckedMenuItem;
-        }
+            bool isDeviceRemoveDropDownEnabled =
+                deviceRemoveSelectWaveInToolStripMenuItem.Enabled
+                || deviceRemoveSelectWaveOutToolStripMenuItem.Enabled;
 
-        /// <summary>
-        /// Toggle bool value, call deviceAddSelectAllToolStripMenuItem is clicked.
-        /// </summary>
-        internal void ToggleDeviceAddSelectAllToolStripMenuItem()
-        {
-            toggleDeviceAddSelectAllToolStripMenuItem =
-                !toggleDeviceAddSelectAllToolStripMenuItem;
+            deviceRemoveConfirmToolStripMenuItem.Enabled =
+                isDeviceRemoveDropDownEnabled;
+
+            deviceRemoveSelectAllToolStripMenuItem.Enabled =
+                isDeviceRemoveDropDownEnabled;
+
+            deviceRemoveSelectToolStripMenuItem.Enabled = isDeviceRemoveDropDownEnabled;
+
+            deviceRemoveSelectAllToolStripMenuItem.Checked =
+                DoesToolStripItemCollectionContainAllCheckedMenuItems
+                    (deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems)
+                && DoesToolStripItemCollectionContainAllCheckedMenuItems
+                    (deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems);
+
+            //TODO: parse removeSelectAllLinked and Unlinked here.
+
+            deviceRemoveToolStripMenuItem.Enabled = isDeviceRemoveDropDownEnabled
+                || deviceRemoveSelectAllLinkedToolStripMenuItem.Enabled
+                || deviceRemoveSelectAllUnlinkedToolStripMenuItem.Enabled;
         }
 
         #endregion
@@ -809,6 +812,7 @@ namespace VACM.NET4_0.Views
             }
 
             ToolStripMenuItem toolStripMenuItem = sender as ToolStripMenuItem;
+
             MMDevice mMDevice = deviceListModel.GetMMDevice
                 (DataFlow.Capture, toolStripMenuItem.ToolTipText);
 
@@ -818,8 +822,10 @@ namespace VACM.NET4_0.Views
             }
 
             inputDeviceControl = new DeviceControl(mMDevice);
+
             SetPropertiesOfSelectedToolStripMenuItem
                 (ref linkAddWaveInToolStripMenuItem, toolStripMenuItem);
+
             AddToRepeaterModel();
         }
 
@@ -846,8 +852,10 @@ namespace VACM.NET4_0.Views
             }
 
             outputDeviceControl = new DeviceControl(mMDevice);
+
             SetPropertiesOfSelectedToolStripMenuItem
                 (ref linkAddWaveOutToolStripMenuItem, toolStripMenuItem);
+
             AddToRepeaterModel();
         }
 
@@ -907,6 +915,7 @@ namespace VACM.NET4_0.Views
             }
 
             ToolStripMenuItem toolStripMenuItem = sender as ToolStripMenuItem;
+
             MMDevice mMDevice = deviceListModel.GetMMDevice
                 (DataFlow.Capture, toolStripMenuItem.ToolTipText);
 
@@ -916,8 +925,10 @@ namespace VACM.NET4_0.Views
             }
 
             inputDeviceControl = new DeviceControl(mMDevice);
+
             SetPropertiesOfSelectedToolStripMenuItem
                 (ref linkRemoveWaveInToolStripMenuItem, toolStripMenuItem);
+
             RemoveFromRepeaterModel();
         }
 
@@ -935,6 +946,7 @@ namespace VACM.NET4_0.Views
             }
 
             ToolStripMenuItem toolStripMenuItem = sender as ToolStripMenuItem;
+
             MMDevice mMDevice = deviceListModel.GetMMDevice
                 (DataFlow.Render, toolStripMenuItem.ToolTipText);
 
@@ -944,8 +956,10 @@ namespace VACM.NET4_0.Views
             }
 
             outputDeviceControl = new DeviceControl(mMDevice);
+
             SetPropertiesOfSelectedToolStripMenuItem
                 (ref linkRemoveWaveOutToolStripMenuItem, toolStripMenuItem);
+
             RemoveFromRepeaterModel();
         }
 
@@ -996,11 +1010,11 @@ namespace VACM.NET4_0.Views
         #region ToolStrip helper logic
 
         /// <summary>
-        /// Does tool strip item collection contain any checked tool strip menu item(s).
+        /// Does tool strip item collection contain all checked tool strip menu item(s).
         /// </summary>
         /// <param name="toolStripItemCollection">The tool strip item collection</param>
         /// <returns>True/False</returns>
-        internal bool DoesToolStripItemCollectionContainCheckedMenuItem
+        internal bool DoesToolStripItemCollectionContainAllCheckedMenuItems
             (ToolStripItemCollection toolStripItemCollection)
         {
             if (toolStripItemCollection is null || toolStripItemCollection.Count == 0)
@@ -1010,18 +1024,65 @@ namespace VACM.NET4_0.Views
 
             foreach (var item in toolStripItemCollection)
             {
-                if (!(item is ToolStripMenuItem))
+                if (!(item is ToolStripMenuItem)
+                    || (item as ToolStripMenuItem).Checked)
                 {
                     continue;
                 }
 
-                if ((item as ToolStripMenuItem).Checked)
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Does tool strip item collection contain any checked tool strip menu item(s).
+        /// </summary>
+        /// <param name="toolStripItemCollection">The tool strip item collection</param>
+        /// <returns>True/False</returns>
+        internal bool DoesToolStripItemCollectionContainAnyCheckedMenuItem
+            (ToolStripItemCollection toolStripItemCollection)
+        {
+            if (toolStripItemCollection is null || toolStripItemCollection.Count == 0)
+            {
+                return false;
+            }
+
+            foreach (var item in toolStripItemCollection)
+            {
+                if (!(item is ToolStripMenuItem)
+                    || !(item as ToolStripMenuItem).Checked)
                 {
-                    return true;
+                    continue;
                 }
+
+                return true;
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Get the name of the tool strip menu item which is the direct child of the
+        /// parent object.
+        /// </summary>
+        /// <param name="toolStripMenuItem">The tool strip menu item</param>
+        /// <returns></returns>
+        internal string GetNameOfRelatedFirstChildToParentObject
+            (ToolStripMenuItem toolStripMenuItem)
+        {
+            if (toolStripMenuItem is null
+                || toolStripMenuItem.AccessibilityObject is null
+                || toolStripMenuItem.AccessibilityObject.Parent is null
+                || toolStripMenuItem.AccessibilityObject.Parent.Parent is null
+                || toolStripMenuItem.AccessibilityObject.Parent.Parent.Parent is
+                    null)
+            {
+                return null;
+            }
+
+            return toolStripMenuItem.AccessibilityObject.Parent.Parent.Parent.Name;
         }
 
         /// <summary>
@@ -1078,6 +1139,66 @@ namespace VACM.NET4_0.Views
                 (ref secondToolStripMenuItem);
 
             GC.Collect();
+        }
+
+        /// <summary>
+        /// Inform observers of LightThemeIsEnabled that its value has changed.
+        /// </summary>
+        internal void OnLightThemeIsEnabledValueChanged()
+        {
+            PropertyValueChangedEventArgs propertyValueChangedEventArgs =
+                new PropertyValueChangedEventArgs(IsLightThemeEnabled);
+
+            IsLightThemeEnabledValueChanged?.Invoke
+                (this, propertyValueChangedEventArgs);
+        }
+
+        /// <summary>
+        /// Recursively ShowDropDown for every parent of the current tool strip item.
+        /// </summary>
+        /// <param name="toolStripItem">The tool strip item</param>
+        internal void RecursivelyShowDropDownForEveryParentToolStripItem
+            (ToolStripItem toolStripItem)
+        {
+            if (toolStripItem is null)
+            {
+                return;
+            }
+
+            if (toolStripItem.OwnerItem != null)
+            {
+                RecursivelyShowDropDownForEveryParentToolStripItem
+                    (toolStripItem.OwnerItem);
+            }
+
+            if (!(toolStripItem is ToolStripMenuItem))
+            {
+                return;
+            }
+
+            (toolStripItem as ToolStripMenuItem).ShowDropDown();
+        }
+
+        /// <summary>
+        /// Recursively ShowDropDown for every parent of the current tool strip menu
+        /// item.
+        /// </summary>
+        /// <param name="toolStripMenuItem">The tool strip menu item</param>
+        internal void RecursivelyShowDropDownForEveryParentToolStripItem
+            (ToolStripMenuItem toolStripMenuItem)
+        {
+            if (toolStripMenuItem is null)
+            {
+                return;
+            }
+
+            if (toolStripMenuItem.OwnerItem != null)
+            {
+                RecursivelyShowDropDownForEveryParentToolStripItem
+                    (toolStripMenuItem.OwnerItem);
+            }
+
+            toolStripMenuItem.ShowDropDown();
         }
 
         /// <summary>
@@ -1178,7 +1299,15 @@ namespace VACM.NET4_0.Views
             }
             else
             {
-                toolStripMenuItem.ToolTipText = "No items found.";
+                string name = GetNameOfRelatedFirstChildToParentObject(toolStripMenuItem);
+                string items = "item(s)";
+
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    items = $"{name.ToLower()}(s)";
+                }
+
+                toolStripMenuItem.ToolTipText = $"No {items} found.";
             }
         }
 
@@ -1217,19 +1346,6 @@ namespace VACM.NET4_0.Views
         }
 
         #endregion
-
-
-        /// <summary>
-        /// Inform observers of LightThemeIsEnabled that its value has changed.
-        /// </summary>
-        internal void OnLightThemeIsEnabledValueChanged()
-        {
-            PropertyValueChangedEventArgs propertyValueChangedEventArgs =
-                new PropertyValueChangedEventArgs(IsLightThemeEnabled);
-
-            IsLightThemeEnabledValueChanged?.Invoke
-                (this, propertyValueChangedEventArgs);
-        }
     }
 
     /*
