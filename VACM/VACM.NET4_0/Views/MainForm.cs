@@ -478,11 +478,11 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void SetIsLightThemeEnabledValueChangedEventArgs()
         {
-            GraphicsWindow.LightThemeValidator.IsLightThemeEnabledValueChanged +=       //NOTE: this will execute some of the code inside (inside SetColorTheme), but not all.
-                (sender, propertyValueChangedEventArgs) =>
-                {
-                    SetColorTheme();
-                };
+            //GraphicsWindow.LightThemeValidator.IsLightThemeEnabledValueChanged +=       //NOTE: this will execute some of the code inside (inside SetColorTheme), but not all.
+            //    (sender, propertyValueChangedEventArgs) =>
+            //    {
+            //        SetColorTheme();
+            //    };
 
             IsLightThemeEnabledValueChanged +=
                 (sender, propertyValueChangedEventArgs) =>
