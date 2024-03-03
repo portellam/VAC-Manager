@@ -12,6 +12,7 @@ using VACM.NET4_0.ViewModels.ColorTable;
 using VACM.NET4_0.Extensions.PropertyValueChanged;
 using PropertyValueChangedEventArgs =
     VACM.NET4_0.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
+using System.Threading.Tasks;
 
 namespace VACM.NET4_0.Views
 {
@@ -89,11 +90,11 @@ namespace VACM.NET4_0.Views
 
                 bool isWaveInListNotEmpty =
                     deviceListModel.UnselectedWaveInNameList != null
-                    && deviceListModel.UnselectedWaveInNameList.Count != 0;
+                    && deviceListModel.UnselectedWaveInNameList.Count > 0;
 
                 bool isWaveOutListNotEmpty =
                     deviceListModel.UnselectedWaveOutNameList != null
-                    && deviceListModel.UnselectedWaveOutNameList.Count != 0;
+                    && deviceListModel.UnselectedWaveOutNameList.Count > 0;
 
                 return isWaveInListNotEmpty || isWaveOutListNotEmpty;
             }
@@ -105,6 +106,65 @@ namespace VACM.NET4_0.Views
         private DeviceControl outputDeviceControl { get; set; }
         private RepeaterDataModel repeaterDataModel { get; set; }
         private List<Control> controlList = new List<Control>();
+
+        private List<string> checkedDeviceAddNameList
+        {
+            get
+            {
+                return checkedDeviceAddWaveInNameList.Concat
+                    (checkedDeviceAddWaveOutNameList).ToList();
+            }
+        }
+
+        private List<string> checkedDeviceAddWaveInNameList
+        {
+            get
+            {
+                return deviceAddSelectWaveInToolStripMenuItem.DropDownItems
+                    .Cast<ToolStripMenuItem>().ToList().Select(x => x.ToolTipText)
+                    .ToList();
+            }
+        }
+
+        private List<string> checkedDeviceAddWaveOutNameList
+        {
+            get
+            {
+                return deviceAddSelectWaveOutToolStripMenuItem.DropDownItems
+                    .Cast<ToolStripMenuItem>().ToList().Select(x => x.ToolTipText)
+                    .ToList();
+            }
+        }
+
+        private List<string> checkedDeviceRemoveNameList
+        {
+            get
+            {
+                return checkedDeviceRemoveWaveInNameList.Concat
+                    (checkedDeviceRemoveWaveOutNameList).ToList();
+            }
+        }
+
+        private List<string> checkedDeviceRemoveWaveInNameList
+        {
+            get
+            {
+                return deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems
+                    .Cast<ToolStripMenuItem>().ToList().Select(x => x.ToolTipText)
+                    .ToList();
+            }
+        }
+
+        private List<string> checkedDeviceRemoveWaveOutNameList
+        {
+            get
+            {
+                return deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems
+                    .Cast<ToolStripMenuItem>().ToList().Select(x => x.ToolTipText)
+                    .ToList();
+            }
+        }
+
         private List<ToolStripItem> toolStripItemList = new List<ToolStripItem>();
 
         public const string WaveInAsString = "Wave In";
@@ -360,12 +420,12 @@ namespace VACM.NET4_0.Views
                 deviceListModel.UnselectedWaveOutMMDeviceList);
 
             InitializeDeviceItemCollection
-                (deviceRemoveWaveInToolStripMenuItemDropDown_Click,
+                (deviceRemoveConfirmToolStripMenuItem_Toggle,
                 ref deviceRemoveSelectWaveInToolStripMenuItem,
                 deviceListModel.SelectedWaveInMMDeviceList);
 
             InitializeDeviceItemCollection
-                (deviceRemoveSelectWaveOutToolStripMenuItemDropDown_Click,
+                (deviceRemoveConfirmToolStripMenuItem_Toggle,
                 ref deviceRemoveSelectWaveOutToolStripMenuItem,
                 deviceListModel.SelectedWaveOutMMDeviceList);
 
@@ -962,6 +1022,9 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            deviceListModel.MoveMMDeviceNameListToSelectedList                          //TODO: this takes at least seven (7) seconds to run, freezing the UI. Can we make this async and/or faster? Is it an issue with the getters?
+                (checkedDeviceAddNameList);
+
             MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
                 (ref deviceAddSelectWaveInToolStripMenuItem,
                 ref deviceRemoveSelectWaveInToolStripMenuItem);
@@ -970,7 +1033,6 @@ namespace VACM.NET4_0.Views
                 (ref deviceAddSelectWaveOutToolStripMenuItem,
                 ref deviceRemoveSelectWaveOutToolStripMenuItem);
 
-            //deviceListModel.MoveMMDeviceToSelectedList()                              //FIXME
             SetPropertiesOfDeviceToolStripMenuItemDropDowns();
         }
 
@@ -1043,6 +1105,9 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            deviceListModel.MoveMMDeviceNameListFromSelectedList                        //TODO: this takes at least seven (7) seconds to run, freezing the UI. Can we make this async and/or faster? Is it an issue with the getters?
+                (checkedDeviceRemoveNameList);
+
             MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
                 (ref deviceRemoveSelectWaveInToolStripMenuItem,
                 ref deviceAddSelectWaveInToolStripMenuItem);
@@ -1051,7 +1116,22 @@ namespace VACM.NET4_0.Views
                 (ref deviceRemoveSelectWaveOutToolStripMenuItem,
                 ref deviceAddSelectWaveOutToolStripMenuItem);
 
-            //deviceListModel.MoveMMDeviceFromSelectedList()                              //FIXME
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
+        }
+
+        /// <summary>
+        /// Toggle enabled property event for deviceRemoveConfirmToolStripMenuItem.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        internal void deviceRemoveConfirmToolStripMenuItem_Toggle
+            (object sender, EventArgs eventArgs)
+        {
+            if (sender is null || !(sender is ToolStripMenuItem))
+            {
+                return;
+            }
+
             SetPropertiesOfDeviceToolStripMenuItemDropDowns();
         }
 
@@ -1139,7 +1219,8 @@ namespace VACM.NET4_0.Views
                 DoesToolStripItemCollectionContainAllCheckedMenuItems
                     (deviceAddSelectWaveInToolStripMenuItem.DropDownItems)
                 && DoesToolStripItemCollectionContainAllCheckedMenuItems
-                    (deviceAddSelectWaveOutToolStripMenuItem.DropDownItems);
+                    (deviceAddSelectWaveOutToolStripMenuItem.DropDownItems)
+                && isDeviceAddDropDownEnabled;
 
             bool isDeviceRemoveDropDownEnabled = isSelectedDeviceListNotEmpty;
 
@@ -1151,17 +1232,18 @@ namespace VACM.NET4_0.Views
 
             deviceRemoveSelectToolStripMenuItem.Enabled = isDeviceRemoveDropDownEnabled;
 
+            deviceRemoveToolStripMenuItem.Enabled = isDeviceRemoveDropDownEnabled
+                || deviceRemoveSelectAllLinkedToolStripMenuItem.Enabled
+                || deviceRemoveSelectAllUnlinkedToolStripMenuItem.Enabled;
+
             deviceRemoveSelectAllToolStripMenuItem.Checked =
                 DoesToolStripItemCollectionContainAllCheckedMenuItems
                     (deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems)
                 && DoesToolStripItemCollectionContainAllCheckedMenuItems
-                    (deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems);
+                    (deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems)
+                && isDeviceRemoveDropDownEnabled;
 
             //TODO: parse removeSelectAllLinked and Unlinked here.
-
-            deviceRemoveToolStripMenuItem.Enabled = isDeviceRemoveDropDownEnabled
-                || deviceRemoveSelectAllLinkedToolStripMenuItem.Enabled
-                || deviceRemoveSelectAllUnlinkedToolStripMenuItem.Enabled;
         }
 
         #endregion
