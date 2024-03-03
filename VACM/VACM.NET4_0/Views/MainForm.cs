@@ -441,7 +441,7 @@ namespace VACM.NET4_0.Views
             SetInitialChanges();
             SetColorTheme();
 
-            SetPropertiesOfDeviceAddAndRemoveDropDowns();
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
         }
 
         /// <summary>
@@ -970,7 +970,7 @@ namespace VACM.NET4_0.Views
                 (ref deviceAddSelectWaveOutToolStripMenuItem,
                 deviceAddSelectAllToolStripMenuItem.Checked);
 
-            SetPropertiesOfDeviceAddAndRemoveDropDowns();
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
 
             RecursivelyShowDropDownForEveryParentToolStripItem
                 (deviceAddSelectAllToolStripMenuItem);
@@ -998,7 +998,7 @@ namespace VACM.NET4_0.Views
                 ref deviceRemoveSelectWaveOutToolStripMenuItem);
 
             //deviceListModel.MoveMMDeviceToSelectedList()                              //FIXME
-            SetPropertiesOfDeviceAddAndRemoveDropDowns();
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
         }
 
         /// <summary>
@@ -1014,7 +1014,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            SetPropertiesOfDeviceAddAndRemoveDropDowns();
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
         }
 
         /// <summary>
@@ -1027,7 +1027,7 @@ namespace VACM.NET4_0.Views
         {
             SetDeviceList();
             InitializeLists();
-            SetPropertiesOfDeviceAddAndRemoveDropDowns();
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
         }
 
         /// <summary>
@@ -1052,7 +1052,7 @@ namespace VACM.NET4_0.Views
                 (ref deviceRemoveSelectWaveOutToolStripMenuItem,
                 deviceRemoveSelectAllToolStripMenuItem.Checked);
 
-            SetPropertiesOfDeviceAddAndRemoveDropDowns();
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
 
             RecursivelyShowDropDownForEveryParentToolStripItem
                 (deviceAddSelectAllToolStripMenuItem);
@@ -1080,7 +1080,7 @@ namespace VACM.NET4_0.Views
                 ref deviceAddSelectWaveOutToolStripMenuItem);
 
             //deviceListModel.MoveMMDeviceFromSelectedList()                              //FIXME
-            SetPropertiesOfDeviceAddAndRemoveDropDowns();
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
         }
 
         /// <summary>
@@ -1100,7 +1100,7 @@ namespace VACM.NET4_0.Views
                 (DataFlow.Capture, (sender as ToolStripMenuItem).ToolTipText);
 
             InitializeLists();
-            SetPropertiesOfDeviceAddAndRemoveDropDowns();
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
         }
 
         /// <summary>
@@ -1120,13 +1120,13 @@ namespace VACM.NET4_0.Views
                 (DataFlow.Render, (sender as ToolStripMenuItem).ToolTipText);
 
             InitializeLists();
-            SetPropertiesOfDeviceAddAndRemoveDropDowns();
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
         }
 
         /// <summary>
-        /// Set properties of device Add and Remove drop downs.
+        /// Set properties of deviceToolStripMenuItem drop downs.
         /// </summary>
-        internal void SetPropertiesOfDeviceAddAndRemoveDropDowns()
+        internal void SetPropertiesOfDeviceToolStripMenuItemDropDowns()                      //TODO: keep working on this method. Works some of the time.
         {
             bool isDeviceAddDropDownEnabled = isUnselectedDeviceListNotEmpty;
 
