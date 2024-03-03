@@ -21,14 +21,6 @@ namespace VACM.NET4_0.Views
 
         private AboutForm aboutForm;
 
-        private bool DoForceColorTheme
-        {
-            get
-            {
-                return GraphicsWindow.DoForceColorTheme;
-            }
-        }
-
         private string darkModeText
         {
             get
@@ -44,6 +36,14 @@ namespace VACM.NET4_0.Views
             }
         }
 
+        private bool DoForceColorTheme
+        {
+            get
+            {
+                return GraphicsWindow.DoForceColorTheme;
+            }
+        }
+
         private bool IsLightThemeEnabled
         {
             get
@@ -54,6 +54,48 @@ namespace VACM.NET4_0.Views
             {
                 GraphicsWindow.IsLightThemeEnabled = value;
                 OnLightThemeIsEnabledValueChanged();
+            }
+        }
+
+        private bool isSelectedDeviceListNotEmpty
+        {
+            get
+            {
+                if (deviceListModel is null)
+                {
+                    return false;
+                }
+
+                bool isWaveInListNotEmpty =
+                    deviceListModel.SelectedWaveInNameList != null
+                    && deviceListModel.SelectedWaveInNameList.Count != 0;
+
+                bool isWaveOutListNotEmpty =
+                    deviceListModel.SelectedWaveOutNameList != null
+                    && deviceListModel.SelectedWaveOutNameList.Count != 0;
+
+                return isWaveInListNotEmpty || isWaveOutListNotEmpty;
+            }
+        }
+
+        private bool isUnselectedDeviceListNotEmpty
+        {
+            get
+            {
+                if (deviceListModel is null)
+                {
+                    return false;
+                }
+
+                bool isWaveInListNotEmpty =
+                    deviceListModel.UnselectedWaveInNameList != null
+                    && deviceListModel.UnselectedWaveInNameList.Count != 0;
+
+                bool isWaveOutListNotEmpty =
+                    deviceListModel.UnselectedWaveOutNameList != null
+                    && deviceListModel.UnselectedWaveOutNameList.Count != 0;
+
+                return isWaveInListNotEmpty || isWaveOutListNotEmpty;
             }
         }
 
@@ -83,6 +125,7 @@ namespace VACM.NET4_0.Views
             SetDeviceList();
             InitializeComponent();
             PostInitializeComponent();
+
         }
 
         /// <summary>
@@ -391,10 +434,14 @@ namespace VACM.NET4_0.Views
 
             SetIsLightThemeEnabledValueChangedEventArgs();                              //FIXME: See SetColorTheme.
             SetRepeaterDataModel();
+
             ModifyListItemsBeforeInitialization();
             InitializeLists();
+
             SetInitialChanges();
             SetColorTheme();
+
+            SetPropertiesOfDeviceAddAndRemoveDropDowns();
         }
 
         /// <summary>
@@ -1081,9 +1128,7 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void SetPropertiesOfDeviceAddAndRemoveDropDowns()
         {
-            bool isDeviceAddDropDownEnabled =
-                deviceAddSelectWaveInToolStripMenuItem.Enabled
-                || deviceAddSelectWaveOutToolStripMenuItem.Enabled;
+            bool isDeviceAddDropDownEnabled = isUnselectedDeviceListNotEmpty;
 
             deviceAddConfirmToolStripMenuItem.Enabled = isDeviceAddDropDownEnabled;
             deviceAddSelectAllToolStripMenuItem.Enabled = isDeviceAddDropDownEnabled;
@@ -1096,9 +1141,7 @@ namespace VACM.NET4_0.Views
                 && DoesToolStripItemCollectionContainAllCheckedMenuItems
                     (deviceAddSelectWaveOutToolStripMenuItem.DropDownItems);
 
-            bool isDeviceRemoveDropDownEnabled =
-                deviceRemoveSelectWaveInToolStripMenuItem.Enabled
-                || deviceRemoveSelectWaveOutToolStripMenuItem.Enabled;
+            bool isDeviceRemoveDropDownEnabled = isSelectedDeviceListNotEmpty;
 
             deviceRemoveConfirmToolStripMenuItem.Enabled =
                 isDeviceRemoveDropDownEnabled;
