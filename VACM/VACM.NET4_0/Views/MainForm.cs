@@ -10,6 +10,8 @@ using VACM.NET4_0.ViewModels;
 using VACM.NET4.Models;
 using VACM.NET4_0.ViewModels.Accessors;
 using VACM.NET4_0.ViewModels.ColorTable;
+using VACM.NET4_0.Extensions.PropertyValueChanged;
+using PropertyValueChangedEventArgs = VACM.NET4_0.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
 
 namespace VACM.NET4_0.Views
 {
@@ -62,6 +64,7 @@ namespace VACM.NET4_0.Views
             set
             {
                 GraphicsWindow.IsLightThemeEnabled = value;
+                OnLightThemeIsEnabledValueChanged();
             }
         }
 
@@ -76,6 +79,8 @@ namespace VACM.NET4_0.Views
 
         public const string WaveInAsString = "Wave In";
         public const string WaveOutAsString = "Wave Out";
+
+        public event PropertyValueChangedDelegate IsLightThemeEnabledValueChanged;
 
         #endregion
 
@@ -442,22 +447,22 @@ namespace VACM.NET4_0.Views
         /// <summary>
         /// Set color theme given dark mode is enabled or not.
         /// </summary>
-        internal void SetColorTheme()                                                   //NOTE: while debugging when the event is handled for IsLightThemeEnabled.*
+        internal void SetColorTheme()
         {
-            ToggleDarkModeRenderer();                                                   //NOTE: this will break.*
+            ToggleDarkModeRenderer();
             SetViewToggleDarkModeToolStripMenuItemProperties();
 
-            FormColorUpdater.SetColorsOfConstructor(this);                              //NOTE: this will NOT break.*
-            FormColorUpdater.SetColorsOfControlCollection(Controls);                    //NOTE: this will NOT break.*
-            FormColorUpdater.SetColorsOfControlList(controlList);                       //NOTE: this will NOT break.*
-            FormColorUpdater.SetColorsOfToolStripItemList(toolStripItemList);           //NOTE: this will NOT break.*
+            FormColorUpdater.SetColorsOfConstructor(this);
+            FormColorUpdater.SetColorsOfControlCollection(Controls);
+            FormColorUpdater.SetColorsOfControlList(controlList);
+            FormColorUpdater.SetColorsOfToolStripItemList(toolStripItemList);
 
-            if (aboutForm != null)                                                      //NOTE: this will NOT break.*
+            if (aboutForm != null)
             {
-                aboutForm.SetColorTheme();                                              //NOTE: this will NOT break.*
+                aboutForm.SetColorTheme();
             }
 
-            Invalidate();                                                               //NOTE: this will NOT break.*
+            Invalidate();
         }
 
         /// <summary>
@@ -473,16 +478,16 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void SetIsLightThemeEnabledValueChangedEventArgs()
         {
-            if (GraphicsWindow.LightThemeValidator is null)
-            {
-                return;
-            }
-
-            GraphicsWindow.LightThemeValidator.IsLightThemeEnabledValueChanged +=
+            GraphicsWindow.LightThemeValidator.IsLightThemeEnabledValueChanged +=       //NOTE: this will execute some of the code inside (inside SetColorTheme), but not all.
                 (sender, propertyValueChangedEventArgs) =>
                 {
-
                     SetColorTheme();
+                };
+
+            IsLightThemeEnabledValueChanged +=
+                (sender, propertyValueChangedEventArgs) =>
+                {
+                    SetColorTheme();                                                    //NOTE: this appears to execute all the code inside SetColorTheme.
                 };
         }
 
@@ -504,7 +509,6 @@ namespace VACM.NET4_0.Views
             toolStripMenuItem.DropDown.MouseLeave += new System.EventHandler
                 (this.SetAutoClosePropertyOfToolStripDropDown_MouseLeave);
         }
-
 
         /// <summary>
         /// Set viewToggleDarkModeToolStripMenuItem properties.
@@ -963,7 +967,6 @@ namespace VACM.NET4_0.Views
             (object sender, EventArgs eventArgs)
         {
             IsLightThemeEnabled = !viewToggleDarkModeToolStripMenuItem.Checked;
-            SetColorTheme();
         }
 
         #endregion
@@ -1214,6 +1217,19 @@ namespace VACM.NET4_0.Views
         }
 
         #endregion
+
+
+        /// <summary>
+        /// Inform observers of LightThemeIsEnabled that its value has changed.
+        /// </summary>
+        internal void OnLightThemeIsEnabledValueChanged()
+        {
+            PropertyValueChangedEventArgs propertyValueChangedEventArgs =
+                new PropertyValueChangedEventArgs(IsLightThemeEnabled);
+
+            IsLightThemeEnabledValueChanged?.Invoke
+                (this, propertyValueChangedEventArgs);
+        }
     }
 
     /*
