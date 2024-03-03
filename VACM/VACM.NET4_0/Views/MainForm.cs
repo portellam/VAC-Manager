@@ -950,33 +950,6 @@ namespace VACM.NET4_0.Views
         #region 2. Device menu logic
 
         /// <summary>
-        /// Click event logic for deviceAddSelectAllToolStripMenuItem.
-        /// </summary>
-        /// <param name="sender">The sender object</param>
-        /// <param name="eventArgs">The event arguments</param>
-        internal void deviceAddSelectAllToolStripMenuItem_Click
-            (object sender, EventArgs eventArgs)
-        {
-            if (sender is null || !(sender is ToolStripMenuItem))
-            {
-                return;
-            }
-
-            SetCheckedPropertyForEachToolStripMenuItem
-                (ref deviceAddSelectWaveInToolStripMenuItem,
-                deviceAddSelectAllToolStripMenuItem.Checked);
-
-            SetCheckedPropertyForEachToolStripMenuItem
-                (ref deviceAddSelectWaveOutToolStripMenuItem,
-                deviceAddSelectAllToolStripMenuItem.Checked);
-
-            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
-
-            RecursivelyShowDropDownForEveryParentToolStripItem
-                (deviceAddSelectAllToolStripMenuItem);
-        }
-
-        /// <summary>
         /// Click event logic for deviceAddConfirmToolStripMenuItem.
         /// </summary>
         /// <param name="sender">The sender object</param>
@@ -1018,6 +991,33 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
+        /// Click event logic for deviceAddSelectAllToolStripMenuItem.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        internal void deviceAddSelectAllToolStripMenuItem_Click
+            (object sender, EventArgs eventArgs)
+        {
+            if (sender is null || !(sender is ToolStripMenuItem))
+            {
+                return;
+            }
+
+            SetCheckedPropertyForEachToolStripMenuItem
+                (ref deviceAddSelectWaveInToolStripMenuItem,
+                deviceAddSelectAllToolStripMenuItem.Checked);
+
+            SetCheckedPropertyForEachToolStripMenuItem
+                (ref deviceAddSelectWaveOutToolStripMenuItem,
+                deviceAddSelectAllToolStripMenuItem.Checked);
+
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
+
+            RecursivelyShowDropDownForEveryParentToolStripItem
+                (deviceAddSelectAllToolStripMenuItem);
+        }
+
+        /// <summary>
         /// Click event logic for deviceReloadAllToolStripMenuItem.
         /// </summary>
         /// <param name="sender">The sender object</param>
@@ -1027,6 +1027,31 @@ namespace VACM.NET4_0.Views
         {
             SetDeviceList();
             InitializeLists();
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
+        }
+
+        /// <summary>
+        /// Click event logic for deviceRemoveConfirmToolStripMenuItem.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        internal void deviceRemoveConfirmToolStripMenuItem_Click
+            (object sender, EventArgs eventArgs)
+        {
+            if (sender is null || !(sender is ToolStripMenuItem))
+            {
+                return;
+            }
+
+            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                (ref deviceRemoveSelectWaveInToolStripMenuItem,
+                ref deviceAddSelectWaveInToolStripMenuItem);
+
+            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                (ref deviceRemoveSelectWaveOutToolStripMenuItem,
+                ref deviceAddSelectWaveOutToolStripMenuItem);
+
+            //deviceListModel.MoveMMDeviceFromSelectedList()                              //FIXME
             SetPropertiesOfDeviceToolStripMenuItemDropDowns();
         }
 
@@ -1056,31 +1081,6 @@ namespace VACM.NET4_0.Views
 
             RecursivelyShowDropDownForEveryParentToolStripItem
                 (deviceAddSelectAllToolStripMenuItem);
-        }
-
-        /// <summary>
-        /// Click event logic for deviceRemoveConfirmToolStripMenuItem.
-        /// </summary>
-        /// <param name="sender">The sender object</param>
-        /// <param name="eventArgs">The event arguments</param>
-        internal void deviceRemoveConfirmToolStripMenuItem_Click
-            (object sender, EventArgs eventArgs)
-        {
-            if (sender is null || !(sender is ToolStripMenuItem))
-            {
-                return;
-            }
-
-            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
-                (ref deviceRemoveSelectWaveInToolStripMenuItem,
-                ref deviceAddSelectWaveInToolStripMenuItem);
-
-            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
-                (ref deviceRemoveSelectWaveOutToolStripMenuItem,
-                ref deviceAddSelectWaveOutToolStripMenuItem);
-
-            //deviceListModel.MoveMMDeviceFromSelectedList()                              //FIXME
-            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
         }
 
         /// <summary>
