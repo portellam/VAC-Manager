@@ -192,7 +192,7 @@ namespace VACM.NET4_0.Views
 
             this.deviceToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
             this.deviceToolStripMenuItem.Text = "Device";
-            this.deviceToolStripMenuItem.DropDown.AutoClose = false;
+            this.deviceToolStripMenuItem.DropDown.AutoClose = true;
             //
             // deviceAddToolStripMenuItem
             //
