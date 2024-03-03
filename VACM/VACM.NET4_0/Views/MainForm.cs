@@ -365,7 +365,7 @@ namespace VACM.NET4_0.Views
                 deviceListModel.SelectedWaveInMMDeviceList);
 
             InitializeDeviceItemCollection
-                (deviceRemoveWaveOutToolStripMenuItemDropDown_Click,
+                (deviceRemoveSelectWaveOutToolStripMenuItemDropDown_Click,
                 ref deviceRemoveSelectWaveOutToolStripMenuItem,
                 deviceListModel.SelectedWaveOutMMDeviceList);
 
@@ -1104,11 +1104,11 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Click event logic for deviceRemoveWaveOutToolStripMenuItemDropDown.
+        /// Click event logic for deviceRemoveSelectWaveOutToolStripMenuItemDropDown.
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="eventArgs">The event arguments</param>
-        internal void deviceRemoveWaveOutToolStripMenuItemDropDown_Click
+        internal void deviceRemoveSelectWaveOutToolStripMenuItemDropDown_Click
             (object sender, EventArgs eventArgs)
         {
             if (!(sender is ToolStripMenuItem))
