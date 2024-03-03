@@ -4,7 +4,7 @@ using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace VACM.NET4.Models
+namespace VACM.NET4_0.Models
 {
     public class DeviceListModel
     {
