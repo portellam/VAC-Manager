@@ -22,12 +22,14 @@ namespace VACM.NET4_0.Views
         private ToolStripMenuItem deviceAddSelectWaveOutToolStripMenuItem;
         private ToolStripMenuItem deviceAddToolStripMenuItem;
         private ToolStripMenuItem deviceReloadAllToolStripMenuItem;
-        private ToolStripMenuItem deviceRemoveAllLinkedToolStripMenuItem;
-        private ToolStripMenuItem deviceRemoveAllToolStripMenuItem;
-        private ToolStripMenuItem deviceRemoveAllUnlinkedToolStripMenuItem;
+        private ToolStripMenuItem deviceRemoveConfirmToolStripMenuItem;
+        private ToolStripMenuItem deviceRemoveSelectAllLinkedToolStripMenuItem;
+        private ToolStripMenuItem deviceRemoveSelectAllToolStripMenuItem;
+        private ToolStripMenuItem deviceRemoveSelectAllUnlinkedToolStripMenuItem;
+        private ToolStripMenuItem deviceRemoveSelectToolStripMenuItem;
         private ToolStripMenuItem deviceRemoveToolStripMenuItem;
-        private ToolStripMenuItem deviceRemoveWaveInToolStripMenuItem;
-        private ToolStripMenuItem deviceRemoveWaveOutToolStripMenuItem;
+        private ToolStripMenuItem deviceRemoveSelectWaveInToolStripMenuItem;
+        private ToolStripMenuItem deviceRemoveSelectWaveOutToolStripMenuItem;
         private ToolStripMenuItem deviceToolStripMenuItem;
         private ToolStripMenuItem fileCloseToolStripMenuItem;
         private ToolStripMenuItem fileExitToolStripMenuItem;
@@ -94,12 +96,14 @@ namespace VACM.NET4_0.Views
             this.deviceAddSelectWaveOutToolStripMenuItem = new ToolStripMenuItem();
             this.deviceAddToolStripMenuItem = new ToolStripMenuItem();
             this.deviceReloadAllToolStripMenuItem = new ToolStripMenuItem();
-            this.deviceRemoveAllLinkedToolStripMenuItem = new ToolStripMenuItem();
-            this.deviceRemoveAllToolStripMenuItem = new ToolStripMenuItem();
-            this.deviceRemoveAllUnlinkedToolStripMenuItem = new ToolStripMenuItem();
+            this.deviceRemoveSelectAllLinkedToolStripMenuItem = new ToolStripMenuItem();
+            this.deviceRemoveSelectAllToolStripMenuItem = new ToolStripMenuItem();
+            this.deviceRemoveSelectAllUnlinkedToolStripMenuItem = new ToolStripMenuItem();
+            this.deviceRemoveConfirmToolStripMenuItem = new ToolStripMenuItem();
             this.deviceRemoveToolStripMenuItem = new ToolStripMenuItem();
-            this.deviceRemoveWaveInToolStripMenuItem = new ToolStripMenuItem();
-            this.deviceRemoveWaveOutToolStripMenuItem = new ToolStripMenuItem();
+            this.deviceRemoveSelectToolStripMenuItem = new ToolStripMenuItem();
+            this.deviceRemoveSelectWaveInToolStripMenuItem = new ToolStripMenuItem();
+            this.deviceRemoveSelectWaveOutToolStripMenuItem = new ToolStripMenuItem();
             this.deviceToolStripMenuItem = new ToolStripMenuItem();
             this.deviceToolStripSeparator1 = new ToolStripSeparator();
             this.deviceToolStripSeparator2 = new ToolStripSeparator();
@@ -180,9 +184,9 @@ namespace VACM.NET4_0.Views
                     this.deviceAddToolStripMenuItem,
                     this.deviceToolStripSeparator2,
                     this.deviceRemoveToolStripMenuItem,
-                    this.deviceRemoveAllToolStripMenuItem,
-                    this.deviceRemoveAllLinkedToolStripMenuItem,
-                    this.deviceRemoveAllUnlinkedToolStripMenuItem
+                    this.deviceRemoveSelectAllToolStripMenuItem,
+                    this.deviceRemoveSelectAllLinkedToolStripMenuItem,
+                    this.deviceRemoveSelectAllUnlinkedToolStripMenuItem
                 });
 
             this.deviceToolStripMenuItem.Name = "deviceToolStripMenuItem";
@@ -258,7 +262,7 @@ namespace VACM.NET4_0.Views
 
             this.deviceAddSelectWaveOutToolStripMenuItem.Tag = "";
             // 
-            // deviceAddAllToolStripMenuItem
+            // deviceAddSelectAllToolStripMenuItem
             // 
             this.deviceAddSelectAllToolStripMenuItem.Name =
                 "deviceAddAllToolStripMenuItem";
@@ -268,6 +272,7 @@ namespace VACM.NET4_0.Views
 
             this.deviceAddSelectAllToolStripMenuItem.Tag = "";
             this.deviceAddSelectAllToolStripMenuItem.Text = "Select All";
+            this.deviceAddSelectAllToolStripMenuItem.CheckOnClick = true;
 
             this.deviceAddSelectAllToolStripMenuItem.Click += new System.EventHandler
                 (this.deviceAddSelectAllToolStripMenuItem_Click);
@@ -281,7 +286,7 @@ namespace VACM.NET4_0.Views
                 new System.Drawing.Size(230, 26);
 
             this.deviceReloadAllToolStripMenuItem.Tag = "";
-            this.deviceReloadAllToolStripMenuItem.Text = "Force Reload All";
+            this.deviceReloadAllToolStripMenuItem.Text = "Reload...";
 
             this.deviceReloadAllToolStripMenuItem.Click +=
                 new System.EventHandler(this.deviceReloadAllToolStripMenuItem_Click);
@@ -291,66 +296,107 @@ namespace VACM.NET4_0.Views
             this.deviceRemoveToolStripMenuItem.DropDownItems
                 .AddRange(new ToolStripItem[]
                 {
-                    this.deviceRemoveWaveInToolStripMenuItem,
-                    this.deviceRemoveWaveOutToolStripMenuItem
+                    this.deviceRemoveConfirmToolStripMenuItem,
+                    this.deviceRemoveSelectToolStripMenuItem,
+                    this.deviceRemoveSelectAllToolStripMenuItem,
+                    this.deviceRemoveSelectAllLinkedToolStripMenuItem,
+                    this.deviceRemoveSelectAllUnlinkedToolStripMenuItem
                 });
 
             this.deviceRemoveToolStripMenuItem.Name = "deviceRemoveToolStripMenuItem";
             this.deviceRemoveToolStripMenuItem.Size = new System.Drawing.Size(230, 26);
             this.deviceRemoveToolStripMenuItem.Text = "Remove...";
-            // 
-            // deviceRemoveAllToolStripMenuItem
-            // 
-            this.deviceRemoveAllToolStripMenuItem.Name =
-                "deviceRemoveAllToolStripMenuItem";
+            //
+            // deviceRemoveConfirmToolStripMenuItem
+            //
+            this.deviceRemoveConfirmToolStripMenuItem.Name =
+                "deviceRemoveConfirmToolStripMenuItem";
 
-            this.deviceRemoveAllToolStripMenuItem.Size =
+            this.deviceRemoveConfirmToolStripMenuItem.Size =
                 new System.Drawing.Size(230, 26);
 
-            this.deviceRemoveAllToolStripMenuItem.Tag = "";
-            this.deviceRemoveAllToolStripMenuItem.Text = "Remove All";
+            this.deviceRemoveConfirmToolStripMenuItem.Text = "Confirm Selected";
+
+            this.deviceRemoveConfirmToolStripMenuItem.Click += new System.EventHandler
+                (this.deviceRemoveConfirmToolStripMenuItem_Click);
+            // 
+            // deviceRemoveSelectToolStripMenuItem
+            // 
+            this.deviceRemoveSelectToolStripMenuItem.DropDownItems
+                .AddRange(new ToolStripItem[]
+                {
+                    this.deviceRemoveSelectWaveInToolStripMenuItem,
+                    this.deviceRemoveSelectWaveOutToolStripMenuItem
+                });
+
+            this.deviceRemoveSelectToolStripMenuItem.Name =
+                "deviceRemoveSelectToolStripMenuItem";
+
+            this.deviceRemoveSelectToolStripMenuItem.Size =
+                new System.Drawing.Size(230, 26);
+
+            this.deviceRemoveSelectToolStripMenuItem.Text = "Select...";
+            // 
+            // deviceRemoveSelectAllToolStripMenuItem
+            // 
+            this.deviceRemoveSelectAllToolStripMenuItem.Name =
+                "deviceRemoveSelectAllToolStripMenuItem";
+
+            this.deviceRemoveSelectAllToolStripMenuItem.Size =
+                new System.Drawing.Size(230, 26);
+
+            this.deviceRemoveSelectAllToolStripMenuItem.Tag = "";
+            this.deviceRemoveSelectAllToolStripMenuItem.Text = "Select All";
+            this.deviceRemoveSelectAllToolStripMenuItem.CheckOnClick = true;
+
+            this.deviceRemoveSelectAllToolStripMenuItem.Click += new System.EventHandler
+                (this.deviceRemoveSelectAllToolStripMenuItem_Click);
             // 
             // deviceRemoveAllLinkedToolStripMenuItem
             // 
-            this.deviceRemoveAllLinkedToolStripMenuItem.Name =
+            this.deviceRemoveSelectAllLinkedToolStripMenuItem.Name =
                 "deviceRemoveAllLinkedToolStripMenuItem";
 
-            this.deviceRemoveAllLinkedToolStripMenuItem.Size =
+            this.deviceRemoveSelectAllLinkedToolStripMenuItem.Size =
                 new System.Drawing.Size(230, 26);
 
-            this.deviceRemoveAllLinkedToolStripMenuItem.Tag = "";
-            this.deviceRemoveAllLinkedToolStripMenuItem.Text = "Remove All Linked";
+            this.deviceRemoveSelectAllLinkedToolStripMenuItem.Tag = "";
+
+            this.deviceRemoveSelectAllLinkedToolStripMenuItem.Text =
+                "Select All Linked";
             // 
             // deviceRemoveAllUnlinkedToolStripMenuItem
             // 
-            this.deviceRemoveAllUnlinkedToolStripMenuItem.Name =
+            this.deviceRemoveSelectAllUnlinkedToolStripMenuItem.Name =
                 "deviceRemoveAllUnlinkedToolStripMenuItem";
 
-            this.deviceRemoveAllUnlinkedToolStripMenuItem.Size =
+            this.deviceRemoveSelectAllUnlinkedToolStripMenuItem.Size =
                 new System.Drawing.Size(230, 26);
 
-            this.deviceRemoveAllUnlinkedToolStripMenuItem.Tag = "";
-            this.deviceRemoveAllUnlinkedToolStripMenuItem.Text = "Remove All Unlinked";
+            this.deviceRemoveSelectAllUnlinkedToolStripMenuItem.Tag = "";
+
+            this.deviceRemoveSelectAllUnlinkedToolStripMenuItem.Text =
+                "Select All Unlinked";
             // 
             // deviceRemoveWaveInToolStripMenuItem
             // 
-            this.deviceRemoveWaveInToolStripMenuItem.Name =
+            this.deviceRemoveSelectWaveInToolStripMenuItem.Name =
                 "deviceRemoveWaveInToolStripMenuItem";
 
-            this.deviceRemoveWaveInToolStripMenuItem.Size =
+            this.deviceRemoveSelectWaveInToolStripMenuItem.Size =
                 new System.Drawing.Size(156, 26);
 
-            this.deviceRemoveWaveInToolStripMenuItem.Tag = "";
+            this.deviceRemoveSelectWaveInToolStripMenuItem.Tag = "";
             // 
             // deviceRemoveWaveOutToolStripMenuItem
             // 
-            this.deviceRemoveWaveOutToolStripMenuItem.Name =
+            this.deviceRemoveSelectWaveOutToolStripMenuItem.Name =
                 "deviceRemoveWaveOutToolStripMenuItem";
 
-            this.deviceRemoveWaveOutToolStripMenuItem.Size =
+            this.deviceRemoveSelectWaveOutToolStripMenuItem.Size =
                 new System.Drawing.Size(156, 26);
 
-            this.deviceRemoveWaveOutToolStripMenuItem.Tag = "";
+            this.deviceRemoveSelectWaveOutToolStripMenuItem.Tag = "";
             // 
             // deviceToolStripSeparator1
             // 
