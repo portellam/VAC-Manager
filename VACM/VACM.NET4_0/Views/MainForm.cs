@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using VACM.NET4_0.Models;
 using VACM.NET4_0.ViewModels;
 using VACM.NET4.Models;
+using VACM.NET4_0.ViewModels.Accessors;
+using VACM.NET4_0.ViewModels.ColorTable;
 
 namespace VACM.NET4_0.Views
 {
@@ -28,12 +30,49 @@ namespace VACM.NET4_0.Views
             }
         }
 
+        private bool DoForceColorTheme
+        {
+            get
+            {
+                return GraphicsWindow.DoForceColorTheme;
+            }
+        }
+
+        private string darkModeText
+        {
+            get
+            {
+                string text = "Dark Mode";
+
+                if (!viewToggleDarkModeToolStripMenuItem.Checked)
+                {
+                    return $"Enable {text}";
+                }
+
+                return $"Disable {text}";
+            }
+        }
+
+        private bool IsLightThemeEnabled
+        {
+            get
+            {
+                return GraphicsWindow.IsLightThemeEnabled;
+            }
+            set
+            {
+                GraphicsWindow.IsLightThemeEnabled = value;
+            }
+        }
+
         private bool toggleDeviceAddSelectAllToolStripMenuItem;
         private string fileName;
         private DeviceListModel deviceListModel;
         private DeviceControl inputDeviceControl { get; set; }
         private DeviceControl outputDeviceControl { get; set; }
         private RepeaterDataModel repeaterDataModel { get; set; }
+        private List<Control> controlList = new List<Control>();
+        private List<ToolStripItem> toolStripItemList = new List<ToolStripItem>();
 
         public const string WaveInAsString = "Wave In";
         public const string WaveOutAsString = "Wave Out";
@@ -60,6 +99,439 @@ namespace VACM.NET4_0.Views
         internal void SetDeviceList()
         {
             deviceListModel = new DeviceListModel();
+        }
+
+        #endregion
+
+        #region Windows Form Designer custom code
+
+        /// <summary>
+        /// Set the ability of the DeviceAdd and DeviceAddAll menu items.
+        /// </summary>
+        internal void DeviceAddMenuItemAbility()
+        {
+            bool isEnabled = deviceAddSelectWaveInToolStripMenuItem.Enabled
+                || deviceAddSelectWaveOutToolStripMenuItem.Enabled;
+            deviceAddSelectToolStripMenuItem.Enabled = isEnabled;
+            deviceAddSelectAllToolStripMenuItem.Enabled = isEnabled;
+        }
+
+        /// <summary>
+        /// Set the ability of the DeviceRemove and DeviceRemoveAll menu items.
+        /// </summary>
+        internal void DeviceRemoveMenuItemAbility()
+        {
+            bool isEnabled = deviceRemoveWaveInToolStripMenuItem.Enabled
+                || deviceRemoveWaveOutToolStripMenuItem.Enabled;
+            deviceRemoveToolStripMenuItem.Enabled = isEnabled;
+            deviceRemoveAllToolStripMenuItem.Enabled = isEnabled;
+        }
+
+        /// <summary>
+        /// Add all controls to list.
+        /// </summary>
+        internal void InitializeControlsList()                                          //NOTE: Append new control objects here!
+        {
+            controlList.Clear();
+            controlList.Add(tabControl1);
+            controlList.Add(graphTab);
+            controlList.Add(gridTab);
+        }
+
+        /// <summary>
+        /// Add all tool strip items to list.
+        /// </summary>
+        internal void InitializeToolStripItemList()                                     //NOTE: Append new tool strip item objects here!
+        {
+            toolStripItemList.Clear();
+            toolStripItemList.Add(deviceAddConfirmToolStripMenuItem);
+            toolStripItemList.Add(deviceAddSelectAllToolStripMenuItem);
+            toolStripItemList.Add(deviceAddSelectToolStripMenuItem);
+            toolStripItemList.Add(deviceAddSelectWaveInToolStripMenuItem);
+            toolStripItemList.Add(deviceAddSelectWaveOutToolStripMenuItem);
+            toolStripItemList.Add(deviceAddToolStripMenuItem);
+            toolStripItemList.Add(deviceReloadAllToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveAllLinkedToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveAllToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveAllUnlinkedToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveWaveInToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveWaveOutToolStripMenuItem);
+            toolStripItemList.Add(deviceToolStripSeparator1);
+            toolStripItemList.Add(deviceToolStripSeparator2);
+            toolStripItemList.Add(deviceToolStripSeparator2);
+            toolStripItemList.Add(fileCloseToolStripMenuItem);
+            toolStripItemList.Add(fileExitToolStripMenuItem);
+            toolStripItemList.Add(fileNewToolStripMenuItem);
+            toolStripItemList.Add(fileOpenToolStripMenuItem);
+            toolStripItemList.Add(fileSaveACopyAsToolStripMenuItem);
+            toolStripItemList.Add(fileSaveAsToolStripMenuItem);
+            toolStripItemList.Add(fileSaveToolStripMenuItem);
+            toolStripItemList.Add(fileToolStripMenuItem);
+            toolStripItemList.Add(fileToolStripSeparator1);
+            toolStripItemList.Add(helpAboutToolStripMenuItem);
+            toolStripItemList.Add(helpToolStripMenuItem);
+            toolStripItemList.Add(linkAddToolStripMenuItem);
+            toolStripItemList.Add(linkAddWaveInToolStripMenuItem);
+            toolStripItemList.Add(linkAddWaveOutToolStripMenuItem);
+            toolStripItemList.Add(linkDefaultBitRateToolStripMenuItem);
+            toolStripItemList.Add(linkDefaultBufferToolStripMenuItem);
+            toolStripItemList.Add(linkDefaultChannelsToolStripMenuItem);
+            toolStripItemList.Add(linkDefaultPrefillToolStripMenuItem);
+            toolStripItemList.Add(linkDefaultResyncAtToolStripMenuItem);
+            toolStripItemList.Add(linkDefaultSamplingRateToolStripMenuItem);
+            toolStripItemList.Add(linkRemoveAllToolStripMenuItem);
+            toolStripItemList.Add(linkRemoveToolStripMenuItem);
+            toolStripItemList.Add(linkRemoveWaveInToolStripMenuItem);
+            toolStripItemList.Add(linkRemoveWaveOutToolStripMenuItem);
+            toolStripItemList.Add(linkToolStripMenuItem);
+            toolStripItemList.Add(linkToolStripSeparator1);
+            toolStripItemList.Add(linkToolStripSeparator2);
+            toolStripItemList.Add(repeaterRestartAllToolStripMenuItem);
+            toolStripItemList.Add(repeaterRestartToolStripMenuItem);
+            toolStripItemList.Add(repeaterStartAllToolStripMenuItem);
+            toolStripItemList.Add(repeaterStartToolStripMenuItem);
+            toolStripItemList.Add(repeaterStopAllToolStripMenuItem);
+            toolStripItemList.Add(repeaterStopToolStripMenuItem);
+            toolStripItemList.Add(repeaterToolStripMenuItem);
+            toolStripItemList.Add(repeaterToolStripSeparator1);
+            toolStripItemList.Add(repeaterToolStripSeparator2);
+            toolStripItemList.Add(viewToggleDarkModeToolStripMenuItem);
+            toolStripItemList.Add(viewToolStripMenuItem);
+        }
+
+        /// <summary>
+        /// Initialize the device tool strip menu item.
+        /// </summary>
+        /// <param name="eventHandler">The event handler</param>
+        /// <param name="mMDevice">The MMDevice</param>
+        /// <param name="toolStripMenuItemList">The tool strip menu item list</param>
+        internal void InitializeDeviceItem(EventHandler eventHandler,
+            MMDevice mMDevice, ref List<ToolStripMenuItem> toolStripMenuItemList)
+        {
+            //if (mMDevice.State == DeviceState.NotPresent)
+            //{
+            //	return;
+            //}
+
+            if (mMDevice is null || toolStripMenuItemList is null)
+            {
+                return;
+            }
+
+            bool deviceIsEnabled = mMDevice.State != DeviceState.Disabled;
+            string text = $"{mMDevice.FriendlyName} ";
+
+            if (deviceIsEnabled)
+            {
+                text += "(Enabled)";
+            }
+            else
+            {
+                text += "(Disabled)";
+            }
+
+            ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem()
+            {
+                CheckState = CheckState.Unchecked,
+                CheckOnClick = true,
+                Text = text,
+                ToolTipText = mMDevice.FriendlyName,                                //NOTE: The ToolTipText property must contain the MMDevice.FriendlyName, so that the MenuItem as a sender object will be properly validated in DeviceList logic.
+            };
+
+            if (eventHandler != null)
+            {
+                toolStripMenuItem.Click += new System.EventHandler(eventHandler);
+            }
+
+            toolStripMenuItem.CheckOnClick = true;
+
+            if (toolStripMenuItemList.Contains(toolStripMenuItem))
+            {
+                return;
+            }
+
+            toolStripMenuItemList.Add(toolStripMenuItem);
+        }
+
+        /// <summary>
+        /// Initialize a device tool strip menu item collection by parsing the related
+        /// device list.
+        /// </summary>
+        /// <param name="eventHandler">The event handler</param>
+        /// <param name="parentToolStripMenuItem">The parent device tool strip menu item
+        /// </param>
+        /// <param name="mMDeviceList">The device list</param>
+        internal void InitializeDeviceItemCollection(EventHandler eventHandler,
+            ref ToolStripMenuItem parentToolStripMenuItem, List<MMDevice> mMDeviceList)
+        {
+            if (mMDeviceList is null || mMDeviceList.Count == 0)
+            {
+                return;
+            }
+
+            DataFlow dataFlow = mMDeviceList.FirstOrDefault().DataFlow;
+            parentToolStripMenuItem.DropDownItems.Clear();
+
+            List<ToolStripMenuItem> toolStripMenuItemList =
+                new List<ToolStripMenuItem>();
+
+            foreach (MMDevice mMDevice in mMDeviceList.ToList())
+            {
+                InitializeDeviceItem(eventHandler, mMDevice, ref toolStripMenuItemList);
+            }
+
+            toolStripMenuItemList.ForEach(toolStripMenuItem =>
+            {
+                InitializeDeviceItemText(dataFlow, ref toolStripMenuItem);
+            });
+
+            parentToolStripMenuItem.DropDownItems.AddRange
+                (toolStripMenuItemList.ToArray());
+
+            FormColorUpdater.SetColorsOfToolStripItem(parentToolStripMenuItem);
+
+            SetMousePropertiesOfToolStripMenuItemDropDown
+                (ref parentToolStripMenuItem);
+
+            SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
+                (ref parentToolStripMenuItem);
+        }
+
+        /// <summary>
+        /// Initialize the text of the device tool strip menu item.
+        /// </summary>
+        /// <param name="dataFlow">The data flow</param>
+        /// <param name="toolStripMenuItem">The device tool strip menu item</param>
+        internal void InitializeDeviceItemText
+            (DataFlow dataFlow, ref ToolStripMenuItem toolStripMenuItem)
+        {
+            int index = deviceListModel.GetIndexOfMMDevice
+                (dataFlow, toolStripMenuItem.ToolTipText);
+
+            index++;
+            string prefix = $"{index.ToString()}. ";
+
+            toolStripMenuItem.Text = string.Format
+                ("{0,4} {1}", prefix, toolStripMenuItem.Text);
+        }
+
+        /// <summary>
+        /// Initialize device drop down collections.
+        /// </summary>
+        internal void InitializeDeviceDropDownCollections()
+        {
+            deviceAddSelectWaveInToolStripMenuItem.DropDownItems.Clear();
+            deviceAddSelectWaveOutToolStripMenuItem.DropDownItems.Clear();
+            deviceRemoveWaveInToolStripMenuItem.DropDownItems.Clear();
+            deviceRemoveWaveOutToolStripMenuItem.DropDownItems.Clear();
+            linkAddWaveInToolStripMenuItem.DropDownItems.Clear();
+            linkAddWaveOutToolStripMenuItem.DropDownItems.Clear();
+            linkRemoveWaveInToolStripMenuItem.DropDownItems.Clear();
+            linkRemoveWaveOutToolStripMenuItem.DropDownItems.Clear();
+
+            string text = deviceToolStripMenuItem.Text;
+            deviceToolStripMenuItem.Text = "Loading...";
+            deviceToolStripMenuItem.Enabled = false;
+            Refresh();
+
+            InitializeDeviceItemCollection
+                (deviceAddConfirmToolStripMenuItemEnabled_Toggle,
+                ref deviceAddSelectWaveInToolStripMenuItem,
+                deviceListModel.UnselectedWaveInMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (deviceAddConfirmToolStripMenuItemEnabled_Toggle,
+                ref deviceAddSelectWaveOutToolStripMenuItem,
+                deviceListModel.UnselectedWaveOutMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (deviceRemoveWaveInToolStripMenuItemDropDown_Click,
+                ref deviceRemoveWaveInToolStripMenuItem,
+                deviceListModel.SelectedWaveInMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (deviceRemoveWaveOutToolStripMenuItemDropDown_Click,
+                ref deviceRemoveWaveOutToolStripMenuItem,
+                deviceListModel.SelectedWaveOutMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (linkAddWaveInToolStripMenuItem_Click,
+                ref linkAddWaveInToolStripMenuItem,
+                deviceListModel.SelectedWaveInMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (linkAddWaveOutToolStripMenuItem_Click,
+                ref linkAddWaveOutToolStripMenuItem,
+                deviceListModel.SelectedWaveOutMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (linkRemoveWaveInToolStripMenuItem_Click,
+                ref linkRemoveWaveInToolStripMenuItem,
+                repeaterDataModel.LinkWaveInMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (linkRemoveWaveOutToolStripMenuItem_Click,
+                ref linkRemoveWaveOutToolStripMenuItem,
+                repeaterDataModel.LinkWaveOutMMDeviceList);
+
+            deviceToolStripMenuItem.Text = text;
+            deviceToolStripMenuItem.Enabled = true;
+            Refresh();
+        }
+
+        /// <summary>
+        /// Initialize all lists.
+        /// </summary>
+        internal void InitializeLists()
+        {
+            InitializeControlsList();
+            InitializeToolStripItemList();
+            GC.Collect();
+        }
+
+        /// <summary>
+        /// Logic to execute before InitializeLists.
+        /// </summary>
+        internal void ModifyListItemsBeforeInitialization()
+        {
+            InitializeDeviceDropDownCollections();
+            DeviceAddMenuItemAbility();
+            DeviceRemoveMenuItemAbility();
+        }
+
+        /// <summary>
+        /// Code to run after generated code.
+        /// </summary>
+        internal void PostInitializeComponent()
+        {
+            deviceAddConfirmToolStripMenuItem.Enabled =
+                doAddSelectedWaveInOrWaveOutContainCheckedMenuItem;
+
+            deviceAddSelectWaveInToolStripMenuItem.Text = WaveInAsString;
+            deviceAddSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
+            deviceRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
+            deviceRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
+
+            helpAboutToolStripMenuItem.Text =
+                $"About {Common.ApplicationNameAsAbbreviation}";
+
+            linkAddWaveInToolStripMenuItem.Text = WaveInAsString;
+            linkAddWaveOutToolStripMenuItem.Text = WaveOutAsString;
+            linkRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
+            linkRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
+
+            viewToggleDarkModeToolStripMenuItem.Enabled = !DoForceColorTheme;
+
+            SetIsLightThemeEnabledValueChangedEventArgs();                              //FIXME: See SetColorTheme.
+            SetRepeaterDataModel();
+            ModifyListItemsBeforeInitialization();
+            InitializeLists();
+            SetInitialChanges();
+            SetColorTheme();
+        }
+
+        /// <summary>
+        /// Save renderer to new parameter before making changes.
+        /// </summary>
+        internal void SaveInitialRenderer()
+        {
+            initialMenuStrip1Renderer = menuStrip1.Renderer;
+        }
+
+        /// <summary>
+        /// Set color theme given dark mode is enabled or not.
+        /// </summary>
+        internal void SetColorTheme()                                                   //NOTE: while debugging when the event is handled for IsLightThemeEnabled.*
+        {
+            ToggleDarkModeRenderer();                                                   //NOTE: this will break.*
+            SetViewToggleDarkModeToolStripMenuItemProperties();
+
+            FormColorUpdater.SetColorsOfConstructor(this);                              //NOTE: this will NOT break.*
+            FormColorUpdater.SetColorsOfControlCollection(Controls);                    //NOTE: this will NOT break.*
+            FormColorUpdater.SetColorsOfControlList(controlList);                       //NOTE: this will NOT break.*
+            FormColorUpdater.SetColorsOfToolStripItemList(toolStripItemList);           //NOTE: this will NOT break.*
+
+            if (aboutForm != null)                                                      //NOTE: this will NOT break.*
+            {
+                aboutForm.SetColorTheme();                                              //NOTE: this will NOT break.*
+            }
+
+            Invalidate();                                                               //NOTE: this will NOT break.*
+        }
+
+        /// <summary>
+        /// Set initial changes to form and its children.
+        /// </summary>
+        internal void SetInitialChanges()
+        {
+            Text = AssemblyInformationAccessor.AssemblyTitle;
+        }
+
+        /// <summary>
+        /// Set IsLightThemEnabledValueChanged event arguments.
+        /// </summary>
+        internal void SetIsLightThemeEnabledValueChangedEventArgs()
+        {
+            if (GraphicsWindow.LightThemeValidator is null)
+            {
+                return;
+            }
+
+            GraphicsWindow.LightThemeValidator.IsLightThemeEnabledValueChanged +=
+                (sender, propertyValueChangedEventArgs) =>
+                {
+
+                    SetColorTheme();
+                };
+        }
+
+        /// <summary>
+        /// Set mouse properties of drop down tool strip menu item.
+        /// </summary>
+        /// <param name="toolStripMenuItem">The drop down tool strip menu item</param>
+        internal void SetMousePropertiesOfToolStripMenuItemDropDown
+            (ref ToolStripMenuItem toolStripMenuItem)
+        {
+            if (toolStripMenuItem is null)
+            {
+                return;
+            }
+
+            toolStripMenuItem.DropDown.MouseEnter += new System.EventHandler
+                (this.SetAutoClosePropertyOfToolStripDropDown_MouseEnter);
+
+            toolStripMenuItem.DropDown.MouseLeave += new System.EventHandler
+                (this.SetAutoClosePropertyOfToolStripDropDown_MouseLeave);
+        }
+
+
+        /// <summary>
+        /// Set viewToggleDarkModeToolStripMenuItem properties.
+        /// </summary>
+        internal void SetViewToggleDarkModeToolStripMenuItemProperties()
+        {
+            viewToggleDarkModeToolStripMenuItem.Checked = !IsLightThemeEnabled;
+            viewToggleDarkModeToolStripMenuItem.Text = darkModeText;
+        }
+
+        /// <summary>
+        /// Toggle the type of renderer given dark mode is enabled or not.
+        /// </summary>
+        internal void ToggleDarkModeRenderer()
+        {
+            if (IsLightThemeEnabled)
+            {
+                menuStrip1.RenderMode = ToolStripRenderMode.ManagerRenderMode;
+                menuStrip1.Renderer = initialMenuStrip1Renderer;
+            }
+            else
+            {
+                menuStrip1.RenderMode = ToolStripRenderMode.Professional;
+                menuStrip1.Renderer = new ToolStripProfessionalRenderer
+                    (new DarkColorTable());
+                //menuStrip1.Renderer = new ToolStripDarkRenderer();                    //NOTE: breaks context menu colors.
+            }
         }
 
         #endregion
