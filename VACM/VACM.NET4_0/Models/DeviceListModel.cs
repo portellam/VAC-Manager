@@ -353,8 +353,7 @@ namespace VACM.NET4_0.Models
         /// <param name="mMDeviceName">The MMDevice name</param>
         public void MoveMMDeviceFromSelectedList(DataFlow dataFlow, string mMDeviceName)
         {
-            if (mMDeviceName is null || mMDeviceName == string.Empty
-                || dataFlow == DataFlow.All)
+            if (string.IsNullOrWhiteSpace(mMDeviceName))
             {
                 return;
             }
@@ -401,8 +400,7 @@ namespace VACM.NET4_0.Models
         /// <param name="mMDeviceName">The MMDevice name</param>
         public void MoveMMDeviceToSelectedList(DataFlow dataFlow, string mMDeviceName)
         {
-            if (mMDeviceName is null || mMDeviceName == string.Empty
-                || dataFlow == DataFlow.All)
+            if (string.IsNullOrWhiteSpace(mMDeviceName))
             {
                 return;
             }
@@ -448,50 +446,35 @@ namespace VACM.NET4_0.Models
         /// </summary>
         /// <param name="mMDeviceNameList">The MMDevice name list</param>
         public void MoveMMDeviceNameListFromSelectedList
-            (List<string> mMDeviceNameList)
+            (DataFlow dataFlow, List<string> mMDeviceNameList)
         {
-            if (mMDeviceNameList is null || mMDeviceNameList.Count == 0)
+            if (dataFlow == DataFlow.All || mMDeviceNameList is null
+                || mMDeviceNameList.Count == 0)
             {
                 return;
             }
 
-            foreach (string mMDeviceName in mMDeviceNameList)
-            {
-                MMDevice mMDevice = GetMMDevice(mMDeviceName);
-
-                if (mMDevice is null)
-                {
-                    continue;
-                }
-
-                MoveMMDeviceFromSelectedList(mMDevice.DataFlow, mMDeviceName);
-            }
+            mMDeviceNameList.ForEach(mMDeviceName =>
+                MoveMMDeviceFromSelectedList(dataFlow, mMDeviceName));
         }
 
         /// <summary>
         /// Parse MMDevice name list and move each valid MMDevice to the relevant
         /// selected list.
         /// </summary>
+        /// <param name="dataFlow">The data flow</param>
         /// <param name="mMDeviceNameList">The MMDevice name list</param>
         public void MoveMMDeviceNameListToSelectedList
-            (List<string> mMDeviceNameList)
+            (DataFlow dataFlow, List<string> mMDeviceNameList)
         {
-            if (mMDeviceNameList is null || mMDeviceNameList.Count == 0)
+            if (dataFlow == DataFlow.All || mMDeviceNameList is null
+                || mMDeviceNameList.Count == 0)
             {
                 return;
             }
 
-            foreach (string mMDeviceName in mMDeviceNameList)
-            {
-                MMDevice mMDevice = GetMMDevice(mMDeviceName);
-
-                if (mMDevice is null)
-                {
-                    continue;
-                }
-
-                MoveMMDeviceToSelectedList(mMDevice.DataFlow, mMDeviceName);
-            }
+            mMDeviceNameList.ForEach(mMDeviceName =>
+                MoveMMDeviceToSelectedList(dataFlow, mMDeviceName));
         }
 
         #endregion
