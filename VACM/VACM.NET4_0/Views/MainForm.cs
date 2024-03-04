@@ -1013,7 +1013,7 @@ namespace VACM.NET4_0.Views
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="eventArgs">The event arguments</param>
-        internal void deviceAddConfirmToolStripMenuItem_Click
+        internal void deviceAddConfirmToolStripMenuItem_Click                           //TODO: make called methods async?
             (object sender, EventArgs eventArgs)
         {
             if (sender is null || !(sender is ToolStripMenuItem))
@@ -1021,13 +1021,13 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            deviceListModel.MoveMMDeviceNameListToSelectedList
+            deviceListModel.MoveMMDeviceNameListFromSelectedList                        //NOTE: we can async the WaveIn and WaveOut list-parsing.
                 (DataFlow.Capture, checkedDeviceAddWaveInNameList);
 
             deviceListModel.MoveMMDeviceNameListToSelectedList
                 (DataFlow.Render, checkedDeviceAddWaveInNameList);
 
-            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection                //NOTE: is it possible to make both the model and UI logic async?
                 (ref deviceAddSelectWaveInToolStripMenuItem,
                 ref deviceRemoveSelectWaveInToolStripMenuItem);
 
