@@ -169,7 +169,6 @@ namespace VACM.NET4_0.Views
 
         public const string WaveInAsString = "Wave In";
         public const string WaveOutAsString = "Wave Out";
-
         public event PropertyValueChangedDelegate IsLightThemeEnabledValueChanged;
 
         #endregion
@@ -1022,8 +1021,11 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            deviceListModel.MoveMMDeviceNameListToSelectedList                          //TODO: this takes at least seven (7) seconds to run, freezing the UI. Can we make this async and/or faster? Is it an issue with the getters?
-                (checkedDeviceAddNameList);
+            deviceListModel.MoveMMDeviceNameListToSelectedList
+                (DataFlow.Capture, checkedDeviceAddWaveInNameList);
+
+            deviceListModel.MoveMMDeviceNameListToSelectedList
+                (DataFlow.Render, checkedDeviceAddWaveInNameList);
 
             MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
                 (ref deviceAddSelectWaveInToolStripMenuItem,
@@ -1105,8 +1107,11 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            deviceListModel.MoveMMDeviceNameListFromSelectedList                        //TODO: this takes at least seven (7) seconds to run, freezing the UI. Can we make this async and/or faster? Is it an issue with the getters?
-                (checkedDeviceRemoveNameList);
+            deviceListModel.MoveMMDeviceNameListFromSelectedList
+                (DataFlow.Capture, checkedDeviceRemoveWaveInNameList);
+
+            deviceListModel.MoveMMDeviceNameListFromSelectedList
+                (DataFlow.Render, checkedDeviceRemoveWaveInNameList);
 
             MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
                 (ref deviceRemoveSelectWaveInToolStripMenuItem,
