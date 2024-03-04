@@ -12,7 +12,6 @@ using VACM.NET4_0.ViewModels.ColorTable;
 using VACM.NET4_0.Extensions.PropertyValueChanged;
 using PropertyValueChangedEventArgs =
     VACM.NET4_0.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
-using System.Threading.Tasks;
 
 namespace VACM.NET4_0.Views
 {
@@ -119,15 +118,10 @@ namespace VACM.NET4_0.Views
                     return false;
                 }
 
-                bool isWaveInListNotEmpty =
-                    deviceListModel.SelectedWaveInNameList != null
-                    && deviceListModel.SelectedWaveInNameList.Count != 0;
-
-                bool isWaveOutListNotEmpty =
-                    deviceListModel.SelectedWaveOutNameList != null
-                    && deviceListModel.SelectedWaveOutNameList.Count != 0;
-
-                return isWaveInListNotEmpty || isWaveOutListNotEmpty;
+                return (deviceListModel.SelectedWaveInNameList != null
+                        && deviceListModel.SelectedWaveInNameList.Count > 0)
+                    || (deviceListModel.SelectedWaveOutNameList != null
+                        && deviceListModel.SelectedWaveOutNameList.Count > 0);
             }
         }
 
@@ -140,15 +134,10 @@ namespace VACM.NET4_0.Views
                     return false;
                 }
 
-                bool isWaveInListNotEmpty =
-                    deviceListModel.UnselectedWaveInNameList != null
-                    && deviceListModel.UnselectedWaveInNameList.Count > 0;
-
-                bool isWaveOutListNotEmpty =
-                    deviceListModel.UnselectedWaveOutNameList != null
-                    && deviceListModel.UnselectedWaveOutNameList.Count > 0;
-
-                return isWaveInListNotEmpty || isWaveOutListNotEmpty;
+                return (deviceListModel.UnselectedWaveInNameList != null
+                        && deviceListModel.UnselectedWaveInNameList.Count > 0)
+                    || (deviceListModel.UnselectedWaveOutNameList != null
+                        && deviceListModel.UnselectedWaveOutNameList.Count > 0);
             }
         }
 
