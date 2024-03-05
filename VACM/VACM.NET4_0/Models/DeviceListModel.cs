@@ -103,33 +103,6 @@ namespace VACM.NET4_0.Models
         }
 
         /// <summary>
-        /// Get MMDevice by friendly name.
-        /// </summary>
-        /// <param name="mMDeviceFriendlyName">The MMDevice friendly name</param>
-        /// <returns>The MMDevice</returns>
-        public MMDevice GetMMDevice(string mMDeviceFriendlyName)
-        {
-            MMDevice mMDevice = null;
-
-            if (AllWaveInNameList.Contains(mMDeviceFriendlyName))
-            {
-                mMDevice = AllWaveInDeviceList
-                    .Where(thisMMDevice =>
-                        thisMMDevice.FriendlyName == mMDeviceFriendlyName)
-                    .FirstOrDefault();
-            }
-            else if (AllWaveOutNameList.Contains(mMDeviceFriendlyName))
-            {
-                mMDevice = AllWaveOutDeviceList
-                    .Where(thisMMDevice =>
-                        thisMMDevice.FriendlyName == mMDeviceFriendlyName)
-                    .FirstOrDefault();
-            }
-
-            return mMDevice;
-        }
-
-        /// <summary>
         /// Get MMDevice by friendly name and data flow.
         /// </summary>
         /// <param name="dataFlow">The data flow</param>
