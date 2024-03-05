@@ -1,6 +1,7 @@
 ﻿using NAudio.CoreAudioApi;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -9,6 +10,7 @@ using VACM.NET4_0.Models;
 using VACM.NET4_0.ViewModels;
 using VACM.NET4_0.ViewModels.Accessors;
 using VACM.NET4_0.ViewModels.ColorTable;
+using VACM.NET4_0.Extensions;
 using VACM.NET4_0.Extensions.PropertyValueChanged;
 using PropertyValueChangedEventArgs =
     VACM.NET4_0.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
@@ -18,6 +20,8 @@ namespace VACM.NET4_0.Views
     public partial class MainForm : Form
     {
         #region Parameters
+
+        //TODO: have master dict to contain all drop down items in device add and remove.
 
         private AboutForm aboutForm;
 
@@ -198,8 +202,11 @@ namespace VACM.NET4_0.Views
 
         private List<ToolStripItem> toolStripItemList = new List<ToolStripItem>();
 
+        private const string deviceText = "Device";
+
         public const string WaveInAsString = "Wave In";
         public const string WaveOutAsString = "Wave Out";
+
         public event PropertyValueChangedDelegate IsLightThemeEnabledValueChanged;
 
         #endregion
@@ -379,7 +386,7 @@ namespace VACM.NET4_0.Views
             List<ToolStripMenuItem> toolStripMenuItemList =
                 new List<ToolStripMenuItem>();
 
-            mMDeviceList.ToList().ForEach(mMDevice =>
+            mMDeviceList.ForEach(mMDevice =>
                 {
                     InitializeDeviceItem(eventHandler, mMDevice, toolStripMenuItemList);
                 });
@@ -503,6 +510,8 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void PostInitializeComponent()
         {
+            SetPropertiesOfDeviceToolStripMenuItem();
+
             deviceAddSelectWaveInToolStripMenuItem.Text = WaveInAsString;
             deviceAddSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
             deviceRemoveSelectWaveInToolStripMenuItem.Text = WaveInAsString;
@@ -516,12 +525,17 @@ namespace VACM.NET4_0.Views
             linkRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
             linkRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
             viewToggleDarkModeToolStripMenuItem.Enabled = !DoForceColorTheme;
+
             SetIsLightThemeEnabledValueChangedEventArgs();                              //FIXME: See SetColorTheme.
+
             SetRepeaterDataModel();
+
             ModifyListItemsBeforeInitialization();
             InitializeLists();
+
             SetInitialChanges();
             SetColorTheme();
+
             SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
             SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
         }
@@ -714,11 +728,11 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            List<ToolStripMenuItem> tempToolStripMenuItemList = firstToolStripMenuItem
-                .DropDownItems.Cast<ToolStripMenuItem>().ToList()
+            List<ToolStripMenuItem> toolStripMenuItemList = firstToolStripMenuItem
+                .DropDownItems.Cast<ToolStripMenuItem>()
                 .Where(toolStripMenuItem => toolStripMenuItem.Checked).ToList();
 
-            tempToolStripMenuItemList.ForEach(toolStripMenuItem =>
+            toolStripMenuItemList.ForEach(toolStripMenuItem =>
                 {
                     toolStripMenuItem.Checked = false;
                     firstToolStripMenuItem.DropDownItems.Remove(toolStripMenuItem);
@@ -736,7 +750,26 @@ namespace VACM.NET4_0.Views
             SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
                 (secondToolStripMenuItem);
 
-            GC.Collect();
+            //GC.Collect();
+            SortToolStripMenuItemCollectionByName(secondToolStripMenuItem);
+            //GC.Collect();                                                             //TODO: evaluate if GC Collect is necessary here.
+        }
+
+        internal void SortToolStripMenuItemCollectionByName
+            (ToolStripMenuItem toolStripMenuItem)
+        {
+            if (toolStripMenuItem is null || toolStripMenuItem.DropDownItems.Count == 0)
+            {
+                return;
+            }
+
+            ToolStripMenuItem[] toolStripMenuItemArray = toolStripMenuItem
+                .DropDownItems.Cast<ToolStripMenuItem>().OrderBy(x => x.Name)
+                .ToArray();
+
+            toolStripMenuItem.DropDownItems.Clear();
+            toolStripMenuItem.DropDownItems.AddRange(toolStripMenuItemArray);
+            //GC.Collect();
         }
 
         /// <summary>
@@ -799,7 +832,7 @@ namespace VACM.NET4_0.Views
         {
             string isSelectedSuffix = " (Selected)";
 
-            parentToolStripMenuItem.DropDownItems.Cast<ToolStripItem>().ToList().Where
+            parentToolStripMenuItem.DropDownItems.Cast<ToolStripItem>().Where
                 (toolStripItem => toolStripItem.ToolTipText != mMDevice.FriendlyName)
                 .ToList().ForEach(toolStripItem =>
                     {
@@ -874,7 +907,7 @@ namespace VACM.NET4_0.Views
         internal void SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
             (ToolStripMenuItem toolStripMenuItem)
         {
-            bool isNotEmpty = toolStripMenuItem.DropDownItems.Count != 0;
+            bool isNotEmpty = toolStripMenuItem.DropDownItems.Count > 0;
             toolStripMenuItem.Enabled = isNotEmpty;
 
             if (isNotEmpty)
@@ -1005,6 +1038,11 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            string text = deviceToolStripMenuItem.Text;
+            deviceToolStripMenuItem.Enabled = false;
+            deviceToolStripMenuItem.Text = "Loading...";
+            Invalidate();
+
             deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Capture,        //NOTE: we can async the WaveIn and WaveOut list-parsing.
                 checkedDeviceAddWaveInNameList);
 
@@ -1018,6 +1056,10 @@ namespace VACM.NET4_0.Views
             MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
                 (deviceAddSelectWaveOutToolStripMenuItem,
                  deviceRemoveSelectWaveOutToolStripMenuItem);
+
+            deviceToolStripMenuItem.Enabled = true;
+            deviceToolStripMenuItem.Text = text;
+            Invalidate();
 
             SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
             SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
@@ -1095,12 +1137,6 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            deviceListModel.MoveMMDeviceNameListFromSelectedList(DataFlow.Capture,
-                checkedDeviceRemoveWaveInNameList);
-
-            deviceListModel.MoveMMDeviceNameListFromSelectedList(DataFlow.Render,
-                checkedDeviceRemoveWaveOutNameList);
-
             MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
                 (deviceRemoveSelectWaveInToolStripMenuItem,
                 deviceAddSelectWaveInToolStripMenuItem);
@@ -1108,6 +1144,12 @@ namespace VACM.NET4_0.Views
             MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
                 (deviceRemoveSelectWaveOutToolStripMenuItem,
                 deviceAddSelectWaveOutToolStripMenuItem);
+
+            deviceListModel.MoveMMDeviceNameListFromSelectedList(DataFlow.Capture,
+                checkedDeviceRemoveWaveInNameList);
+
+            deviceListModel.MoveMMDeviceNameListFromSelectedList(DataFlow.Render,
+                checkedDeviceRemoveWaveOutNameList);
 
             SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
             SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
@@ -1429,6 +1471,217 @@ namespace VACM.NET4_0.Views
 
             aboutForm = new AboutForm();
             aboutForm.Show();
+        }
+
+        #endregion
+
+        #region 2. Device background logic
+
+        /// <summary>
+        /// Action logic for deviceAddConfirm background worker. If moving items in
+        /// device list model raise exception, cancel and return 1. If moving checked
+        /// items in item collection raise exception, cancel and return 2.
+        /// Else, return 0.
+        /// </summary>
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        /// <returns>The return value</returns>
+        internal int deviceAddConfirmBackgroundWorker_Action
+            (DoWorkEventArgs doWorkEventArgs)
+        {
+            try
+            {
+                deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Capture,
+                    checkedDeviceAddWaveInNameList);
+
+                deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Render,
+                    checkedDeviceAddWaveOutNameList);
+            }
+            catch
+            {
+                doWorkEventArgs.Cancel = true;
+                return 1;
+            }
+
+            try
+            {
+                MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                    (deviceAddSelectWaveInToolStripMenuItem,
+                    deviceRemoveSelectWaveInToolStripMenuItem);
+
+                MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                    (deviceAddSelectWaveOutToolStripMenuItem,
+                     deviceRemoveSelectWaveOutToolStripMenuItem);
+            }
+            catch
+            {
+                doWorkEventArgs.Cancel = true;
+                return 2;
+            }
+
+            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            return 0;
+        }
+
+        /// <summary>
+        /// Work logic for deviceAddConfirm background worker.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        internal void deviceAddConfirmBackgroundWorker_DoWork(object sender,
+            DoWorkEventArgs doWorkEventArgs)
+        {
+            if (sender is null || !(sender is BackgroundWorker))
+            {
+                return;
+            }
+
+            UnsetPropertiesOfDeviceToolStripMenuItem();
+
+            doWorkEventArgs.Result = deviceAddConfirmBackgroundWorker_Action
+                (doWorkEventArgs);
+        }
+
+        /// <summary>
+        /// Action logic for deviceRemoveConfirm background worker. If moving items in
+        /// device list model raise exception, cancel and return 1. If moving checked
+        /// items in item collection raise exception, cancel and return 2.
+        /// Else, return 0.
+        /// </summary>
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        /// <returns>The return value</returns>
+        internal int deviceRemoveConfirmBackgroundWorker_Action
+            (DoWorkEventArgs doWorkEventArgs)
+        {
+            try
+            {
+                deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Capture,
+                    checkedDeviceRemoveWaveInNameList);
+
+                deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Render,
+                    checkedDeviceRemoveWaveOutNameList);
+            }
+            catch
+            {
+                doWorkEventArgs.Cancel = true;
+                return 1;
+            }
+
+            try
+            {
+                MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                    (deviceRemoveSelectWaveInToolStripMenuItem,
+                    deviceAddSelectWaveInToolStripMenuItem);
+
+                MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                    (deviceRemoveSelectWaveOutToolStripMenuItem,
+                     deviceAddSelectWaveOutToolStripMenuItem);
+            }
+            catch
+            {
+                doWorkEventArgs.Cancel = true;
+                return 2;
+            }
+
+            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            return 0;
+        }
+
+        /// <summary>
+        /// Work logic for deviceRemoveConfirm background worker.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        internal void deviceRemoveConfirmBackgroundWorker_DoWork(object sender,
+            DoWorkEventArgs doWorkEventArgs)
+        {
+            if (sender is null || !(sender is BackgroundWorker))
+            {
+                return;
+            }
+
+            UnsetPropertiesOfDeviceToolStripMenuItem();
+
+            doWorkEventArgs.Result = deviceRemoveConfirmBackgroundWorker_Action
+                (doWorkEventArgs);
+        }
+
+        /// <summary>
+        /// Action logic for deviceReloadAllConfirm background worker. If moving items in
+        /// device list model raise exception, cancel and return 1. If moving checked
+        /// items in item collection raise exception, cancel and return 2.
+        /// Else, return 0.
+        /// </summary>
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        /// <returns>The return value</returns>
+        internal int deviceReloadAllBackgroundWorker_Action
+            (DoWorkEventArgs doWorkEventArgs)
+        {
+            try
+            {
+                SetDeviceList();
+                InitializeLists();
+                SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+                SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            }
+            catch
+            {
+                doWorkEventArgs.Cancel = true;
+                return 1;
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Work logic for deviceReloadAll background worker.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        internal void deviceReloadAllBackgroundWorker_DoWork(object sender,
+            DoWorkEventArgs doWorkEventArgs)
+        {
+            if (sender is null || !(sender is BackgroundWorker))
+            {
+                return;
+            }
+
+            UnsetPropertiesOfDeviceToolStripMenuItem();
+
+            doWorkEventArgs.Result = deviceReloadAllBackgroundWorker_Action
+                (doWorkEventArgs);
+        }
+
+        /// <summary>
+        /// On complete logic for device background worker(s).
+        /// worker.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="runWorkerCompletedEventArgs">The run worker completed event
+        /// arguments</param>
+        internal void deviceBackgroundWorker_RunWorkerCompleted(object sender,
+            RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
+        {
+            if (runWorkerCompletedEventArgs.Error != null)
+            {
+                MessageBoxWrapper.ShowError(runWorkerCompletedEventArgs.Error.Message);
+                //NOTE: undo all changes here from previous callstack operation?
+            }
+
+            SetPropertiesOfDeviceToolStripMenuItem();
+        }
+
+        internal void SetPropertiesOfDeviceToolStripMenuItem()
+        {
+            deviceToolStripMenuItem.Enabled = true;
+            deviceToolStripMenuItem.Text = deviceText;
+        }
+
+        internal void UnsetPropertiesOfDeviceToolStripMenuItem()
+        {
+            deviceToolStripMenuItem.Enabled = false;
+            deviceToolStripMenuItem.Text = "Loading...";
         }
 
         #endregion
