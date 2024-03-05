@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Threading;
+using System.Windows.Forms;
 using VACM.NET4_0.ViewModels;
 using VACM.NET4_0.Views;
 
@@ -9,7 +10,6 @@ namespace VACM.NET4_0
         #region Parameters
 
         private static bool isLightThemeEnabled;
-        private static MainForm mainForm;
 
         public static bool IsLightThemeEnabled
         {
@@ -54,19 +54,28 @@ namespace VACM.NET4_0
         /// </summary>
         public GraphicsWindow()
         {
-            if (!DoForceColorTheme)
+            var thread = new Thread(() =>
             {
-                LightThemeValidator = new LightThemeValidator();
-            }
+                if (!DoForceColorTheme)
+                {
+                    LightThemeValidator = new LightThemeValidator();
+                }
 
-            FormColorUpdater = new FormColorUpdater();
-            mainForm = new MainForm();
-            Application.Run(mainForm);
+                FormColorUpdater = new FormColorUpdater();
+                Control.CheckForIllegalCrossThreadCalls = false;
+                var mainForm = new MainForm();
+                mainForm.ShowDialog();
+                Control.CheckForIllegalCrossThreadCalls = true;
+                Application.Run(mainForm);
 
-            if (LightThemeValidator != null)
-            {
-                LightThemeValidator.Dispose();
-            }
+                if (LightThemeValidator != null)
+                {
+                    LightThemeValidator.Dispose();
+                }
+            });
+
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
         }
 
         #endregion
