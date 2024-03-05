@@ -12,8 +12,10 @@ namespace VACM.NET4_0.Views
         /// Required designer variable.
         /// </summary>
         private IContainer components = null;
-        private BackgroundWorker backgroundWorker1;
         private MenuStrip menuStrip1;
+        private BackgroundWorker deviceAddConfirmBackgroundWorker;
+        private BackgroundWorker deviceRemoveConfirmBackgroundWorker;
+        private BackgroundWorker deviceReloadAllBackgroundWorker;
         private TableLayoutPanel gridTableLayoutPanel;
         private ToolStripMenuItem deviceAddConfirmToolStripMenuItem;
         private ToolStripMenuItem deviceAddSelectAllToolStripMenuItem;
@@ -88,22 +90,24 @@ namespace VACM.NET4_0.Views
         internal void InitializeComponent()
         {
             this.menuStrip1 = new MenuStrip();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.deviceAddConfirmBackgroundWorker = new BackgroundWorker();
             this.deviceAddConfirmToolStripMenuItem = new ToolStripMenuItem();
             this.deviceAddSelectAllToolStripMenuItem = new ToolStripMenuItem();
             this.deviceAddSelectToolStripMenuItem = new ToolStripMenuItem();
             this.deviceAddSelectWaveInToolStripMenuItem = new ToolStripMenuItem();
             this.deviceAddSelectWaveOutToolStripMenuItem = new ToolStripMenuItem();
             this.deviceAddToolStripMenuItem = new ToolStripMenuItem();
+            this.deviceReloadAllBackgroundWorker = new BackgroundWorker();
             this.deviceReloadAllToolStripMenuItem = new ToolStripMenuItem();
+            this.deviceRemoveConfirmBackgroundWorker = new BackgroundWorker();
+            this.deviceRemoveConfirmToolStripMenuItem = new ToolStripMenuItem();
             this.deviceRemoveSelectAllLinkedToolStripMenuItem = new ToolStripMenuItem();
             this.deviceRemoveSelectAllToolStripMenuItem = new ToolStripMenuItem();
             this.deviceRemoveSelectAllUnlinkedToolStripMenuItem = new ToolStripMenuItem();
-            this.deviceRemoveConfirmToolStripMenuItem = new ToolStripMenuItem();
-            this.deviceRemoveToolStripMenuItem = new ToolStripMenuItem();
             this.deviceRemoveSelectToolStripMenuItem = new ToolStripMenuItem();
             this.deviceRemoveSelectWaveInToolStripMenuItem = new ToolStripMenuItem();
             this.deviceRemoveSelectWaveOutToolStripMenuItem = new ToolStripMenuItem();
+            this.deviceRemoveToolStripMenuItem = new ToolStripMenuItem();
             this.deviceToolStripMenuItem = new ToolStripMenuItem();
             this.deviceToolStripSeparator1 = new ToolStripSeparator();
             this.deviceToolStripSeparator2 = new ToolStripSeparator();
