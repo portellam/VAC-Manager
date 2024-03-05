@@ -505,37 +505,36 @@ namespace VACM.NET4_0.Views
             InitializeDeviceDropDownCollections();
         }
 
+
+        /// <summary>
+        /// Initialize background workers.
+        /// </summary>
+        internal void InitializeBackgroundWorkers()
+        {
+            deviceAddConfirmBackgroundWorker.DoWork +=
+                deviceAddConfirmBackgroundWorker_DoWork;
+
+            deviceReloadAllBackgroundWorker.DoWork +=
+                deviceReloadAllBackgroundWorker_DoWork;
+
+            deviceRemoveConfirmBackgroundWorker.DoWork +=
+                deviceRemoveConfirmBackgroundWorker_DoWork;
+        }
+
         /// <summary>
         /// Code to run after generated code.
         /// </summary>
         internal void PostInitializeComponent()
         {
+            InitializeBackgroundWorkers();
             SetPropertiesOfDeviceToolStripMenuItem();
-
-            deviceAddSelectWaveInToolStripMenuItem.Text = WaveInAsString;
-            deviceAddSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
-            deviceRemoveSelectWaveInToolStripMenuItem.Text = WaveInAsString;
-            deviceRemoveSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
-
-            helpAboutToolStripMenuItem.Text =
-                $"About {Common.ApplicationNameAsAbbreviation}";
-
-            linkAddWaveInToolStripMenuItem.Text = WaveInAsString;
-            linkAddWaveOutToolStripMenuItem.Text = WaveOutAsString;
-            linkRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
-            linkRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
-            viewToggleDarkModeToolStripMenuItem.Enabled = !DoForceColorTheme;
-
+            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
             SetIsLightThemeEnabledValueChangedEventArgs();                              //FIXME: See SetColorTheme.
-
             SetRepeaterDataModel();
-
             ModifyListItemsBeforeInitialization();
             InitializeLists();
-
             SetInitialChanges();
             SetColorTheme();
-
             SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
             SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
         }
@@ -1204,6 +1203,36 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
+        /// Set properties of deviceToolStripMenuItem.
+        /// </summary>
+        internal void SetPropertiesOfDeviceToolStripMenuItem()
+        {
+            deviceToolStripMenuItem.Enabled = true;
+            deviceToolStripMenuItem.Text = deviceText;
+        }
+
+        /// <summary>
+        /// Set properties of deviceToolStripMenuItem drop downs.
+        /// </summary>
+        internal void SetPropertiesOfDeviceToolStripMenuItemDropDowns()
+        {
+            deviceAddSelectWaveInToolStripMenuItem.Text = WaveInAsString;
+            deviceAddSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
+            deviceRemoveSelectWaveInToolStripMenuItem.Text = WaveInAsString;
+            deviceRemoveSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
+
+            helpAboutToolStripMenuItem.Text =
+                $"About {Common.ApplicationNameAsAbbreviation}";
+
+            linkAddWaveInToolStripMenuItem.Text = WaveInAsString;
+            linkAddWaveOutToolStripMenuItem.Text = WaveOutAsString;
+            linkRemoveWaveInToolStripMenuItem.Text = WaveInAsString;
+            linkRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
+
+            viewToggleDarkModeToolStripMenuItem.Enabled = !DoForceColorTheme;
+        }
+
+        /// <summary>
         /// Set properties of deviceAddToolStripMenuItem drop downs.
         /// </summary>
         internal void SetPropertiesOfDeviceAddToolStripMenuItemDropDowns()
@@ -1242,6 +1271,15 @@ namespace VACM.NET4_0.Views
                 isCheckedDeviceRemoveNameListFull && isSelectedDeviceListNotEmpty;
 
             //TODO: parse removeSelectAllLinked and Unlinked here.
+        }
+
+        /// <summary>
+        /// Unset properties of deviceToolStripMenuItem.
+        /// </summary>
+        internal void UnsetPropertiesOfDeviceToolStripMenuItem()
+        {
+            deviceToolStripMenuItem.Enabled = false;
+            deviceToolStripMenuItem.Text = "Loading...";
         }
 
         #endregion
@@ -1670,18 +1708,6 @@ namespace VACM.NET4_0.Views
             }
 
             SetPropertiesOfDeviceToolStripMenuItem();
-        }
-
-        internal void SetPropertiesOfDeviceToolStripMenuItem()
-        {
-            deviceToolStripMenuItem.Enabled = true;
-            deviceToolStripMenuItem.Text = deviceText;
-        }
-
-        internal void UnsetPropertiesOfDeviceToolStripMenuItem()
-        {
-            deviceToolStripMenuItem.Enabled = false;
-            deviceToolStripMenuItem.Text = "Loading...";
         }
 
         #endregion
