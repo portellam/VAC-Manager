@@ -505,7 +505,6 @@ namespace VACM.NET4_0.Views
             InitializeDeviceDropDownCollections();
         }
 
-
         /// <summary>
         /// Initialize background workers.
         /// </summary>
