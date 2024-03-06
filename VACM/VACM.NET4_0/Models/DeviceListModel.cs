@@ -338,7 +338,7 @@ namespace VACM.NET4_0.Models
                 return;
             }
 
-            if (mMDevice.DataFlow == DataFlow.Capture)
+            if (dataFlow == DataFlow.Capture)
             {
                 SelectedWaveInMMDeviceList.Remove(mMDevice);
 
@@ -385,7 +385,7 @@ namespace VACM.NET4_0.Models
                 return;
             }
 
-            if (mMDevice.DataFlow == DataFlow.Capture)
+            if (dataFlow == DataFlow.Capture)
             {
                 UnselectedWaveInMMDeviceList.Remove(mMDevice);
 
