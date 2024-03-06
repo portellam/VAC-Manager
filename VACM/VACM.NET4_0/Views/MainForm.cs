@@ -116,12 +116,30 @@ namespace VACM.NET4_0.Views
             get
             {
                 return
-                    (deviceAddSelectWaveInToolStripMenuItem is null ||
-                        deviceAddSelectWaveInToolStripMenuItem.DropDownItems is null ||
-                        deviceAddSelectWaveInToolStripMenuItem.DropDownItems.Count == 0)
-                    && (deviceAddSelectWaveOutToolStripMenuItem is null ||
-                        deviceAddSelectWaveOutToolStripMenuItem.DropDownItems is null ||
-                        deviceAddSelectWaveOutToolStripMenuItem.DropDownItems.Count == 0);
+                    isDeviceAddWaveInNameListEmpty
+                    && isDeviceAddWaveOutNameListEmpty;
+            }
+        }
+
+        private bool isDeviceAddWaveInNameListEmpty
+        {
+            get
+            {
+                return
+                    deviceAddSelectWaveInToolStripMenuItem is null ||
+                    deviceAddSelectWaveInToolStripMenuItem.DropDownItems is null ||
+                    deviceAddSelectWaveInToolStripMenuItem.DropDownItems.Count == 0;
+            }
+        }
+
+        private bool isDeviceAddWaveOutNameListEmpty
+        {
+            get
+            {
+                return
+                    deviceAddSelectWaveOutToolStripMenuItem is null ||
+                    deviceAddSelectWaveOutToolStripMenuItem.DropDownItems is null ||
+                    deviceAddSelectWaveOutToolStripMenuItem.DropDownItems.Count == 0;
             }
         }
 
@@ -130,12 +148,30 @@ namespace VACM.NET4_0.Views
             get
             {
                 return
-                    (deviceRemoveSelectWaveInToolStripMenuItem is null ||
-                        deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems is null ||
-                        deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems.Count == 0)
-                    && (deviceRemoveSelectWaveOutToolStripMenuItem is null ||
-                        deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems is null ||
-                        deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems.Count == 0);
+                    isDeviceRemoveWaveInNameListEmpty
+                    && isDeviceRemoveWaveOutNameListEmpty;
+            }
+        }
+
+        private bool isDeviceRemoveWaveInNameListEmpty
+        {
+            get
+            {
+                return
+                    deviceRemoveSelectWaveOutToolStripMenuItem is null ||
+                    deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems is null ||
+                    deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems.Count == 0;
+            }
+        }
+
+        private bool isDeviceRemoveWaveOutNameListEmpty
+        {
+            get
+            {
+                return
+                    deviceRemoveSelectWaveOutToolStripMenuItem is null ||
+                    deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems is null ||
+                    deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems.Count == 0;
             }
         }
 
@@ -1156,6 +1192,15 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            string message = "Reload all devices will undo any unsaved changes to the" +
+                " Grid and Graph, including devices, links, and repeaters.\nAre you " +
+                "sure?";
+
+            if (MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(message))
+            {
+                return;
+            }
+
             deviceToolStripMenuItemDropDown_Action(deviceReloadAllBackgroundWorker);
         }
 
@@ -1342,6 +1387,12 @@ namespace VACM.NET4_0.Views
             deviceAddSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
             deviceAddSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
 
+            deviceAddSelectWaveInToolStripMenuItem.Enabled = !isBusy
+                && !isDeviceAddWaveInNameListEmpty;
+
+            deviceAddSelectWaveOutToolStripMenuItem.Enabled = !isBusy
+                && !isDeviceAddWaveOutNameListEmpty;
+
             string toolTipText = GetDeviceToolTipText(isBusy,
                 isDeviceAddNameListEmpty);
 
@@ -1365,7 +1416,7 @@ namespace VACM.NET4_0.Views
             }
 
             deviceReloadAllToolStripMenuItem.Enabled = !isBusy
-                && isDeviceAddNameListEmpty && isDeviceRemoveNameListEmpty;
+                && (!isDeviceAddNameListEmpty || !isDeviceRemoveNameListEmpty);
 
             deviceReloadAllToolStripMenuItem.ToolTipText = GetDeviceToolTipText(isBusy,
                 isDeviceAddNameListEmpty && isDeviceRemoveNameListEmpty);
@@ -1396,6 +1447,13 @@ namespace VACM.NET4_0.Views
                 isNotBusyAndListIsNotEmpty;                                             //TODO: create a getter to determine if unlinked items exist.
 
             deviceRemoveSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+
+            deviceRemoveSelectWaveInToolStripMenuItem.Enabled = !isBusy
+                && !isDeviceRemoveWaveInNameListEmpty;
+
+            deviceRemoveSelectWaveOutToolStripMenuItem.Enabled = !isBusy
+                && !isDeviceRemoveWaveOutNameListEmpty;
+
 
             string toolTipText = GetDeviceToolTipText(isBusy,
                 isDeviceRemoveNameListEmpty);
