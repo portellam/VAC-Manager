@@ -68,22 +68,9 @@ namespace VACM.NET4_0.Views
                 return deviceAddSelectWaveInToolStripMenuItem.DropDownItems
                     .Cast<ToolStripMenuItem>()
                     .All(toolStripMenuItem => toolStripMenuItem.Checked)
-                    || deviceAddSelectWaveOutToolStripMenuItem.DropDownItems
+                    && deviceAddSelectWaveOutToolStripMenuItem.DropDownItems
                     .Cast<ToolStripMenuItem>()
                     .All(toolStripMenuItem => toolStripMenuItem.Checked);
-            }
-        }
-
-        private bool isCheckedDeviceAddNameListNotEmpty
-        {
-            get
-            {
-                return deviceAddSelectWaveInToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .Any(toolStripMenuItem => toolStripMenuItem.Checked)
-                    || deviceAddSelectWaveOutToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .Any(toolStripMenuItem => toolStripMenuItem.Checked);
             }
         }
 
@@ -94,54 +81,37 @@ namespace VACM.NET4_0.Views
                 return deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems
                     .Cast<ToolStripMenuItem>()
                     .All(toolStripMenuItem => toolStripMenuItem.Checked)
-                    || deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems
+                    && deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems
                     .Cast<ToolStripMenuItem>()
                     .All(toolStripMenuItem => toolStripMenuItem.Checked);
             }
         }
 
-        private bool isCheckedDeviceRemoveNameListNotEmpty
+        private bool isDeviceAddNameListEmpty
         {
             get
             {
-                return deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .Any(toolStripMenuItem => toolStripMenuItem.Checked)
-                    || deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .Any(toolStripMenuItem => toolStripMenuItem.Checked);
+                return
+                    (deviceAddSelectWaveInToolStripMenuItem is null ||
+                        deviceAddSelectWaveInToolStripMenuItem.DropDownItems is null ||
+                        deviceAddSelectWaveInToolStripMenuItem.DropDownItems.Count == 0)
+                    && (deviceAddSelectWaveOutToolStripMenuItem is null ||
+                        deviceAddSelectWaveOutToolStripMenuItem.DropDownItems is null ||
+                        deviceAddSelectWaveOutToolStripMenuItem.DropDownItems.Count == 0);
             }
         }
 
-        private bool isSelectedDeviceListNotEmpty
+        private bool isDeviceRemoveNameListEmpty
         {
             get
             {
-                if (deviceListModel is null)
-                {
-                    return false;
-                }
-
-                return (deviceListModel.SelectedWaveInNameList != null
-                        && deviceListModel.SelectedWaveInNameList.Count > 0)
-                    || (deviceListModel.SelectedWaveOutNameList != null
-                        && deviceListModel.SelectedWaveOutNameList.Count > 0);
-            }
-        }
-
-        private bool isUnselectedDeviceListNotEmpty
-        {
-            get
-            {
-                if (deviceListModel is null)
-                {
-                    return false;
-                }
-
-                return (deviceListModel.UnselectedWaveInNameList != null
-                        && deviceListModel.UnselectedWaveInNameList.Count > 0)
-                    || (deviceListModel.UnselectedWaveOutNameList != null
-                        && deviceListModel.UnselectedWaveOutNameList.Count > 0);
+                return
+                    (deviceRemoveSelectWaveInToolStripMenuItem is null ||
+                        deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems is null ||
+                        deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems.Count == 0)
+                    && (deviceRemoveSelectWaveOutToolStripMenuItem is null ||
+                        deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems is null ||
+                        deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems.Count == 0);
             }
         }
 
@@ -202,11 +172,8 @@ namespace VACM.NET4_0.Views
 
         private List<ToolStripItem> toolStripItemList = new List<ToolStripItem>();
 
-        private const string deviceText = "Device";
-
         public const string WaveInAsString = "Wave In";
         public const string WaveOutAsString = "Wave Out";
-
         public event PropertyValueChangedDelegate IsLightThemeEnabledValueChanged;
 
         #endregion
@@ -443,22 +410,22 @@ namespace VACM.NET4_0.Views
             Refresh();
 
             InitializeDeviceItemCollection
-                (deviceAddConfirmToolStripMenuItemEnabled_Toggle,
+                (deviceAddSelectToolStripMenuItemEnabled_Confirm,
                 deviceAddSelectWaveInToolStripMenuItem,
                 deviceListModel.UnselectedWaveInMMDeviceList);
 
             InitializeDeviceItemCollection
-                (deviceAddConfirmToolStripMenuItemEnabled_Toggle,
+                (deviceAddSelectToolStripMenuItemEnabled_Confirm,
                 deviceAddSelectWaveOutToolStripMenuItem,
                 deviceListModel.UnselectedWaveOutMMDeviceList);
 
             InitializeDeviceItemCollection
-                (deviceRemoveConfirmToolStripMenuItem_Toggle,
+                (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
                 deviceRemoveSelectWaveInToolStripMenuItem,
                 deviceListModel.SelectedWaveInMMDeviceList);
 
             InitializeDeviceItemCollection
-                (deviceRemoveConfirmToolStripMenuItem_Toggle,
+                (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
                 deviceRemoveSelectWaveOutToolStripMenuItem,
                 deviceListModel.SelectedWaveOutMMDeviceList);
 
@@ -513,11 +480,20 @@ namespace VACM.NET4_0.Views
             deviceAddConfirmBackgroundWorker.DoWork +=
                 deviceAddConfirmBackgroundWorker_DoWork;
 
+            deviceAddConfirmBackgroundWorker.RunWorkerCompleted +=
+                deviceBackgroundWorker_RunWorkerCompleted;
+
             deviceReloadAllBackgroundWorker.DoWork +=
                 deviceReloadAllBackgroundWorker_DoWork;
 
+            deviceReloadAllBackgroundWorker.RunWorkerCompleted +=
+                deviceBackgroundWorker_RunWorkerCompleted;
+
             deviceRemoveConfirmBackgroundWorker.DoWork +=
                 deviceRemoveConfirmBackgroundWorker_DoWork;
+
+            deviceRemoveConfirmBackgroundWorker.RunWorkerCompleted +=
+                deviceBackgroundWorker_RunWorkerCompleted;
         }
 
         /// <summary>
@@ -526,7 +502,6 @@ namespace VACM.NET4_0.Views
         internal void PostInitializeComponent()
         {
             InitializeBackgroundWorkers();
-            SetPropertiesOfDeviceToolStripMenuItem();
             SetPropertiesOfDeviceToolStripMenuItemDropDowns();
             SetIsLightThemeEnabledValueChangedEventArgs();                              //FIXME: See SetColorTheme.
             SetRepeaterDataModel();
@@ -534,8 +509,8 @@ namespace VACM.NET4_0.Views
             InitializeLists();
             SetInitialChanges();
             SetColorTheme();
-            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
         }
 
         /// <summary>
@@ -720,8 +695,10 @@ namespace VACM.NET4_0.Views
             ToolStripMenuItem secondToolStripMenuItem)
         {
             if (firstToolStripMenuItem is null
+                || firstToolStripMenuItem.DropDownItems is null
                 || firstToolStripMenuItem.DropDownItems.Count == 0
-                || secondToolStripMenuItem is null)
+                || secondToolStripMenuItem is null
+                || secondToolStripMenuItem.DropDownItems is null)
             {
                 return;
             }
@@ -732,14 +709,9 @@ namespace VACM.NET4_0.Views
 
             toolStripMenuItemList.ForEach(toolStripMenuItem =>
                 {
-                    toolStripMenuItem.Checked = false;
-                    firstToolStripMenuItem.DropDownItems.Remove(toolStripMenuItem);
-
-                    if (!secondToolStripMenuItem.DropDownItems
-                        .Contains(toolStripMenuItem))
-                    {
-                        secondToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
-                    }
+                    MoveToolStripMenuItemToNewToolStripItemCollection
+                        (toolStripMenuItem, firstToolStripMenuItem,
+                        secondToolStripMenuItem);
                 });
 
             SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
@@ -748,9 +720,41 @@ namespace VACM.NET4_0.Views
             SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
                 (secondToolStripMenuItem);
 
-            //GC.Collect();
             SortToolStripMenuItemCollectionByName(secondToolStripMenuItem);
-            //GC.Collect();                                                             //TODO: evaluate if GC Collect is necessary here.
+        }
+
+        /// <summary>
+        /// Move tool strip menu item to new tool strip item collection.
+        /// </summary>
+        /// <param name="thisToolStripMenuItem">The tool strip menu item to move</param>
+        /// <param name="firstToolStripMenuItem">The first tool strip menu item</param>
+        /// <param name="secondToolStripMenuItem">The second tool strip menu item
+        /// </param>
+        internal void MoveToolStripMenuItemToNewToolStripItemCollection
+            (ToolStripMenuItem thisToolStripMenuItem,
+            ToolStripMenuItem firstToolStripMenuItem,
+            ToolStripMenuItem secondToolStripMenuItem)
+        {
+            if (thisToolStripMenuItem is null
+                || firstToolStripMenuItem is null
+                || firstToolStripMenuItem.DropDownItems is null
+                || firstToolStripMenuItem.DropDownItems.Count == 0
+                || secondToolStripMenuItem is null
+                || secondToolStripMenuItem.DropDownItems is null)
+            {
+                return;
+            }
+
+            thisToolStripMenuItem.Checked = false;
+            firstToolStripMenuItem.DropDownItems.Remove(thisToolStripMenuItem);
+
+            if (secondToolStripMenuItem.DropDownItems
+                .Contains(thisToolStripMenuItem))
+            {
+                return;
+            }
+
+            secondToolStripMenuItem.DropDownItems.Add(thisToolStripMenuItem);
         }
 
         internal void SortToolStripMenuItemCollectionByName
@@ -1031,44 +1035,25 @@ namespace VACM.NET4_0.Views
         internal void deviceAddConfirmToolStripMenuItem_Click(object sender,            //TODO: make called methods async?
             EventArgs eventArgs)
         {
-            if (sender is null || !(sender is ToolStripMenuItem))
+            if (sender is null || !(sender is ToolStripMenuItem)
+                || deviceAddConfirmBackgroundWorker.IsBusy
+                || deviceReloadAllBackgroundWorker.IsBusy
+                || deviceRemoveConfirmBackgroundWorker.IsBusy)
             {
                 return;
             }
 
-            string text = deviceToolStripMenuItem.Text;
-            deviceToolStripMenuItem.Enabled = false;
-            deviceToolStripMenuItem.Text = "Loading...";
-            Invalidate();
-
-            deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Capture,        //NOTE: we can async the WaveIn and WaveOut list-parsing.
-                checkedDeviceAddWaveInNameList);
-
-            deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Render,
-                checkedDeviceAddWaveOutNameList);
-
-            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection                //NOTE: is it possible to make both the model and UI logic async?
-                (deviceAddSelectWaveInToolStripMenuItem,
-                deviceRemoveSelectWaveInToolStripMenuItem);
-
-            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
-                (deviceAddSelectWaveOutToolStripMenuItem,
-                 deviceRemoveSelectWaveOutToolStripMenuItem);
-
-            deviceToolStripMenuItem.Enabled = true;
-            deviceToolStripMenuItem.Text = text;
-            Invalidate();
-
-            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            //SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            //Invalidate();
+            deviceToolStripMenuItemDropDown_Action(deviceAddConfirmBackgroundWorker);
         }
 
         /// <summary>
-        /// Toggle enabled property event for deviceAddConfirmToolStripMenuItem.
+        /// Confirm deviceAddSelectWaveIn or WaveOutToolStripMenuItem drop down.
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="eventArgs">The event arguments</param>
-        internal void deviceAddConfirmToolStripMenuItemEnabled_Toggle(object sender,
+        internal void deviceAddSelectToolStripMenuItemEnabled_Confirm(object sender,
             EventArgs eventArgs)
         {
             if (sender is null || !(sender is ToolStripMenuItem))
@@ -1076,8 +1061,8 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            Invalidate();
         }
 
         /// <summary>
@@ -1101,8 +1086,8 @@ namespace VACM.NET4_0.Views
                 (deviceAddSelectWaveOutToolStripMenuItem,
                 deviceAddSelectAllToolStripMenuItem.Checked);
 
-            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
 
             RecursivelyShowDropDownForEveryParentToolStripItem
                 (deviceAddSelectAllToolStripMenuItem);
@@ -1116,10 +1101,17 @@ namespace VACM.NET4_0.Views
         internal void deviceReloadAllToolStripMenuItem_Click(object sender,
             EventArgs eventArgs)
         {
-            SetDeviceList();
-            InitializeLists();
-            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            if (sender is null || !(sender is ToolStripMenuItem)
+                || deviceAddConfirmBackgroundWorker.IsBusy
+                || deviceReloadAllBackgroundWorker.IsBusy
+                || deviceRemoveConfirmBackgroundWorker.IsBusy)
+            {
+                return;
+            }
+
+            CloseAndSetPropertiesOfDeviceReloadAllToolStripMenuItem();
+            Invalidate();
+            deviceToolStripMenuItemDropDown_Action(deviceReloadAllBackgroundWorker);
         }
 
         /// <summary>
@@ -1130,35 +1122,25 @@ namespace VACM.NET4_0.Views
         internal void deviceRemoveConfirmToolStripMenuItem_Click(object sender,
             EventArgs eventArgs)
         {
-            if (sender is null || !(sender is ToolStripMenuItem))
+            if (sender is null || !(sender is ToolStripMenuItem)
+                || deviceAddConfirmBackgroundWorker.IsBusy
+                || deviceReloadAllBackgroundWorker.IsBusy
+                || deviceRemoveConfirmBackgroundWorker.IsBusy)
             {
                 return;
             }
 
-            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
-                (deviceRemoveSelectWaveInToolStripMenuItem,
-                deviceAddSelectWaveInToolStripMenuItem);
-
-            MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
-                (deviceRemoveSelectWaveOutToolStripMenuItem,
-                deviceAddSelectWaveOutToolStripMenuItem);
-
-            deviceListModel.MoveMMDeviceNameListFromSelectedList(DataFlow.Capture,
-                checkedDeviceRemoveWaveInNameList);
-
-            deviceListModel.MoveMMDeviceNameListFromSelectedList(DataFlow.Render,
-                checkedDeviceRemoveWaveOutNameList);
-
-            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            //SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            //Invalidate();
+            deviceToolStripMenuItemDropDown_Action(deviceRemoveConfirmBackgroundWorker);
         }
 
         /// <summary>
-        /// Toggle enabled property event for deviceRemoveConfirmToolStripMenuItem.
+        /// Confirm deviceRemoveSelectWaveIn or WaveOutToolStripMenuItem drop down.
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="eventArgs">The event arguments</param>
-        internal void deviceRemoveConfirmToolStripMenuItem_Toggle(object sender,
+        internal void deviceRemoveSelectToolStripMenuItemEnabled_Confirm(object sender,
             EventArgs eventArgs)
         {
             if (sender is null || !(sender is ToolStripMenuItem))
@@ -1166,8 +1148,8 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            Invalidate();
         }
 
         /// <summary>
@@ -1183,9 +1165,6 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            //SetDeviceList();
-            //InitializeLists();
-
             SetCheckedPropertyForEachToolStripMenuItem
                 (deviceRemoveSelectWaveInToolStripMenuItem,
                 deviceRemoveSelectAllToolStripMenuItem.Checked);
@@ -1194,20 +1173,33 @@ namespace VACM.NET4_0.Views
                 (deviceRemoveSelectWaveOutToolStripMenuItem,
                 deviceRemoveSelectAllToolStripMenuItem.Checked);
 
-            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
 
             RecursivelyShowDropDownForEveryParentToolStripItem
                 (deviceRemoveSelectAllToolStripMenuItem);
         }
 
         /// <summary>
-        /// Set properties of deviceToolStripMenuItem.
+        /// Action logic for deviceToolStripMenuItem drop down background worker.
+        /// Unset properties of the parent tool strip menu item (device), set properties
+        /// of each child, run the worker, then set properties of each child again, and
+        /// reset properties of the parent.
         /// </summary>
-        internal void SetPropertiesOfDeviceToolStripMenuItem()
+        /// <param name="backgroundWorker">The background worker</param>
+        internal void deviceToolStripMenuItemDropDown_Action
+            (BackgroundWorker backgroundWorker)
         {
-            deviceToolStripMenuItem.Enabled = true;
-            deviceToolStripMenuItem.Text = deviceText;
+            if (backgroundWorker is null || backgroundWorker.IsBusy)
+            {
+                return;
+            }
+
+            CloseAndSetPropertiesOfDeviceReloadAllToolStripMenuItem();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            Invalidate();
+            backgroundWorker.RunWorkerAsync();
         }
 
         /// <summary>
@@ -1232,53 +1224,122 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Set properties of deviceAddToolStripMenuItem drop downs.
+        /// Close and set properties of deviceAddToolStripMenuItem drop downs.
         /// </summary>
-        internal void SetPropertiesOfDeviceAddToolStripMenuItemDropDowns()
+        internal void CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns()
         {
-            deviceAddConfirmToolStripMenuItem.Enabled =
-                isCheckedDeviceAddNameListNotEmpty;
+            if (deviceAddConfirmBackgroundWorker.IsBusy)
+            {
+                deviceAddToolStripMenuItem.DropDown.Close();
+            }
 
-            deviceAddSelectAllToolStripMenuItem.Enabled =
-                isUnselectedDeviceListNotEmpty;
+            bool isNotBusyAndListIsFull = !deviceAddConfirmBackgroundWorker.IsBusy
+                && isCheckedDeviceAddNameListFull;
 
-            deviceAddSelectToolStripMenuItem.Enabled = isUnselectedDeviceListNotEmpty;
-            deviceAddToolStripMenuItem.Enabled = isUnselectedDeviceListNotEmpty;
+            bool isNotBusyAndListIsNotEmpty = !deviceAddConfirmBackgroundWorker.IsBusy
+                && !isDeviceAddNameListEmpty;
 
-            deviceAddSelectAllToolStripMenuItem.Checked =
-                isCheckedDeviceAddNameListFull && isUnselectedDeviceListNotEmpty;
+            deviceAddConfirmToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+            deviceAddSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
+            deviceAddSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+            deviceAddSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+            //deviceAddToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+
+            string toolTipText;
+
+            if (deviceAddConfirmBackgroundWorker.IsBusy)
+            {
+                toolTipText = "Busy. Please wait...";
+
+            }
+            else if (isDeviceAddNameListEmpty)
+            {
+                toolTipText = "No device(s) found.";
+            }
+            else
+            {
+                toolTipText = string.Empty;
+            }
+
+            deviceAddConfirmToolStripMenuItem.ToolTipText = toolTipText;
+            deviceAddSelectAllToolStripMenuItem.ToolTipText = toolTipText;
+            deviceAddSelectToolStripMenuItem.ToolTipText = toolTipText;
         }
 
         /// <summary>
-        /// Set properties of deviceRemoveToolStripMenuItem drop downs.
+        /// Close and set properties of deviceReloadAllToolStripMenuItem.
         /// </summary>
-        internal void SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns()
+        internal void CloseAndSetPropertiesOfDeviceReloadAllToolStripMenuItem()
         {
-            deviceRemoveConfirmToolStripMenuItem.Enabled =
-                isCheckedDeviceRemoveNameListNotEmpty;
+            if (deviceReloadAllBackgroundWorker.IsBusy)
+            {
+                deviceReloadAllToolStripMenuItem.DropDown.Close();
+            }
 
-            deviceRemoveSelectAllToolStripMenuItem.Enabled =
-                isSelectedDeviceListNotEmpty;
+            deviceReloadAllToolStripMenuItem.Enabled =
+                !deviceReloadAllBackgroundWorker.IsBusy;
 
-            deviceRemoveSelectToolStripMenuItem.Enabled = isSelectedDeviceListNotEmpty;
-
-            deviceRemoveToolStripMenuItem.Enabled = isSelectedDeviceListNotEmpty
-                || deviceRemoveSelectAllLinkedToolStripMenuItem.Enabled
-                || deviceRemoveSelectAllUnlinkedToolStripMenuItem.Enabled;
-
-            deviceRemoveSelectAllToolStripMenuItem.Checked =
-                isCheckedDeviceRemoveNameListFull && isSelectedDeviceListNotEmpty;
-
-            //TODO: parse removeSelectAllLinked and Unlinked here.
+            if (!deviceReloadAllToolStripMenuItem.Enabled)
+            {
+                deviceReloadAllToolStripMenuItem.ToolTipText =
+                    "Busy. Please wait...";
+            }
+            else
+            {
+                deviceReloadAllToolStripMenuItem.ToolTipText = string.Empty;
+            }
         }
 
         /// <summary>
-        /// Unset properties of deviceToolStripMenuItem.
+        /// Close and set properties of deviceRemoveToolStripMenuItem drop downs.
         /// </summary>
-        internal void UnsetPropertiesOfDeviceToolStripMenuItem()
+        internal void CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns()
         {
-            deviceToolStripMenuItem.Enabled = false;
-            deviceToolStripMenuItem.Text = "Loading...";
+            if (deviceRemoveConfirmBackgroundWorker.IsBusy)
+            {
+                deviceRemoveToolStripMenuItem.DropDown.Close();
+            }
+
+            bool isNotBusyAndListIsFull = !deviceRemoveConfirmBackgroundWorker.IsBusy
+                && isCheckedDeviceRemoveNameListFull;
+
+            bool isNotBusyAndListIsNotEmpty =
+                !deviceRemoveConfirmBackgroundWorker.IsBusy
+                && !isDeviceRemoveNameListEmpty;
+
+            deviceRemoveConfirmToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+            deviceRemoveSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
+            deviceRemoveSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+
+            deviceRemoveSelectAllLinkedToolStripMenuItem.Enabled =
+                isNotBusyAndListIsNotEmpty;                                             //TODO: create a getter to determine if linked items exist.
+
+            deviceRemoveSelectAllUnlinkedToolStripMenuItem.Enabled =
+                isNotBusyAndListIsNotEmpty;                                             //TODO: create a getter to determine if unlinked items exist.
+
+            deviceRemoveSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+            //deviceRemoveToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+
+            string toolTipText;
+
+            if (deviceRemoveConfirmBackgroundWorker.IsBusy)
+            {
+                toolTipText = "Busy. Please wait...";
+            }
+            else if (isDeviceRemoveNameListEmpty)
+            {
+                toolTipText = "No device(s) found.";
+            }
+            else
+            {
+                toolTipText = string.Empty;
+            }
+
+            deviceRemoveConfirmToolStripMenuItem.ToolTipText = toolTipText;
+            deviceRemoveSelectAllToolStripMenuItem.ToolTipText = toolTipText;
+            deviceRemoveSelectAllLinkedToolStripMenuItem.ToolTipText = toolTipText;
+            deviceRemoveSelectAllUnlinkedToolStripMenuItem.ToolTipText = toolTipText;
+            deviceRemoveSelectToolStripMenuItem.ToolTipText = toolTipText;
         }
 
         #endregion
@@ -1515,16 +1576,22 @@ namespace VACM.NET4_0.Views
         #region 2. Device background logic
 
         /// <summary>
-        /// Action logic for deviceAddConfirm background worker. If moving items in
-        /// device list model raise exception, cancel and return 1. If moving checked
-        /// items in item collection raise exception, cancel and return 2.
-        /// Else, return 0.
+        /// Action logic for deviceAddConfirm background worker.
+        /// Return 2 if list is empty.
+        /// Return 1 if moving between lists or collections fails.
+        /// Return 0 if successful.
         /// </summary>
         /// <param name="doWorkEventArgs">The do work event arguments</param>
         /// <returns>The return value</returns>
         internal int deviceAddConfirmBackgroundWorker_Action
             (DoWorkEventArgs doWorkEventArgs)
         {
+            if (isDeviceAddNameListEmpty)
+            {
+                doWorkEventArgs.Cancel = true;
+                return 2;
+            }
+
             try
             {
                 deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Capture,
@@ -1532,15 +1599,7 @@ namespace VACM.NET4_0.Views
 
                 deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Render,
                     checkedDeviceAddWaveOutNameList);
-            }
-            catch
-            {
-                doWorkEventArgs.Cancel = true;
-                return 1;
-            }
 
-            try
-            {
                 MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
                     (deviceAddSelectWaveInToolStripMenuItem,
                     deviceRemoveSelectWaveInToolStripMenuItem);
@@ -1552,11 +1611,9 @@ namespace VACM.NET4_0.Views
             catch
             {
                 doWorkEventArgs.Cancel = true;
-                return 2;
+                return 1;
             }
 
-            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
             return 0;
         }
 
@@ -1573,23 +1630,27 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            UnsetPropertiesOfDeviceToolStripMenuItem();
-
             doWorkEventArgs.Result = deviceAddConfirmBackgroundWorker_Action
                 (doWorkEventArgs);
         }
 
         /// <summary>
-        /// Action logic for deviceRemoveConfirm background worker. If moving items in
-        /// device list model raise exception, cancel and return 1. If moving checked
-        /// items in item collection raise exception, cancel and return 2.
-        /// Else, return 0.
+        /// Action logic for deviceRemoveConfirm background worker.
+        /// Return 2 if list is empty.
+        /// Return 1 if moving between lists or collections fails.
+        /// Return 0 if successful.
         /// </summary>
         /// <param name="doWorkEventArgs">The do work event arguments</param>
         /// <returns>The return value</returns>
         internal int deviceRemoveConfirmBackgroundWorker_Action
             (DoWorkEventArgs doWorkEventArgs)
         {
+            if (isDeviceRemoveNameListEmpty)
+            {
+                doWorkEventArgs.Cancel = true;
+                return 2;
+            }
+
             try
             {
                 deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Capture,
@@ -1597,15 +1658,7 @@ namespace VACM.NET4_0.Views
 
                 deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Render,
                     checkedDeviceRemoveWaveOutNameList);
-            }
-            catch
-            {
-                doWorkEventArgs.Cancel = true;
-                return 1;
-            }
 
-            try
-            {
                 MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
                     (deviceRemoveSelectWaveInToolStripMenuItem,
                     deviceAddSelectWaveInToolStripMenuItem);
@@ -1617,11 +1670,9 @@ namespace VACM.NET4_0.Views
             catch
             {
                 doWorkEventArgs.Cancel = true;
-                return 2;
+                return 1;
             }
 
-            SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
             return 0;
         }
 
@@ -1637,8 +1688,6 @@ namespace VACM.NET4_0.Views
             {
                 return;
             }
-
-            UnsetPropertiesOfDeviceToolStripMenuItem();
 
             doWorkEventArgs.Result = deviceRemoveConfirmBackgroundWorker_Action
                 (doWorkEventArgs);
@@ -1659,8 +1708,8 @@ namespace VACM.NET4_0.Views
             {
                 SetDeviceList();
                 InitializeLists();
-                SetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-                SetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+                CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+                CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
             }
             catch
             {
@@ -1684,8 +1733,6 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            UnsetPropertiesOfDeviceToolStripMenuItem();
-
             doWorkEventArgs.Result = deviceReloadAllBackgroundWorker_Action
                 (doWorkEventArgs);
         }
@@ -1702,11 +1749,14 @@ namespace VACM.NET4_0.Views
         {
             if (runWorkerCompletedEventArgs.Error != null)
             {
-                MessageBoxWrapper.ShowError(runWorkerCompletedEventArgs.Error.Message);
+                MessageBoxWrapper.ShowError(runWorkerCompletedEventArgs.Error.Message); //TODO: determine what is the contents of this. Should I create a message here, given return value?
                 //NOTE: undo all changes here from previous callstack operation?
             }
 
-            SetPropertiesOfDeviceToolStripMenuItem();
+            CloseAndSetPropertiesOfDeviceReloadAllToolStripMenuItem();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            Invalidate();
         }
 
         #endregion
