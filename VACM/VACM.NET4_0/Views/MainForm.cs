@@ -262,12 +262,12 @@ namespace VACM.NET4_0.Views
 
         #endregion
 
-        #region Intialization logic
+        #region Intialize list logic (Append new objects here!)
 
         /// <summary>
         /// Add all controls to list.
         /// </summary>
-        internal void InitializeControlsList()                                          //NOTE: Append new control objects here!
+        internal void InitializeControlsList()
         {
             controlList.Clear();
             controlList.Add(tabControl1);
@@ -278,7 +278,7 @@ namespace VACM.NET4_0.Views
         /// <summary>
         /// Add all tool strip items to list.
         /// </summary>
-        internal void InitializeToolStripItemList()                                     //NOTE: Append new tool strip item objects here!
+        internal void InitializeToolStripItemList()
         {
             toolStripItemList.Clear();
             toolStripItemList.Add(deviceAddConfirmToolStripMenuItem);
@@ -336,6 +336,73 @@ namespace VACM.NET4_0.Views
             toolStripItemList.Add(repeaterToolStripSeparator2);
             toolStripItemList.Add(viewToggleDarkModeToolStripMenuItem);
             toolStripItemList.Add(viewToolStripMenuItem);
+        }
+
+        #endregion
+
+        #region Initialization logic
+
+        /// <summary>
+        /// Initialize device drop down collections.
+        /// </summary>
+        internal void InitializeDeviceDropDownCollections()
+        {
+            deviceAddSelectWaveInToolStripMenuItem.DropDownItems.Clear();
+            deviceAddSelectWaveOutToolStripMenuItem.DropDownItems.Clear();
+            deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems.Clear();
+            deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems.Clear();
+            linkAddWaveInToolStripMenuItem.DropDownItems.Clear();
+            linkAddWaveOutToolStripMenuItem.DropDownItems.Clear();
+            linkRemoveWaveInToolStripMenuItem.DropDownItems.Clear();
+            linkRemoveWaveOutToolStripMenuItem.DropDownItems.Clear();
+            string text = deviceToolStripMenuItem.Text;
+            deviceToolStripMenuItem.Text = "Loading...";
+            deviceToolStripMenuItem.Enabled = false;
+            Refresh();
+
+            InitializeDeviceItemCollection
+                (deviceAddSelectToolStripMenuItemEnabled_Confirm,
+                deviceAddSelectWaveInToolStripMenuItem,
+                deviceListModel.UnselectedWaveInMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (deviceAddSelectToolStripMenuItemEnabled_Confirm,
+                deviceAddSelectWaveOutToolStripMenuItem,
+                deviceListModel.UnselectedWaveOutMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
+                deviceRemoveSelectWaveInToolStripMenuItem,
+                deviceListModel.SelectedWaveInMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
+                deviceRemoveSelectWaveOutToolStripMenuItem,
+                deviceListModel.SelectedWaveOutMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (linkAddWaveInToolStripMenuItem_Click,
+                linkAddWaveInToolStripMenuItem,
+                deviceListModel.SelectedWaveInMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (linkAddWaveOutToolStripMenuItem_Click,
+                linkAddWaveOutToolStripMenuItem,
+                deviceListModel.SelectedWaveOutMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (linkRemoveWaveInToolStripMenuItem_Click,
+                linkRemoveWaveInToolStripMenuItem,
+                repeaterDataModel.LinkWaveInMMDeviceList);
+
+            InitializeDeviceItemCollection
+                (linkRemoveWaveOutToolStripMenuItem_Click,
+                linkRemoveWaveOutToolStripMenuItem,
+                repeaterDataModel.LinkWaveOutMMDeviceList);
+
+            deviceToolStripMenuItem.Text = text;
+            deviceToolStripMenuItem.Enabled = true;
+            Refresh();
         }
 
         /// <summary>
@@ -450,69 +517,6 @@ namespace VACM.NET4_0.Views
 
             toolStripMenuItem.Text = string.Format("{0,4} {1}", prefix,
                 toolStripMenuItem.Text);
-        }
-
-        /// <summary>
-        /// Initialize device drop down collections.
-        /// </summary>
-        internal void InitializeDeviceDropDownCollections()
-        {
-            deviceAddSelectWaveInToolStripMenuItem.DropDownItems.Clear();
-            deviceAddSelectWaveOutToolStripMenuItem.DropDownItems.Clear();
-            deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems.Clear();
-            deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems.Clear();
-            linkAddWaveInToolStripMenuItem.DropDownItems.Clear();
-            linkAddWaveOutToolStripMenuItem.DropDownItems.Clear();
-            linkRemoveWaveInToolStripMenuItem.DropDownItems.Clear();
-            linkRemoveWaveOutToolStripMenuItem.DropDownItems.Clear();
-            string text = deviceToolStripMenuItem.Text;
-            deviceToolStripMenuItem.Text = "Loading...";
-            deviceToolStripMenuItem.Enabled = false;
-            Refresh();
-
-            InitializeDeviceItemCollection
-                (deviceAddSelectToolStripMenuItemEnabled_Confirm,
-                deviceAddSelectWaveInToolStripMenuItem,
-                deviceListModel.UnselectedWaveInMMDeviceList);
-
-            InitializeDeviceItemCollection
-                (deviceAddSelectToolStripMenuItemEnabled_Confirm,
-                deviceAddSelectWaveOutToolStripMenuItem,
-                deviceListModel.UnselectedWaveOutMMDeviceList);
-
-            InitializeDeviceItemCollection
-                (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
-                deviceRemoveSelectWaveInToolStripMenuItem,
-                deviceListModel.SelectedWaveInMMDeviceList);
-
-            InitializeDeviceItemCollection
-                (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
-                deviceRemoveSelectWaveOutToolStripMenuItem,
-                deviceListModel.SelectedWaveOutMMDeviceList);
-
-            InitializeDeviceItemCollection
-                (linkAddWaveInToolStripMenuItem_Click,
-                linkAddWaveInToolStripMenuItem,
-                deviceListModel.SelectedWaveInMMDeviceList);
-
-            InitializeDeviceItemCollection
-                (linkAddWaveOutToolStripMenuItem_Click,
-                linkAddWaveOutToolStripMenuItem,
-                deviceListModel.SelectedWaveOutMMDeviceList);
-
-            InitializeDeviceItemCollection
-                (linkRemoveWaveInToolStripMenuItem_Click,
-                linkRemoveWaveInToolStripMenuItem,
-                repeaterDataModel.LinkWaveInMMDeviceList);
-
-            InitializeDeviceItemCollection
-                (linkRemoveWaveOutToolStripMenuItem_Click,
-                linkRemoveWaveOutToolStripMenuItem,
-                repeaterDataModel.LinkWaveOutMMDeviceList);
-
-            deviceToolStripMenuItem.Text = text;
-            deviceToolStripMenuItem.Enabled = true;
-            Refresh();
         }
 
         /// <summary>
@@ -960,42 +964,6 @@ namespace VACM.NET4_0.Views
                     });
         }
 
-        internal void SortToolStripMenuItemDropDownCollection                           //TODO: remove refs?
-            (ToolStripMenuItem toolStripMenuItem)
-        {
-            toolStripMenuItem.DropDownItems.Cast<ToolStripMenuItem>().ToList().Sort();
-        }
-
-        /// <summary>
-        /// Set properties of tool strip menu item given tool strip item collection is
-        /// empty or not.
-        /// </summary>
-        /// <param name="toolStripMenuItem">The tool strip menu item</param>
-        internal void SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
-            (ToolStripMenuItem toolStripMenuItem)
-        {
-            bool isNotEmpty = toolStripMenuItem.DropDownItems.Count > 0;
-            toolStripMenuItem.Enabled = isNotEmpty;
-
-            if (isNotEmpty)
-            {
-                toolStripMenuItem.ToolTipText = string.Empty;
-                return;
-            }
-
-            string name = GetNameOfChildToFirstParentAccessibleObject
-                (toolStripMenuItem);
-
-            string items = "item(s)";
-
-            if (!string.IsNullOrWhiteSpace(name))
-            {
-                items = $"{name.ToLower()}(s)";
-            }
-
-            toolStripMenuItem.ToolTipText = $"No {items} found.";
-        }
-
         /// <summary>
         /// Set properties of every nested tool strip item. If the item matches the
         /// child tool strip menu item, append a substring and disable the item.
@@ -1030,9 +998,59 @@ namespace VACM.NET4_0.Views
                     });
         }
 
+        /// <summary>
+        /// Set properties of tool strip menu item given tool strip item collection is
+        /// empty or not.
+        /// </summary>
+        /// <param name="toolStripMenuItem">The tool strip menu item</param>
+        internal void SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
+            (ToolStripMenuItem toolStripMenuItem)
+        {
+            bool isNotEmpty = toolStripMenuItem.DropDownItems.Count > 0;
+            toolStripMenuItem.Enabled = isNotEmpty;
+
+            if (isNotEmpty)
+            {
+                toolStripMenuItem.ToolTipText = string.Empty;
+                return;
+            }
+
+            string name = GetNameOfChildToFirstParentAccessibleObject
+                (toolStripMenuItem);
+
+            string items = "item(s)";
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                items = $"{name.ToLower()}(s)";
+            }
+
+            toolStripMenuItem.ToolTipText = $"No {items} found.";
+        }
+
         #endregion
 
         #region 1. File menu logic
+
+        /// <summary>
+        /// Click event logic for fileExitToolStripMenuItem.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        internal void fileExitToolStripMenuItem_Click(object sender,
+            EventArgs eventArgs)
+        {
+            /*
+             * TODO:
+             *  -add logic to...
+             *      -check if runtime data is saved to file.
+             *      -warn user to save changes.
+             *      -warn user that audio repeaters may exit at app shutdown.
+             */
+
+            Dispose();
+            //Application.Exit();
+        }
 
         /// <summary>
         /// Click event logic for fileOpenToolStripMenuItem.
@@ -1058,26 +1076,6 @@ namespace VACM.NET4_0.Views
             openFileDialog.FilterIndex = 0;
             openFileDialog.RestoreDirectory = true;
             fileName = openFileDialog.FileName;
-        }
-
-        /// <summary>
-        /// Click event logic for fileExitToolStripMenuItem.
-        /// </summary>
-        /// <param name="sender">The sender object</param>
-        /// <param name="eventArgs">The event arguments</param>
-        internal void fileExitToolStripMenuItem_Click(object sender,
-            EventArgs eventArgs)
-        {
-            /*
-             * TODO:
-             *  -add logic to...
-             *      -check if runtime data is saved to file.
-             *      -warn user to save changes.
-             *      -warn user that audio repeaters may exit at app shutdown.
-             */
-
-            Dispose();
-            //Application.Exit();
         }
 
         /// <summary>
@@ -1237,23 +1235,6 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Confirm deviceAddSelectWaveIn or WaveOutToolStripMenuItem drop down.
-        /// </summary>
-        /// <param name="sender">The sender object</param>
-        /// <param name="eventArgs">The event arguments</param>
-        internal void deviceAddSelectToolStripMenuItemEnabled_Confirm(object sender,
-            EventArgs eventArgs)
-        {
-            if (sender is null || !(sender is ToolStripMenuItem))
-            {
-                return;
-            }
-
-            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            Invalidate();
-        }
-
-        /// <summary>
         /// Click event logic for deviceAddSelectAllToolStripMenuItem.
         /// </summary>
         /// <param name="sender">The sender object</param>
@@ -1279,6 +1260,23 @@ namespace VACM.NET4_0.Views
 
             RecursivelyShowDropDownForEveryParentToolStripItem
                 (deviceAddSelectAllToolStripMenuItem);
+        }
+
+        /// <summary>
+        /// Confirm deviceAddSelectWaveIn or WaveOutToolStripMenuItem drop down.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        internal void deviceAddSelectToolStripMenuItemEnabled_Confirm(object sender,
+            EventArgs eventArgs)
+        {
+            if (sender is null || !(sender is ToolStripMenuItem))
+            {
+                return;
+            }
+
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            Invalidate();
         }
 
         /// <summary>
@@ -1330,23 +1328,6 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Confirm deviceRemoveSelectWaveIn or WaveOutToolStripMenuItem drop down.
-        /// </summary>
-        /// <param name="sender">The sender object</param>
-        /// <param name="eventArgs">The event arguments</param>
-        internal void deviceRemoveSelectToolStripMenuItemEnabled_Confirm(object sender,
-            EventArgs eventArgs)
-        {
-            if (sender is null || !(sender is ToolStripMenuItem))
-            {
-                return;
-            }
-
-            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
-            Invalidate();
-        }
-
-        /// <summary>
         /// Click event logic for deviceRemoveSelectAllToolStripMenuItem.
         /// </summary>
         /// <param name="sender">The sender object</param>
@@ -1372,6 +1353,23 @@ namespace VACM.NET4_0.Views
 
             RecursivelyShowDropDownForEveryParentToolStripItem
                 (deviceRemoveSelectAllToolStripMenuItem);
+        }
+
+        /// <summary>
+        /// Confirm deviceRemoveSelectWaveIn or WaveOutToolStripMenuItem drop down.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        internal void deviceRemoveSelectToolStripMenuItemEnabled_Confirm(object sender,
+            EventArgs eventArgs)
+        {
+            if (sender is null || !(sender is ToolStripMenuItem))
+            {
+                return;
+            }
+
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            Invalidate();
         }
 
         /// <summary>
@@ -1552,48 +1550,6 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Remove input and output device controls to repeater model.
-        /// </summary>
-        internal void RemoveFromRepeaterModel()
-        {
-            if (inputDeviceControl is null || outputDeviceControl is null)
-            {
-                return;
-            }
-
-            repeaterDataModel.RemoveDictionary(inputDeviceControl, outputDeviceControl);
-            ResetPropertiesForSelectedLinkAddToolStripMenuItem(inputDeviceControl);
-            ResetPropertiesForSelectedLinkAddToolStripMenuItem(outputDeviceControl);
-            inputDeviceControl = null;
-            outputDeviceControl = null;
-            InitializeLists();
-        }
-
-        /// <summary>
-        /// Resets properties for selected linkAddWaveIn or linkAddWaveOut.
-        /// </summary>
-        /// <param name="deviceControl">The device control</param>
-        internal void ResetPropertiesForSelectedLinkAddToolStripMenuItem
-            (DeviceControl deviceControl)
-        {
-            if (deviceControl is null || deviceControl.MMDevice is null)
-            {
-                return;
-            }
-
-            if (deviceControl.MMDevice.DataFlow == DataFlow.Capture)
-            {
-                ResetPropertiesForEachSelectedToolStripMenuItem(deviceControl.MMDevice,
-                    linkAddWaveInToolStripMenuItem);
-            }
-            else
-            {
-                ResetPropertiesForEachSelectedToolStripMenuItem(deviceControl.MMDevice,
-                    linkAddWaveOutToolStripMenuItem);
-            }
-        }
-
-        /// <summary>
         /// Click event logic for linkRemoveWaveInToolStripMenuItem.
         /// </summary>
         /// <param name="sender">The sender object</param>
@@ -1653,6 +1609,48 @@ namespace VACM.NET4_0.Views
                 toolStripMenuItem);
 
             RemoveFromRepeaterModel();
+        }
+
+        /// <summary>
+        /// Remove input and output device controls to repeater model.
+        /// </summary>
+        internal void RemoveFromRepeaterModel()
+        {
+            if (inputDeviceControl is null || outputDeviceControl is null)
+            {
+                return;
+            }
+
+            repeaterDataModel.RemoveDictionary(inputDeviceControl, outputDeviceControl);
+            ResetPropertiesForSelectedLinkAddToolStripMenuItem(inputDeviceControl);
+            ResetPropertiesForSelectedLinkAddToolStripMenuItem(outputDeviceControl);
+            inputDeviceControl = null;
+            outputDeviceControl = null;
+            InitializeLists();
+        }
+
+        /// <summary>
+        /// Resets properties for selected linkAddWaveIn or linkAddWaveOut.
+        /// </summary>
+        /// <param name="deviceControl">The device control</param>
+        internal void ResetPropertiesForSelectedLinkAddToolStripMenuItem
+            (DeviceControl deviceControl)
+        {
+            if (deviceControl is null || deviceControl.MMDevice is null)
+            {
+                return;
+            }
+
+            if (deviceControl.MMDevice.DataFlow == DataFlow.Capture)
+            {
+                ResetPropertiesForEachSelectedToolStripMenuItem(deviceControl.MMDevice,
+                    linkAddWaveInToolStripMenuItem);
+            }
+            else
+            {
+                ResetPropertiesForEachSelectedToolStripMenuItem(deviceControl.MMDevice,
+                    linkAddWaveOutToolStripMenuItem);
+            }
         }
 
         #endregion
@@ -1744,20 +1742,30 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Work logic for deviceAddConfirm background worker.
+        /// Action logic for deviceReloadAllConfirm background worker. If moving items in
+        /// device list model raise exception, cancel and return 1. If moving checked
+        /// items in item collection raise exception, cancel and return 2.
+        /// Else, return 0.
         /// </summary>
-        /// <param name="sender">The sender object</param>
         /// <param name="doWorkEventArgs">The do work event arguments</param>
-        internal void deviceAddConfirmBackgroundWorker_DoWork(object sender,
-            DoWorkEventArgs doWorkEventArgs)
+        /// <returns>The return value</returns>
+        internal int deviceReloadAllBackgroundWorker_Action
+            (DoWorkEventArgs doWorkEventArgs)
         {
-            if (sender is null || !(sender is BackgroundWorker))
+            try
             {
-                return;
+                SetDeviceList();
+                InitializeLists();
+                CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+                CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            }
+            catch
+            {
+                doWorkEventArgs.Cancel = true;
+                return 1;
             }
 
-            doWorkEventArgs.Result = deviceAddConfirmBackgroundWorker_Action
-                (doWorkEventArgs);
+            return 0;
         }
 
         /// <summary>
@@ -1803,11 +1811,11 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Work logic for deviceRemoveConfirm background worker.
+        /// Work logic for deviceAddConfirm background worker.
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="doWorkEventArgs">The do work event arguments</param>
-        internal void deviceRemoveConfirmBackgroundWorker_DoWork(object sender,
+        internal void deviceAddConfirmBackgroundWorker_DoWork(object sender,
             DoWorkEventArgs doWorkEventArgs)
         {
             if (sender is null || !(sender is BackgroundWorker))
@@ -1815,35 +1823,30 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            doWorkEventArgs.Result = deviceRemoveConfirmBackgroundWorker_Action
+            doWorkEventArgs.Result = deviceAddConfirmBackgroundWorker_Action
                 (doWorkEventArgs);
         }
 
         /// <summary>
-        /// Action logic for deviceReloadAllConfirm background worker. If moving items in
-        /// device list model raise exception, cancel and return 1. If moving checked
-        /// items in item collection raise exception, cancel and return 2.
-        /// Else, return 0.
+        /// On complete logic for device background worker(s).
+        /// worker.
         /// </summary>
-        /// <param name="doWorkEventArgs">The do work event arguments</param>
-        /// <returns>The return value</returns>
-        internal int deviceReloadAllBackgroundWorker_Action
-            (DoWorkEventArgs doWorkEventArgs)
+        /// <param name="sender">The sender object</param>
+        /// <param name="runWorkerCompletedEventArgs">The run worker completed event
+        /// arguments</param>
+        internal void deviceBackgroundWorker_RunWorkerCompleted(object sender,
+            RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
         {
-            try
+            if (runWorkerCompletedEventArgs.Error != null)
             {
-                SetDeviceList();
-                InitializeLists();
-                CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-                CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
-            }
-            catch
-            {
-                doWorkEventArgs.Cancel = true;
-                return 1;
+                MessageBoxWrapper.ShowError(runWorkerCompletedEventArgs.Error.Message); //TODO: determine what is the contents of this. Should I create a message here, given return value?
+                                                                                        //NOTE: undo all changes here from previous callstack operation?
             }
 
-            return 0;
+            CloseAndSetPropertiesOfDeviceReloadAllToolStripMenuItem();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            Invalidate();
         }
 
         /// <summary>
@@ -1864,25 +1867,20 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// On complete logic for device background worker(s).
-        /// worker.
+        /// Work logic for deviceRemoveConfirm background worker.
         /// </summary>
         /// <param name="sender">The sender object</param>
-        /// <param name="runWorkerCompletedEventArgs">The run worker completed event
-        /// arguments</param>
-        internal void deviceBackgroundWorker_RunWorkerCompleted(object sender,
-            RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        internal void deviceRemoveConfirmBackgroundWorker_DoWork(object sender,
+            DoWorkEventArgs doWorkEventArgs)
         {
-            if (runWorkerCompletedEventArgs.Error != null)
+            if (sender is null || !(sender is BackgroundWorker))
             {
-                MessageBoxWrapper.ShowError(runWorkerCompletedEventArgs.Error.Message); //TODO: determine what is the contents of this. Should I create a message here, given return value?
-                //NOTE: undo all changes here from previous callstack operation?
+                return;
             }
 
-            CloseAndSetPropertiesOfDeviceReloadAllToolStripMenuItem();
-            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
-            Invalidate();
+            doWorkEventArgs.Result = deviceRemoveConfirmBackgroundWorker_Action
+                (doWorkEventArgs);
         }
 
         #endregion
