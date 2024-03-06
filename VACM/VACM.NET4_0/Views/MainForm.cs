@@ -782,7 +782,7 @@ namespace VACM.NET4_0.Views
             SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
                 (secondToolStripMenuItem);
 
-            SortToolStripMenuItemCollectionByName(secondToolStripMenuItem);
+            SortToolStripMenuItemCollectionByText(secondToolStripMenuItem);
         }
 
         /// <summary>
@@ -819,7 +819,11 @@ namespace VACM.NET4_0.Views
             secondToolStripMenuItem.DropDownItems.Add(thisToolStripMenuItem);
         }
 
-        internal void SortToolStripMenuItemCollectionByName
+        /// <summary>
+        /// Sort tool strip menu item drop down by text.
+        /// </summary>
+        /// <param name="toolStripMenuItem">The tool strip menu item</param>
+        internal void SortToolStripMenuItemCollectionByText
             (ToolStripMenuItem toolStripMenuItem)
         {
             if (toolStripMenuItem is null || toolStripMenuItem.DropDownItems.Count == 0)
@@ -828,7 +832,7 @@ namespace VACM.NET4_0.Views
             }
 
             ToolStripMenuItem[] toolStripMenuItemArray = toolStripMenuItem
-                .DropDownItems.Cast<ToolStripMenuItem>().OrderBy(x => x.Name)
+                .DropDownItems.Cast<ToolStripMenuItem>().OrderBy(x => x.Text)
                 .ToArray();
 
             toolStripMenuItem.DropDownItems.Clear();
