@@ -1115,6 +1115,108 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
+        /// Close and set properties of deviceAddToolStripMenuItem drop downs.
+        /// </summary>
+        internal void CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns()
+        {
+            bool isBusy = deviceAddConfirmBackgroundWorker.IsBusy;
+            bool isDeviceAddNameListEmpty = this.isDeviceAddNameListEmpty;
+
+            if (deviceAddConfirmBackgroundWorker.IsBusy)
+            {
+                deviceAddToolStripMenuItem.DropDown.Close();
+            }
+
+            bool isNotBusyAndListIsFull = !deviceAddConfirmBackgroundWorker.IsBusy
+                && isCheckedDeviceAddNameListFull;
+
+            bool isNotBusyAndListIsNotEmpty = !deviceAddConfirmBackgroundWorker.IsBusy
+                && !isDeviceAddNameListEmpty;
+
+            deviceAddConfirmToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+            deviceAddSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
+            deviceAddSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+            deviceAddSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+
+            deviceAddSelectWaveInToolStripMenuItem.Enabled = !isBusy
+                && !isDeviceAddWaveInNameListEmpty;
+
+            deviceAddSelectWaveOutToolStripMenuItem.Enabled = !isBusy
+                && !isDeviceAddWaveOutNameListEmpty;
+
+            string toolTipText = GetDeviceToolTipText(isBusy,
+                isDeviceAddNameListEmpty);
+
+            deviceAddConfirmToolStripMenuItem.ToolTipText = toolTipText;
+            deviceAddSelectAllToolStripMenuItem.ToolTipText = toolTipText;
+            deviceAddSelectToolStripMenuItem.ToolTipText = toolTipText;
+        }
+
+        /// <summary>
+        /// Close and set properties of deviceReloadAllToolStripMenuItem.
+        /// </summary>
+        internal void CloseAndSetPropertiesOfDeviceReloadAllToolStripMenuItem()
+        {
+            bool isBusy = deviceAddConfirmBackgroundWorker.IsBusy;
+            bool isDeviceAddNameListEmpty = this.isDeviceAddNameListEmpty;
+            bool isDeviceRemoveNameListEmpty = this.isDeviceRemoveNameListEmpty;
+
+            if (isBusy)
+            {
+                deviceReloadAllToolStripMenuItem.DropDown.Close();
+            }
+
+            deviceReloadAllToolStripMenuItem.Enabled = !isBusy
+                && (!isDeviceAddNameListEmpty || !isDeviceRemoveNameListEmpty);
+
+            deviceReloadAllToolStripMenuItem.ToolTipText = GetDeviceToolTipText(isBusy,
+                isDeviceAddNameListEmpty && isDeviceRemoveNameListEmpty);
+        }
+
+        /// <summary>
+        /// Close and set properties of deviceRemoveToolStripMenuItem drop downs.
+        /// </summary>
+        internal void CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns()
+        {
+            bool isBusy = deviceRemoveConfirmBackgroundWorker.IsBusy;
+
+            if (isBusy)
+            {
+                deviceRemoveToolStripMenuItem.DropDown.Close();
+            }
+
+            bool isNotBusyAndListIsFull = !isBusy && isCheckedDeviceRemoveNameListFull;
+            bool isNotBusyAndListIsNotEmpty = !isBusy && !isDeviceRemoveNameListEmpty;
+            deviceRemoveConfirmToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+            deviceRemoveSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
+            deviceRemoveSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+
+            deviceRemoveSelectAllLinkedToolStripMenuItem.Enabled =
+                isNotBusyAndListIsNotEmpty;                                             //TODO: create a getter to determine if linked items exist.
+
+            deviceRemoveSelectAllUnlinkedToolStripMenuItem.Enabled =
+                isNotBusyAndListIsNotEmpty;                                             //TODO: create a getter to determine if unlinked items exist.
+
+            deviceRemoveSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+
+            deviceRemoveSelectWaveInToolStripMenuItem.Enabled = !isBusy
+                && !isDeviceRemoveWaveInNameListEmpty;
+
+            deviceRemoveSelectWaveOutToolStripMenuItem.Enabled = !isBusy
+                && !isDeviceRemoveWaveOutNameListEmpty;
+
+
+            string toolTipText = GetDeviceToolTipText(isBusy,
+                isDeviceRemoveNameListEmpty);
+
+            deviceRemoveConfirmToolStripMenuItem.ToolTipText = toolTipText;
+            deviceRemoveSelectAllToolStripMenuItem.ToolTipText = toolTipText;
+            deviceRemoveSelectAllLinkedToolStripMenuItem.ToolTipText = toolTipText;
+            deviceRemoveSelectAllUnlinkedToolStripMenuItem.ToolTipText = toolTipText;
+            deviceRemoveSelectToolStripMenuItem.ToolTipText = toolTipText;
+        }
+
+        /// <summary>
         /// Click event logic for deviceAddConfirmToolStripMenuItem.
         /// </summary>
         /// <param name="sender">The sender object</param>
@@ -1364,108 +1466,6 @@ namespace VACM.NET4_0.Views
             linkRemoveWaveOutToolStripMenuItem.Text = WaveOutAsString;
 
             viewToggleDarkModeToolStripMenuItem.Enabled = !DoForceColorTheme;
-        }
-
-        /// <summary>
-        /// Close and set properties of deviceAddToolStripMenuItem drop downs.
-        /// </summary>
-        internal void CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns()
-        {
-            bool isBusy = deviceAddConfirmBackgroundWorker.IsBusy;
-            bool isDeviceAddNameListEmpty = this.isDeviceAddNameListEmpty;
-
-            if (deviceAddConfirmBackgroundWorker.IsBusy)
-            {
-                deviceAddToolStripMenuItem.DropDown.Close();
-            }
-
-            bool isNotBusyAndListIsFull = !deviceAddConfirmBackgroundWorker.IsBusy
-                && isCheckedDeviceAddNameListFull;
-
-            bool isNotBusyAndListIsNotEmpty = !deviceAddConfirmBackgroundWorker.IsBusy
-                && !isDeviceAddNameListEmpty;
-
-            deviceAddConfirmToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
-            deviceAddSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
-            deviceAddSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
-            deviceAddSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
-
-            deviceAddSelectWaveInToolStripMenuItem.Enabled = !isBusy
-                && !isDeviceAddWaveInNameListEmpty;
-
-            deviceAddSelectWaveOutToolStripMenuItem.Enabled = !isBusy
-                && !isDeviceAddWaveOutNameListEmpty;
-
-            string toolTipText = GetDeviceToolTipText(isBusy,
-                isDeviceAddNameListEmpty);
-
-            deviceAddConfirmToolStripMenuItem.ToolTipText = toolTipText;
-            deviceAddSelectAllToolStripMenuItem.ToolTipText = toolTipText;
-            deviceAddSelectToolStripMenuItem.ToolTipText = toolTipText;
-        }
-
-        /// <summary>
-        /// Close and set properties of deviceReloadAllToolStripMenuItem.
-        /// </summary>
-        internal void CloseAndSetPropertiesOfDeviceReloadAllToolStripMenuItem()
-        {
-            bool isBusy = deviceAddConfirmBackgroundWorker.IsBusy;
-            bool isDeviceAddNameListEmpty = this.isDeviceAddNameListEmpty;
-            bool isDeviceRemoveNameListEmpty = this.isDeviceRemoveNameListEmpty;
-
-            if (isBusy)
-            {
-                deviceReloadAllToolStripMenuItem.DropDown.Close();
-            }
-
-            deviceReloadAllToolStripMenuItem.Enabled = !isBusy
-                && (!isDeviceAddNameListEmpty || !isDeviceRemoveNameListEmpty);
-
-            deviceReloadAllToolStripMenuItem.ToolTipText = GetDeviceToolTipText(isBusy,
-                isDeviceAddNameListEmpty && isDeviceRemoveNameListEmpty);
-        }
-
-        /// <summary>
-        /// Close and set properties of deviceRemoveToolStripMenuItem drop downs.
-        /// </summary>
-        internal void CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns()
-        {
-            bool isBusy = deviceRemoveConfirmBackgroundWorker.IsBusy;
-
-            if (isBusy)
-            {
-                deviceRemoveToolStripMenuItem.DropDown.Close();
-            }
-
-            bool isNotBusyAndListIsFull = !isBusy && isCheckedDeviceRemoveNameListFull;
-            bool isNotBusyAndListIsNotEmpty = !isBusy && !isDeviceRemoveNameListEmpty;
-            deviceRemoveConfirmToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
-            deviceRemoveSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
-            deviceRemoveSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
-
-            deviceRemoveSelectAllLinkedToolStripMenuItem.Enabled =
-                isNotBusyAndListIsNotEmpty;                                             //TODO: create a getter to determine if linked items exist.
-
-            deviceRemoveSelectAllUnlinkedToolStripMenuItem.Enabled =
-                isNotBusyAndListIsNotEmpty;                                             //TODO: create a getter to determine if unlinked items exist.
-
-            deviceRemoveSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
-
-            deviceRemoveSelectWaveInToolStripMenuItem.Enabled = !isBusy
-                && !isDeviceRemoveWaveInNameListEmpty;
-
-            deviceRemoveSelectWaveOutToolStripMenuItem.Enabled = !isBusy
-                && !isDeviceRemoveWaveOutNameListEmpty;
-
-
-            string toolTipText = GetDeviceToolTipText(isBusy,
-                isDeviceRemoveNameListEmpty);
-
-            deviceRemoveConfirmToolStripMenuItem.ToolTipText = toolTipText;
-            deviceRemoveSelectAllToolStripMenuItem.ToolTipText = toolTipText;
-            deviceRemoveSelectAllLinkedToolStripMenuItem.ToolTipText = toolTipText;
-            deviceRemoveSelectAllUnlinkedToolStripMenuItem.ToolTipText = toolTipText;
-            deviceRemoveSelectToolStripMenuItem.ToolTipText = toolTipText;
         }
 
         #endregion
