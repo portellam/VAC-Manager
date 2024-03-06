@@ -66,7 +66,6 @@ namespace VACM.NET4_0
                 var mainForm = new MainForm();
                 mainForm.ShowDialog();
                 Control.CheckForIllegalCrossThreadCalls = true;
-                Application.Run(mainForm);
 
                 if (LightThemeValidator != null)
                 {
