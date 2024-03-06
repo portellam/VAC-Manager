@@ -64,11 +64,11 @@ namespace VACM.NET4_0.Views
             get
             {
                 return !deviceAddSelectWaveInToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .Any(toolStripMenuItem => toolStripMenuItem.Checked)
+                        .Cast<ToolStripMenuItem>()
+                        .Any(toolStripMenuItem => toolStripMenuItem.Checked)
                     && !deviceAddSelectWaveOutToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .Any(toolStripMenuItem => toolStripMenuItem.Checked);
+                        .Cast<ToolStripMenuItem>()
+                        .Any(toolStripMenuItem => toolStripMenuItem.Checked);
             }
         }
 
@@ -76,12 +76,13 @@ namespace VACM.NET4_0.Views
         {
             get
             {
-                return deviceAddSelectWaveInToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .All(toolStripMenuItem => toolStripMenuItem.Checked)
+                return !isCheckedDeviceAddNameListEmpty
+                    && deviceAddSelectWaveInToolStripMenuItem.DropDownItems
+                        .Cast<ToolStripMenuItem>()
+                        .All(toolStripMenuItem => toolStripMenuItem.Checked)
                     && deviceAddSelectWaveOutToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .All(toolStripMenuItem => toolStripMenuItem.Checked);
+                        .Cast<ToolStripMenuItem>()
+                        .All(toolStripMenuItem => toolStripMenuItem.Checked);
             }
         }
 
@@ -90,11 +91,11 @@ namespace VACM.NET4_0.Views
             get
             {
                 return !deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .Any(toolStripMenuItem => toolStripMenuItem.Checked)
+                        .Cast<ToolStripMenuItem>()
+                        .Any(toolStripMenuItem => toolStripMenuItem.Checked)
                     && !deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .Any(toolStripMenuItem => toolStripMenuItem.Checked);
+                        .Cast<ToolStripMenuItem>()
+                        .Any(toolStripMenuItem => toolStripMenuItem.Checked);
             }
         }
 
@@ -102,12 +103,13 @@ namespace VACM.NET4_0.Views
         {
             get
             {
-                return deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .All(toolStripMenuItem => toolStripMenuItem.Checked)
+                return !isCheckedDeviceRemoveNameListEmpty
+                    && deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems
+                        .Cast<ToolStripMenuItem>()
+                        .All(toolStripMenuItem => toolStripMenuItem.Checked)
                     && deviceRemoveSelectWaveOutToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .All(toolStripMenuItem => toolStripMenuItem.Checked);
+                        .Cast<ToolStripMenuItem>()
+                        .All(toolStripMenuItem => toolStripMenuItem.Checked);
             }
         }
 
@@ -115,8 +117,7 @@ namespace VACM.NET4_0.Views
         {
             get
             {
-                return
-                    isDeviceAddWaveInNameListEmpty
+                return isDeviceAddWaveInNameListEmpty
                     && isDeviceAddWaveOutNameListEmpty;
             }
         }
@@ -125,10 +126,9 @@ namespace VACM.NET4_0.Views
         {
             get
             {
-                return
-                    deviceAddSelectWaveInToolStripMenuItem is null ||
-                    deviceAddSelectWaveInToolStripMenuItem.DropDownItems is null ||
-                    deviceAddSelectWaveInToolStripMenuItem.DropDownItems.Count == 0;
+                return deviceAddSelectWaveInToolStripMenuItem is null
+                     || deviceAddSelectWaveInToolStripMenuItem.DropDownItems is null
+                     || deviceAddSelectWaveInToolStripMenuItem.DropDownItems.Count == 0;
             }
         }
 
@@ -136,10 +136,9 @@ namespace VACM.NET4_0.Views
         {
             get
             {
-                return
-                    deviceAddSelectWaveOutToolStripMenuItem is null ||
-                    deviceAddSelectWaveOutToolStripMenuItem.DropDownItems is null ||
-                    deviceAddSelectWaveOutToolStripMenuItem.DropDownItems.Count == 0;
+                return deviceAddSelectWaveOutToolStripMenuItem is null
+                    || deviceAddSelectWaveOutToolStripMenuItem.DropDownItems is null
+                    || deviceAddSelectWaveOutToolStripMenuItem.DropDownItems.Count == 0;
             }
         }
 
@@ -147,8 +146,7 @@ namespace VACM.NET4_0.Views
         {
             get
             {
-                return
-                    isDeviceRemoveWaveInNameListEmpty
+                return isDeviceRemoveWaveInNameListEmpty
                     && isDeviceRemoveWaveOutNameListEmpty;
             }
         }
@@ -188,10 +186,10 @@ namespace VACM.NET4_0.Views
             get
             {
                 return deviceAddSelectWaveInToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .Where(toolStripMenuItem => toolStripMenuItem.Checked)
-                    .Select(toolStripMenuItem => toolStripMenuItem.ToolTipText)
-                    .ToList();
+                            .Cast<ToolStripMenuItem>()
+                            .Where(toolStripMenuItem => toolStripMenuItem.Checked)
+                            .Select(toolStripMenuItem => toolStripMenuItem.ToolTipText)
+                            .ToList();
             }
         }
 
@@ -200,10 +198,10 @@ namespace VACM.NET4_0.Views
             get
             {
                 return deviceAddSelectWaveOutToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .Where(toolStripMenuItem => toolStripMenuItem.Checked)
-                    .Select(toolStripMenuItem => toolStripMenuItem.ToolTipText)
-                    .ToList();
+                            .Cast<ToolStripMenuItem>()
+                            .Where(toolStripMenuItem => toolStripMenuItem.Checked)
+                            .Select(toolStripMenuItem => toolStripMenuItem.ToolTipText)
+                            .ToList();
             }
         }
 
@@ -212,10 +210,10 @@ namespace VACM.NET4_0.Views
             get
             {
                 return deviceRemoveSelectWaveInToolStripMenuItem.DropDownItems
-                    .Cast<ToolStripMenuItem>()
-                    .Where(toolStripMenuItem => toolStripMenuItem.Checked)
-                    .Select(toolStripMenuItem => toolStripMenuItem.ToolTipText)
-                    .ToList();
+                            .Cast<ToolStripMenuItem>()
+                            .Where(toolStripMenuItem => toolStripMenuItem.Checked)
+                            .Select(toolStripMenuItem => toolStripMenuItem.ToolTipText)
+                            .ToList();
             }
         }
 
