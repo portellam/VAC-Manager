@@ -290,7 +290,7 @@ namespace VACM.NET4_0.Views
                 new System.Drawing.Size(230, 26);
 
             this.deviceReloadAllToolStripMenuItem.Tag = "";
-            this.deviceReloadAllToolStripMenuItem.Text = "Reload...";
+            this.deviceReloadAllToolStripMenuItem.Text = "Reload";
 
             this.deviceReloadAllToolStripMenuItem.Click +=
                 new System.EventHandler(this.deviceReloadAllToolStripMenuItem_Click);
