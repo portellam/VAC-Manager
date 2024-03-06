@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 
@@ -29,9 +30,9 @@ namespace VACM.NET4_0.Views
         private ToolStripMenuItem deviceRemoveSelectAllToolStripMenuItem;
         private ToolStripMenuItem deviceRemoveSelectAllUnlinkedToolStripMenuItem;
         private ToolStripMenuItem deviceRemoveSelectToolStripMenuItem;
-        private ToolStripMenuItem deviceRemoveToolStripMenuItem;
         private ToolStripMenuItem deviceRemoveSelectWaveInToolStripMenuItem;
         private ToolStripMenuItem deviceRemoveSelectWaveOutToolStripMenuItem;
+        private ToolStripMenuItem deviceRemoveToolStripMenuItem;
         private ToolStripMenuItem deviceToolStripMenuItem;
         private ToolStripMenuItem fileCloseToolStripMenuItem;
         private ToolStripMenuItem fileExitToolStripMenuItem;
@@ -43,19 +44,23 @@ namespace VACM.NET4_0.Views
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem helpAboutToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem linkAddConfirmToolStripMenuItem;
+        private ToolStripMenuItem linkAddSelectToolStripMenuItem;
+        private ToolStripMenuItem linkAddSelectWaveInToolStripMenuItem;
+        private ToolStripMenuItem linkAddSelectWaveOutToolStripMenuItem;
         private ToolStripMenuItem linkAddToolStripMenuItem;
-        private ToolStripMenuItem linkAddWaveInToolStripMenuItem;
-        private ToolStripMenuItem linkAddWaveOutToolStripMenuItem;
         private ToolStripMenuItem linkDefaultBitRateToolStripMenuItem;
         private ToolStripMenuItem linkDefaultBufferToolStripMenuItem;
         private ToolStripMenuItem linkDefaultChannelsToolStripMenuItem;
         private ToolStripMenuItem linkDefaultPrefillToolStripMenuItem;
         private ToolStripMenuItem linkDefaultResyncAtToolStripMenuItem;
         private ToolStripMenuItem linkDefaultSamplingRateToolStripMenuItem;
-        private ToolStripMenuItem linkRemoveAllToolStripMenuItem;
+        private ToolStripMenuItem linkRemoveConfirmToolStripMenuItem;
+        private ToolStripMenuItem linkRemoveSelectToolStripMenuItem;
+        private ToolStripMenuItem linkRemoveSelectAllToolStripMenuItem;
+        private ToolStripMenuItem linkRemoveSelectWaveInToolStripMenuItem;
+        private ToolStripMenuItem linkRemoveSelectWaveOutToolStripMenuItem;
         private ToolStripMenuItem linkRemoveToolStripMenuItem;
-        private ToolStripMenuItem linkRemoveWaveInToolStripMenuItem;
-        private ToolStripMenuItem linkRemoveWaveOutToolStripMenuItem;
         private ToolStripMenuItem linkToolStripMenuItem;
         private ToolStripMenuItem repeaterRestartAllToolStripMenuItem;
         private ToolStripMenuItem repeaterRestartToolStripMenuItem;
@@ -120,24 +125,26 @@ namespace VACM.NET4_0.Views
             this.fileSaveToolStripMenuItem = new ToolStripMenuItem();
             this.fileToolStripMenuItem = new ToolStripMenuItem();
             this.fileToolStripSeparator1 = new ToolStripSeparator();
-            this.graphTab = new Manina.Windows.Forms.Tab();
-            this.gridTab = new Manina.Windows.Forms.Tab();
             this.gridTableLayoutPanel = new TableLayoutPanel();
             this.helpAboutToolStripMenuItem = new ToolStripMenuItem();
             this.helpToolStripMenuItem = new ToolStripMenuItem();
+            this.linkAddConfirmToolStripMenuItem = new ToolStripMenuItem();
+            this.linkAddSelectToolStripMenuItem = new ToolStripMenuItem();
+            this.linkAddSelectWaveInToolStripMenuItem = new ToolStripMenuItem();
+            this.linkAddSelectWaveOutToolStripMenuItem = new ToolStripMenuItem();
             this.linkAddToolStripMenuItem = new ToolStripMenuItem();
-            this.linkAddWaveInToolStripMenuItem = new ToolStripMenuItem();
-            this.linkAddWaveOutToolStripMenuItem = new ToolStripMenuItem();
             this.linkDefaultBitRateToolStripMenuItem = new ToolStripMenuItem();
             this.linkDefaultBufferToolStripMenuItem = new ToolStripMenuItem();
             this.linkDefaultChannelsToolStripMenuItem = new ToolStripMenuItem();
             this.linkDefaultPrefillToolStripMenuItem = new ToolStripMenuItem();
             this.linkDefaultResyncAtToolStripMenuItem = new ToolStripMenuItem();
             this.linkDefaultSamplingRateToolStripMenuItem = new ToolStripMenuItem();
-            this.linkRemoveAllToolStripMenuItem = new ToolStripMenuItem();
+            this.linkRemoveConfirmToolStripMenuItem = new ToolStripMenuItem();
+            this.linkRemoveSelectToolStripMenuItem = new ToolStripMenuItem();
+            this.linkRemoveSelectAllToolStripMenuItem = new ToolStripMenuItem();
+            this.linkRemoveSelectWaveInToolStripMenuItem = new ToolStripMenuItem();
+            this.linkRemoveSelectWaveOutToolStripMenuItem = new ToolStripMenuItem();
             this.linkRemoveToolStripMenuItem = new ToolStripMenuItem();
-            this.linkRemoveWaveInToolStripMenuItem = new ToolStripMenuItem();
-            this.linkRemoveWaveOutToolStripMenuItem = new ToolStripMenuItem();
             this.linkToolStripMenuItem = new ToolStripMenuItem();
             this.linkToolStripSeparator1 = new ToolStripSeparator();
             this.linkToolStripSeparator2 = new ToolStripSeparator();
@@ -150,9 +157,11 @@ namespace VACM.NET4_0.Views
             this.repeaterToolStripMenuItem = new ToolStripMenuItem();
             this.repeaterToolStripSeparator1 = new ToolStripSeparator();
             this.repeaterToolStripSeparator2 = new ToolStripSeparator();
-            this.tabControl1 = new Manina.Windows.Forms.TabControl();
             this.viewToggleDarkModeToolStripMenuItem = new ToolStripMenuItem();
             this.viewToolStripMenuItem = new ToolStripMenuItem();
+            this.graphTab = new Manina.Windows.Forms.Tab();
+            this.gridTab = new Manina.Windows.Forms.Tab();
+            this.tabControl1 = new Manina.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             this.gridTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -525,7 +534,7 @@ namespace VACM.NET4_0.Views
                     this.linkAddToolStripMenuItem,
                     this.linkToolStripSeparator1,
                     this.linkRemoveToolStripMenuItem,
-                    this.linkRemoveAllToolStripMenuItem,
+                    this.linkRemoveSelectAllToolStripMenuItem,
                     this.linkToolStripSeparator2,
                     this.linkDefaultBitRateToolStripMenuItem,
                     this.linkDefaultBufferToolStripMenuItem,
@@ -548,70 +557,152 @@ namespace VACM.NET4_0.Views
             this.linkAddToolStripMenuItem.DropDownItems
                 .AddRange(new ToolStripItem[]
                 {
-                    this.linkAddWaveInToolStripMenuItem,
-                    this.linkAddWaveOutToolStripMenuItem
+                    this.linkAddConfirmToolStripMenuItem,
+                    this.linkAddSelectToolStripMenuItem,
                 });
 
             this.linkAddToolStripMenuItem.Name = "linkAddToolStripMenuItem";
             this.linkAddToolStripMenuItem.Size = new System.Drawing.Size(285, 26);
             this.linkAddToolStripMenuItem.Text = "Link...";
             // 
-            // linkAddWaveInToolStripMenuItem
+            // linkAddConfirmToolStripMenuItem
             // 
-            this.linkAddWaveInToolStripMenuItem.Name = "linkAddWaveInToolStripMenuItem";
-            this.linkAddWaveInToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
-            this.linkAddWaveInToolStripMenuItem.Tag = "";
-            // 
-            // linkAddWaveOutToolStripMenuItem
-            // 
-            this.linkAddWaveOutToolStripMenuItem.Name =
-                "linkAddWaveOutToolStripMenuItem";
+            this.linkAddConfirmToolStripMenuItem.Name =
+                "linkAddConfirmToolStripMenuItem";
 
-            this.linkAddWaveOutToolStripMenuItem.Size =
+            this.linkAddConfirmToolStripMenuItem.Size =
                 new System.Drawing.Size(156, 26);
 
-            this.linkAddWaveOutToolStripMenuItem.Tag = "";
+            this.linkAddConfirmToolStripMenuItem.Tag = "";
+            this.linkAddConfirmToolStripMenuItem.Text = "Confirm Selected";
+
+            this.linkAddConfirmToolStripMenuItem.Click += new System.EventHandler
+                (this.linkAddConfirmToolStripMenuItem_Click);
+            // 
+            // linkAddSelectToolStripMenuItem
+            // 
+            this.linkAddSelectToolStripMenuItem.DropDownItems
+                .AddRange(new ToolStripItem[]
+                {
+                    this.linkAddSelectWaveInToolStripMenuItem,
+                    this.linkAddSelectWaveOutToolStripMenuItem,
+                });
+
+            this.linkAddSelectToolStripMenuItem.Name =
+                "linkAddSelectToolStripMenuItem";
+
+            this.linkAddSelectToolStripMenuItem.Size =
+                new System.Drawing.Size(285, 26);
+
+            this.linkAddSelectToolStripMenuItem.Tag = "";
+            this.linkAddSelectToolStripMenuItem.Text = "Select...";
+
+            this.linkAddSelectToolStripMenuItem.Click += new System.EventHandler
+                (this.linkAddSelectToolStripMenuItem_Click);
+            // 
+            // linkAddSelectWaveInToolStripMenuItem
+            // 
+            this.linkAddSelectWaveInToolStripMenuItem.Name =
+                "linkAddSelectWaveInToolStripMenuItem";
+
+            this.linkAddSelectWaveInToolStripMenuItem.Size =
+                new System.Drawing.Size(156, 26);
+
+            this.linkAddSelectWaveInToolStripMenuItem.Tag = "";
+            // 
+            // linkAddSelectWaveOutToolStripMenuItem
+            // 
+            this.linkAddSelectWaveOutToolStripMenuItem.Name =
+                "linkAddSelectWaveOutToolStripMenuItem";
+
+            this.linkAddSelectWaveOutToolStripMenuItem.Size =
+                new System.Drawing.Size(156, 26);
+
+            this.linkAddSelectWaveOutToolStripMenuItem.Tag = "";
             // 
             // linkRemoveToolStripMenuItem
             // 
             this.linkRemoveToolStripMenuItem.DropDownItems
                 .AddRange(new ToolStripItem[]
                 {
-                    this.linkRemoveWaveInToolStripMenuItem,
-                    this.linkRemoveWaveOutToolStripMenuItem
+                    this.linkRemoveConfirmToolStripMenuItem,
+                    this.linkRemoveSelectToolStripMenuItem,
+                    this.linkRemoveSelectAllToolStripMenuItem
                 });
 
             this.linkRemoveToolStripMenuItem.Name = "linkRemoveToolStripMenuItem";
             this.linkRemoveToolStripMenuItem.Size = new System.Drawing.Size(285, 26);
             this.linkRemoveToolStripMenuItem.Text = "Unlink...";
             // 
-            // linkRemoveAllToolStripMenuItem
+            // linkRemoveConfirmToolStripMenuItem
             // 
-            this.linkRemoveAllToolStripMenuItem.Name = "linkRemoveAllToolStripMenuItem";
-            this.linkRemoveAllToolStripMenuItem.Size = new System.Drawing.Size(285, 26);
-            this.linkRemoveAllToolStripMenuItem.Tag = "";
-            this.linkRemoveAllToolStripMenuItem.Text = "Unlink All";
-            // 
-            // 
-            // linkRemoveWaveInToolStripMenuItem
-            // 
-            this.linkRemoveWaveInToolStripMenuItem.Name =
-                "linkRemoveWaveInToolStripMenuItem";
+            this.linkRemoveConfirmToolStripMenuItem.Name =
+                "linkRemoveConfirmToolStripMenuItem";
 
-            this.linkRemoveWaveInToolStripMenuItem.Size =
+            this.linkRemoveConfirmToolStripMenuItem.Size =
                 new System.Drawing.Size(156, 26);
 
-            this.linkRemoveWaveInToolStripMenuItem.Tag = "";
-            // 
-            // linkRemoveWaveOutToolStripMenuItem
-            // 
-            this.linkRemoveWaveOutToolStripMenuItem.Name =
-                "linkRemoveWaveOutToolStripMenuItem";
+            this.linkRemoveConfirmToolStripMenuItem.Tag = "";
+            this.linkRemoveConfirmToolStripMenuItem.Text = "Confirm Selected";
 
-            this.linkRemoveWaveOutToolStripMenuItem.Size =
+            this.linkRemoveConfirmToolStripMenuItem.Click += new System.EventHandler
+                (this.linkRemoveConfirmToolStripMenuItem_Click);
+            // 
+            // linkRemoveSelectAllToolStripMenuItem
+            // 
+            this.linkRemoveSelectAllToolStripMenuItem.Name =
+                "linkRemoveSelectAllToolStripMenuItem";
+
+            this.linkRemoveSelectAllToolStripMenuItem.Size =
+                new System.Drawing.Size(285, 26);
+
+            this.linkRemoveSelectAllToolStripMenuItem.Tag = "";
+            this.linkRemoveSelectAllToolStripMenuItem.Text = "Select All";
+
+            this.linkRemoveSelectAllToolStripMenuItem.Click += new System.EventHandler
+                (this.linkRemoveSelectAllToolStripMenuItem_Click);
+            // 
+            // linkRemoveSelectToolStripMenuItem
+            // 
+            this.linkRemoveSelectToolStripMenuItem.DropDownItems
+                .AddRange(new ToolStripItem[]
+                {
+                    this.linkRemoveSelectWaveInToolStripMenuItem,
+                    this.linkRemoveSelectWaveOutToolStripMenuItem,
+                });
+
+            this.linkRemoveSelectToolStripMenuItem.Name =
+                "linkRemoveSelectToolStripMenuItem";
+
+            this.linkRemoveSelectToolStripMenuItem.Size =
+                new System.Drawing.Size(285, 26);
+
+            this.linkRemoveSelectToolStripMenuItem.Tag = "";
+            this.linkRemoveSelectToolStripMenuItem.Text = "Select...";
+
+            this.linkRemoveSelectToolStripMenuItem.Click += new System.EventHandler
+                (this.linkRemoveSelectToolStripMenuItem_Click);
+            // 
+            // 
+            // linkRemoveSelectWaveInToolStripMenuItem
+            // 
+            this.linkRemoveSelectWaveInToolStripMenuItem.Name =
+                "linkRemoveSelectWaveInToolStripMenuItem";
+
+            this.linkRemoveSelectWaveInToolStripMenuItem.Size =
                 new System.Drawing.Size(156, 26);
 
-            this.linkRemoveWaveOutToolStripMenuItem.Tag = "";
+            this.linkRemoveSelectWaveInToolStripMenuItem.Tag = "";
+            // 
+            // linkRemoveSelectWaveOutToolStripMenuItem
+            // 
+            this.linkRemoveSelectWaveOutToolStripMenuItem.Name =
+                "linkRemoveSelectWaveOutToolStripMenuItem";
+
+            this.linkRemoveSelectWaveOutToolStripMenuItem.Size =
+                new System.Drawing.Size(156, 26);
+
+            this.linkRemoveSelectWaveOutToolStripMenuItem.Tag = "";
             // 
             // linkDefaultBitRateToolStripMenuItem
             // 
