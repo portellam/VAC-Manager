@@ -1248,6 +1248,9 @@ namespace VACM.NET4_0.Views
             backgroundWorker.RunWorkerAsync();
         }
 
+        /// <summary>
+        /// Lock deviceAddToolStripMenuItem and drop down.
+        /// </summary>
         internal void LockDeviceAddToolStripMenuItemAndDropDown()
         {
             deviceAddToolStripMenuItem.DropDown.Close();
@@ -1257,8 +1260,8 @@ namespace VACM.NET4_0.Views
             deviceAddSelectWaveInToolStripMenuItem.Enabled = false;
             deviceAddSelectWaveOutToolStripMenuItem.Enabled = false;
 
-            string toolTipText = "Busy. Please wait...";
-            deviceAddToolStripMenuItem.ToolTipText = toolTipText;
+            string toolTipText = GetDeviceToolTipText(true, false);
+
             deviceAddConfirmToolStripMenuItem.ToolTipText = toolTipText;
             deviceAddSelectAllToolStripMenuItem.ToolTipText = toolTipText;
             deviceAddSelectToolStripMenuItem.ToolTipText = toolTipText;
@@ -1266,13 +1269,20 @@ namespace VACM.NET4_0.Views
             deviceAddSelectWaveOutToolStripMenuItem.ToolTipText = toolTipText;
         }
 
+        /// <summary>
+        /// Lock deviceReloadToolStripMenuItem and drop down.
+        /// </summary>
         internal void LockDeviceReloadToolStripMenuItemAndDropDown()
         {
             deviceReloadAllToolStripMenuItem.Enabled = false;
-            string toolTipText = "Busy. Please wait...";
-            deviceReloadAllToolStripMenuItem.ToolTipText = toolTipText;
+
+            deviceReloadAllToolStripMenuItem.ToolTipText = GetDeviceToolTipText(true,
+                false);
         }
 
+        /// <summary>
+        /// Lock deviceRemoveToolStripMenuItem and drop down.
+        /// </summary>
         internal void LockDeviceRemoveToolStripMenuItemAndDropDown()
         {
             deviceRemoveToolStripMenuItem.DropDown.Close();
@@ -1282,8 +1292,8 @@ namespace VACM.NET4_0.Views
             deviceRemoveSelectWaveInToolStripMenuItem.Enabled = false;
             deviceRemoveSelectWaveOutToolStripMenuItem.Enabled = false;
 
-            string toolTipText = "Busy. Please wait...";
-            deviceRemoveToolStripMenuItem.ToolTipText = toolTipText;
+            string toolTipText = GetDeviceToolTipText(true, false);
+
             deviceRemoveConfirmToolStripMenuItem.ToolTipText = toolTipText;
             deviceRemoveSelectAllToolStripMenuItem.ToolTipText = toolTipText;
             deviceRemoveSelectToolStripMenuItem.ToolTipText = toolTipText;
@@ -1340,7 +1350,6 @@ namespace VACM.NET4_0.Views
             string toolTipText = GetDeviceToolTipText(isBusy,
                 isDeviceAddNameListEmpty);
 
-            deviceAddToolStripMenuItem.ToolTipText = toolTipText;
             deviceAddConfirmToolStripMenuItem.ToolTipText = toolTipText;
             deviceAddSelectAllToolStripMenuItem.ToolTipText = toolTipText;
             deviceAddSelectToolStripMenuItem.ToolTipText = toolTipText;
@@ -1399,7 +1408,6 @@ namespace VACM.NET4_0.Views
             string toolTipText = GetDeviceToolTipText(isBusy,
                 isDeviceRemoveNameListEmpty);
 
-            deviceRemoveToolStripMenuItem.ToolTipText = toolTipText;
             deviceRemoveConfirmToolStripMenuItem.ToolTipText = toolTipText;
             deviceRemoveSelectAllToolStripMenuItem.ToolTipText = toolTipText;
             deviceRemoveSelectAllLinkedToolStripMenuItem.ToolTipText = toolTipText;
