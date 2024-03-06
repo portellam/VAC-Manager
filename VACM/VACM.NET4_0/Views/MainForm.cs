@@ -115,11 +115,87 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private string fileName;
         private DeviceListModel deviceListModel;
         private DeviceControl inputDeviceControl { get; set; }
         private DeviceControl outputDeviceControl { get; set; }
         private RepeaterDataModel repeaterDataModel { get; set; }
+        private string fileName;
+
+        private string[] checkedDeviceAddSelectWaveInToolStripMenuItemDropDownArray
+        {
+            get
+            {
+                return
+                    dataFlowAndNameAndToolStripMenuItemNameAndIsCheckedDictionary
+                        .Where(w => w.Key == DataFlow.Capture)
+                        .SelectMany(x => x.Value)
+                        .Where(y =>
+                        {
+                            return y.Value.ContainsKey
+                                    (nameof(deviceAddSelectWaveInToolStripMenuItem))
+                                && y.Value.ContainsValue(true);
+                        })
+                        .Select(z => z.Key).ToArray();
+            }
+        }
+
+        private string[] checkedDeviceAddSelectWaveOutToolStripMenuItemDropDownArray
+        {
+            get
+            {
+                return
+                    dataFlowAndNameAndToolStripMenuItemNameAndIsCheckedDictionary
+                        .Where(w => w.Key == DataFlow.Render)
+                        .SelectMany(x => x.Value)
+                        .Where(y =>
+                        {
+                            return y.Value.ContainsKey
+                                    (nameof(deviceAddSelectWaveOutToolStripMenuItem))
+                                && y.Value.ContainsValue(true);
+                        })
+                        .Select(z => z.Key).ToArray();
+            }
+        }
+
+        private string[] checkedDeviceRemoveSelectWaveInToolStripMenuItemDropDownArray
+        {
+            get
+            {
+                return
+                    dataFlowAndNameAndToolStripMenuItemNameAndIsCheckedDictionary
+                        .Where(w => w.Key == DataFlow.Capture)
+                        .SelectMany(x => x.Value)
+                        .Where(y =>
+                        {
+                            return y.Value.ContainsKey
+                                    (nameof(deviceRemoveSelectWaveInToolStripMenuItem))
+                                && y.Value.ContainsValue(true);
+                        })
+                        .Select(z => z.Key).ToArray();
+            }
+        }
+
+        private string[] checkedDeviceRemoveSelectWaveOutToolStripMenuItemDropDownArray
+        {
+            get
+            {
+                return
+                    dataFlowAndNameAndToolStripMenuItemNameAndIsCheckedDictionary
+                        .Where(w => w.Key == DataFlow.Render)
+                        .SelectMany(x => x.Value)
+                        .Where(y =>
+                        {
+                            return y.Value.ContainsKey
+                                    (nameof(deviceRemoveSelectWaveOutToolStripMenuItem))
+                                && y.Value.ContainsValue(true);
+                        })
+                        .Select(z => z.Key).ToArray();
+            }
+        }
+
+        Dictionary<DataFlow, Dictionary<string, Dictionary<string, bool>>>
+            dataFlowAndNameAndToolStripMenuItemNameAndIsCheckedDictionary;
+
         private List<Control> controlList = new List<Control>();
 
         private List<string> checkedDeviceAddWaveInNameList
