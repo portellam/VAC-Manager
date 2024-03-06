@@ -21,8 +21,6 @@ namespace VACM.NET4_0.Views
     {
         #region Parameters
 
-        //TODO: have master dict to contain all drop down items in device add and remove.
-
         private AboutForm aboutForm;
 
         private string darkModeText
