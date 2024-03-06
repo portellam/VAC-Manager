@@ -1196,7 +1196,7 @@ namespace VACM.NET4_0.Views
                 " Grid and Graph, including devices, links, and repeaters.\nAre you " +
                 "sure?";
 
-            if (MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(message))
+            if (!MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(message))
             {
                 return;
             }
