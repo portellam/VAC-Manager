@@ -14,6 +14,7 @@ using VACM.NET4_0.Extensions;
 using VACM.NET4_0.Extensions.PropertyValueChanged;
 using PropertyValueChangedEventArgs =
     VACM.NET4_0.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
+using System.Data;
 
 namespace VACM.NET4_0.Views
 {
@@ -273,11 +274,66 @@ namespace VACM.NET4_0.Views
         internal void SetDeviceList()
         {
             deviceListModel = new DeviceListModel();
+
+            dataFlowAndNameAndToolStripMenuItemNameAndIsCheckedDictionary =
+                new Dictionary<DataFlow, Dictionary<string, Dictionary<string, bool>>>()
+                {
+                    {
+                        DataFlow.Capture,
+                        new Dictionary<string, Dictionary<string, bool>>()
+                    },
+                    {
+                        DataFlow.Render,
+                        new Dictionary<string, Dictionary<string, bool>>()
+                    }
+                };
         }
 
         #endregion
 
         #region Intialization logic
+
+        /// <summary>
+        /// Get the initialized the device tool strip menu item.
+        /// </summary>
+        /// <param name="eventHandler">The event handler</param>
+        /// <param name="mMDevice">The MMDevice</param>
+        internal ToolStripMenuItem GetInitializedDeviceItem(EventHandler eventHandler,
+            MMDevice mMDevice)
+        {
+            if (eventHandler is null || mMDevice is null)
+            {
+                return null;
+            }
+
+            bool deviceIsEnabled = mMDevice.State != DeviceState.Disabled;
+            string text = $"{mMDevice.FriendlyName} ";
+
+            if (deviceIsEnabled)
+            {
+                text += "(Enabled)";
+            }
+            else
+            {
+                text += "(Disabled)";
+            }
+
+            ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem()
+            {
+                CheckState = CheckState.Unchecked,
+                CheckOnClick = true,
+                Text = text,
+                ToolTipText = mMDevice.FriendlyName,                            //NOTE: The ToolTipText property must contain the MMDevice.FriendlyName, so that the MenuItem as a sender object will be properly validated in DeviceList logic.
+            };
+
+            if (eventHandler != null)
+            {
+                toolStripMenuItem.Click += new EventHandler(eventHandler);
+            }
+
+            toolStripMenuItem.CheckOnClick = true;
+            return toolStripMenuItem;
+        }
 
         /// <summary>
         /// Add all controls to list.
@@ -411,6 +467,42 @@ namespace VACM.NET4_0.Views
         /// Initialize a device tool strip menu item collection by parsing the related
         /// device list.
         /// </summary>
+        /// <param name="dataFlow">The data flow</param>
+        /// <param name="eventHandler">The event handler</param>
+        /// <param name="parentToolStripMenuItem">The parent device tool strip menu item
+        /// </param>
+        /// <param name="mMDeviceList">The device list</param>
+        internal void InitializeDeviceItemCollection(DataFlow dataFlow,
+            EventHandler eventHandler, ref ToolStripMenuItem parentToolStripMenuItem,
+            List<MMDevice> mMDeviceList)
+        {
+            if (eventHandler is null || parentToolStripMenuItem is null
+                || mMDeviceList is null || mMDeviceList.Count == 0)
+            {
+                return;
+            }
+
+            mMDeviceList.ForEach(mMDevice =>
+                {
+                    ToolStripMenuItem toolStripMenuItem = GetInitializedDeviceItem
+                        (eventHandler, mMDevice);
+
+                    dataFlowAndNameAndToolStripMenuItemNameAndIsCheckedDictionary
+                        [dataFlow].Add(mMDevice.FriendlyName,
+                            new Dictionary<string, bool>()
+                            {
+                                {
+                                    nameof(parentToolStripMenuItem),
+                                    false
+                                }
+                            });
+                });
+        }
+
+        /// <summary>
+        /// Initialize a device tool strip menu item collection by parsing the related
+        /// device list.
+        /// </summary>
         /// <param name="eventHandler">The event handler</param>
         /// <param name="parentToolStripMenuItem">The parent device tool strip menu item
         /// </param>
@@ -418,7 +510,8 @@ namespace VACM.NET4_0.Views
         internal void InitializeDeviceItemCollection(EventHandler eventHandler,
             ToolStripMenuItem parentToolStripMenuItem, List<MMDevice> mMDeviceList)
         {
-            if (mMDeviceList is null || mMDeviceList.Count == 0)
+            if (eventHandler is null || parentToolStripMenuItem is null
+                || mMDeviceList is null || mMDeviceList.Count == 0)
             {
                 return;
             }
@@ -485,44 +578,86 @@ namespace VACM.NET4_0.Views
             deviceToolStripMenuItem.Enabled = false;
             Refresh();
 
-            InitializeDeviceItemCollection
-                (deviceAddSelectToolStripMenuItemEnabled_Confirm,
-                deviceAddSelectWaveInToolStripMenuItem,
-                deviceListModel.UnselectedWaveInMMDeviceList);
+            //InitializeDeviceItemCollection
+            //    (deviceAddSelectToolStripMenuItemEnabled_Confirm,
+            //    deviceAddSelectWaveInToolStripMenuItem,
+            //    deviceListModel.UnselectedWaveInMMDeviceList);
+
+            //InitializeDeviceItemCollection
+            //    (deviceAddSelectToolStripMenuItemEnabled_Confirm,
+            //    deviceAddSelectWaveOutToolStripMenuItem,
+            //    deviceListModel.UnselectedWaveOutMMDeviceList);
+
+            //InitializeDeviceItemCollection
+            //    (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
+            //    deviceRemoveSelectWaveInToolStripMenuItem,
+            //    deviceListModel.SelectedWaveInMMDeviceList);
+
+            //InitializeDeviceItemCollection
+            //    (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
+            //    deviceRemoveSelectWaveOutToolStripMenuItem,
+            //    deviceListModel.SelectedWaveOutMMDeviceList);
+
+            //InitializeDeviceItemCollection
+            //    (linkAddWaveInToolStripMenuItem_Click,
+            //    linkAddWaveInToolStripMenuItem,
+            //    deviceListModel.SelectedWaveInMMDeviceList);
+
+            //InitializeDeviceItemCollection
+            //    (linkAddWaveOutToolStripMenuItem_Click,
+            //    linkAddWaveOutToolStripMenuItem,
+            //    deviceListModel.SelectedWaveOutMMDeviceList);
+
+            //InitializeDeviceItemCollection
+            //    (linkRemoveWaveInToolStripMenuItem_Click,
+            //    linkRemoveWaveInToolStripMenuItem,
+            //    repeaterDataModel.LinkWaveInMMDeviceList);
+
+            //InitializeDeviceItemCollection
+            //    (linkRemoveWaveOutToolStripMenuItem_Click,
+            //    linkRemoveWaveOutToolStripMenuItem,
+            //    repeaterDataModel.LinkWaveOutMMDeviceList);
 
             InitializeDeviceItemCollection
-                (deviceAddSelectToolStripMenuItemEnabled_Confirm,
-                deviceAddSelectWaveOutToolStripMenuItem,
+                (DataFlow.Capture, deviceAddSelectToolStripMenuItemEnabled_Confirm,
+                ref deviceAddSelectWaveInToolStripMenuItem,
+                deviceListModel.UnselectedWaveInMMDeviceList);
+
+            //TODO: create way to add items to drop down. We are just creating a dict here.
+
+            InitializeDeviceItemCollection
+                (DataFlow.Render, deviceAddSelectToolStripMenuItemEnabled_Confirm,
+                ref deviceAddSelectWaveOutToolStripMenuItem,
                 deviceListModel.UnselectedWaveOutMMDeviceList);
 
             InitializeDeviceItemCollection
-                (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
-                deviceRemoveSelectWaveInToolStripMenuItem,
+                (DataFlow.Capture, deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
+                ref deviceRemoveSelectWaveInToolStripMenuItem,
                 deviceListModel.SelectedWaveInMMDeviceList);
 
             InitializeDeviceItemCollection
-                (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
-                deviceRemoveSelectWaveOutToolStripMenuItem,
+                (DataFlow.Render, deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
+                ref deviceRemoveSelectWaveOutToolStripMenuItem,
                 deviceListModel.SelectedWaveOutMMDeviceList);
 
             InitializeDeviceItemCollection
-                (linkAddWaveInToolStripMenuItem_Click,
-                linkAddWaveInToolStripMenuItem,
+                (DataFlow.Capture, linkAddWaveInToolStripMenuItem_Click,
+                ref linkAddWaveInToolStripMenuItem,
                 deviceListModel.SelectedWaveInMMDeviceList);
 
             InitializeDeviceItemCollection
-                (linkAddWaveOutToolStripMenuItem_Click,
-                linkAddWaveOutToolStripMenuItem,
+                (DataFlow.Render, linkAddWaveOutToolStripMenuItem_Click,
+                ref linkAddWaveOutToolStripMenuItem,
                 deviceListModel.SelectedWaveOutMMDeviceList);
 
             InitializeDeviceItemCollection
-                (linkRemoveWaveInToolStripMenuItem_Click,
-                linkRemoveWaveInToolStripMenuItem,
+                (DataFlow.Capture, linkRemoveWaveInToolStripMenuItem_Click,
+                ref linkRemoveWaveInToolStripMenuItem,
                 repeaterDataModel.LinkWaveInMMDeviceList);
 
             InitializeDeviceItemCollection
-                (linkRemoveWaveOutToolStripMenuItem_Click,
-                linkRemoveWaveOutToolStripMenuItem,
+                (DataFlow.Render, linkRemoveWaveOutToolStripMenuItem_Click,
+                ref linkRemoveWaveOutToolStripMenuItem,
                 repeaterDataModel.LinkWaveOutMMDeviceList);
 
             deviceToolStripMenuItem.Text = text;
