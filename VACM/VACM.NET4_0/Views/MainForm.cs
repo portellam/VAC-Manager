@@ -1261,7 +1261,6 @@ namespace VACM.NET4_0.Views
             deviceAddSelectWaveOutToolStripMenuItem.Enabled = false;
 
             string toolTipText = GetDeviceToolTipText(true, false);
-
             deviceAddConfirmToolStripMenuItem.ToolTipText = toolTipText;
             deviceAddSelectAllToolStripMenuItem.ToolTipText = toolTipText;
             deviceAddSelectToolStripMenuItem.ToolTipText = toolTipText;
@@ -1293,7 +1292,6 @@ namespace VACM.NET4_0.Views
             deviceRemoveSelectWaveOutToolStripMenuItem.Enabled = false;
 
             string toolTipText = GetDeviceToolTipText(true, false);
-
             deviceRemoveConfirmToolStripMenuItem.ToolTipText = toolTipText;
             deviceRemoveSelectAllToolStripMenuItem.ToolTipText = toolTipText;
             deviceRemoveSelectToolStripMenuItem.ToolTipText = toolTipText;
@@ -1345,7 +1343,6 @@ namespace VACM.NET4_0.Views
             deviceAddSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
             deviceAddSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
             deviceAddSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
-            //deviceAddToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
 
             string toolTipText = GetDeviceToolTipText(isBusy,
                 isDeviceAddNameListEmpty);
@@ -1389,9 +1386,7 @@ namespace VACM.NET4_0.Views
             }
 
             bool isNotBusyAndListIsFull = !isBusy && isCheckedDeviceRemoveNameListFull;
-
             bool isNotBusyAndListIsNotEmpty = !isBusy && !isDeviceRemoveNameListEmpty;
-
             deviceRemoveConfirmToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
             deviceRemoveSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
             deviceRemoveSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
@@ -1403,7 +1398,6 @@ namespace VACM.NET4_0.Views
                 isNotBusyAndListIsNotEmpty;                                             //TODO: create a getter to determine if unlinked items exist.
 
             deviceRemoveSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
-            //deviceRemoveToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
 
             string toolTipText = GetDeviceToolTipText(isBusy,
                 isDeviceRemoveNameListEmpty);
