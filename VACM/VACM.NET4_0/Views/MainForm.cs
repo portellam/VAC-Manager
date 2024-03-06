@@ -837,7 +837,6 @@ namespace VACM.NET4_0.Views
 
             toolStripMenuItem.DropDownItems.Clear();
             toolStripMenuItem.DropDownItems.AddRange(toolStripMenuItemArray);
-            //GC.Collect();
         }
 
         /// <summary>
