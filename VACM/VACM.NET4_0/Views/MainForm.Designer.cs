@@ -885,7 +885,7 @@ namespace VACM.NET4_0.Views
                 .AddRange(new ToolStripItem[]
                 {
                     this.repeaterStartConfirmToolStripMenuItem,
-                    this.repeaterRestartSelectToolStripMenuItem,
+                    this.repeaterStartSelectToolStripMenuItem,
                     this.repeaterStartSelectAllToolStripMenuItem,
                 });
 
