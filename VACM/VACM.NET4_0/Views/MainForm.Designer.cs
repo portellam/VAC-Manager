@@ -943,7 +943,6 @@ namespace VACM.NET4_0.Views
                 });
 
             this.repeaterStopToolStripMenuItem.Name = "repeaterStopToolStripMenuItem";
-
             this.repeaterStopToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.repeaterStopToolStripMenuItem.Tag = "";
             this.repeaterStopToolStripMenuItem.Text = "Stop...";
