@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace VACM.NET4_0.Extensions
 {
+    /// <summary>
+    /// Extension for MessageBox library
+    /// </summary>
     public class MessageBoxExtension
     {
         #region Parameters
