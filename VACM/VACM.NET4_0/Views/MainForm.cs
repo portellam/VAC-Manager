@@ -360,49 +360,82 @@ namespace VACM.NET4_0.Views
             deviceToolStripMenuItem.Enabled = false;
             Refresh();
 
-            InitializeDeviceItemCollection
+            InitializeDeviceToolStripMenuItemCollection
                 (deviceAddSelectToolStripMenuItemEnabled_Confirm,
                 deviceAddSelectWaveInToolStripMenuItem,
                 deviceListModel.UnselectedWaveInMMDeviceList);
 
-            InitializeDeviceItemCollection
+            InitializeDeviceToolStripMenuItem(deviceAddSelectWaveInToolStripMenuItem);
+
+            InitializeDeviceToolStripMenuItemCollection
                 (deviceAddSelectToolStripMenuItemEnabled_Confirm,
                 deviceAddSelectWaveOutToolStripMenuItem,
                 deviceListModel.UnselectedWaveOutMMDeviceList);
 
-            InitializeDeviceItemCollection
+            InitializeDeviceToolStripMenuItem(deviceAddSelectWaveOutToolStripMenuItem);
+
+            InitializeDeviceToolStripMenuItemCollection
                 (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
                 deviceRemoveSelectWaveInToolStripMenuItem,
                 deviceListModel.SelectedWaveInMMDeviceList);
 
-            InitializeDeviceItemCollection
+            InitializeDeviceToolStripMenuItem(deviceRemoveSelectWaveInToolStripMenuItem);
+
+            InitializeDeviceToolStripMenuItemCollection
                 (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
                 deviceRemoveSelectWaveOutToolStripMenuItem,
                 deviceListModel.SelectedWaveOutMMDeviceList);
 
-            InitializeDeviceItemCollection
+            InitializeDeviceToolStripMenuItem(deviceRemoveSelectWaveOutToolStripMenuItem);
+
+            InitializeDeviceToolStripMenuItemCollection
                 (linkAddSelectWaveInToolStripMenuItem_Click,
                 linkAddSelectWaveInToolStripMenuItem,
                 deviceListModel.SelectedWaveInMMDeviceList);
 
-            InitializeDeviceItemCollection
+            InitializeDeviceToolStripMenuItem(linkAddSelectWaveInToolStripMenuItem);
+
+            InitializeDeviceToolStripMenuItemCollection
                 (linkAddSelectWaveOutToolStripMenuItem_Click,
                 linkAddSelectWaveOutToolStripMenuItem,
                 deviceListModel.SelectedWaveOutMMDeviceList);
 
-            InitializeDeviceItemCollection
+            InitializeDeviceToolStripMenuItem(linkAddSelectWaveOutToolStripMenuItem);
+
+            InitializeDeviceToolStripMenuItemCollection
                 (linkRemoveSelectWaveInToolStripMenuItem_Click,
                 linkRemoveSelectWaveInToolStripMenuItem,
                 repeaterDataModel.LinkWaveInMMDeviceList);
 
-            InitializeDeviceItemCollection
+            InitializeDeviceToolStripMenuItem(linkRemoveSelectWaveInToolStripMenuItem);
+
+            InitializeDeviceToolStripMenuItemCollection
                 (linkRemoveSelectWaveOutToolStripMenuItem_Click,
                 linkRemoveSelectWaveOutToolStripMenuItem,
                 repeaterDataModel.LinkWaveOutMMDeviceList);
 
+            InitializeDeviceToolStripMenuItem(linkRemoveSelectWaveOutToolStripMenuItem);
             deviceToolStripMenuItem.Text = text;
             deviceToolStripMenuItem.Enabled = true;
             Refresh();
+        }
+
+        /// <summary>
+        /// Initialize device tool strip menu item properties.
+        /// </summary>
+        /// <param name="toolStripMenuItem">The tool strip menu item</param>
+        internal void InitializeDeviceToolStripMenuItem(ToolStripMenuItem toolStripMenuItem)
+        {
+            if (toolStripMenuItem is null)
+            {
+                return;
+            }
+
+            FormColorUpdater.SetColorsOfToolStripItem(toolStripMenuItem);
+            SetMousePropertiesOfToolStripMenuItemDropDown(toolStripMenuItem);
+
+            SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
+                (toolStripMenuItem);
         }
 
         /// <summary>
@@ -411,8 +444,9 @@ namespace VACM.NET4_0.Views
         /// <param name="eventHandler">The event handler</param>
         /// <param name="mMDevice">The MMDevice</param>
         /// <param name="toolStripMenuItemList">The tool strip menu item list</param>
-        internal void InitializeDeviceItem(EventHandler eventHandler,
-            MMDevice mMDevice, List<ToolStripMenuItem> toolStripMenuItemList)
+        internal void InitializeDeviceToolStripMenuItemCollectionItem
+            (EventHandler eventHandler, MMDevice mMDevice,
+            List<ToolStripMenuItem> toolStripMenuItemList)
         {
             //if (mMDevice.State == DeviceState.NotPresent)
             //{
@@ -467,10 +501,11 @@ namespace VACM.NET4_0.Views
         /// <param name="parentToolStripMenuItem">The parent device tool strip menu item
         /// </param>
         /// <param name="mMDeviceList">The device list</param>
-        internal void InitializeDeviceItemCollection(EventHandler eventHandler,
+        internal void InitializeDeviceToolStripMenuItemCollection(EventHandler eventHandler,
             ToolStripMenuItem parentToolStripMenuItem, List<MMDevice> mMDeviceList)
         {
-            if (mMDeviceList is null || mMDeviceList.Count == 0)
+            if (parentToolStripMenuItem is null || mMDeviceList is null
+                || mMDeviceList.Count == 0)
             {
                 return;
             }
@@ -483,22 +518,16 @@ namespace VACM.NET4_0.Views
 
             mMDeviceList.ForEach(mMDevice =>
                 {
-                    InitializeDeviceItem(eventHandler, mMDevice, toolStripMenuItemList);
+                    InitializeDeviceToolStripMenuItemCollectionItem(eventHandler, mMDevice, toolStripMenuItemList);
                 });
 
             toolStripMenuItemList.ForEach(toolStripMenuItem =>
                 {
-                    InitializeDeviceItemText(dataFlow, toolStripMenuItem);
+                    InitializeDeviceItemToolStripMenuItemCollectionItemText(dataFlow, toolStripMenuItem);
                 });
 
             parentToolStripMenuItem.DropDownItems
                 .AddRange(toolStripMenuItemList.ToArray());
-
-            FormColorUpdater.SetColorsOfToolStripItem(parentToolStripMenuItem);
-            SetMousePropertiesOfToolStripMenuItemDropDown(parentToolStripMenuItem);
-
-            SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
-                (parentToolStripMenuItem);
         }
 
         /// <summary>
@@ -506,8 +535,8 @@ namespace VACM.NET4_0.Views
         /// </summary>
         /// <param name="dataFlow">The data flow</param>
         /// <param name="toolStripMenuItem">The device tool strip menu item</param>
-        internal void InitializeDeviceItemText(DataFlow dataFlow,
-            ToolStripMenuItem toolStripMenuItem)
+        internal void InitializeDeviceItemToolStripMenuItemCollectionItemText
+            (DataFlow dataFlow, ToolStripMenuItem toolStripMenuItem)
         {
             int index = deviceListModel.GetIndexOfMMDevice(dataFlow,
                 toolStripMenuItem.ToolTipText);
