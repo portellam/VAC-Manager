@@ -245,7 +245,6 @@ namespace VACM.NET4_0.Views
         [ExcludeFromCodeCoverage]
         public MainForm()
         {
-            SetDeviceList();
             InitializeComponent();
             PostInitializeComponent();
         }
@@ -528,7 +527,7 @@ namespace VACM.NET4_0.Views
 
             toolStripMenuItemList.ForEach(toolStripMenuItem =>
                 {
-                    InitializeDeviceItemToolStripMenuItemDropDownItemText(dataFlow,
+                    InitializeDeviceToolStripMenuItemDropDownItemText(dataFlow,
                         toolStripMenuItem);
                 });
 
@@ -541,7 +540,7 @@ namespace VACM.NET4_0.Views
         /// </summary>
         /// <param name="dataFlow">The data flow</param>
         /// <param name="toolStripMenuItem">The device tool strip menu item</param>
-        internal void InitializeDeviceItemToolStripMenuItemDropDownItemText
+        internal void InitializeDeviceToolStripMenuItemDropDownItemText
             (DataFlow dataFlow, ToolStripMenuItem toolStripMenuItem)
         {
             int index = deviceListModel.GetIndexOfMMDevice(dataFlow,
@@ -565,11 +564,36 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
+        /// Initialize repeater drop downs.
+        /// </summary>
+        internal void InitializeLinksToolStripMenuItemDropDowns()
+        {
+            linkAddConfirmToolStripMenuItem.DropDownItems.Clear();
+            linkRemoveConfirmToolStripMenuItem.DropDownItems.Clear();
+
+            //TODO: work on this more.
+        }
+
+        /// <summary>
+        /// Initialize repeater drop downs.
+        /// </summary>
+        internal void InitializeRepeaterToolStripMenuItemDropDowns()
+        {
+            repeaterRestartSelectToolStripMenuItem.DropDownItems.Clear();
+            repeaterStartConfirmToolStripMenuItem.DropDownItems.Clear();
+            repeaterStopConfirmToolStripMenuItem.DropDownItems.Clear();
+
+            //TODO: work on this more.
+        }
+
+        /// <summary>
         /// Logic to execute before InitializeLists.
         /// </summary>
-        internal void ModifyListItemsBeforeInitialization()
+        internal void ModifyDropDownsBeforeInitialization()
         {
             InitializeDeviceToolStripMenuItemDropDowns();
+            InitializeLinksToolStripMenuItemDropDowns();
+            InitializeRepeaterToolStripMenuItemDropDowns();
         }
 
         /// <summary>
@@ -604,8 +628,9 @@ namespace VACM.NET4_0.Views
             InitializeBackgroundWorkers();
             SetPropertiesOfDeviceToolStripMenuItemDropDown();
             SetIsLightThemeEnabledValueChangedEventArgs();                              //FIXME: See SetColorTheme.
+            SetDeviceList();
             SetRepeaterDataModel();
-            ModifyListItemsBeforeInitialization();
+            ModifyDropDownsBeforeInitialization();
             InitializeLists();
             SetInitialChanges();
             SetColorTheme();
