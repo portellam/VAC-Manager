@@ -1,6 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Forms;
 using VACM.NET4_0.ViewModels.Accessors;
-using MessageBox = System.Windows.MessageBox;
 
 namespace VACM.NET4_0.Extensions
 {
@@ -21,9 +21,9 @@ namespace VACM.NET4_0.Extensions
         /// <returns>True/False</returns>
         public static bool ShowYesNoAndReturnTrueFalse(string messageBoxText)
         {
-            return MessageBox.Show(messageBoxText,
-                AssemblyInformationAccessor.AssemblyTitle, MessageBoxButton.YesNo)
-                is MessageBoxResult.Yes;
+            return MessageBoxExtension.Show(messageBoxText,
+                AssemblyInformationAccessor.AssemblyTitle, MessageBoxButtons.YesNo)
+                is (DialogResult)MessageBoxResult.Yes;
         }
 
         /// <summary>
@@ -36,9 +36,8 @@ namespace VACM.NET4_0.Extensions
         public static bool ShowYesNoAndReturnTrueFalse
             (string messageBoxText, string messageBoxCaption)
         {
-            return MessageBox.Show
-                (messageBoxText, messageBoxCaption, MessageBoxButton.YesNo)
-                is MessageBoxResult.Yes;
+            return MessageBoxExtension.Show(messageBoxText, messageBoxCaption,
+                MessageBoxButtons.YesNo) is (DialogResult)MessageBoxResult.Yes;
         }
 
         /// <summary>
@@ -59,7 +58,7 @@ namespace VACM.NET4_0.Extensions
         /// <param name="messageBoxCaption">The message box caption</param>
         public static void Show(string messageBoxText, string messageBoxCaption)
         {
-            MessageBox.Show(messageBoxText, messageBoxCaption);
+            MessageBoxExtension.Show(messageBoxText, messageBoxCaption);
         }
 
         /// <summary>
