@@ -139,6 +139,7 @@ namespace VACM.NET4_0.Views
             this.gridTableLayoutPanel = new TableLayoutPanel();
             this.helpAboutToolStripMenuItem = new ToolStripMenuItem();
             this.helpToolStripMenuItem = new ToolStripMenuItem();
+            this.linkAddConfirmBackgroundWorker = new BackgroundWorker();
             this.linkAddConfirmToolStripMenuItem = new ToolStripMenuItem();
             this.linkAddSelectToolStripMenuItem = new ToolStripMenuItem();
             this.linkAddSelectWaveInToolStripMenuItem = new ToolStripMenuItem();
@@ -150,6 +151,7 @@ namespace VACM.NET4_0.Views
             this.linkDefaultPrefillToolStripMenuItem = new ToolStripMenuItem();
             this.linkDefaultResyncAtToolStripMenuItem = new ToolStripMenuItem();
             this.linkDefaultSamplingRateToolStripMenuItem = new ToolStripMenuItem();
+            this.linkRemoveConfirmBackgroundWorker = new BackgroundWorker();
             this.linkRemoveConfirmToolStripMenuItem = new ToolStripMenuItem();
             this.linkRemoveSelectAllToolStripMenuItem = new ToolStripMenuItem();
             this.linkRemoveSelectToolStripMenuItem = new ToolStripMenuItem();

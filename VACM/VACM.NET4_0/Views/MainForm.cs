@@ -21,9 +21,9 @@ namespace VACM.NET4_0.Views
     {
         #region Parameters
 
-        private AboutForm aboutForm;
+        internal AboutForm aboutForm;
 
-        private string darkModeText
+        internal string darkModeText
         {
             get
             {
@@ -38,7 +38,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool DoForceColorTheme
+        internal bool DoForceColorTheme
         {
             get
             {
@@ -46,7 +46,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool IsLightThemeEnabled
+        internal bool IsLightThemeEnabled
         {
             get
             {
@@ -59,7 +59,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool isCheckedDeviceAddNameListEmpty
+        internal bool isCheckedDeviceAddNameListEmpty
         {
             get
             {
@@ -72,7 +72,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool isCheckedDeviceAddNameListFull
+        internal bool isCheckedDeviceAddNameListFull
         {
             get
             {
@@ -86,7 +86,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool isCheckedDeviceRemoveNameListEmpty
+        internal bool isCheckedDeviceRemoveNameListEmpty
         {
             get
             {
@@ -99,7 +99,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool isCheckedDeviceRemoveNameListFull
+        internal bool isCheckedDeviceRemoveNameListFull
         {
             get
             {
@@ -113,7 +113,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool isDeviceAddNameListEmpty
+        internal bool isDeviceAddNameListEmpty
         {
             get
             {
@@ -122,7 +122,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool isDeviceAddWaveInNameListEmpty
+        internal bool isDeviceAddWaveInNameListEmpty
         {
             get
             {
@@ -132,7 +132,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool isDeviceAddWaveOutNameListEmpty
+        internal bool isDeviceAddWaveOutNameListEmpty
         {
             get
             {
@@ -142,7 +142,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool isDeviceRemoveNameListEmpty
+        internal bool isDeviceRemoveNameListEmpty
         {
             get
             {
@@ -151,7 +151,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool isDeviceRemoveWaveInNameListEmpty
+        internal bool isDeviceRemoveWaveInNameListEmpty
         {
             get
             {
@@ -162,7 +162,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private bool isDeviceRemoveWaveOutNameListEmpty
+        internal bool isDeviceRemoveWaveOutNameListEmpty
         {
             get
             {
@@ -173,15 +173,15 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private DeviceListModel deviceListModel;
-        private DeviceControl inputDeviceControl { get; set; }
-        private DeviceControl outputDeviceControl { get; set; }
-        private RepeaterDataModel repeaterDataModel { get; set; }
-        private string fileName;
+        internal DeviceListModel deviceListModel;
+        internal DeviceControl inputDeviceControl { get; set; }
+        internal DeviceControl outputDeviceControl { get; set; }
+        internal RepeaterDataModel repeaterDataModel { get; set; }
+        internal string fileName;
 
-        private List<Control> controlList = new List<Control>();
+        internal List<Control> controlList = new List<Control>();
 
-        private List<string> checkedDeviceAddWaveInNameList
+        internal List<string> checkedDeviceAddWaveInNameList
         {
             get
             {
@@ -193,7 +193,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private List<string> checkedDeviceAddWaveOutNameList
+        internal List<string> checkedDeviceAddWaveOutNameList
         {
             get
             {
@@ -205,7 +205,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private List<string> checkedDeviceRemoveWaveInNameList
+        internal List<string> checkedDeviceRemoveWaveInNameList
         {
             get
             {
@@ -217,7 +217,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private List<string> checkedDeviceRemoveWaveOutNameList
+        internal List<string> checkedDeviceRemoveWaveOutNameList
         {
             get
             {
@@ -229,7 +229,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        private List<ToolStripItem> toolStripItemList = new List<ToolStripItem>();
+        internal List<ToolStripItem> toolStripItemList = new List<ToolStripItem>();
 
         public const string WaveInAsString = "Wave In";
         public const string WaveOutAsString = "Wave Out";
@@ -629,7 +629,7 @@ namespace VACM.NET4_0.Views
                 linkRemoveConfirmBackgroundWorker_DoWork;
 
             linkRemoveConfirmBackgroundWorker.RunWorkerCompleted +=
-                linkRemoveConfirmBackgroundWorker_RunWorkerCompleted;
+                linkBackgroundWorker_RunWorkerCompleted;
 
             repeaterRestartConfirmBackgroundWorker.DoWork +=
                 repeaterRestartConfirmBackgroundWorker_DoWork;
@@ -649,8 +649,6 @@ namespace VACM.NET4_0.Views
             repeaterStopConfirmBackgroundWorker.RunWorkerCompleted +=
                 repeaterBackgroundWorker_RunWorkerCompleted;
         }
-
-        
 
         /// <summary>
         /// Code to run after generated code.
@@ -1841,7 +1839,7 @@ namespace VACM.NET4_0.Views
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="eventArgs">The event arguments</param>
-        private void repeaterRestartConfirmToolStripMenuItem_Click(object sender,
+        internal void repeaterRestartConfirmToolStripMenuItem_Click(object sender,
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
@@ -1856,7 +1854,7 @@ namespace VACM.NET4_0.Views
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="eventArgs">The event arguments</param>
-        private void repeaterStartConfirmToolStripMenuItem_Click(object sender,
+        internal void repeaterStartConfirmToolStripMenuItem_Click(object sender,
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
@@ -1871,7 +1869,7 @@ namespace VACM.NET4_0.Views
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="eventArgs">The event arguments</param>
-        private void repeaterStopConfirmToolStripMenuItem_Click(object sender,
+        internal void repeaterStopConfirmToolStripMenuItem_Click(object sender,
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
@@ -2111,48 +2109,128 @@ namespace VACM.NET4_0.Views
 
         #region Link background logic
 
-        private void linkAddConfirmBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        /// <summary>
+        /// Work logic for linkAddConfirm background worker.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        internal void linkAddConfirmBackgroundWorker_DoWork(object sender,
+            DoWorkEventArgs doWorkEventArgs)
         {
-            throw new NotImplementedException();
+            if (sender is null || !(sender is BackgroundWorker))
+            {
+                return;
+            }
+
+            doWorkEventArgs.Result = 0;                                                 //TODO: implement here.
         }
 
-        private void linkBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        /// <summary>
+        /// Work logic for linkRemoveConfirm background worker.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        internal void linkRemoveConfirmBackgroundWorker_DoWork(object sender,
+            DoWorkEventArgs doWorkEventArgs)
         {
-            throw new NotImplementedException();
+            if (sender is null || !(sender is BackgroundWorker))
+            {
+                return;
+            }
+
+            doWorkEventArgs.Result = 0;                                                 //TODO: implement here.
         }
 
-        private void linkRemoveConfirmBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        /// <summary>
+        /// On complete logic for link background worker(s).
+        /// worker.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="runWorkerCompletedEventArgs">The run worker completed event
+        /// arguments</param>
+        internal void linkBackgroundWorker_RunWorkerCompleted(object sender,
+            RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
         {
-            throw new NotImplementedException();
-        }
+            if (runWorkerCompletedEventArgs.Error != null)
+            {
+                MessageBoxWrapper.ShowError(runWorkerCompletedEventArgs.Error.Message); //TODO: determine what is the contents of this. Should I create a message here, given return value?
+                                                                                        //NOTE: undo all changes here from previous callstack operation?
+            }
 
-        private void linkRemoveConfirmBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            throw new NotImplementedException();
+            //TODO: add logic here.
+            Invalidate();
         }
 
         #endregion
 
         #region Repeater background logic
 
-        private void repeaterRestartConfirmBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        /// <summary>
+        /// Work logic for repeaterRestartConfirm background worker.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        internal void repeaterRestartConfirmBackgroundWorker_DoWork(object sender,
+            DoWorkEventArgs doWorkEventArgs)
         {
-            throw new NotImplementedException();
+            if (sender is null || !(sender is BackgroundWorker))
+            {
+                return;
+            }
+
+            doWorkEventArgs.Result = 0;                                                 //TODO: implement here.
         }
 
-        private void repeaterStartConfirmBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        /// <summary>
+        /// Work logic for repeaterStartConfirm background worker.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        internal void repeaterStartConfirmBackgroundWorker_DoWork(object sender,
+            DoWorkEventArgs doWorkEventArgs)
         {
-            throw new NotImplementedException();
+            if (sender is null || !(sender is BackgroundWorker))
+            {
+                return;
+            }
+
+            doWorkEventArgs.Result = 0;                                                 //TODO: implement here.
         }
 
-        private void repeaterStopConfirmBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        /// <summary>
+        /// Work logic for repeaterStopConfirm background worker.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="doWorkEventArgs">The do work event arguments</param>
+        internal void repeaterStopConfirmBackgroundWorker_DoWork(object sender,
+            DoWorkEventArgs doWorkEventArgs)
         {
-            throw new NotImplementedException();
+            if (sender is null || !(sender is BackgroundWorker))
+            {
+                return;
+            }
+
+            doWorkEventArgs.Result = 0;                                                 //TODO: implement here.
         }
 
-        private void repeaterBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        /// <summary>
+        /// On complete logic for repeater background worker(s).
+        /// worker.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="runWorkerCompletedEventArgs">The run worker completed event
+        /// arguments</param>
+        internal void repeaterBackgroundWorker_RunWorkerCompleted(object sender,
+            RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
         {
-            throw new NotImplementedException();
+            if (runWorkerCompletedEventArgs.Error != null)
+            {
+                MessageBoxWrapper.ShowError(runWorkerCompletedEventArgs.Error.Message); //TODO: determine what is the contents of this. Should I create a message here, given return value?
+                                                                                        //NOTE: undo all changes here from previous callstack operation?
+            }
+
+            //TODO: add logic here.
+            Invalidate();
         }
 
         #endregion
