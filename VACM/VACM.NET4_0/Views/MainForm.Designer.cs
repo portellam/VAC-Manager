@@ -67,11 +67,11 @@ namespace VACM.NET4_0.Views
         private ToolStripMenuItem linkRemoveSelectWaveOutToolStripMenuItem;
         private ToolStripMenuItem linkRemoveToolStripMenuItem;
         private ToolStripMenuItem linkToolStripMenuItem;
-        private ToolStripMenuItem repeaterRestartAllToolStripMenuItem;
+        private ToolStripMenuItem repeaterRestartSelectAllToolStripMenuItem;
         private ToolStripMenuItem repeaterRestartToolStripMenuItem;
-        private ToolStripMenuItem repeaterStartAllToolStripMenuItem;
+        private ToolStripMenuItem repeaterStartSelectAllToolStripMenuItem;
         private ToolStripMenuItem repeaterStartToolStripMenuItem;
-        private ToolStripMenuItem repeaterStopAllToolStripMenuItem;
+        private ToolStripMenuItem repeaterStopSelectAllToolStripMenuItem;
         private ToolStripMenuItem repeaterStopToolStripMenuItem;
         private ToolStripMenuItem repeaterToolStripMenuItem;
         private ToolStripMenuItem viewToggleDarkModeToolStripMenuItem;
@@ -153,13 +153,13 @@ namespace VACM.NET4_0.Views
             this.linkToolStripMenuItem = new ToolStripMenuItem();
             this.linkToolStripSeparator1 = new ToolStripSeparator();
             this.linkToolStripSeparator2 = new ToolStripSeparator();
-            this.repeaterRestartAllToolStripMenuItem = new ToolStripMenuItem();
+            this.repeaterRestartSelectAllToolStripMenuItem = new ToolStripMenuItem();
             this.repeaterRestartConfirmBackgroundWorker = new BackgroundWorker();
             this.repeaterRestartToolStripMenuItem = new ToolStripMenuItem();
-            this.repeaterStartAllToolStripMenuItem = new ToolStripMenuItem();
+            this.repeaterStartSelectAllToolStripMenuItem = new ToolStripMenuItem();
             this.repeaterStartConfirmBackgroundWorker = new BackgroundWorker();
             this.repeaterStartToolStripMenuItem = new ToolStripMenuItem();
-            this.repeaterStopAllToolStripMenuItem = new ToolStripMenuItem();
+            this.repeaterStopSelectAllToolStripMenuItem = new ToolStripMenuItem();
             this.repeaterStopConfirmBackgroundWorker = new BackgroundWorker();
             this.repeaterStopToolStripMenuItem = new ToolStripMenuItem();
             this.repeaterToolStripMenuItem = new ToolStripMenuItem();
@@ -798,13 +798,10 @@ namespace VACM.NET4_0.Views
                 .AddRange(new ToolStripItem[]
                 {
                     this.repeaterRestartToolStripMenuItem,
-                    this.repeaterRestartAllToolStripMenuItem,
                     this.repeaterToolStripSeparator1,
                     this.repeaterStartToolStripMenuItem,
-                    this.repeaterStartAllToolStripMenuItem,
                     this.repeaterToolStripSeparator2,
                     this.repeaterStopToolStripMenuItem,
-                    this.repeaterStopAllToolStripMenuItem
                 });
 
             this.repeaterToolStripMenuItem.Name = "repeaterToolStripMenuItem";
@@ -815,19 +812,25 @@ namespace VACM.NET4_0.Views
             this.repeaterToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             this.repeaterToolStripMenuItem.Text = "Repeater";
             // 
-            // repeaterRestartAllToolStripMenuItem
+            // repeaterRestartSelectAllToolStripMenuItem
             // 
-            this.repeaterRestartAllToolStripMenuItem.Name =
+            this.repeaterRestartSelectAllToolStripMenuItem.Name =
                 "repeaterRestartAllToolStripMenuItem";
 
-            this.repeaterRestartAllToolStripMenuItem.Size =
+            this.repeaterRestartSelectAllToolStripMenuItem.Size =
                 new System.Drawing.Size(224, 26);
 
-            this.repeaterRestartAllToolStripMenuItem.Tag = "";
-            this.repeaterRestartAllToolStripMenuItem.Text = "Restart All";
+            this.repeaterRestartSelectAllToolStripMenuItem.Tag = "";
+            this.repeaterRestartSelectAllToolStripMenuItem.Text = "Select All";
             // 
             // repeaterRestartToolStripMenuItem
             // 
+            this.repeaterRestartToolStripMenuItem.DropDownItems
+                .AddRange(new ToolStripItem[]
+                {
+                    this.repeaterRestartSelectAllToolStripMenuItem,
+                 });
+
             this.repeaterRestartToolStripMenuItem.Name =
                 "repeaterRestartToolStripMenuItem";
 
@@ -837,49 +840,59 @@ namespace VACM.NET4_0.Views
             this.repeaterRestartToolStripMenuItem.Tag = "";
             this.repeaterRestartToolStripMenuItem.Text = "Restart...";
             // 
-            // repeaterStartAllToolStripMenuItem
+            // repeaterStartSelectAllToolStripMenuItem
             // 
-            this.repeaterStartAllToolStripMenuItem.CheckOnClick = true;
+            this.repeaterStartSelectAllToolStripMenuItem.CheckOnClick = true;
 
-            this.repeaterStartAllToolStripMenuItem.Name =
+            this.repeaterStartSelectAllToolStripMenuItem.Name =
                 "repeaterStartAllToolStripMenuItem";
 
-            this.repeaterStartAllToolStripMenuItem.Size =
+            this.repeaterStartSelectAllToolStripMenuItem.Size =
                 new System.Drawing.Size(224, 26);
 
-            this.repeaterStartAllToolStripMenuItem.Tag = "";
-            this.repeaterStartAllToolStripMenuItem.Text = "Start All";
+            this.repeaterStartSelectAllToolStripMenuItem.Tag = "";
+            this.repeaterStartSelectAllToolStripMenuItem.Text = "Select All";
             // 
             // repeaterStartToolStripMenuItem
             // 
-            this.repeaterStartToolStripMenuItem.CheckOnClick = true;
+            this.repeaterStartToolStripMenuItem.DropDownItems
+                .AddRange(new ToolStripItem[]
+                {
+                    this.repeaterStartSelectAllToolStripMenuItem,
+                });
+
             this.repeaterStartToolStripMenuItem.Name = "repeaterStartToolStripMenuItem";
             this.repeaterStartToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.repeaterStartToolStripMenuItem.Tag = "";
             this.repeaterStartToolStripMenuItem.Text = "Start...";
             // 
+            // repeaterStopSelectAllToolStripMenuItem
+            // 
+            this.repeaterStopSelectAllToolStripMenuItem.CheckOnClick = true;
+
+            this.repeaterStopSelectAllToolStripMenuItem.Name =
+                "repeaterStopAllToolStripMenuItem";
+
+            this.repeaterStopSelectAllToolStripMenuItem.Size =
+                new System.Drawing.Size(224, 26);
+
+            this.repeaterStopSelectAllToolStripMenuItem.Tag = "";
+            this.repeaterStopSelectAllToolStripMenuItem.Text = "Select All";
+            // 
             // repeaterStopToolStripMenuItem
             // 
-            this.repeaterStopToolStripMenuItem.CheckOnClick = true;
+            this.repeaterStopToolStripMenuItem.DropDownItems
+                .AddRange(new ToolStripItem[]
+                {
+                    this.repeaterStopSelectAllToolStripMenuItem,
+                });
 
             this.repeaterStopToolStripMenuItem.Name = "repeaterStopToolStripMenuItem";
 
             this.repeaterStopToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.repeaterStopToolStripMenuItem.Tag = "";
             this.repeaterStopToolStripMenuItem.Text = "Stop...";
-            // 
-            // repeaterStopAllToolStripMenuItem
-            // 
-            this.repeaterStopAllToolStripMenuItem.CheckOnClick = true;
-
-            this.repeaterStopAllToolStripMenuItem.Name =
-                "repeaterStopAllToolStripMenuItem";
-
-            this.repeaterStopAllToolStripMenuItem.Size =
-                new System.Drawing.Size(224, 26);
-
-            this.repeaterStopAllToolStripMenuItem.Tag = "";
-            this.repeaterStopAllToolStripMenuItem.Text = "Stop All";
+            
             // 
             // repeaterToolStripSeparator1
             // 

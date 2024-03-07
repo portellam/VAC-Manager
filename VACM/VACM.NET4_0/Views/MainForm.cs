@@ -325,11 +325,11 @@ namespace VACM.NET4_0.Views
             toolStripItemList.Add(linkToolStripMenuItem);
             toolStripItemList.Add(linkToolStripSeparator1);
             toolStripItemList.Add(linkToolStripSeparator2);
-            toolStripItemList.Add(repeaterRestartAllToolStripMenuItem);
+            toolStripItemList.Add(repeaterRestartSelectAllToolStripMenuItem);
             toolStripItemList.Add(repeaterRestartToolStripMenuItem);
-            toolStripItemList.Add(repeaterStartAllToolStripMenuItem);
+            toolStripItemList.Add(repeaterStartSelectAllToolStripMenuItem);
             toolStripItemList.Add(repeaterStartToolStripMenuItem);
-            toolStripItemList.Add(repeaterStopAllToolStripMenuItem);
+            toolStripItemList.Add(repeaterStopSelectAllToolStripMenuItem);
             toolStripItemList.Add(repeaterStopToolStripMenuItem);
             toolStripItemList.Add(repeaterToolStripMenuItem);
             toolStripItemList.Add(repeaterToolStripSeparator1);
