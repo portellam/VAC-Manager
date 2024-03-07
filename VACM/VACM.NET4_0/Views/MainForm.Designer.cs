@@ -67,11 +67,17 @@ namespace VACM.NET4_0.Views
         private ToolStripMenuItem linkRemoveSelectWaveOutToolStripMenuItem;
         private ToolStripMenuItem linkRemoveToolStripMenuItem;
         private ToolStripMenuItem linkToolStripMenuItem;
+        private ToolStripMenuItem repeaterRestartConfirmToolStripMenuItem;
         private ToolStripMenuItem repeaterRestartSelectAllToolStripMenuItem;
+        private ToolStripMenuItem repeaterRestartSelectToolStripMenuItem;
         private ToolStripMenuItem repeaterRestartToolStripMenuItem;
+        private ToolStripMenuItem repeaterStartConfirmToolStripMenuItem;
         private ToolStripMenuItem repeaterStartSelectAllToolStripMenuItem;
+        private ToolStripMenuItem repeaterStartSelectToolStripMenuItem;
         private ToolStripMenuItem repeaterStartToolStripMenuItem;
+        private ToolStripMenuItem repeaterStopConfirmToolStripMenuItem;
         private ToolStripMenuItem repeaterStopSelectAllToolStripMenuItem;
+        private ToolStripMenuItem repeaterStopSelectToolStripMenuItem;
         private ToolStripMenuItem repeaterStopToolStripMenuItem;
         private ToolStripMenuItem repeaterToolStripMenuItem;
         private ToolStripMenuItem viewToggleDarkModeToolStripMenuItem;
@@ -812,22 +818,13 @@ namespace VACM.NET4_0.Views
             this.repeaterToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             this.repeaterToolStripMenuItem.Text = "Repeater";
             // 
-            // repeaterRestartSelectAllToolStripMenuItem
-            // 
-            this.repeaterRestartSelectAllToolStripMenuItem.Name =
-                "repeaterRestartAllToolStripMenuItem";
-
-            this.repeaterRestartSelectAllToolStripMenuItem.Size =
-                new System.Drawing.Size(224, 26);
-
-            this.repeaterRestartSelectAllToolStripMenuItem.Tag = "";
-            this.repeaterRestartSelectAllToolStripMenuItem.Text = "Select All";
-            // 
             // repeaterRestartToolStripMenuItem
             // 
             this.repeaterRestartToolStripMenuItem.DropDownItems
                 .AddRange(new ToolStripItem[]
                 {
+                    this.repeaterRestartConfirmToolStripMenuItem,
+                    this.repeaterRestartSelectToolStripMenuItem,
                     this.repeaterRestartSelectAllToolStripMenuItem,
                  });
 
@@ -839,6 +836,82 @@ namespace VACM.NET4_0.Views
 
             this.repeaterRestartToolStripMenuItem.Tag = "";
             this.repeaterRestartToolStripMenuItem.Text = "Restart...";
+            // 
+            // repeaterRestartConfirmToolStripMenuItem
+            // 
+            this.repeaterRestartConfirmToolStripMenuItem.Name =
+                "repeaterRestartConfirmToolStripMenuItem";
+
+            this.repeaterRestartConfirmToolStripMenuItem.Size =
+                new System.Drawing.Size(156, 26);
+
+            this.repeaterRestartConfirmToolStripMenuItem.Tag = "";
+            this.repeaterRestartConfirmToolStripMenuItem.Text = "Confirm Selected";
+
+            this.repeaterRestartConfirmToolStripMenuItem.Click += new System.EventHandler
+                (this.repeaterRestartConfirmToolStripMenuItem_Click);
+            // 
+            // repeaterRestartSelectToolStripMenuItem
+            // 
+            this.repeaterRestartSelectToolStripMenuItem.Name =
+                "repeaterRestartSelectToolStripMenuItem";
+
+            this.repeaterRestartSelectToolStripMenuItem.Size =
+                new System.Drawing.Size(285, 26);
+
+            this.repeaterRestartSelectToolStripMenuItem.Tag = "";
+            this.repeaterRestartSelectToolStripMenuItem.Text = "Select...";
+            // 
+            // repeaterRestartSelectAllToolStripMenuItem
+            // 
+            this.repeaterRestartSelectAllToolStripMenuItem.Name =
+                "repeaterRestartAllToolStripMenuItem";
+
+            this.repeaterRestartSelectAllToolStripMenuItem.Size =
+                new System.Drawing.Size(224, 26);
+
+            this.repeaterRestartSelectAllToolStripMenuItem.Tag = "";
+            this.repeaterRestartSelectAllToolStripMenuItem.Text = "Select All";
+            // 
+            // repeaterStartToolStripMenuItem
+            // 
+            this.repeaterStartToolStripMenuItem.DropDownItems
+                .AddRange(new ToolStripItem[]
+                {
+                    this.repeaterStartConfirmToolStripMenuItem,
+                    this.repeaterRestartSelectToolStripMenuItem,
+                    this.repeaterStartSelectAllToolStripMenuItem,
+                });
+
+            this.repeaterStartToolStripMenuItem.Name = "repeaterStartToolStripMenuItem";
+            this.repeaterStartToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.repeaterStartToolStripMenuItem.Tag = "";
+            this.repeaterStartToolStripMenuItem.Text = "Start...";
+            // 
+            // repeaterStartConfirmToolStripMenuItem
+            // 
+            this.repeaterStartConfirmToolStripMenuItem.Name =
+                "repeaterStartConfirmToolStripMenuItem";
+
+            this.repeaterStartConfirmToolStripMenuItem.Size =
+                new System.Drawing.Size(156, 26);
+
+            this.repeaterStartConfirmToolStripMenuItem.Tag = "";
+            this.repeaterStartConfirmToolStripMenuItem.Text = "Confirm Selected";
+
+            this.repeaterStartConfirmToolStripMenuItem.Click += new System.EventHandler
+                (this.repeaterStartConfirmToolStripMenuItem_Click);
+            // 
+            // repeaterStartSelectToolStripMenuItem
+            // 
+            this.repeaterStartSelectToolStripMenuItem.Name =
+                "repeaterStartSelectToolStripMenuItem";
+
+            this.repeaterStartSelectToolStripMenuItem.Size =
+                new System.Drawing.Size(285, 26);
+
+            this.repeaterStartSelectToolStripMenuItem.Tag = "";
+            this.repeaterStartSelectToolStripMenuItem.Text = "Select...";
             // 
             // repeaterStartSelectAllToolStripMenuItem
             // 
@@ -853,18 +926,46 @@ namespace VACM.NET4_0.Views
             this.repeaterStartSelectAllToolStripMenuItem.Tag = "";
             this.repeaterStartSelectAllToolStripMenuItem.Text = "Select All";
             // 
-            // repeaterStartToolStripMenuItem
+            // repeaterStopToolStripMenuItem
             // 
-            this.repeaterStartToolStripMenuItem.DropDownItems
+            this.repeaterStopToolStripMenuItem.DropDownItems
                 .AddRange(new ToolStripItem[]
                 {
-                    this.repeaterStartSelectAllToolStripMenuItem,
+                    this.repeaterStopConfirmToolStripMenuItem,
+                    this.repeaterStopSelectToolStripMenuItem,
+                    this.repeaterStopSelectAllToolStripMenuItem,
                 });
 
-            this.repeaterStartToolStripMenuItem.Name = "repeaterStartToolStripMenuItem";
-            this.repeaterStartToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.repeaterStartToolStripMenuItem.Tag = "";
-            this.repeaterStartToolStripMenuItem.Text = "Start...";
+            this.repeaterStopToolStripMenuItem.Name = "repeaterStopToolStripMenuItem";
+
+            this.repeaterStopToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.repeaterStopToolStripMenuItem.Tag = "";
+            this.repeaterStopToolStripMenuItem.Text = "Stop...";
+            // 
+            // repeaterStopConfirmToolStripMenuItem
+            // 
+            this.repeaterStopConfirmToolStripMenuItem.Name =
+                "repeaterStopConfirmToolStripMenuItem";
+
+            this.repeaterStopConfirmToolStripMenuItem.Size =
+                new System.Drawing.Size(156, 26);
+
+            this.repeaterStopConfirmToolStripMenuItem.Tag = "";
+            this.repeaterStopConfirmToolStripMenuItem.Text = "Confirm Selected";
+
+            this.repeaterStopConfirmToolStripMenuItem.Click += new System.EventHandler
+                (this.repeaterStopConfirmToolStripMenuItem_Click);
+            // 
+            // repeaterStopSelectToolStripMenuItem
+            // 
+            this.repeaterStopSelectToolStripMenuItem.Name =
+                "repeaterStopSelectToolStripMenuItem";
+
+            this.repeaterStopSelectToolStripMenuItem.Size =
+                new System.Drawing.Size(285, 26);
+
+            this.repeaterStopSelectToolStripMenuItem.Tag = "";
+            this.repeaterStopSelectToolStripMenuItem.Text = "Select...";
             // 
             // repeaterStopSelectAllToolStripMenuItem
             // 
@@ -878,21 +979,6 @@ namespace VACM.NET4_0.Views
 
             this.repeaterStopSelectAllToolStripMenuItem.Tag = "";
             this.repeaterStopSelectAllToolStripMenuItem.Text = "Select All";
-            // 
-            // repeaterStopToolStripMenuItem
-            // 
-            this.repeaterStopToolStripMenuItem.DropDownItems
-                .AddRange(new ToolStripItem[]
-                {
-                    this.repeaterStopSelectAllToolStripMenuItem,
-                });
-
-            this.repeaterStopToolStripMenuItem.Name = "repeaterStopToolStripMenuItem";
-
-            this.repeaterStopToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.repeaterStopToolStripMenuItem.Tag = "";
-            this.repeaterStopToolStripMenuItem.Text = "Stop...";
-            
             // 
             // repeaterToolStripSeparator1
             // 

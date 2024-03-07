@@ -1761,6 +1761,48 @@ namespace VACM.NET4_0.Views
 
         #region 4. Repeater menu logic
 
+        /// <summary>
+        /// Click event logic for repeaterRestartConfirmToolStripMenuItem.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        private void repeaterRestartConfirmToolStripMenuItem_Click(object sender,
+            EventArgs eventArgs)                                                        //TODO: implement!
+        {
+            if (sender is null || !(sender is ToolStripMenuItem))
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Click event logic for repeaterStartConfirmToolStripMenuItem.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        private void repeaterStartConfirmToolStripMenuItem_Click(object sender,
+            EventArgs eventArgs)                                                        //TODO: implement!
+        {
+            if (sender is null || !(sender is ToolStripMenuItem))
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Click event logic for repeaterStopConfirmToolStripMenuItem.
+        /// </summary>
+        /// <param name="sender">The sender object</param>
+        /// <param name="eventArgs">The event arguments</param>
+        private void repeaterStopConfirmToolStripMenuItem_Click(object sender,
+            EventArgs eventArgs)                                                        //TODO: implement!
+        {
+            if (sender is null || !(sender is ToolStripMenuItem))
+            {
+                return;
+            }
+        }
+
         #endregion
 
         #region 5. View menu logic
