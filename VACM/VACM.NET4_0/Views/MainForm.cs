@@ -343,9 +343,9 @@ namespace VACM.NET4_0.Views
         #region Initialization logic
 
         /// <summary>
-        /// Initialize device drop down collections.
+        /// Initialize device drop downs.
         /// </summary>
-        internal void InitializeDeviceDropDownCollections()
+        internal void InitializeDeviceToolStripMenuItemDropDowns()
         {
             deviceAddSelectWaveInToolStripMenuItem.DropDownItems.Clear();
             deviceAddSelectWaveOutToolStripMenuItem.DropDownItems.Clear();
@@ -360,56 +360,58 @@ namespace VACM.NET4_0.Views
             deviceToolStripMenuItem.Enabled = false;
             Refresh();
 
-            InitializeDeviceToolStripMenuItemCollection
+            InitializeDeviceToolStripMenuItemDropDown
                 (deviceAddSelectToolStripMenuItemEnabled_Confirm,
                 deviceAddSelectWaveInToolStripMenuItem,
                 deviceListModel.UnselectedWaveInMMDeviceList);
 
             InitializeDeviceToolStripMenuItem(deviceAddSelectWaveInToolStripMenuItem);
 
-            InitializeDeviceToolStripMenuItemCollection
+            InitializeDeviceToolStripMenuItemDropDown
                 (deviceAddSelectToolStripMenuItemEnabled_Confirm,
                 deviceAddSelectWaveOutToolStripMenuItem,
                 deviceListModel.UnselectedWaveOutMMDeviceList);
 
             InitializeDeviceToolStripMenuItem(deviceAddSelectWaveOutToolStripMenuItem);
 
-            InitializeDeviceToolStripMenuItemCollection
+            InitializeDeviceToolStripMenuItemDropDown
                 (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
                 deviceRemoveSelectWaveInToolStripMenuItem,
                 deviceListModel.SelectedWaveInMMDeviceList);
 
-            InitializeDeviceToolStripMenuItem(deviceRemoveSelectWaveInToolStripMenuItem);
+            InitializeDeviceToolStripMenuItem
+                (deviceRemoveSelectWaveInToolStripMenuItem);
 
-            InitializeDeviceToolStripMenuItemCollection
+            InitializeDeviceToolStripMenuItemDropDown
                 (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
                 deviceRemoveSelectWaveOutToolStripMenuItem,
                 deviceListModel.SelectedWaveOutMMDeviceList);
 
-            InitializeDeviceToolStripMenuItem(deviceRemoveSelectWaveOutToolStripMenuItem);
+            InitializeDeviceToolStripMenuItem
+                (deviceRemoveSelectWaveOutToolStripMenuItem);
 
-            InitializeDeviceToolStripMenuItemCollection
+            InitializeDeviceToolStripMenuItemDropDown
                 (linkAddSelectWaveInToolStripMenuItem_Click,
                 linkAddSelectWaveInToolStripMenuItem,
                 deviceListModel.SelectedWaveInMMDeviceList);
 
             InitializeDeviceToolStripMenuItem(linkAddSelectWaveInToolStripMenuItem);
 
-            InitializeDeviceToolStripMenuItemCollection
+            InitializeDeviceToolStripMenuItemDropDown
                 (linkAddSelectWaveOutToolStripMenuItem_Click,
                 linkAddSelectWaveOutToolStripMenuItem,
                 deviceListModel.SelectedWaveOutMMDeviceList);
 
             InitializeDeviceToolStripMenuItem(linkAddSelectWaveOutToolStripMenuItem);
 
-            InitializeDeviceToolStripMenuItemCollection
+            InitializeDeviceToolStripMenuItemDropDown
                 (linkRemoveSelectWaveInToolStripMenuItem_Click,
                 linkRemoveSelectWaveInToolStripMenuItem,
                 repeaterDataModel.LinkWaveInMMDeviceList);
 
             InitializeDeviceToolStripMenuItem(linkRemoveSelectWaveInToolStripMenuItem);
 
-            InitializeDeviceToolStripMenuItemCollection
+            InitializeDeviceToolStripMenuItemDropDown
                 (linkRemoveSelectWaveOutToolStripMenuItem_Click,
                 linkRemoveSelectWaveOutToolStripMenuItem,
                 repeaterDataModel.LinkWaveOutMMDeviceList);
@@ -424,7 +426,8 @@ namespace VACM.NET4_0.Views
         /// Initialize device tool strip menu item properties.
         /// </summary>
         /// <param name="toolStripMenuItem">The tool strip menu item</param>
-        internal void InitializeDeviceToolStripMenuItem(ToolStripMenuItem toolStripMenuItem)
+        internal void InitializeDeviceToolStripMenuItem
+            (ToolStripMenuItem toolStripMenuItem)
         {
             if (toolStripMenuItem is null)
             {
@@ -434,7 +437,7 @@ namespace VACM.NET4_0.Views
             FormColorUpdater.SetColorsOfToolStripItem(toolStripMenuItem);
             SetMousePropertiesOfToolStripMenuItemDropDown(toolStripMenuItem);
 
-            SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
+            SetPropertiesOfToolStripMenuItemGivenItemDropDownIsEmptyOrNot
                 (toolStripMenuItem);
         }
 
@@ -444,7 +447,7 @@ namespace VACM.NET4_0.Views
         /// <param name="eventHandler">The event handler</param>
         /// <param name="mMDevice">The MMDevice</param>
         /// <param name="toolStripMenuItemList">The tool strip menu item list</param>
-        internal void InitializeDeviceToolStripMenuItemCollectionItem
+        internal void InitializeDeviceToolStripMenuItemDropDownItem
             (EventHandler eventHandler, MMDevice mMDevice,
             List<ToolStripMenuItem> toolStripMenuItemList)
         {
@@ -494,15 +497,16 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Initialize a device tool strip menu item collection by parsing the related
+        /// Initialize a device tool strip menu item drop down by parsing the related
         /// device list.
         /// </summary>
         /// <param name="eventHandler">The event handler</param>
         /// <param name="parentToolStripMenuItem">The parent device tool strip menu item
         /// </param>
         /// <param name="mMDeviceList">The device list</param>
-        internal void InitializeDeviceToolStripMenuItemCollection(EventHandler eventHandler,
-            ToolStripMenuItem parentToolStripMenuItem, List<MMDevice> mMDeviceList)
+        internal void InitializeDeviceToolStripMenuItemDropDown
+            (EventHandler eventHandler, ToolStripMenuItem parentToolStripMenuItem,
+            List<MMDevice> mMDeviceList)
         {
             if (parentToolStripMenuItem is null || mMDeviceList is null
                 || mMDeviceList.Count == 0)
@@ -518,12 +522,14 @@ namespace VACM.NET4_0.Views
 
             mMDeviceList.ForEach(mMDevice =>
                 {
-                    InitializeDeviceToolStripMenuItemCollectionItem(eventHandler, mMDevice, toolStripMenuItemList);
+                    InitializeDeviceToolStripMenuItemDropDownItem(eventHandler,
+                        mMDevice, toolStripMenuItemList);
                 });
 
             toolStripMenuItemList.ForEach(toolStripMenuItem =>
                 {
-                    InitializeDeviceItemToolStripMenuItemCollectionItemText(dataFlow, toolStripMenuItem);
+                    InitializeDeviceItemToolStripMenuItemDropDownItemText(dataFlow,
+                        toolStripMenuItem);
                 });
 
             parentToolStripMenuItem.DropDownItems
@@ -535,7 +541,7 @@ namespace VACM.NET4_0.Views
         /// </summary>
         /// <param name="dataFlow">The data flow</param>
         /// <param name="toolStripMenuItem">The device tool strip menu item</param>
-        internal void InitializeDeviceItemToolStripMenuItemCollectionItemText
+        internal void InitializeDeviceItemToolStripMenuItemDropDownItemText
             (DataFlow dataFlow, ToolStripMenuItem toolStripMenuItem)
         {
             int index = deviceListModel.GetIndexOfMMDevice(dataFlow,
@@ -563,7 +569,7 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void ModifyListItemsBeforeInitialization()
         {
-            InitializeDeviceDropDownCollections();
+            InitializeDeviceToolStripMenuItemDropDowns();
         }
 
         /// <summary>
@@ -596,7 +602,7 @@ namespace VACM.NET4_0.Views
         internal void PostInitializeComponent()
         {
             InitializeBackgroundWorkers();
-            SetPropertiesOfDeviceToolStripMenuItemDropDowns();
+            SetPropertiesOfDeviceToolStripMenuItemDropDown();
             SetIsLightThemeEnabledValueChangedEventArgs();                              //FIXME: See SetColorTheme.
             SetRepeaterDataModel();
             ModifyListItemsBeforeInitialization();
@@ -604,8 +610,8 @@ namespace VACM.NET4_0.Views
             SetInitialChanges();
             SetColorTheme();
             CloseAndSetPropertiesOfDeviceReloadAllToolStripMenuItem();
-            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDown();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDown();
         }
 
         /// <summary>
@@ -780,12 +786,12 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Move all checked tool strip menu items to new tool strip item collection.
+        /// Move all checked tool strip menu items to new tool strip item drop down.
         /// </summary>
         /// <param name="firstToolStripMenuItem">The first tool strip menu item</param>
         /// <param name="secondToolStripMenuItem">The second tool strip menu item
         /// </param>
-        internal void MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+        internal void MoveAllCheckedToolStripMenuItemDropDownToNewToolStripItemDropDown
             (ToolStripMenuItem firstToolStripMenuItem,
             ToolStripMenuItem secondToolStripMenuItem)
         {
@@ -804,28 +810,28 @@ namespace VACM.NET4_0.Views
 
             toolStripMenuItemList.ForEach(toolStripMenuItem =>
                 {
-                    MoveToolStripMenuItemToNewToolStripItemCollection
+                    MoveToolStripMenuItemDropDownToNewToolStripItemDropDown
                         (toolStripMenuItem, firstToolStripMenuItem,
                         secondToolStripMenuItem);
                 });
 
-            SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
+            SetPropertiesOfToolStripMenuItemGivenItemDropDownIsEmptyOrNot
                 (firstToolStripMenuItem);
 
-            SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
+            SetPropertiesOfToolStripMenuItemGivenItemDropDownIsEmptyOrNot
                 (secondToolStripMenuItem);
 
-            SortToolStripMenuItemCollectionByText(secondToolStripMenuItem);
+            SortToolStripMenuItemDropDownByText(secondToolStripMenuItem);
         }
 
         /// <summary>
-        /// Move tool strip menu item to new tool strip item collection.
+        /// Move tool strip menu item to new tool strip item drop down.
         /// </summary>
         /// <param name="thisToolStripMenuItem">The tool strip menu item to move</param>
         /// <param name="firstToolStripMenuItem">The first tool strip menu item</param>
         /// <param name="secondToolStripMenuItem">The second tool strip menu item
         /// </param>
-        internal void MoveToolStripMenuItemToNewToolStripItemCollection
+        internal void MoveToolStripMenuItemDropDownToNewToolStripItemDropDown
             (ToolStripMenuItem thisToolStripMenuItem,
             ToolStripMenuItem firstToolStripMenuItem,
             ToolStripMenuItem secondToolStripMenuItem)
@@ -856,7 +862,7 @@ namespace VACM.NET4_0.Views
         /// Sort tool strip menu item drop down by text.
         /// </summary>
         /// <param name="toolStripMenuItem">The tool strip menu item</param>
-        internal void SortToolStripMenuItemCollectionByText
+        internal void SortToolStripMenuItemDropDownByText
             (ToolStripMenuItem toolStripMenuItem)
         {
             if (toolStripMenuItem is null || toolStripMenuItem.DropDownItems.Count == 0)
@@ -1028,11 +1034,11 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Set properties of tool strip menu item given tool strip item collection is
+        /// Set properties of tool strip menu item given tool strip item drop down is
         /// empty or not.
         /// </summary>
         /// <param name="toolStripMenuItem">The tool strip menu item</param>
-        internal void SetPropertiesOfToolStripMenuItemGivenItemCollectionIsEmptyOrNot
+        internal void SetPropertiesOfToolStripMenuItemGivenItemDropDownIsEmptyOrNot
             (ToolStripMenuItem toolStripMenuItem)
         {
             bool isNotEmpty = toolStripMenuItem.DropDownItems.Count > 0;
@@ -1144,7 +1150,7 @@ namespace VACM.NET4_0.Views
         /// <summary>
         /// Close and set properties of deviceAddToolStripMenuItem drop downs.
         /// </summary>
-        internal void CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns()
+        internal void CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDown()
         {
             bool isBusy = deviceAddConfirmBackgroundWorker.IsBusy;
             bool isDeviceAddNameListEmpty = this.isDeviceAddNameListEmpty;
@@ -1203,7 +1209,7 @@ namespace VACM.NET4_0.Views
         /// <summary>
         /// Close and set properties of deviceRemoveToolStripMenuItem drop downs.
         /// </summary>
-        internal void CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns()
+        internal void CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDown()
         {
             bool isBusy = deviceRemoveConfirmBackgroundWorker.IsBusy;
 
@@ -1283,8 +1289,8 @@ namespace VACM.NET4_0.Views
                 (deviceAddSelectWaveOutToolStripMenuItem,
                 deviceAddSelectAllToolStripMenuItem.Checked);
 
-            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDown();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDown();
 
             RecursivelyShowDropDownForEveryParentToolStripItem
                 (deviceAddSelectAllToolStripMenuItem);
@@ -1303,7 +1309,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDown();
             Invalidate();
         }
 
@@ -1376,8 +1382,8 @@ namespace VACM.NET4_0.Views
                 (deviceRemoveSelectWaveOutToolStripMenuItem,
                 deviceRemoveSelectAllToolStripMenuItem.Checked);
 
-            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDown();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDown();
 
             RecursivelyShowDropDownForEveryParentToolStripItem
                 (deviceRemoveSelectAllToolStripMenuItem);
@@ -1396,7 +1402,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
-            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDown();
             Invalidate();
         }
 
@@ -1476,7 +1482,7 @@ namespace VACM.NET4_0.Views
         /// <summary>
         /// Set properties of deviceToolStripMenuItem drop downs.
         /// </summary>
-        internal void SetPropertiesOfDeviceToolStripMenuItemDropDowns()
+        internal void SetPropertiesOfDeviceToolStripMenuItemDropDown()
         {
             deviceAddSelectWaveInToolStripMenuItem.Text = WaveInAsString;
             deviceAddSelectWaveOutToolStripMenuItem.Text = WaveOutAsString;
@@ -1568,8 +1574,8 @@ namespace VACM.NET4_0.Views
 
             inputDeviceControl = new DeviceControl(mMDevice);
 
-            SetPropertiesOfSelectedToolStripMenuItem(linkAddSelectWaveInToolStripMenuItem,
-                toolStripMenuItem);
+            SetPropertiesOfSelectedToolStripMenuItem
+                (linkAddSelectWaveInToolStripMenuItem, toolStripMenuItem);
 
             AddToRepeaterModel();
         }
@@ -1599,8 +1605,8 @@ namespace VACM.NET4_0.Views
 
             outputDeviceControl = new DeviceControl(mMDevice);
 
-            SetPropertiesOfSelectedToolStripMenuItem(linkAddSelectWaveOutToolStripMenuItem,
-                toolStripMenuItem);
+            SetPropertiesOfSelectedToolStripMenuItem
+                (linkAddSelectWaveOutToolStripMenuItem, toolStripMenuItem);
 
             AddToRepeaterModel();
         }
@@ -1672,8 +1678,8 @@ namespace VACM.NET4_0.Views
 
             inputDeviceControl = new DeviceControl(mMDevice);
 
-            SetPropertiesOfSelectedToolStripMenuItem(linkRemoveSelectWaveInToolStripMenuItem,
-                toolStripMenuItem);
+            SetPropertiesOfSelectedToolStripMenuItem
+                (linkRemoveSelectWaveInToolStripMenuItem, toolStripMenuItem);
 
             RemoveFromRepeaterModel();
         }
@@ -1703,8 +1709,8 @@ namespace VACM.NET4_0.Views
 
             outputDeviceControl = new DeviceControl(mMDevice);
 
-            SetPropertiesOfSelectedToolStripMenuItem(linkRemoveSelectWaveOutToolStripMenuItem,
-                toolStripMenuItem);
+            SetPropertiesOfSelectedToolStripMenuItem
+                (linkRemoveSelectWaveOutToolStripMenuItem, toolStripMenuItem);
 
             RemoveFromRepeaterModel();
         }
@@ -1800,7 +1806,7 @@ namespace VACM.NET4_0.Views
         /// <summary>
         /// Action logic for deviceAddConfirm background worker.
         /// Return 2 if list is empty.
-        /// Return 1 if moving between lists or collections fails.
+        /// Return 1 if moving between lists or drop downs fails.
         /// Return 0 if successful.
         /// </summary>
         /// <param name="doWorkEventArgs">The do work event arguments</param>
@@ -1822,11 +1828,11 @@ namespace VACM.NET4_0.Views
                 deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Render,
                     checkedDeviceAddWaveOutNameList);
 
-                MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                MoveAllCheckedToolStripMenuItemDropDownToNewToolStripItemDropDown
                     (deviceAddSelectWaveInToolStripMenuItem,
                     deviceRemoveSelectWaveInToolStripMenuItem);
 
-                MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                MoveAllCheckedToolStripMenuItemDropDownToNewToolStripItemDropDown
                     (deviceAddSelectWaveOutToolStripMenuItem,
                      deviceRemoveSelectWaveOutToolStripMenuItem);
             }
@@ -1840,9 +1846,9 @@ namespace VACM.NET4_0.Views
         }
 
         /// <summary>
-        /// Action logic for deviceReloadAllConfirm background worker. If moving items in
-        /// device list model raise exception, cancel and return 1. If moving checked
-        /// items in item collection raise exception, cancel and return 2.
+        /// Action logic for deviceReloadAllConfirm background worker. If moving items
+        /// in device list model raise exception, cancel and return 1. If moving checked
+        /// items in item drop down raise exception, cancel and return 2.
         /// Else, return 0.
         /// </summary>
         /// <param name="doWorkEventArgs">The do work event arguments</param>
@@ -1854,8 +1860,8 @@ namespace VACM.NET4_0.Views
             {
                 SetDeviceList();
                 InitializeLists();
-                CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-                CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+                CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDown();
+                CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDown();
             }
             catch
             {
@@ -1869,7 +1875,7 @@ namespace VACM.NET4_0.Views
         /// <summary>
         /// Action logic for deviceRemoveConfirm background worker.
         /// Return 2 if list is empty.
-        /// Return 1 if moving between lists or collections fails.
+        /// Return 1 if moving between lists or drop downs fails.
         /// Return 0 if successful.
         /// </summary>
         /// <param name="doWorkEventArgs">The do work event arguments</param>
@@ -1891,11 +1897,11 @@ namespace VACM.NET4_0.Views
                 deviceListModel.MoveMMDeviceNameListToSelectedList(DataFlow.Render,
                     checkedDeviceRemoveWaveOutNameList);
 
-                MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                MoveAllCheckedToolStripMenuItemDropDownToNewToolStripItemDropDown
                     (deviceRemoveSelectWaveInToolStripMenuItem,
                     deviceAddSelectWaveInToolStripMenuItem);
 
-                MoveAllCheckedToolStripMenuItemsToNewToolStripItemCollection
+                MoveAllCheckedToolStripMenuItemDropDownToNewToolStripItemDropDown
                     (deviceRemoveSelectWaveOutToolStripMenuItem,
                      deviceAddSelectWaveOutToolStripMenuItem);
             }
@@ -1942,8 +1948,8 @@ namespace VACM.NET4_0.Views
             }
 
             CloseAndSetPropertiesOfDeviceReloadAllToolStripMenuItem();
-            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDowns();
-            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDowns();
+            CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDown();
+            CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDown();
             Invalidate();
         }
 
@@ -1987,7 +1993,8 @@ namespace VACM.NET4_0.Views
     /*
     * TODO:
     * -import/export system MMEnumeration to file.
-    * -repeaters > disable item of and start repeaters whose device(s) are disabled or not present.
+    * -repeaters > disable item of and start repeaters whose device(s) are disabled or
+    *   not present.
     * -check for existing running repeaters (should this app exit).
     * -run task of starting repeaters in another thread.
     * -check for glitches in repeaters.
