@@ -1122,6 +1122,11 @@ namespace VACM.NET4_0.Views
             string name = GetNameOfChildToFirstParentAccessibleObject
                 (toolStripMenuItem);
 
+            if (string.Equals(name.ToLower(), "link"))
+            {
+                name = "device";
+            }
+
             string items = "item(s)";
 
             if (!string.IsNullOrWhiteSpace(name))
@@ -1222,20 +1227,23 @@ namespace VACM.NET4_0.Views
         internal void CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDown()
         {
             bool isBusy = deviceAddConfirmBackgroundWorker.IsBusy;
-            bool isDeviceAddNameListEmpty = this.isDeviceAddNameListEmpty;
 
-            if (deviceAddConfirmBackgroundWorker.IsBusy)
+            if (isBusy)
             {
                 deviceAddToolStripMenuItem.DropDown.Close();
             }
 
-            bool isNotBusyAndListIsFull = !deviceAddConfirmBackgroundWorker.IsBusy
-                && isCheckedDeviceAddNameListFull;
+            bool isCheckedDeviceAddNameListEmpty =
+                this.isCheckedDeviceAddNameListEmpty;
 
-            bool isNotBusyAndListIsNotEmpty = !deviceAddConfirmBackgroundWorker.IsBusy
-                && !isDeviceAddNameListEmpty;
+            bool isCheckedDeviceAddNameListFull = this.isCheckedDeviceAddNameListFull;
+            bool isDeviceAddNameListEmpty = this.isDeviceAddNameListEmpty;
+            bool isNotBusyAndListIsFull = !isBusy && isCheckedDeviceAddNameListFull;
+            bool isNotBusyAndListIsNotEmpty = !isBusy && !isDeviceAddNameListEmpty;
 
-            deviceAddConfirmToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+            deviceAddConfirmToolStripMenuItem.Enabled =
+                !isCheckedDeviceAddNameListEmpty;
+
             deviceAddSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
             deviceAddSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
             deviceAddSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
@@ -1287,9 +1295,19 @@ namespace VACM.NET4_0.Views
                 deviceRemoveToolStripMenuItem.DropDown.Close();
             }
 
+            bool isCheckedDeviceRemoveNameListEmpty =
+                this.isCheckedDeviceRemoveNameListEmpty;
+
+            bool isCheckedDeviceRemoveNameListFull =
+                this.isCheckedDeviceRemoveNameListFull;
+
+            bool isDeviceRemoveNameListEmpty = this.isDeviceRemoveNameListEmpty;
             bool isNotBusyAndListIsFull = !isBusy && isCheckedDeviceRemoveNameListFull;
             bool isNotBusyAndListIsNotEmpty = !isBusy && !isDeviceRemoveNameListEmpty;
-            deviceRemoveConfirmToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+
+            deviceRemoveConfirmToolStripMenuItem.Enabled =
+                !isCheckedDeviceRemoveNameListEmpty;
+
             deviceRemoveSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
             deviceRemoveSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
 
@@ -1326,11 +1344,11 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)
         {
             if (sender is null || !(sender is ToolStripMenuItem)
+                || isCheckedDeviceAddNameListEmpty
                 || deviceAddConfirmBackgroundWorker.IsBusy
                 || deviceReloadAllBackgroundWorker.IsBusy
                 || deviceRemoveConfirmBackgroundWorker.IsBusy
-                || isCheckedDeviceAddNameListEmpty
-                || ShowMessageBoxAndConfirmSelection())
+                || !ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1392,8 +1410,8 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)
         {
             if (sender is null || !(sender is ToolStripMenuItem)
-                || deviceAddConfirmBackgroundWorker.IsBusy
                 || deviceReloadAllBackgroundWorker.IsBusy
+                || deviceAddConfirmBackgroundWorker.IsBusy
                 || deviceRemoveConfirmBackgroundWorker.IsBusy)
             {
                 return;
@@ -1420,11 +1438,11 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)
         {
             if (sender is null || !(sender is ToolStripMenuItem)
+                || isCheckedDeviceRemoveNameListEmpty
+                || deviceRemoveConfirmBackgroundWorker.IsBusy
                 || deviceAddConfirmBackgroundWorker.IsBusy
                 || deviceReloadAllBackgroundWorker.IsBusy
-                || deviceRemoveConfirmBackgroundWorker.IsBusy
-                || isCheckedDeviceRemoveNameListEmpty
-                || ShowMessageBoxAndConfirmSelection())
+                || !ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1601,7 +1619,7 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
-                || ShowMessageBoxAndConfirmSelection())
+                || !ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1692,7 +1710,7 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
-                || ShowMessageBoxAndConfirmSelection())
+                || !ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1843,7 +1861,7 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
-                || ShowMessageBoxAndConfirmSelection())
+                || !ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1858,7 +1876,7 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
-                || ShowMessageBoxAndConfirmSelection())
+                || !ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1873,7 +1891,7 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
-                || ShowMessageBoxAndConfirmSelection())
+                || !ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1932,7 +1950,7 @@ namespace VACM.NET4_0.Views
         internal int deviceAddConfirmBackgroundWorker_Action
             (DoWorkEventArgs doWorkEventArgs)
         {
-            if (isDeviceAddNameListEmpty)
+            if (isCheckedDeviceAddNameListEmpty)
             {
                 doWorkEventArgs.Cancel = true;
                 return 2;
@@ -2001,7 +2019,7 @@ namespace VACM.NET4_0.Views
         internal int deviceRemoveConfirmBackgroundWorker_Action
             (DoWorkEventArgs doWorkEventArgs)
         {
-            if (isDeviceRemoveNameListEmpty)
+            if (isCheckedDeviceRemoveNameListEmpty)
             {
                 doWorkEventArgs.Cancel = true;
                 return 2;
