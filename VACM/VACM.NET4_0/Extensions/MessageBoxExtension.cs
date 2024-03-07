@@ -63,7 +63,7 @@ namespace VACM.NET4_0.Extensions
         public static extern IntPtr CallNextHookEx(IntPtr idHook, int nCode,
             IntPtr wParam, IntPtr lParam);
 
-        [DllImport("User32.dll")]
+        [DllImport(dllToImport)]
         public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam,
             IntPtr lParam);
 
@@ -71,7 +71,7 @@ namespace VACM.NET4_0.Extensions
         public static extern IntPtr SetWindowsHookEx(int idHook, HookProc lpfn,
             IntPtr hInstance, int threadId);
 
-        [DllImport("User32.dll")]
+        [DllImport(dllToImport)]
         public static extern UIntPtr SetTimer(IntPtr hWnd, UIntPtr nIDEvent,
             uint uElapse, TimerProc lpTimerFunc);
 
