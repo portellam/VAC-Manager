@@ -17,6 +17,11 @@ namespace VACM.NET4_0.Views
         private BackgroundWorker deviceAddConfirmBackgroundWorker;
         private BackgroundWorker deviceRemoveConfirmBackgroundWorker;
         private BackgroundWorker deviceReloadAllBackgroundWorker;
+        private BackgroundWorker linkAddConfirmBackgroundWorker;
+        private BackgroundWorker linkRemoveConfirmBackgroundWorker;
+        private BackgroundWorker repeaterRestartConfirmBackgroundWorker;
+        private BackgroundWorker repeaterStartConfirmBackgroundWorker;
+        private BackgroundWorker repeaterStopConfirmBackgroundWorker;
         private TableLayoutPanel gridTableLayoutPanel;
         private ToolStripMenuItem deviceAddConfirmToolStripMenuItem;
         private ToolStripMenuItem deviceAddSelectAllToolStripMenuItem;
@@ -140,8 +145,8 @@ namespace VACM.NET4_0.Views
             this.linkDefaultResyncAtToolStripMenuItem = new ToolStripMenuItem();
             this.linkDefaultSamplingRateToolStripMenuItem = new ToolStripMenuItem();
             this.linkRemoveConfirmToolStripMenuItem = new ToolStripMenuItem();
-            this.linkRemoveSelectToolStripMenuItem = new ToolStripMenuItem();
             this.linkRemoveSelectAllToolStripMenuItem = new ToolStripMenuItem();
+            this.linkRemoveSelectToolStripMenuItem = new ToolStripMenuItem();
             this.linkRemoveSelectWaveInToolStripMenuItem = new ToolStripMenuItem();
             this.linkRemoveSelectWaveOutToolStripMenuItem = new ToolStripMenuItem();
             this.linkRemoveToolStripMenuItem = new ToolStripMenuItem();
@@ -149,10 +154,13 @@ namespace VACM.NET4_0.Views
             this.linkToolStripSeparator1 = new ToolStripSeparator();
             this.linkToolStripSeparator2 = new ToolStripSeparator();
             this.repeaterRestartAllToolStripMenuItem = new ToolStripMenuItem();
+            this.repeaterRestartConfirmBackgroundWorker = new BackgroundWorker();
             this.repeaterRestartToolStripMenuItem = new ToolStripMenuItem();
             this.repeaterStartAllToolStripMenuItem = new ToolStripMenuItem();
+            this.repeaterStartConfirmBackgroundWorker = new BackgroundWorker();
             this.repeaterStartToolStripMenuItem = new ToolStripMenuItem();
             this.repeaterStopAllToolStripMenuItem = new ToolStripMenuItem();
+            this.repeaterStopConfirmBackgroundWorker = new BackgroundWorker();
             this.repeaterStopToolStripMenuItem = new ToolStripMenuItem();
             this.repeaterToolStripMenuItem = new ToolStripMenuItem();
             this.repeaterToolStripSeparator1 = new ToolStripSeparator();
