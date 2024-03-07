@@ -357,7 +357,7 @@ namespace VACM.NET4_0.Views
             string text = deviceToolStripMenuItem.Text;
             deviceToolStripMenuItem.Text = "Loading...";
             deviceToolStripMenuItem.Enabled = false;
-            Refresh();
+            Invalidate();
 
             InitializeDeviceToolStripMenuItemDropDown
                 (deviceAddSelectToolStripMenuItemEnabled_Confirm,
@@ -418,7 +418,7 @@ namespace VACM.NET4_0.Views
             InitializeDeviceToolStripMenuItem(linkRemoveSelectWaveOutToolStripMenuItem);
             deviceToolStripMenuItem.Text = text;
             deviceToolStripMenuItem.Enabled = true;
-            Refresh();
+            Invalidate();
         }
 
         /// <summary>
@@ -618,7 +618,39 @@ namespace VACM.NET4_0.Views
 
             deviceRemoveConfirmBackgroundWorker.RunWorkerCompleted +=
                 deviceBackgroundWorker_RunWorkerCompleted;
+
+            linkAddConfirmBackgroundWorker.DoWork +=
+                linkAddConfirmBackgroundWorker_DoWork;
+
+            linkAddConfirmBackgroundWorker.RunWorkerCompleted +=
+                linkBackgroundWorker_RunWorkerCompleted;
+
+            linkRemoveConfirmBackgroundWorker.DoWork +=
+                linkRemoveConfirmBackgroundWorker_DoWork;
+
+            linkRemoveConfirmBackgroundWorker.RunWorkerCompleted +=
+                linkRemoveConfirmBackgroundWorker_RunWorkerCompleted;
+
+            repeaterRestartConfirmBackgroundWorker.DoWork +=
+                repeaterRestartConfirmBackgroundWorker_DoWork;
+
+            repeaterRestartConfirmBackgroundWorker.RunWorkerCompleted +=
+                repeaterBackgroundWorker_RunWorkerCompleted;
+
+            repeaterStartConfirmBackgroundWorker.DoWork +=
+                repeaterStartConfirmBackgroundWorker_DoWork;
+
+            repeaterStartConfirmBackgroundWorker.RunWorkerCompleted +=
+                repeaterBackgroundWorker_RunWorkerCompleted;
+
+            repeaterStopConfirmBackgroundWorker.DoWork +=
+                repeaterStopConfirmBackgroundWorker_DoWork;
+
+            repeaterStopConfirmBackgroundWorker.RunWorkerCompleted +=
+                repeaterBackgroundWorker_RunWorkerCompleted;
         }
+
+        
 
         /// <summary>
         /// Code to run after generated code.
@@ -755,6 +787,20 @@ namespace VACM.NET4_0.Views
 
             IsLightThemeEnabledValueChanged?.Invoke
                 (this, propertyValueChangedEventArgs);
+        }
+
+        #endregion
+
+        #region MessageBox logic
+
+        /// <summary>
+        /// Return true if selection is confirmed.
+        /// </summary>
+        /// <returns></returns>
+        internal bool ShowMessageBoxAndConfirmSelection()
+        {
+            string message = "Confirm selection?";
+            return MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(message);
         }
 
         #endregion
@@ -1285,7 +1331,8 @@ namespace VACM.NET4_0.Views
                 || deviceAddConfirmBackgroundWorker.IsBusy
                 || deviceReloadAllBackgroundWorker.IsBusy
                 || deviceRemoveConfirmBackgroundWorker.IsBusy
-                || isCheckedDeviceAddNameListEmpty)
+                || isCheckedDeviceAddNameListEmpty
+                || ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1378,7 +1425,8 @@ namespace VACM.NET4_0.Views
                 || deviceAddConfirmBackgroundWorker.IsBusy
                 || deviceReloadAllBackgroundWorker.IsBusy
                 || deviceRemoveConfirmBackgroundWorker.IsBusy
-                || isCheckedDeviceRemoveNameListEmpty)
+                || isCheckedDeviceRemoveNameListEmpty
+                || ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1554,7 +1602,8 @@ namespace VACM.NET4_0.Views
         internal void linkAddConfirmToolStripMenuItem_Click(object sender,
             EventArgs eventArgs)                                                        //TODO: implement!
         {
-            if (sender is null || !(sender is ToolStripMenuItem))
+            if (sender is null || !(sender is ToolStripMenuItem)
+                || ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1644,7 +1693,8 @@ namespace VACM.NET4_0.Views
         internal void linkRemoveConfirmToolStripMenuItem_Click(object sender,
             EventArgs eventArgs)                                                        //TODO: implement!
         {
-            if (sender is null || !(sender is ToolStripMenuItem))
+            if (sender is null || !(sender is ToolStripMenuItem)
+                || ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1794,7 +1844,8 @@ namespace VACM.NET4_0.Views
         private void repeaterRestartConfirmToolStripMenuItem_Click(object sender,
             EventArgs eventArgs)                                                        //TODO: implement!
         {
-            if (sender is null || !(sender is ToolStripMenuItem))
+            if (sender is null || !(sender is ToolStripMenuItem)
+                || ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1808,7 +1859,8 @@ namespace VACM.NET4_0.Views
         private void repeaterStartConfirmToolStripMenuItem_Click(object sender,
             EventArgs eventArgs)                                                        //TODO: implement!
         {
-            if (sender is null || !(sender is ToolStripMenuItem))
+            if (sender is null || !(sender is ToolStripMenuItem)
+                || ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -1822,7 +1874,8 @@ namespace VACM.NET4_0.Views
         private void repeaterStopConfirmToolStripMenuItem_Click(object sender,
             EventArgs eventArgs)                                                        //TODO: implement!
         {
-            if (sender is null || !(sender is ToolStripMenuItem))
+            if (sender is null || !(sender is ToolStripMenuItem)
+                || ShowMessageBoxAndConfirmSelection())
             {
                 return;
             }
@@ -2052,6 +2105,54 @@ namespace VACM.NET4_0.Views
 
             doWorkEventArgs.Result = deviceRemoveConfirmBackgroundWorker_Action
                 (doWorkEventArgs);
+        }
+
+        #endregion
+
+        #region Link background logic
+
+        private void linkAddConfirmBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void linkBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void linkRemoveConfirmBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void linkRemoveConfirmBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Repeater background logic
+
+        private void repeaterRestartConfirmBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void repeaterStartConfirmBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void repeaterStopConfirmBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void repeaterBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
