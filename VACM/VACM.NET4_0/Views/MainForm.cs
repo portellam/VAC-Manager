@@ -1298,7 +1298,6 @@ namespace VACM.NET4_0.Views
 
             deviceAddSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
             deviceAddSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
-            //deviceAddSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
 
             deviceAddSelectWaveInToolStripMenuItem.Enabled = !isBusy
                 && !isDeviceAddWaveInNameListEmpty;
@@ -1368,8 +1367,6 @@ namespace VACM.NET4_0.Views
 
             deviceRemoveSelectAllUnlinkedToolStripMenuItem.Enabled =
                 isNotBusyAndListIsNotEmpty;                                             //TODO: create a getter to determine if unlinked items exist.
-
-            //deviceRemoveSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
 
             deviceRemoveSelectWaveInToolStripMenuItem.Enabled = !isBusy
                 && !this.isDeviceRemoveWaveInNameListEmpty;
@@ -1579,7 +1576,6 @@ namespace VACM.NET4_0.Views
             deviceAddToolStripMenuItem.DropDown.Close();
             deviceAddConfirmToolStripMenuItem.Enabled = false;
             deviceAddSelectAllToolStripMenuItem.Enabled = false;
-            deviceAddSelectToolStripMenuItem.Enabled = false;
             deviceAddSelectWaveInToolStripMenuItem.Enabled = false;
             deviceAddSelectWaveOutToolStripMenuItem.Enabled = false;
 
@@ -1610,7 +1606,6 @@ namespace VACM.NET4_0.Views
             deviceRemoveToolStripMenuItem.DropDown.Close();
             deviceRemoveConfirmToolStripMenuItem.Enabled = false;
             deviceRemoveSelectAllToolStripMenuItem.Enabled = false;
-            deviceRemoveSelectToolStripMenuItem.Enabled = false;
             deviceRemoveSelectWaveInToolStripMenuItem.Enabled = false;
             deviceRemoveSelectWaveOutToolStripMenuItem.Enabled = false;
 
