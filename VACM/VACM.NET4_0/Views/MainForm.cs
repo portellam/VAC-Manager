@@ -798,7 +798,7 @@ namespace VACM.NET4_0.Views
         internal bool ShowMessageBoxAndConfirmSelection()
         {
             string message = "Confirm selection?";
-            return MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(message);
+            return MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(this, message);
         }
 
         #endregion
@@ -1421,7 +1421,7 @@ namespace VACM.NET4_0.Views
                 " Grid and Graph, including devices, links, and repeaters.\nAre you " +
                 "sure?";
 
-            if (!MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(message))
+            if (!MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(this, message))
             {
                 return;
             }
@@ -2079,7 +2079,8 @@ namespace VACM.NET4_0.Views
         {
             if (runWorkerCompletedEventArgs.Error != null)
             {
-                MessageBoxWrapper.ShowError(runWorkerCompletedEventArgs.Error.Message); //TODO: determine what is the contents of this. Should I create a message here, given return value?
+                MessageBoxWrapper.ShowError(this,
+                    runWorkerCompletedEventArgs.Error.Message);                         //TODO: determine what is the contents of this. Should I create a message here, given return value?
                                                                                         //NOTE: undo all changes here from previous callstack operation?
             }
 
@@ -2171,7 +2172,8 @@ namespace VACM.NET4_0.Views
         {
             if (runWorkerCompletedEventArgs.Error != null)
             {
-                MessageBoxWrapper.ShowError(runWorkerCompletedEventArgs.Error.Message); //TODO: determine what is the contents of this. Should I create a message here, given return value?
+                MessageBoxWrapper.ShowError(this,
+                    runWorkerCompletedEventArgs.Error.Message);                         //TODO: determine what is the contents of this. Should I create a message here, given return value?
                                                                                         //NOTE: undo all changes here from previous callstack operation?
             }
 
@@ -2243,7 +2245,8 @@ namespace VACM.NET4_0.Views
         {
             if (runWorkerCompletedEventArgs.Error != null)
             {
-                MessageBoxWrapper.ShowError(runWorkerCompletedEventArgs.Error.Message); //TODO: determine what is the contents of this. Should I create a message here, given return value?
+                MessageBoxWrapper.ShowError(this,
+                    runWorkerCompletedEventArgs.Error.Message);                         //TODO: determine what is the contents of this. Should I create a message here, given return value?
                                                                                         //NOTE: undo all changes here from previous callstack operation?
             }
 
