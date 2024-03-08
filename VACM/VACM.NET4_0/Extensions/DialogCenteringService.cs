@@ -9,29 +9,13 @@ namespace VACM.NET4_0.Extensions
     {
         #region Parameters
 
-        private IntPtr _hHook;
-        private readonly IWin32Window _IWin32Window;
-        private readonly Win32Native.HookProc _HookProc;
+        private IntPtr hHook;
+        private readonly IWin32Window iWin32Window;
+        private readonly Win32Native.HookProc hookProc;
 
         #endregion
 
         #region Logic
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="iWin32Owner">The Win32 window</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        public DialogCenteringService(IWin32Window iWin32Owner)
-        {
-            _IWin32Window = iWin32Owner ??
-                throw new ArgumentNullException(nameof(iWin32Owner));
-
-            _HookProc = DialogHookProc;
-
-            _hHook = Win32Native.SetWindowsHookEx(Win32Native.WH_CALLWNDPROCRET,
-                _HookProc, IntPtr.Zero, Win32Native.GetCurrentThreadId());
-        }
 
         DialogCenteringService()
         {
@@ -39,33 +23,49 @@ namespace VACM.NET4_0.Extensions
         }
 
         /// <summary>
-        /// Dispose of managed resources.
+        /// Constructor
         /// </summary>
-        public void Dispose()
+        /// <param name="iWin32Window">The Win32 window</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public DialogCenteringService(IWin32Window iWin32Window)
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            if (iWin32Window is null)
+            {
+                throw new ArgumentNullException(nameof(iWin32Window));
+            }
+
+            this.iWin32Window = iWin32Window;
+            hookProc = GetDialogHookProcedure;
+
+            hHook = Win32Native.SetWindowsHookEx(Win32Native.WH_CALLWNDPROCRET,
+                hookProc, IntPtr.Zero, Win32Native.GetCurrentThreadId());
         }
 
         /// <summary>
-        /// Dispose of managed resources.
+        /// Do center the window.
         /// </summary>
-        /// <param name="doDispose">Do dispose</param>
-        private void Dispose(bool doDispose)
+        /// <param name="hChildWindow">The child window hook</param>
+        /// <returns>True/False</returns>
+        private bool DoCenterWindow(IntPtr hChildWindow)
         {
-            if (doDispose)
+            var recParent = GetWindowRect(iWin32Window.Handle);
+
+            if (recParent is null)
             {
-                //NOTE: Add dispose calls of managed resources here.
+                return false;
             }
 
-            if (_hHook != IntPtr.Zero)
-            {
-                Win32Native.UnhookWindowsHookEx(_hHook);
-                _hHook = IntPtr.Zero;
-            }
+            return DoCenterWindow(hChildWindow, recParent.Value);
         }
 
-        private IntPtr DialogHookProc(int nCode, IntPtr wParam, IntPtr lParam)
+        /// <summary>
+        /// Get the dialog hook procedure from the Win32 API.
+        /// </summary>
+        /// <param name="nCode">The code to determine how to process the message</param>
+        /// <param name="wParam">The keyboard message identifier</param>
+        /// <param name="lParam">The keyboard hook struct pointer</param>
+        /// <returns>The dialog hook procedure</returns>
+        private IntPtr GetDialogHookProcedure(int nCode, IntPtr wParam, IntPtr lParam)
         {
             if (nCode < 0)
             {
@@ -82,41 +82,54 @@ namespace VACM.NET4_0.Extensions
 
             try
             {
-                CenterWindow(msg.hwnd);
+                DoCenterWindow(msg.hwnd);
             }
             finally
             {
-                Win32Native.UnhookWindowsHookEx(_hHook);
-                _hHook = IntPtr.Zero;
+                Win32Native.UnhookWindowsHookEx(hHook);
+                hHook = IntPtr.Zero;
             }
 
             return Win32Native.CallNextHookEx(IntPtr.Zero, nCode, wParam, lParam);
         }
 
-        private bool CenterWindow(IntPtr hChildWnd)
+        /// <summary>
+        /// Dispose of managed resources.
+        /// </summary>
+        /// <param name="doDispose">Do dispose</param>
+        private void Dispose(bool doDispose)
         {
-            var recParent = GetWindowRect(_IWin32Window.Handle);
-
-            if (recParent is null)
+            if (doDispose)
             {
-                return false;
+                //NOTE: Add dispose calls of managed resources here.
             }
 
-            return CenterWindow(hChildWnd, recParent.Value);
+            if (hHook != IntPtr.Zero)
+            {
+                Win32Native.UnhookWindowsHookEx(hHook);
+                hHook = IntPtr.Zero;
+            }
         }
 
-        private static bool CenterWindow(IntPtr hChildWnd, Rectangle recParent)
+        /// <summary>
+        /// Do center the window from the Win32 API.
+        /// </summary>
+        /// <param name="hChildWindow">The child window hook</param>
+        /// <param name="rectangleParent">The rectangle parent</param>
+        /// <returns>True/False</returns>
+        private static bool DoCenterWindow(IntPtr hChildWindow,
+            Rectangle rectangleParent)
         {
-            var recChild = GetWindowRect(hChildWnd);
+            var rectangleChild = GetWindowRect(hChildWindow);
 
-            if (recChild is null)
+            if (rectangleChild is null)
             {
                 return false;
             }
 
-            var centeredPoint = GetCenteredPoint(recParent, recChild.Value);
+            var centeredPoint = GetCenteredPoint(rectangleParent, rectangleChild.Value);
 
-            return Win32Native.SetWindowPos(hChildWnd, IntPtr.Zero, centeredPoint.X,
+            return Win32Native.SetWindowPos(hChildWindow, IntPtr.Zero, centeredPoint.X,
                 centeredPoint.Y, -1, -1,
                 Win32Native.SetWindowPosFlags.SWP_ASYNCWINDOWPOS
                     | Win32Native.SetWindowPosFlags.SWP_NOSIZE
@@ -125,24 +138,31 @@ namespace VACM.NET4_0.Extensions
                     | Win32Native.SetWindowPosFlags.SWP_NOZORDER);
         }
 
-        private static Point GetCenteredPoint(Rectangle recParent, Rectangle recChild)
+        /// <summary>
+        /// Get the centered point.
+        /// </summary>
+        /// <param name="rectangleParent">The rectangle parent</param>
+        /// <param name="rectangleChild">The rectangle child</param>
+        /// <returns>The centered point</returns>
+        private static Point GetCenteredPoint(Rectangle rectangleParent,
+            Rectangle rectangleChild)
         {
             var ptParentCenter = new Point
             {
-                X = recParent.X + (recParent.Width / 2),
-                Y = recParent.Y + (recParent.Height / 2)
+                X = rectangleParent.X + (rectangleParent.Width / 2),
+                Y = rectangleParent.Y + (rectangleParent.Height / 2)
             };
 
             var ptStart = new Point
             {
-                X = ptParentCenter.X - (recChild.Width / 2),
-                Y = ptParentCenter.Y - (recChild.Height / 2)
+                X = ptParentCenter.X - (rectangleChild.Width / 2),
+                Y = ptParentCenter.Y - (rectangleChild.Height / 2)
             };
 
-            var recCentered = new Rectangle(ptStart.X, ptStart.Y, recChild.Width,
-                recChild.Height);                                                       // Get centered rectangle.
+            var recCentered = new Rectangle(ptStart.X, ptStart.Y, rectangleChild.Width,
+                rectangleChild.Height);                                                 // Get centered rectangle.
 
-            var workingArea = Screen.FromRectangle(recParent).WorkingArea;              // Find the working area of the parent.
+            var workingArea = Screen.FromRectangle(rectangleParent).WorkingArea;        // Find the working area of the parent.
 
             if (workingArea.X > recCentered.X)                                          // Make sure child window isn't spanning across multiple screens.
             {
@@ -172,17 +192,31 @@ namespace VACM.NET4_0.Extensions
             return new Point(recCentered.X, recCentered.Y);
         }
 
-        private static Rectangle? GetWindowRect(IntPtr hWnd)
+        /// <summary>
+        /// Get the window rectangle from the Win32 API.
+        /// </summary>
+        /// <param name="hWindow">The window hook</param>
+        /// <returns>The rectangle</returns>
+        private static Rectangle? GetWindowRect(IntPtr hWindow)
         {
             var rect = new Win32Native.RECT();
 
-            if (!Win32Native.GetWindowRect(hWnd, ref rect))
+            if (!Win32Native.GetWindowRect(hWindow, ref rect))
             {
                 return null;
             }
 
             return new Rectangle(rect.left, rect.top, rect.right - rect.left,
                 rect.bottom - rect.top);
+        }
+
+        /// <summary>
+        /// Dispose of managed resources.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion
