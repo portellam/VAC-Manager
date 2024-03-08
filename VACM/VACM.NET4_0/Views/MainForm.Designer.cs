@@ -226,8 +226,7 @@ namespace VACM.NET4_0.Views
 
             this.deviceToolStripMenuItem.Name = "deviceToolStripMenuItem";
 
-            this.deviceToolStripMenuItem.ShortcutKeys = ((Keys)
-                ((Keys.Alt | Keys.D)));
+            this.deviceToolStripMenuItem.ShortcutKeys = ((Keys) ((Keys.Alt | Keys.D)));
 
             this.deviceToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
             this.deviceToolStripMenuItem.Text = "Device";
@@ -460,8 +459,7 @@ namespace VACM.NET4_0.Views
 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 
-            this.fileToolStripMenuItem.ShortcutKeys = ((Keys)
-                ((Keys.Alt | Keys.F)));
+            this.fileToolStripMenuItem.ShortcutKeys = ((Keys) ((Keys.Alt | Keys.F)));
 
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
@@ -527,8 +525,7 @@ namespace VACM.NET4_0.Views
             this.fileSaveAsToolStripMenuItem.Name = "fileSaveAsToolStripMenuItem";
 
             this.fileSaveAsToolStripMenuItem.ShortcutKeys = ((Keys)
-                (((Keys.Control | Keys.Alt)
-                | Keys.S)));
+                (((Keys.Control | Keys.Alt) | Keys.S)));
 
             this.fileSaveAsToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
             this.fileSaveAsToolStripMenuItem.Text = "Save As...";
@@ -568,8 +565,7 @@ namespace VACM.NET4_0.Views
 
             this.linkToolStripMenuItem.Name = "linkToolStripMenuItem";
 
-            this.linkToolStripMenuItem.ShortcutKeys = ((Keys)
-                ((Keys.Alt | Keys.L)));
+            this.linkToolStripMenuItem.ShortcutKeys = ((Keys) ((Keys.Alt | Keys.L)));
 
             this.linkToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.linkToolStripMenuItem.Text = "Link";
@@ -1056,8 +1052,7 @@ namespace VACM.NET4_0.Views
 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 
-            this.helpToolStripMenuItem.ShortcutKeys = ((Keys)
-                ((Keys.Alt | Keys.H)));
+            this.helpToolStripMenuItem.ShortcutKeys = ((Keys) ((Keys.Alt | Keys.H)));
 
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
@@ -1100,8 +1095,7 @@ namespace VACM.NET4_0.Views
 
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 
-            this.viewToolStripMenuItem.ShortcutKeys = ((Keys)
-                ((Keys.Alt | Keys.V)));
+            this.viewToolStripMenuItem.ShortcutKeys = ((Keys) ((Keys.Alt | Keys.V)));
 
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.viewToolStripMenuItem.Text = "View";
