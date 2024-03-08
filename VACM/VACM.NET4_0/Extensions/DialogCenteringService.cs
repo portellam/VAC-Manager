@@ -7,42 +7,63 @@ namespace VACM.NET4_0.Extensions
 {
     public sealed class DialogCenteringService : IDisposable
     {
-        private readonly IWin32Window _owner;
-        private readonly Win32Native.HookProc _hookProc;
-        private IntPtr _hHook;
+        #region Parameters
 
-        public DialogCenteringService(IWin32Window owner)
+        private IntPtr _hHook;
+        private readonly IWin32Window _IWin32Window;
+        private readonly Win32Native.HookProc _HookProc;
+
+        #endregion
+
+        #region Logic
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="iWin32Owner">The Win32 window</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public DialogCenteringService(IWin32Window iWin32Owner)
         {
-            _owner = owner ?? throw new ArgumentNullException(nameof(owner));
-            _hookProc = DialogHookProc;
-            _hHook = Win32Native.SetWindowsHookEx(Win32Native.WH_CALLWNDPROCRET, _hookProc, IntPtr.Zero, Win32Native.GetCurrentThreadId());
+            _IWin32Window = iWin32Owner ??
+                throw new ArgumentNullException(nameof(iWin32Owner));
+
+            _HookProc = DialogHookProc;
+
+            _hHook = Win32Native.SetWindowsHookEx(Win32Native.WH_CALLWNDPROCRET,
+                _HookProc, IntPtr.Zero, Win32Native.GetCurrentThreadId());
         }
 
-        #region Disposing
         DialogCenteringService()
         {
             Dispose(false);
         }
 
+        /// <summary>
+        /// Dispose of managed resources.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        private void Dispose(bool disposing)
+        /// <summary>
+        /// Dispose of managed resources.
+        /// </summary>
+        /// <param name="doDispose">Do dispose</param>
+        private void Dispose(bool doDispose)
         {
-            if (disposing)
+            if (doDispose)
             {
-                // if you have managed resources, get rid of them now
+                //NOTE: Add dispose calls of managed resources here.
             }
+
             if (_hHook != IntPtr.Zero)
             {
                 Win32Native.UnhookWindowsHookEx(_hHook);
                 _hHook = IntPtr.Zero;
             }
         }
-        #endregion
 
         private IntPtr DialogHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
@@ -51,19 +72,22 @@ namespace VACM.NET4_0.Extensions
                 return Win32Native.CallNextHookEx(IntPtr.Zero, nCode, wParam, lParam);
             }
 
-            var msg = (Win32Native.CWPRETSTRUCT)Marshal.PtrToStructure(lParam, typeof(Win32Native.CWPRETSTRUCT));
+            var msg = (Win32Native.CWPRETSTRUCT)Marshal.PtrToStructure(lParam,
+                typeof(Win32Native.CWPRETSTRUCT));
 
-            if (msg.message == (int)Win32Native.CbtHookAction.HCBT_ACTIVATE)
+            if (msg.message != (int)Win32Native.CbtHookAction.HCBT_ACTIVATE)
             {
-                try
-                {
-                    CenterWindow(msg.hwnd);
-                }
-                finally
-                {
-                    Win32Native.UnhookWindowsHookEx(_hHook);
-                    _hHook = IntPtr.Zero;
-                }
+                return Win32Native.CallNextHookEx(IntPtr.Zero, nCode, wParam, lParam);
+            }
+
+            try
+            {
+                CenterWindow(msg.hwnd);
+            }
+            finally
+            {
+                Win32Native.UnhookWindowsHookEx(_hHook);
+                _hHook = IntPtr.Zero;
             }
 
             return Win32Native.CallNextHookEx(IntPtr.Zero, nCode, wParam, lParam);
@@ -71,35 +95,34 @@ namespace VACM.NET4_0.Extensions
 
         private bool CenterWindow(IntPtr hChildWnd)
         {
-            var recParent = GetWindowRect(_owner.Handle);
-            return recParent != null ? CenterWindow(hChildWnd, recParent.Value) : false;
-        }
+            var recParent = GetWindowRect(_IWin32Window.Handle);
 
-        private static Rectangle? GetWindowRect(IntPtr hWnd)
-        {
-            var rect = new Win32Native.RECT();
-            if (Win32Native.GetWindowRect(hWnd, ref rect))
+            if (recParent is null)
             {
-                return new Rectangle(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
+                return false;
             }
-            return null;
+
+            return CenterWindow(hChildWnd, recParent.Value);
         }
 
         private static bool CenterWindow(IntPtr hChildWnd, Rectangle recParent)
         {
             var recChild = GetWindowRect(hChildWnd);
-            if (recChild != null)
+
+            if (recChild is null)
             {
-                var centeredPoint = GetCenteredPoint(recParent, recChild.Value);
-                return Win32Native.SetWindowPos(
-                    hChildWnd,
-                    IntPtr.Zero,
-                    centeredPoint.X, centeredPoint.Y, -1, -1,
-                    Win32Native.SetWindowPosFlags.SWP_ASYNCWINDOWPOS | Win32Native.SetWindowPosFlags.SWP_NOSIZE |
-                    Win32Native.SetWindowPosFlags.SWP_NOACTIVATE | Win32Native.SetWindowPosFlags.SWP_NOOWNERZORDER |
-                    Win32Native.SetWindowPosFlags.SWP_NOZORDER);
+                return false;
             }
-            return false;
+
+            var centeredPoint = GetCenteredPoint(recParent, recChild.Value);
+
+            return Win32Native.SetWindowPos(hChildWnd, IntPtr.Zero, centeredPoint.X,
+                centeredPoint.Y, -1, -1,
+                Win32Native.SetWindowPosFlags.SWP_ASYNCWINDOWPOS
+                    | Win32Native.SetWindowPosFlags.SWP_NOSIZE
+                    | Win32Native.SetWindowPosFlags.SWP_NOACTIVATE
+                    | Win32Native.SetWindowPosFlags.SWP_NOOWNERZORDER
+                    | Win32Native.SetWindowPosFlags.SWP_NOZORDER);
         }
 
         private static Point GetCenteredPoint(Rectangle recParent, Rectangle recChild)
@@ -116,38 +139,71 @@ namespace VACM.NET4_0.Extensions
                 Y = ptParentCenter.Y - (recChild.Height / 2)
             };
 
-            // get centered rectangle
-            var recCentered = new Rectangle(ptStart.X, ptStart.Y, recChild.Width, recChild.Height);
+            var recCentered = new Rectangle(ptStart.X, ptStart.Y, recChild.Width,
+                recChild.Height);                                                       // Get centered rectangle.
 
-            // find the working area of the parent
-            var workingArea = Screen.FromRectangle(recParent).WorkingArea;
+            var workingArea = Screen.FromRectangle(recParent).WorkingArea;              // Find the working area of the parent.
 
-            // make sure child window isn't spanning across mulitiple screens
-            if (workingArea.X > recCentered.X)
+            if (workingArea.X > recCentered.X)                                          // Make sure child window isn't spanning across multiple screens.
             {
-                recCentered = new Rectangle(workingArea.X, recCentered.Y, recCentered.Width, recCentered.Height);
+                recCentered = new Rectangle(workingArea.X, recCentered.Y,
+                    recCentered.Width, recCentered.Height);
             }
+
             if (workingArea.Y > recCentered.Y)
             {
-                recCentered = new Rectangle(recCentered.X, workingArea.Y, recCentered.Width, recCentered.Height);
+                recCentered = new Rectangle(recCentered.X, workingArea.Y,
+                    recCentered.Width, recCentered.Height);
             }
+
             if (workingArea.Right < recCentered.Right)
             {
-                recCentered = new Rectangle(workingArea.Right - recCentered.Width, recCentered.Y, recCentered.Width, recCentered.Height);
+                recCentered = new Rectangle(workingArea.Right - recCentered.Width,
+                    recCentered.Y, recCentered.Width, recCentered.Height);
             }
+
             if (workingArea.Bottom < recCentered.Bottom)
             {
-                recCentered = new Rectangle(recCentered.X, workingArea.Bottom - recCentered.Height, recCentered.Width, recCentered.Height);
+                recCentered = new Rectangle(recCentered.X,
+                    workingArea.Bottom - recCentered.Height, recCentered.Width,
+                    recCentered.Height);
             }
 
             return new Point(recCentered.X, recCentered.Y);
         }
 
+        private static Rectangle? GetWindowRect(IntPtr hWnd)
+        {
+            var rect = new Win32Native.RECT();
+
+            if (!Win32Native.GetWindowRect(hWnd, ref rect))
+            {
+                return null;
+            }
+
+            return new Rectangle(rect.left, rect.top, rect.right - rect.left,
+                rect.bottom - rect.top);
+        }
+
+        #endregion
+
         #region Native/Unsafe
+
+        /// <summary>
+        /// Win32 API
+        /// </summary>
         private static class Win32Native
         {
-            public delegate IntPtr HookProc(int nCode, IntPtr wParam, IntPtr lParam);
+            #region Parameters
+
+            private const string kernel32DllString = "kernel32.dll";
+            private const string user32DllString = "user32.dll";
+
             public const int WH_CALLWNDPROCRET = 12;
+
+            #endregion
+
+            #region Structs
 
             public enum CbtHookAction
             {
@@ -184,15 +240,6 @@ namespace VACM.NET4_0.Extensions
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            public struct RECT
-            {
-                public int left;
-                public int top;
-                public int right;
-                public int bottom;
-            }
-
-            [StructLayout(LayoutKind.Sequential)]
             public struct CWPRETSTRUCT
             {
                 public IntPtr lResult;
@@ -202,26 +249,47 @@ namespace VACM.NET4_0.Extensions
                 public IntPtr hwnd;
             };
 
-            [DllImport("kernel32.dll")]
-            public static extern int GetCurrentThreadId();
+            [StructLayout(LayoutKind.Sequential)]
+            public struct RECT
+            {
+                public int left;
+                public int top;
+                public int right;
+                public int bottom;
+            }
 
-            [DllImport("user32.dll")]
+            #endregion
+
+            #region Delegates
+
+            public delegate IntPtr HookProc(int nCode, IntPtr wParam, IntPtr lParam);
+
+            [DllImport(user32DllString)]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool GetWindowRect(IntPtr hWnd, ref RECT lpRect);
 
-            [DllImport("user32.dll")]
+            [DllImport(user32DllString)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, SetWindowPosFlags uFlags);
+            public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter,
+                int x, int y, int cx, int cy, SetWindowPosFlags uFlags);
 
-            [DllImport("user32.dll")]
-            public static extern IntPtr SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hInstance, int threadId);
+            [DllImport(kernel32DllString)]
+            public static extern int GetCurrentThreadId();
 
-            [DllImport("user32.dll")]
+            [DllImport(user32DllString)]
             public static extern int UnhookWindowsHookEx(IntPtr idHook);
 
-            [DllImport("user32.dll")]
-            public static extern IntPtr CallNextHookEx(IntPtr idHook, int nCode, IntPtr wParam, IntPtr lParam);
+            [DllImport(user32DllString)]
+            public static extern IntPtr SetWindowsHookEx(int idHook, HookProc lpfn,
+                IntPtr hInstance, int threadId);
+
+            [DllImport(user32DllString)]
+            public static extern IntPtr CallNextHookEx(IntPtr idHook, int nCode,
+                IntPtr wParam, IntPtr lParam);
+
+            #endregion
         }
+
         #endregion
     }
 }
