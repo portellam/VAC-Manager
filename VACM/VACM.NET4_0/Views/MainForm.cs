@@ -789,20 +789,6 @@ namespace VACM.NET4_0.Views
 
         #endregion
 
-        #region MessageBox logic
-
-        /// <summary>
-        /// Return true if selection is confirmed.
-        /// </summary>
-        /// <returns></returns>
-        internal bool ShowMessageBoxAndConfirmSelection()
-        {
-            string message = "Confirm selection?";
-            return MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(this, message);
-        }
-
-        #endregion
-
         #region ToolStrip helper logic
 
         /// <summary>
@@ -1348,7 +1334,8 @@ namespace VACM.NET4_0.Views
                 || deviceAddConfirmBackgroundWorker.IsBusy
                 || deviceReloadAllBackgroundWorker.IsBusy
                 || deviceRemoveConfirmBackgroundWorker.IsBusy
-                || !ShowMessageBoxAndConfirmSelection())
+                || !MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(this,
+                    "Add selected devices?"))
             {
                 return;
             }
@@ -1442,7 +1429,8 @@ namespace VACM.NET4_0.Views
                 || deviceRemoveConfirmBackgroundWorker.IsBusy
                 || deviceAddConfirmBackgroundWorker.IsBusy
                 || deviceReloadAllBackgroundWorker.IsBusy
-                || !ShowMessageBoxAndConfirmSelection())
+                || !MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(this,
+                    "Removed selected devices?"))
             {
                 return;
             }
@@ -1619,7 +1607,8 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
-                || !ShowMessageBoxAndConfirmSelection())
+                || !MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(this,
+                    "Link selected devices?"))
             {
                 return;
             }
@@ -1710,7 +1699,8 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
-                || !ShowMessageBoxAndConfirmSelection())
+                || !MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(this,
+                    "Unlink selected devices?"))
             {
                 return;
             }
@@ -1861,7 +1851,8 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
-                || !ShowMessageBoxAndConfirmSelection())
+                || !MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(this,
+                    "Restart selected audio repeaters?"))
             {
                 return;
             }
@@ -1876,7 +1867,8 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
-                || !ShowMessageBoxAndConfirmSelection())
+                || !MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(this,
+                    "Start selected audio repeaters?"))
             {
                 return;
             }
@@ -1891,7 +1883,8 @@ namespace VACM.NET4_0.Views
             EventArgs eventArgs)                                                        //TODO: implement!
         {
             if (sender is null || !(sender is ToolStripMenuItem)
-                || !ShowMessageBoxAndConfirmSelection())
+                || !MessageBoxWrapper.ShowYesNoAndReturnTrueFalse(this,
+                    "Stop selected audio repeaters?"))
             {
                 return;
             }
