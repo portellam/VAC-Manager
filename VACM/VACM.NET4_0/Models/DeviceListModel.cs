@@ -179,6 +179,59 @@ namespace VACM.NET4_0.Models
         }
 
         /// <summary>
+        /// Get array of modified MMDevice friendly names. Count each repeated MMDevice
+        /// and append an '#' and number value to the friendly name.
+        /// </summary>
+        /// <param name="mMDeviceList">The MMDevice list</param>
+        /// <returns>The friendly name array</returns>
+        internal string[] GetModifiedNameArray(List<MMDevice> mMDeviceList)
+        {
+            List<string> modifiedNameList = new List<string>();
+
+            mMDeviceList.ForEach(x =>
+            {
+                modifiedNameList.Add(x.FriendlyName);
+            });
+
+            mMDeviceList.ForEach(x =>
+            {
+                string friendlyName = x.FriendlyName;
+
+                if (!modifiedNameList.Any
+                    (y => y.StartsWith(friendlyName)))
+                {
+                    return;
+                }
+
+                int repeatCount = modifiedNameList.Where
+                    (y => string.Equals(y, friendlyName)).Count();
+
+                if (repeatCount <= 1)
+                {
+                    return;
+                }
+
+                int modifiedIndex = 1;
+
+                modifiedNameList.ForEach(y =>
+                {
+                    if (modifiedIndex > repeatCount
+                        || !string.Equals(y, friendlyName))
+                    {
+                        return;
+                    }
+
+                    int index = modifiedNameList.IndexOf(y);
+                    y = string.Format("{0} #{1}", y, modifiedIndex);
+                    modifiedNameList[index] = y;
+                    modifiedIndex++;
+                });
+            });
+
+            return modifiedNameList.ToArray();
+        }
+
+        /// <summary>
         /// Get unselected wave in MMDevice lists.
         /// </summary>
         internal void GetUnselectedWaveInMMDeviceLists()
@@ -250,6 +303,8 @@ namespace VACM.NET4_0.Models
 
             AllWaveOutNameList = GetNameListGivenMMDeviceList(AllWaveOutDeviceList);
         }
+
+        
 
         /// <summary>
         /// Remove MMDevice(s) from selected lists if MMDevice does not currently exist
