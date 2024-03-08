@@ -307,17 +307,17 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void SetDeviceListModelLists()
         {
-            deviceListModel.SetSelectedList
-                (DataFlow.Capture, selectedDeviceWaveInNameList);
+            deviceListModel.SetSelectedList(DataFlow.Capture,
+                selectedDeviceWaveInNameList);
 
-            deviceListModel.SetSelectedList
-                (DataFlow.Render, selectedDeviceWaveOutNameList);
+            deviceListModel.SetSelectedList(DataFlow.Render,
+                selectedDeviceWaveOutNameList);
 
-            deviceListModel.SetUnselectedList
-                (DataFlow.Capture, unselectedDeviceWaveInNameList);
+            deviceListModel.SetUnselectedList(DataFlow.Capture,
+                unselectedDeviceWaveInNameList);
 
-            deviceListModel.SetUnselectedList
-                (DataFlow.Render, unselectedDeviceWaveOutNameList);
+            deviceListModel.SetUnselectedList(DataFlow.Render,
+                unselectedDeviceWaveOutNameList);
         }
 
         #endregion
@@ -346,6 +346,7 @@ namespace VACM.NET4_0.Views
             toolStripItemList.Add(deviceAddSelectToolStripMenuItem);
             toolStripItemList.Add(deviceAddSelectWaveInToolStripMenuItem);
             toolStripItemList.Add(deviceAddSelectWaveOutToolStripMenuItem);
+            toolStripItemList.Add(deviceAddSelectToolStripMenuItem);
             toolStripItemList.Add(deviceAddToolStripMenuItem);
             toolStripItemList.Add(deviceReloadAllToolStripMenuItem);
             toolStripItemList.Add(deviceRemoveConfirmToolStripMenuItem);
@@ -354,6 +355,7 @@ namespace VACM.NET4_0.Views
             toolStripItemList.Add(deviceRemoveSelectAllUnlinkedToolStripMenuItem);
             toolStripItemList.Add(deviceRemoveSelectWaveInToolStripMenuItem);
             toolStripItemList.Add(deviceRemoveSelectWaveOutToolStripMenuItem);
+            toolStripItemList.Add(deviceRemoveSelectToolStripMenuItem);
             toolStripItemList.Add(deviceRemoveToolStripMenuItem);
             toolStripItemList.Add(deviceToolStripSeparator1);
             toolStripItemList.Add(deviceToolStripSeparator2);
@@ -372,6 +374,7 @@ namespace VACM.NET4_0.Views
             toolStripItemList.Add(linkAddConfirmToolStripMenuItem);
             toolStripItemList.Add(linkAddSelectWaveInToolStripMenuItem);
             toolStripItemList.Add(linkAddSelectWaveOutToolStripMenuItem);
+            toolStripItemList.Add(linkAddSelectToolStripMenuItem);
             toolStripItemList.Add(linkAddToolStripMenuItem);
             toolStripItemList.Add(linkDefaultBitRateToolStripMenuItem);
             toolStripItemList.Add(linkDefaultBufferToolStripMenuItem);
@@ -383,6 +386,7 @@ namespace VACM.NET4_0.Views
             toolStripItemList.Add(linkRemoveSelectAllToolStripMenuItem);
             toolStripItemList.Add(linkRemoveSelectWaveInToolStripMenuItem);
             toolStripItemList.Add(linkRemoveSelectWaveOutToolStripMenuItem);
+            toolStripItemList.Add(linkRemoveSelectToolStripMenuItem);
             toolStripItemList.Add(linkRemoveToolStripMenuItem);
             toolStripItemList.Add(linkToolStripMenuItem);
             toolStripItemList.Add(linkToolStripSeparator1);
@@ -417,8 +421,7 @@ namespace VACM.NET4_0.Views
             linkAddSelectWaveOutToolStripMenuItem.DropDownItems.Clear();
             linkRemoveSelectWaveInToolStripMenuItem.DropDownItems.Clear();
             linkRemoveSelectWaveOutToolStripMenuItem.DropDownItems.Clear();
-            string text = deviceToolStripMenuItem.Text;
-            deviceToolStripMenuItem.Text = "Loading...";
+
             deviceToolStripMenuItem.Enabled = false;
             Invalidate();
 
@@ -479,7 +482,7 @@ namespace VACM.NET4_0.Views
                 repeaterDataModel.LinkWaveOutMMDeviceList);
 
             InitializeDeviceToolStripMenuItem(linkRemoveSelectWaveOutToolStripMenuItem);
-            deviceToolStripMenuItem.Text = text;
+
             deviceToolStripMenuItem.Enabled = true;
             Invalidate();
         }
@@ -1295,7 +1298,7 @@ namespace VACM.NET4_0.Views
 
             deviceAddSelectAllToolStripMenuItem.Checked = isNotBusyAndListIsFull;
             deviceAddSelectAllToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
-            deviceAddSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+            //deviceAddSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
 
             deviceAddSelectWaveInToolStripMenuItem.Enabled = !isBusy
                 && !isDeviceAddWaveInNameListEmpty;
@@ -1366,13 +1369,13 @@ namespace VACM.NET4_0.Views
             deviceRemoveSelectAllUnlinkedToolStripMenuItem.Enabled =
                 isNotBusyAndListIsNotEmpty;                                             //TODO: create a getter to determine if unlinked items exist.
 
-            deviceRemoveSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
+            //deviceRemoveSelectToolStripMenuItem.Enabled = isNotBusyAndListIsNotEmpty;
 
             deviceRemoveSelectWaveInToolStripMenuItem.Enabled = !isBusy
-                && !isDeviceRemoveWaveInNameListEmpty;
+                && !this.isDeviceRemoveWaveInNameListEmpty;
 
             deviceRemoveSelectWaveOutToolStripMenuItem.Enabled = !isBusy
-                && !isDeviceRemoveWaveOutNameListEmpty;
+                && !this.isDeviceRemoveWaveOutNameListEmpty;
 
             string toolTipText = GetDeviceToolTipText(isBusy,
                 isDeviceRemoveNameListEmpty);
