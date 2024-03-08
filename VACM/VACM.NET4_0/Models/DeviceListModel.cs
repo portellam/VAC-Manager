@@ -121,14 +121,32 @@ namespace VACM.NET4_0.Models
             {
                 mMDevice = AllWaveInDeviceList
                     .Where(thisMMDevice =>
-                        thisMMDevice.FriendlyName == mMDeviceFriendlyName)
+                        {
+                            if (thisMMDevice is null
+                                || thisMMDevice.FriendlyName is null
+                                || thisMMDevice.FriendlyName != mMDeviceFriendlyName)
+                            {
+                                return false;
+                            }
+
+                            return true;
+                        })
                     .FirstOrDefault();
             }
             else
             {
                 mMDevice = AllWaveOutDeviceList
                     .Where(thisMMDevice =>
-                        thisMMDevice.FriendlyName == mMDeviceFriendlyName)
+                        {
+                            if (thisMMDevice is null
+                                || thisMMDevice.FriendlyName is null
+                                || thisMMDevice.FriendlyName != mMDeviceFriendlyName)
+                            {
+                                return false;
+                            }
+
+                            return true;
+                        })
                     .FirstOrDefault();
             }
 
@@ -354,6 +372,11 @@ namespace VACM.NET4_0.Models
                 {
                     MMDevice mMDevice = GetMMDevice(dataFlow, mMDeviceName);
 
+                    if (mMDevice is null)
+                    {
+                        return;
+                    }
+
                     if (dataFlow == DataFlow.Capture)
                     {
                         SelectedWaveInMMDeviceList.Add(mMDevice);
@@ -396,6 +419,11 @@ namespace VACM.NET4_0.Models
             mMDeviceNameList.ForEach(mMDeviceName =>
             {
                 MMDevice mMDevice = GetMMDevice(dataFlow, mMDeviceName);
+
+                if (mMDevice is null)
+                {
+                    return;
+                }
 
                 if (dataFlow == DataFlow.Capture)
                 {
