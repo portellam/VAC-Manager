@@ -325,49 +325,6 @@ namespace VACM.NET4_0.Models
         }
 
         /// <summary>
-        /// Move MMDevice from unselected list to related selected list.
-        /// </summary>
-        /// <param name="dataFlow">The data flow</param>
-        /// <param name="mMDeviceName">The MMDevice name</param>
-        public void AddMMDeviceToSelectedList(DataFlow dataFlow, string mMDeviceName)
-        {
-            MMDevice mMDevice = GetMMDevice(dataFlow, mMDeviceName);
-
-            if (mMDevice is null)
-            {
-                return;
-            }
-
-            if (dataFlow == DataFlow.Capture)
-            {
-                UnselectedWaveInMMDeviceList.Remove(mMDevice);
-
-                UnselectedWaveInNameList =
-                    GetNameListGivenMMDeviceList(UnselectedWaveInMMDeviceList);
-
-                SelectedWaveInMMDeviceList.Add(mMDevice);
-
-                SelectedWaveInNameList =
-                    GetNameListGivenMMDeviceList(SelectedWaveInMMDeviceList);
-            }
-            else
-            {
-                UnselectedWaveOutMMDeviceList.Remove(mMDevice);
-
-                UnselectedWaveOutNameList =
-                    GetNameListGivenMMDeviceList(UnselectedWaveOutMMDeviceList);
-
-                SelectedWaveOutMMDeviceList.Add(mMDevice);
-
-                SelectedWaveOutNameList =
-                    GetNameListGivenMMDeviceList(SelectedWaveOutMMDeviceList);
-            }
-
-            SortSelectedMMDeviceLists();
-        }
-
-
-        /// <summary>
         /// Parse MMDevice name list and copy each valid MMDevice to the relevant
         /// selected list.
         /// </summary>
@@ -382,8 +339,75 @@ namespace VACM.NET4_0.Models
                 return;
             }
 
+            if (dataFlow == DataFlow.Capture)
+            {
+                SelectedWaveInMMDeviceList.Clear();
+                SelectedWaveInNameList.Clear();
+            }
+            else
+            {
+                SelectedWaveOutMMDeviceList.Clear();
+                SelectedWaveOutNameList.Clear();
+            }
+
             mMDeviceNameList.ForEach(mMDeviceName =>
-                AddMMDeviceToSelectedList(dataFlow, mMDeviceName));
+                {
+                    MMDevice mMDevice = GetMMDevice(dataFlow, mMDeviceName);
+
+                    if (dataFlow == DataFlow.Capture)
+                    {
+                        SelectedWaveInMMDeviceList.Add(mMDevice);
+                        SelectedWaveInNameList.Add(mMDeviceName);
+                    }
+                    else
+                    {
+                        SelectedWaveOutMMDeviceList.Add(mMDevice);
+                        SelectedWaveOutNameList.Add(mMDeviceName);
+                    }
+                });
+        }
+
+        /// <summary>
+        /// Parse MMDevice name list and copy each valid MMDevice to the relevant
+        /// unselected list.
+        /// </summary>
+        /// <param name="dataFlow">The data flow</param>
+        /// <param name="mMDeviceNameList">The MMDevice name list</param>
+        public void SetUnselectedList
+            (DataFlow dataFlow, List<string> mMDeviceNameList)
+        {
+            if (dataFlow == DataFlow.All || mMDeviceNameList is null
+                || mMDeviceNameList.Count == 0)
+            {
+                return;
+            }
+
+            if (dataFlow == DataFlow.Capture)
+            {
+                UnselectedWaveInMMDeviceList.Clear();
+                UnselectedWaveInNameList.Clear();
+            }
+            else
+            {
+                UnselectedWaveOutMMDeviceList.Clear();
+                UnselectedWaveOutNameList.Clear();
+            }
+
+            mMDeviceNameList.ForEach(mMDeviceName =>
+            {
+                MMDevice mMDevice = GetMMDevice(dataFlow, mMDeviceName);
+
+                if (dataFlow == DataFlow.Capture)
+                {
+                    UnselectedWaveInMMDeviceList.Add(mMDevice);
+                    UnselectedWaveInNameList.Add(mMDeviceName);
+                }
+                else
+                {
+                    UnselectedWaveOutMMDeviceList.Add(mMDevice);
+                    UnselectedWaveOutNameList.Add(mMDeviceName);
+                }
+            });
         }
 
         #endregion
