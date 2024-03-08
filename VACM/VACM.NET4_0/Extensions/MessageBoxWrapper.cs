@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Forms;
 using VACM.NET4_0.ViewModels.Accessors;
 using MessageBox = System.Windows.MessageBox;
 
@@ -14,35 +15,78 @@ namespace VACM.NET4_0.Extensions
         private readonly static string warningCaption = "Warning";
 
         /// <summary>
-        /// Return True if question is answered with Yes.
-        /// False if No.
+        /// Show MessageBox with predefined caption which user must close with "Yes" or
+        /// "No". Return True if question is answered with Yes. False if No.
         /// </summary>
         /// <param name="messageBoxText">The message box text</param>
         /// <returns>True/False</returns>
         public static bool ShowYesNoAndReturnTrueFalse(string messageBoxText)
         {
-            return MessageBox.Show(messageBoxText,
-                AssemblyInformationAccessor.AssemblyTitle, MessageBoxButton.YesNo)
-                is MessageBoxResult.Yes;
+            return ShowYesNoAndReturnTrueFalse(messageBoxText,
+                AssemblyInformationAccessor.AssemblyTitle);
         }
 
         /// <summary>
-        /// Return True if question is answered with Yes.
-        /// False if No.
+        /// Show centered MessageBox with predefined caption which user must close with
+        /// "Yes" or "No". Return True if question is answered with "Yes".
+        /// False if "No".
+        /// </summary>
+        /// <param name="parentObject">The parent object</param>
+        /// <param name="messageBoxText">The message box text</param>
+        /// <returns>True/False</returns>
+        public static bool ShowYesNoAndReturnTrueFalse(object parentObject,
+            string messageBoxText)
+        {
+            return ShowYesNoAndReturnTrueFalse(parentObject, messageBoxText,
+                AssemblyInformationAccessor.AssemblyTitle);
+        }
+
+        /// <summary>
+        /// Show MessageBox with user-defined caption which user must close with "Yes"
+        /// or "No". Return True if question is answered with "Yes". False if "No".
         /// </summary>
         /// <param name="messageBoxText">The message box text</param>
         /// <param name="messageBoxCaption">The message box caption</param>
         /// <returns>True/False</returns>
-        public static bool ShowYesNoAndReturnTrueFalse
-            (string messageBoxText, string messageBoxCaption)
+        public static bool ShowYesNoAndReturnTrueFalse(string messageBoxText,
+            string messageBoxCaption)
         {
             return MessageBox.Show(messageBoxText, messageBoxCaption,
                 MessageBoxButton.YesNo) is MessageBoxResult.Yes;
         }
 
         /// <summary>
-        /// Show MessageBox which user must close.
-        /// Predefined caption.
+        /// Show centered MessageBox with user-defined caption which user must close
+        /// with "Yes" or "No". Return True if question is answered with "Yes".
+        /// False if "No".
+        /// </summary>
+        /// <param name="parentObject">The parent object</param>
+        /// <param name="messageBoxText">The message box text</param>
+        /// <param name="messageBoxCaption">The message box caption</param>
+        /// <returns>True/False</returns>
+        public static bool ShowYesNoAndReturnTrueFalse(object parentObject,
+            string messageBoxText, string messageBoxCaption)
+        {
+            if (parentObject is null)
+            {
+                throw new System.ArgumentNullException(nameof(parentObject));
+            }
+
+            if (!(parentObject is IWin32Window))
+            {
+                throw new System.NotSupportedException(nameof(parentObject));
+            }
+
+            using (DialogCenteringService dialogCenteringService =
+                    new DialogCenteringService(parentObject as IWin32Window))
+            {
+                return MessageBox.Show(messageBoxText, messageBoxCaption,
+                    MessageBoxButton.YesNo) is MessageBoxResult.Yes;
+            }
+        }
+
+        /// <summary>
+        /// Show MessageBox with predefined caption which user must close.
         /// </summary>
         /// <param name="messageBoxText">The message box text</param>
         public static void Show(string messageBoxText)
@@ -51,18 +95,68 @@ namespace VACM.NET4_0.Extensions
         }
 
         /// <summary>
-        /// Show MessageBox which user must close.
-        /// Predefined caption.
+        /// Show centered MessageBox with predefined caption which user must close.
+        /// </summary>
+        /// <param name="parentObject">The parent object</param>
+        /// <param name="messageBoxText">The message box text</param>
+        public static void Show(object parentObject, string messageBoxText)
+        {
+            if (parentObject is null)
+            {
+                throw new System.ArgumentNullException(nameof(parentObject));
+            }
+
+            if (!(parentObject is IWin32Window))
+            {
+                throw new System.NotSupportedException(nameof(parentObject));
+            }
+
+            using (DialogCenteringService dialogCenteringService =
+                    new DialogCenteringService(parentObject as IWin32Window))
+            {
+                Show(messageBoxText, AssemblyInformationAccessor.AssemblyTitle);
+            }
+        }
+
+        /// <summary>
+        /// Show MessageBox with user-defined caption which user must close.
         /// </summary>
         /// <param name="messageBoxText">The message box text</param>
         /// <param name="messageBoxCaption">The message box caption</param>
         public static void Show(string messageBoxText, string messageBoxCaption)
         {
-            Show(messageBoxText, messageBoxCaption);
+            MessageBox.Show(messageBoxText, messageBoxCaption);
         }
 
         /// <summary>
-        /// Show MessageBox with predefined caption "Error".
+        /// Show centered MessageBox with user-defined caption which user must close.
+        /// </summary>
+        /// <param name="parentObject">The parent object</param>
+        /// <param name="messageBoxText">The message box text</param>
+        /// <param name="messageBoxCaption">The message box caption</param>
+        public static void Show(object parentObject, string messageBoxText,
+            string messageBoxCaption)
+        {
+            if (parentObject is null)
+            {
+                throw new System.ArgumentNullException(nameof(parentObject));
+            }
+
+            if (!(parentObject is IWin32Window))
+            {
+                throw new System.NotSupportedException(nameof(parentObject));
+            }
+
+            using (DialogCenteringService dialogCenteringService =
+                    new DialogCenteringService(parentObject as IWin32Window))
+            {
+                Show(messageBoxText, messageBoxCaption);
+            }
+        }
+
+        /// <summary>
+        /// Show MessageBox with predefined caption "Error" which user must
+        /// close.
         /// </summary>
         /// <param name="messageBoxText">The message box text</param>
         public static void ShowError(string messageBoxText)
@@ -71,7 +165,19 @@ namespace VACM.NET4_0.Extensions
         }
 
         /// <summary>
-        /// Show MessageBox with predefined caption "Notice".
+        /// Show centered MessageBox with predefined caption "Error" which user must
+        /// close.
+        /// </summary>
+        /// <param name="parentObject">The parent object</param>
+        /// <param name="messageBoxText">The message box text</param>
+        public static void ShowError(object parentObject, string messageBoxText)
+        {
+            Show(parentObject, messageBoxText, errorCaption);
+        }
+
+        /// <summary>
+        /// Show MessageBox with predefined caption "Notice" which user must
+        /// close.
         /// </summary>
         /// <param name="messageBoxText">The message box text</param>
         public static void ShowNotice(string messageBoxText)
@@ -80,12 +186,36 @@ namespace VACM.NET4_0.Extensions
         }
 
         /// <summary>
-        /// Show MessageBox with predefined caption "Warning".
+        /// Show centered MessageBox with predefined caption "Notice" which user must
+        /// close.
+        /// </summary>
+        /// <param name="parentObject">The parent object</param>
+        /// <param name="messageBoxText">The message box text</param>
+        public static void ShowNotice(object parentObject,
+            string messageBoxText)
+        {
+            Show(parentObject, messageBoxText, noticeCaption);
+        }
+
+        /// <summary>
+        /// Show MessageBox with predefined caption "Warning" which user must
+        /// close.
         /// </summary>
         /// <param name="messageBoxText">The message box text</param>
         public static void ShowWarning(string messageBoxText)
         {
             Show(messageBoxText, warningCaption);
+        }
+
+        /// <summary>
+        /// Show centered MessageBox with predefined caption "Warning" which user must
+        /// close.
+        /// </summary>
+        /// <param name="parentObject">The parent object</param>
+        /// <param name="messageBoxText">The message box text</param>
+        public static void ShowWarning(object parentObject, string messageBoxText)
+        {
+            Show(parentObject, messageBoxText, warningCaption);
         }
     }
 }
