@@ -77,8 +77,7 @@ namespace VACM.NET4_0.Extensions
                 throw new System.NotSupportedException(nameof(parentObject));
             }
 
-            using (DialogCenteringService dialogCenteringService =
-                    new DialogCenteringService(parentObject as IWin32Window))
+            using (new DialogCenteringService(parentObject as IWin32Window))
             {
                 return MessageBox.Show(messageBoxText, messageBoxCaption,
                     MessageBoxButton.YesNo) is MessageBoxResult.Yes;
@@ -111,8 +110,7 @@ namespace VACM.NET4_0.Extensions
                 throw new System.NotSupportedException(nameof(parentObject));
             }
 
-            using (DialogCenteringService dialogCenteringService =
-                    new DialogCenteringService(parentObject as IWin32Window))
+            using (new DialogCenteringService(parentObject as IWin32Window))
             {
                 Show(messageBoxText, AssemblyInformationAccessor.AssemblyTitle);
             }
@@ -147,8 +145,7 @@ namespace VACM.NET4_0.Extensions
                 throw new System.NotSupportedException(nameof(parentObject));
             }
 
-            using (DialogCenteringService dialogCenteringService =
-                    new DialogCenteringService(parentObject as IWin32Window))
+            using (new DialogCenteringService(parentObject as IWin32Window))
             {
                 Show(messageBoxText, messageBoxCaption);
             }
