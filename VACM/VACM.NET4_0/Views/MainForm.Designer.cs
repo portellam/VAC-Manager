@@ -390,7 +390,7 @@ namespace VACM.NET4_0.Views
             // deviceRemoveAllLinkedToolStripMenuItem
             // 
             this.deviceRemoveSelectAllLinkedToolStripMenuItem.Name =
-                "deviceRemoveAllLinkedToolStripMenuItem";
+                "deviceRemoveSelectAllLinkedToolStripMenuItem";
 
             this.deviceRemoveSelectAllLinkedToolStripMenuItem.Size =
                 new System.Drawing.Size(230, 26);
@@ -403,7 +403,7 @@ namespace VACM.NET4_0.Views
             // deviceRemoveAllUnlinkedToolStripMenuItem
             // 
             this.deviceRemoveSelectAllUnlinkedToolStripMenuItem.Name =
-                "deviceRemoveAllUnlinkedToolStripMenuItem";
+                "deviceRemoveSelectAllUnlinkedToolStripMenuItem";
 
             this.deviceRemoveSelectAllUnlinkedToolStripMenuItem.Size =
                 new System.Drawing.Size(230, 26);
@@ -416,7 +416,7 @@ namespace VACM.NET4_0.Views
             // deviceRemoveWaveInToolStripMenuItem
             // 
             this.deviceRemoveSelectWaveInToolStripMenuItem.Name =
-                "deviceRemoveWaveInToolStripMenuItem";
+                "deviceRemoveSelectWaveInToolStripMenuItem";
 
             this.deviceRemoveSelectWaveInToolStripMenuItem.Size =
                 new System.Drawing.Size(156, 26);
@@ -426,7 +426,7 @@ namespace VACM.NET4_0.Views
             // deviceRemoveWaveOutToolStripMenuItem
             // 
             this.deviceRemoveSelectWaveOutToolStripMenuItem.Name =
-                "deviceRemoveWaveOutToolStripMenuItem";
+                "deviceRemoveSelectWaveOutToolStripMenuItem";
 
             this.deviceRemoveSelectWaveOutToolStripMenuItem.Size =
                 new System.Drawing.Size(156, 26);
