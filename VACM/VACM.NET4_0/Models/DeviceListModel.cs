@@ -110,6 +110,11 @@ namespace VACM.NET4_0.Models
         /// <returns>The MMDevice</returns>
         public MMDevice GetMMDevice(DataFlow dataFlow, string mMDeviceFriendlyName)
         {
+            if (string.IsNullOrWhiteSpace(mMDeviceFriendlyName))
+            {
+                return null;
+            }
+
             MMDevice mMDevice = null;
 
             if (dataFlow == DataFlow.Capture)
@@ -320,64 +325,12 @@ namespace VACM.NET4_0.Models
         }
 
         /// <summary>
-        /// Move MMDevice from selected list to related unselected list.
-        /// </summary>
-        /// <param name="dataFlow">The data flow</param>
-        /// <param name="mMDeviceName">The MMDevice name</param>
-        public void MoveMMDeviceFromSelectedList(DataFlow dataFlow, string mMDeviceName)
-        {
-            if (string.IsNullOrWhiteSpace(mMDeviceName))
-            {
-                return;
-            }
-
-            MMDevice mMDevice = GetMMDevice(dataFlow, mMDeviceName);
-
-            if (mMDevice is null)
-            {
-                return;
-            }
-
-            if (dataFlow == DataFlow.Capture)
-            {
-                SelectedWaveInMMDeviceList.Remove(mMDevice);
-
-                SelectedWaveInNameList =
-                    GetNameListGivenMMDeviceList(SelectedWaveInMMDeviceList);
-
-                UnselectedWaveInMMDeviceList.Add(mMDevice);
-
-                UnselectedWaveInNameList =
-                    GetNameListGivenMMDeviceList(UnselectedWaveInMMDeviceList);
-            }
-            else
-            {
-                SelectedWaveOutMMDeviceList.Remove(mMDevice);
-
-                SelectedWaveOutNameList =
-                    GetNameListGivenMMDeviceList(SelectedWaveOutMMDeviceList);
-
-                UnselectedWaveOutMMDeviceList.Add(mMDevice);
-
-                UnselectedWaveOutNameList =
-                    GetNameListGivenMMDeviceList(UnselectedWaveOutMMDeviceList);
-            }
-
-            SortUnselectedMMDeviceLists();
-        }
-
-        /// <summary>
         /// Move MMDevice from unselected list to related selected list.
         /// </summary>
         /// <param name="dataFlow">The data flow</param>
         /// <param name="mMDeviceName">The MMDevice name</param>
-        public void MoveMMDeviceToSelectedList(DataFlow dataFlow, string mMDeviceName)
+        public void AddMMDeviceToSelectedList(DataFlow dataFlow, string mMDeviceName)
         {
-            if (string.IsNullOrWhiteSpace(mMDeviceName))
-            {
-                return;
-            }
-
             MMDevice mMDevice = GetMMDevice(dataFlow, mMDeviceName);
 
             if (mMDevice is null)
@@ -413,31 +366,14 @@ namespace VACM.NET4_0.Models
             SortSelectedMMDeviceLists();
         }
 
-        /// <summary>
-        /// Parse MMDevice name list and move each valid MMDevice to the relevant
-        /// selected list.
-        /// </summary>
-        /// <param name="mMDeviceNameList">The MMDevice name list</param>
-        public void MoveMMDeviceNameListFromSelectedList
-            (DataFlow dataFlow, List<string> mMDeviceNameList)
-        {
-            if (dataFlow == DataFlow.All || mMDeviceNameList is null
-                || mMDeviceNameList.Count == 0)
-            {
-                return;
-            }
-
-            mMDeviceNameList.ForEach(mMDeviceName =>
-                MoveMMDeviceFromSelectedList(dataFlow, mMDeviceName));
-        }
 
         /// <summary>
-        /// Parse MMDevice name list and move each valid MMDevice to the relevant
+        /// Parse MMDevice name list and copy each valid MMDevice to the relevant
         /// selected list.
         /// </summary>
         /// <param name="dataFlow">The data flow</param>
         /// <param name="mMDeviceNameList">The MMDevice name list</param>
-        public void MoveMMDeviceNameListToSelectedList
+        public void SetSelectedList
             (DataFlow dataFlow, List<string> mMDeviceNameList)
         {
             if (dataFlow == DataFlow.All || mMDeviceNameList is null
@@ -447,7 +383,7 @@ namespace VACM.NET4_0.Models
             }
 
             mMDeviceNameList.ForEach(mMDeviceName =>
-                MoveMMDeviceToSelectedList(dataFlow, mMDeviceName));
+                AddMMDeviceToSelectedList(dataFlow, mMDeviceName));
         }
 
         #endregion
