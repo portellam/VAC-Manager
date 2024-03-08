@@ -5,7 +5,7 @@ using VACM.NET4_0.ViewModels.Accessors;
 namespace VACM.NET4_0.Extensions
 {
     /// <summary>
-    /// Wrapper for MessageBox library.
+    /// Wrapper for MessageBox library
     /// </summary>
     public class MessageBoxWrapper
     {
@@ -47,8 +47,7 @@ namespace VACM.NET4_0.Extensions
         /// <param name="messageBoxText">The message box text</param>
         public static void Show(string messageBoxText)
         {
-            MessageBoxExtension.Show(messageBoxText,
-                AssemblyInformationAccessor.AssemblyTitle);
+            Show(messageBoxText, AssemblyInformationAccessor.AssemblyTitle);
         }
 
         /// <summary>
@@ -68,7 +67,7 @@ namespace VACM.NET4_0.Extensions
         /// <param name="messageBoxText">The message box text</param>
         public static void ShowError(string messageBoxText)
         {
-            MessageBoxExtension.Show(messageBoxText, errorCaption);
+            Show(messageBoxText, errorCaption);
         }
 
         /// <summary>
@@ -77,7 +76,7 @@ namespace VACM.NET4_0.Extensions
         /// <param name="messageBoxText">The message box text</param>
         public static void ShowNotice(string messageBoxText)
         {
-            MessageBoxExtension.Show(messageBoxText, noticeCaption);
+            Show(messageBoxText, noticeCaption);
         }
 
         /// <summary>
@@ -86,7 +85,7 @@ namespace VACM.NET4_0.Extensions
         /// <param name="messageBoxText">The message box text</param>
         public static void ShowWarning(string messageBoxText)
         {
-            MessageBoxExtension.Show(messageBoxText, warningCaption);
+            Show(messageBoxText, warningCaption);
         }
     }
 }
