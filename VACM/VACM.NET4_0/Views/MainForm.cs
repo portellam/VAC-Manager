@@ -510,24 +510,30 @@ namespace VACM.NET4_0.Views
         /// Initialize the device tool strip menu item.
         /// </summary>
         /// <param name="eventHandler">The event handler</param>
-        /// <param name="mMDevice">The MMDevice</param>
+        /// <param name="mMDeviceAndNumberedFriendlyName">The MMDevice and numbered
+        /// friendly name</param>
         /// <param name="toolStripMenuItemList">The tool strip menu item list</param>
         internal void InitializeDeviceToolStripMenuItemDropDownItem
-            (EventHandler eventHandler, MMDevice mMDevice,
-            List<ToolStripMenuItem> toolStripMenuItemList)
+            (EventHandler eventHandler,
+                KeyValuePair<MMDevice, string> mMDeviceAndNumberedFriendlyName,
+                List<ToolStripMenuItem> toolStripMenuItemList)
         {
             //if (mMDevice.State == DeviceState.NotPresent)
             //{
             //	return;
             //}
 
-            if (mMDevice is null || toolStripMenuItemList is null)
+            if (mMDeviceAndNumberedFriendlyName.Key is null
+                || mMDeviceAndNumberedFriendlyName.Value is null
+                || toolStripMenuItemList is null)
             {
                 return;
             }
 
-            bool deviceIsEnabled = mMDevice.State != DeviceState.Disabled;
-            string text = $"{mMDevice.FriendlyName} ";
+            bool deviceIsEnabled = mMDeviceAndNumberedFriendlyName.Key.State !=
+                DeviceState.Disabled;
+
+            string text = $"{mMDeviceAndNumberedFriendlyName.Value} ";
 
             if (deviceIsEnabled)
             {
@@ -543,7 +549,7 @@ namespace VACM.NET4_0.Views
                 CheckState = CheckState.Unchecked,
                 CheckOnClick = true,
                 Text = text,
-                ToolTipText = mMDevice.FriendlyName,                                    //NOTE: The ToolTipText property must contain the MMDevice.FriendlyName, so that the MenuItem as a sender object will be properly validated in DeviceList logic.
+                ToolTipText = mMDeviceAndNumberedFriendlyName.Key.FriendlyName,
             };
 
             if (eventHandler != null)
@@ -585,10 +591,11 @@ namespace VACM.NET4_0.Views
             List<ToolStripMenuItem> toolStripMenuItemList =
                 new List<ToolStripMenuItem>();
 
-            mMDeviceList.ForEach(mMDevice =>
+            deviceListModel.GetDeviceAndNumberedFriendlyNameDictionary(mMDeviceList)
+                .ToList().ForEach(x =>
                 {
-                    InitializeDeviceToolStripMenuItemDropDownItem(eventHandler,
-                        mMDevice, toolStripMenuItemList);
+                    InitializeDeviceToolStripMenuItemDropDownItem
+                        (eventHandler, x, toolStripMenuItemList);
                 });
 
             toolStripMenuItemList.ForEach(toolStripMenuItem =>
@@ -600,6 +607,8 @@ namespace VACM.NET4_0.Views
             parentToolStripMenuItem.DropDownItems
                 .AddRange(toolStripMenuItemList.ToArray());
         }
+
+        
 
         /// <summary>
         /// Initialize the text of the device tool strip menu item.
@@ -613,20 +622,10 @@ namespace VACM.NET4_0.Views
                 toolStripMenuItem.ToolTipText);
 
             index++;
-            string prefix = $"{index.ToString()}. ";
+            string prefix = $"{index}. ";
 
             toolStripMenuItem.Text = string.Format("{0,4} {1}", prefix,
                 toolStripMenuItem.Text);
-        }
-
-        /// <summary>
-        /// Initialize all lists.
-        /// </summary>
-        internal void InitializeLists()
-        {
-            InitializeControlsList();
-            InitializeToolStripItemList();
-            GC.Collect();
         }
 
         /// <summary>
@@ -638,6 +637,16 @@ namespace VACM.NET4_0.Views
             linkRemoveConfirmToolStripMenuItem.DropDownItems.Clear();
 
             //TODO: work on this more.
+        }
+
+        /// <summary>
+        /// Initialize all lists.
+        /// </summary>
+        internal void InitializeLists()
+        {
+            InitializeControlsList();
+            InitializeToolStripItemList();
+            GC.Collect();
         }
 
         /// <summary>
