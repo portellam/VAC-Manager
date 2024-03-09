@@ -199,14 +199,14 @@ namespace VACM.NET4_0.Models
             {
                 string friendlyName = x.FriendlyName;
 
-                if (!deviceAndNumberedFriendlyNameDictionary.Any
-                    (y => y.Value.StartsWith(friendlyName)))
+                if (!deviceAndNumberedFriendlyNameDictionary.Values
+                        .Any(y => y.StartsWith(friendlyName)))
                 {
                     return;
                 }
 
-                int repeatCount = deviceAndNumberedFriendlyNameDictionary
-                    .Where(y => string.Equals(y.Value, friendlyName)).Count();
+                int repeatCount = deviceAndNumberedFriendlyNameDictionary.Values
+                    .Where(y => string.Equals(y, friendlyName)).Count();
 
                 if (repeatCount <= 1)
                 {
@@ -218,7 +218,7 @@ namespace VACM.NET4_0.Models
                 deviceAndNumberedFriendlyNameDictionary.ToList().ForEach(y =>
                 {
                     if (number > repeatCount
-                        || !string.Equals(y.Value, friendlyName))
+                        || !string.Equals(y, friendlyName))
                     {
                         return;
                     }
