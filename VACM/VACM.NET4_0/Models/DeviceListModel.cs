@@ -184,51 +184,53 @@ namespace VACM.NET4_0.Models
         /// </summary>
         /// <param name="mMDeviceList">The MMDevice list</param>
         /// <returns>The friendly name array</returns>
-        internal string[] GetModifiedNameArray(List<MMDevice> mMDeviceList)
+        internal Dictionary<MMDevice, string> GetDeviceAndNumberedFriendlyNameDictionary
+            (List<MMDevice> mMDeviceList)
         {
-            List<string> modifiedNameList = new List<string>();
+            Dictionary<MMDevice, string> deviceAndNumberedFriendlyNameDictionary =
+                new Dictionary<MMDevice, string> ();
 
             mMDeviceList.ForEach(x =>
             {
-                modifiedNameList.Add(x.FriendlyName);
+                deviceAndNumberedFriendlyNameDictionary.Add(x, x.FriendlyName);
             });
 
             mMDeviceList.ForEach(x =>
             {
                 string friendlyName = x.FriendlyName;
 
-                if (!modifiedNameList.Any
-                    (y => y.StartsWith(friendlyName)))
+                if (!deviceAndNumberedFriendlyNameDictionary.Any
+                    (y => y.Value.StartsWith(friendlyName)))
                 {
                     return;
                 }
 
-                int repeatCount = modifiedNameList.Where
-                    (y => string.Equals(y, friendlyName)).Count();
+                int repeatCount = deviceAndNumberedFriendlyNameDictionary
+                    .Where(y => string.Equals(y.Value, friendlyName)).Count();
 
                 if (repeatCount <= 1)
                 {
                     return;
                 }
 
-                int modifiedIndex = 1;
+                int number = 1;
 
-                modifiedNameList.ForEach(y =>
+                deviceAndNumberedFriendlyNameDictionary.ToList().ForEach(y =>
                 {
-                    if (modifiedIndex > repeatCount
-                        || !string.Equals(y, friendlyName))
+                    if (number > repeatCount
+                        || !string.Equals(y.Value, friendlyName))
                     {
                         return;
                     }
 
-                    int index = modifiedNameList.IndexOf(y);
-                    y = string.Format("{0} #{1}", y, modifiedIndex);
-                    modifiedNameList[index] = y;
-                    modifiedIndex++;
+                    deviceAndNumberedFriendlyNameDictionary[y.Key] =
+                        string.Format("{0} #{1}", y.Value, number);
+
+                    number++;
                 });
             });
 
-            return modifiedNameList.ToArray();
+            return deviceAndNumberedFriendlyNameDictionary;
         }
 
         /// <summary>
