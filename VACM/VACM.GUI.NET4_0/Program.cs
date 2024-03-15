@@ -8,7 +8,6 @@ namespace VACM.GUI.NET4_0
     {
         #region Arguments
 
-        private static bool doRunInConsole = false;
         public static bool DoForceColorTheme { get; private set; } = false;
         public static bool IsLightThemeEnabled { get; private set; } = false;
 
@@ -32,15 +31,7 @@ namespace VACM.GUI.NET4_0
             ParseArguments();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            if (doRunInConsole)
-            {
-                //TODO: create console mode.
-            }
-            else
-            {
-                new GraphicsWindow();
-            }
+            new GraphicsWindow();
         }
 
         /// <summary>
@@ -62,10 +53,6 @@ namespace VACM.GUI.NET4_0
 
                 switch (argument.ToLower())
                 {
-                    //case "/console":
-                    //    doRunInConsole = true;
-                    //    break;
-
                     case "/forcedarkmode":
                         DoForceColorTheme = true;
                         IsLightThemeEnabled = false;
