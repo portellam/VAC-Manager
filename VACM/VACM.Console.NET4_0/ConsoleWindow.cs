@@ -1,4 +1,6 @@
-﻿namespace VACM.Console.NET4_0
+﻿using VACM.Console.Views.NET4_0;
+
+namespace VACM.Console.NET4_0
 {
     public class ConsoleWindow
     {
@@ -9,8 +11,7 @@
         /// </summary>
         public ConsoleWindow()
         {
-            System.Console.WriteLine("Hello world!");
-            System.Console.Read();
+            new MainConsole();
         }
 
         #endregion
