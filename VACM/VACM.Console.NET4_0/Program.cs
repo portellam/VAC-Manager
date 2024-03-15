@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace VACM.Console.NET4_0
+namespace VACM.CLI.NET4_0
 {
     public class Program
     {

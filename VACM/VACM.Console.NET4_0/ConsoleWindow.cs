@@ -1,6 +1,6 @@
-﻿using VACM.Console.Views.NET4_0;
+﻿using VACM.CLI.Views.NET4_0;
 
-namespace VACM.Console.NET4_0
+namespace VACM.CLI.NET4_0
 {
     public class ConsoleWindow
     {
