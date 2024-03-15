@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace VACM.Console.Views.NET4_0
+namespace VACM.CLI.Views.NET4_0
 {
     public class MainConsole
     {
@@ -14,8 +14,8 @@ namespace VACM.Console.Views.NET4_0
         /// </summary>
         public MainConsole()
         {
-            System.Console.WriteLine("Hello world!");
-            System.Console.Read();
+            Console.WriteLine("Hello world!");
+            Console.Read();
         }
 
         #endregion
