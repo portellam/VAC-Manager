@@ -426,58 +426,58 @@ namespace VACM.NET4_0.Views
             Invalidate();
 
             InitializeDeviceToolStripMenuItemDropDown
-                (deviceAddSelectToolStripMenuItemEnabled_Confirm,
+                (true, deviceAddSelectToolStripMenuItemEnabled_Confirm,
                 deviceAddSelectWaveInToolStripMenuItem,
                 deviceListModel.UnselectedWaveInMMDeviceList);
 
             InitializeDeviceToolStripMenuItem(deviceAddSelectWaveInToolStripMenuItem);
 
             InitializeDeviceToolStripMenuItemDropDown
-                (deviceAddSelectToolStripMenuItemEnabled_Confirm,
+                (true, deviceAddSelectToolStripMenuItemEnabled_Confirm,
                 deviceAddSelectWaveOutToolStripMenuItem,
                 deviceListModel.UnselectedWaveOutMMDeviceList);
 
             InitializeDeviceToolStripMenuItem(deviceAddSelectWaveOutToolStripMenuItem);
 
             InitializeDeviceToolStripMenuItemDropDown
-                (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
+                (false, deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
                 deviceRemoveSelectWaveInToolStripMenuItem,
-                deviceListModel.SelectedWaveInMMDeviceList);
+                deviceListModel.UnselectedWaveInMMDeviceList);
 
             InitializeDeviceToolStripMenuItem
                 (deviceRemoveSelectWaveInToolStripMenuItem);
 
             InitializeDeviceToolStripMenuItemDropDown
-                (deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
+                (false, deviceRemoveSelectToolStripMenuItemEnabled_Confirm,
                 deviceRemoveSelectWaveOutToolStripMenuItem,
-                deviceListModel.SelectedWaveOutMMDeviceList);
+                deviceListModel.UnselectedWaveOutMMDeviceList);
 
             InitializeDeviceToolStripMenuItem
                 (deviceRemoveSelectWaveOutToolStripMenuItem);
 
             InitializeDeviceToolStripMenuItemDropDown
-                (linkAddSelectWaveInToolStripMenuItem_Click,
+                (false, linkAddSelectWaveInToolStripMenuItem_Click,
                 linkAddSelectWaveInToolStripMenuItem,
                 deviceListModel.SelectedWaveInMMDeviceList);
 
             InitializeDeviceToolStripMenuItem(linkAddSelectWaveInToolStripMenuItem);
 
             InitializeDeviceToolStripMenuItemDropDown
-                (linkAddSelectWaveOutToolStripMenuItem_Click,
+                (false, linkAddSelectWaveOutToolStripMenuItem_Click,
                 linkAddSelectWaveOutToolStripMenuItem,
                 deviceListModel.SelectedWaveOutMMDeviceList);
 
             InitializeDeviceToolStripMenuItem(linkAddSelectWaveOutToolStripMenuItem);
 
             InitializeDeviceToolStripMenuItemDropDown
-                (linkRemoveSelectWaveInToolStripMenuItem_Click,
+                (false, linkRemoveSelectWaveInToolStripMenuItem_Click,
                 linkRemoveSelectWaveInToolStripMenuItem,
                 repeaterDataModel.LinkWaveInMMDeviceList);
 
             InitializeDeviceToolStripMenuItem(linkRemoveSelectWaveInToolStripMenuItem);
 
             InitializeDeviceToolStripMenuItemDropDown
-                (linkRemoveSelectWaveOutToolStripMenuItem_Click,
+                (false, linkRemoveSelectWaveOutToolStripMenuItem_Click,
                 linkRemoveSelectWaveOutToolStripMenuItem,
                 repeaterDataModel.LinkWaveOutMMDeviceList);
 
@@ -602,13 +602,57 @@ namespace VACM.NET4_0.Views
                 {
                     InitializeDeviceToolStripMenuItemDropDownItemText(dataFlow,
                         toolStripMenuItem);
+
+                    toolStripMenuItem.Visible = false;
                 });
 
             parentToolStripMenuItem.DropDownItems
                 .AddRange(toolStripMenuItemList.ToArray());
         }
 
-        
+        /// <summary>
+        /// Initialize a device tool strip menu item drop down by parsing the related
+        /// device list.
+        /// </summary>
+        /// <param name="isDropDownVisible">Is drop down visible</param>
+        /// <param name="eventHandler">The event handler</param>
+        /// <param name="parentToolStripMenuItem">The parent device tool strip menu item
+        /// </param>
+        /// <param name="mMDeviceList">The device list</param>
+        internal void InitializeDeviceToolStripMenuItemDropDown
+            (bool isDropDownVisible, EventHandler eventHandler, ToolStripMenuItem parentToolStripMenuItem,
+            List<MMDevice> mMDeviceList)
+        {
+            if (parentToolStripMenuItem is null || mMDeviceList is null
+                || mMDeviceList.Count == 0)
+            {
+                return;
+            }
+
+            DataFlow dataFlow = mMDeviceList.FirstOrDefault().DataFlow;
+            parentToolStripMenuItem.DropDownItems.Clear();
+
+            List<ToolStripMenuItem> toolStripMenuItemList =
+                new List<ToolStripMenuItem>();
+
+            deviceListModel.GetDeviceAndNumberedFriendlyNameDictionary(mMDeviceList)
+                .ToList().ForEach(x =>
+                {
+                    InitializeDeviceToolStripMenuItemDropDownItem
+                        (eventHandler, x, toolStripMenuItemList);
+                });
+
+            toolStripMenuItemList.ForEach(toolStripMenuItem =>
+            {
+                InitializeDeviceToolStripMenuItemDropDownItemText(dataFlow,
+                    toolStripMenuItem);
+
+                toolStripMenuItem.Visible = isDropDownVisible;
+            });
+
+            parentToolStripMenuItem.DropDownItems
+                .AddRange(toolStripMenuItemList.ToArray());
+        }
 
         /// <summary>
         /// Initialize the text of the device tool strip menu item.
@@ -929,7 +973,8 @@ namespace VACM.NET4_0.Views
                 || firstToolStripMenuItem.DropDownItems is null
                 || firstToolStripMenuItem.DropDownItems.Count == 0
                 || secondToolStripMenuItem is null
-                || secondToolStripMenuItem.DropDownItems is null)
+                || secondToolStripMenuItem.DropDownItems is null
+                || secondToolStripMenuItem.DropDownItems.Count == 0)
             {
                 return;
             }
@@ -940,9 +985,12 @@ namespace VACM.NET4_0.Views
 
             toolStripMenuItemList.ForEach(toolStripMenuItem =>
                 {
-                    MoveToolStripMenuItemDropDownToNewToolStripItemDropDown
-                        (toolStripMenuItem, firstToolStripMenuItem,
-                        secondToolStripMenuItem);
+                    firstToolStripMenuItem.DropDownItems.Remove(toolStripMenuItem);
+                    secondToolStripMenuItem.DropDownItems.Remove(toolStripMenuItem);
+                    toolStripMenuItem.Checked = false;
+                    secondToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
+                    toolStripMenuItem.Visible = false;
+                    firstToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
                 });
 
             SetPropertiesOfToolStripMenuItemGivenItemDropDownIsEmptyOrNot
@@ -952,40 +1000,6 @@ namespace VACM.NET4_0.Views
                 (secondToolStripMenuItem);
 
             SortToolStripMenuItemDropDownByText(secondToolStripMenuItem);
-        }
-
-        /// <summary>
-        /// Move tool strip menu item to new tool strip item drop down.
-        /// </summary>
-        /// <param name="thisToolStripMenuItem">The tool strip menu item to move</param>
-        /// <param name="firstToolStripMenuItem">The first tool strip menu item</param>
-        /// <param name="secondToolStripMenuItem">The second tool strip menu item
-        /// </param>
-        internal void MoveToolStripMenuItemDropDownToNewToolStripItemDropDown
-            (ToolStripMenuItem thisToolStripMenuItem,
-            ToolStripMenuItem firstToolStripMenuItem,
-            ToolStripMenuItem secondToolStripMenuItem)
-        {
-            if (thisToolStripMenuItem is null
-                || firstToolStripMenuItem is null
-                || firstToolStripMenuItem.DropDownItems is null
-                || firstToolStripMenuItem.DropDownItems.Count == 0
-                || secondToolStripMenuItem is null
-                || secondToolStripMenuItem.DropDownItems is null)
-            {
-                return;
-            }
-
-            thisToolStripMenuItem.Checked = false;
-            firstToolStripMenuItem.DropDownItems.Remove(thisToolStripMenuItem);
-
-            if (secondToolStripMenuItem.DropDownItems
-                .Contains(thisToolStripMenuItem))
-            {
-                return;
-            }
-
-            secondToolStripMenuItem.DropDownItems.Add(thisToolStripMenuItem);
         }
 
         /// <summary>
@@ -2030,6 +2044,7 @@ namespace VACM.NET4_0.Views
                      deviceRemoveSelectWaveOutToolStripMenuItem);
 
                 SetDeviceListModelLists();
+                return 0;
             }
             catch
             {
@@ -2037,10 +2052,8 @@ namespace VACM.NET4_0.Views
                 return 1;
             }
 
-            return 0;
+            
         }
-
-        
 
         /// <summary>
         /// Action logic for deviceReloadAllConfirm background worker. If moving items
@@ -2120,6 +2133,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            this.UseWaitCursor = true;
             doWorkEventArgs.Result = deviceAddConfirmBackgroundWorker_Action
                 (doWorkEventArgs);
         }
@@ -2145,6 +2159,7 @@ namespace VACM.NET4_0.Views
             CloseAndSetPropertiesOfDeviceAddToolStripMenuItemDropDown();
             CloseAndSetPropertiesOfDeviceRemoveToolStripMenuItemDropDown();
             Invalidate();
+            this.UseWaitCursor = false;
         }
 
         /// <summary>
@@ -2160,6 +2175,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            this.UseWaitCursor = true;
             doWorkEventArgs.Result = deviceReloadAllBackgroundWorker_Action
                 (doWorkEventArgs);
         }
@@ -2177,6 +2193,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            this.UseWaitCursor = true;
             doWorkEventArgs.Result = deviceRemoveConfirmBackgroundWorker_Action
                 (doWorkEventArgs);
         }
@@ -2198,6 +2215,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            this.UseWaitCursor = true;
             doWorkEventArgs.Result = 0;                                                 //TODO: implement here.
         }
 
@@ -2214,6 +2232,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            this.UseWaitCursor = true;
             doWorkEventArgs.Result = 0;                                                 //TODO: implement here.
         }
 
@@ -2236,6 +2255,7 @@ namespace VACM.NET4_0.Views
 
             //TODO: add logic here.
             Invalidate();
+            this.UseWaitCursor = false;
         }
 
         #endregion
@@ -2255,6 +2275,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            this.UseWaitCursor = true;
             doWorkEventArgs.Result = 0;                                                 //TODO: implement here.
         }
 
@@ -2271,6 +2292,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            this.UseWaitCursor = true;
             doWorkEventArgs.Result = 0;                                                 //TODO: implement here.
         }
 
@@ -2287,6 +2309,7 @@ namespace VACM.NET4_0.Views
                 return;
             }
 
+            this.UseWaitCursor = true;
             doWorkEventArgs.Result = 0;                                                 //TODO: implement here.
         }
 
@@ -2309,6 +2332,7 @@ namespace VACM.NET4_0.Views
 
             //TODO: add logic here.
             Invalidate();
+            this.UseWaitCursor = false;
         }
 
         #endregion
