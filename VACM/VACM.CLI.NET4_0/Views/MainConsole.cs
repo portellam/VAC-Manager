@@ -32,12 +32,8 @@ namespace VACM.CLI.Views.NET4_0
             iLog.Info($"Opening {nameof(MainConsole)}...");
             FirstMenu();
             PrintAndParseOptions();
-            Console.Read();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         internal void FirstMenu()
         {
             Console.WriteLine(
@@ -48,6 +44,8 @@ namespace VACM.CLI.Views.NET4_0
         internal void PrintAndParseOptions()
         {
             iLog.Info($"Printing options...");
+            Console.WriteLine("Main Menu");
+            Console.WriteLine();
 
             while (true)
             {
@@ -66,6 +64,7 @@ namespace VACM.CLI.Views.NET4_0
                     || result < 1 || result > options.Length)
                 {
                     Console.WriteLine("Invalid option. Please try again.");
+                    Console.WriteLine();
                     continue;
                 }
 
