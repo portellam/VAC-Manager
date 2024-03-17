@@ -32,9 +32,6 @@ namespace VACM.CLI.NET4_0
 
         #region Parameters
 
-        private const string terminatedOutput =
-            "Application terminated. Press <Enter> to exit...";
-
         private static readonly ILog iLog = LogManager.GetLogger
             (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -49,16 +46,6 @@ namespace VACM.CLI.NET4_0
         [STAThread]
         internal static int Main(string[] arguments)
         {
-            string terminatedOutput =
-                "Application terminated. Press <Enter> to exit...";
-
-            if (iLog is null)
-            {
-                Console.WriteLine(terminatedOutput);
-                Console.ReadKey();
-                return 1;
-            }
-
             iLog.Info("Application started...");
             Arguments = arguments;
 
@@ -71,28 +58,31 @@ namespace VACM.CLI.NET4_0
                 return 2;
             }
 
+            int resultCode;
+
             try
             {
                 ConsoleWindow consoleWindow = new ConsoleWindow();
                 iLog.Info($"Waiting on task completion...");
                 consoleWindow.Task.Wait();
+                resultCode = 0;
+                Console.WriteLine();
             }
             catch (TaskCanceledException taskCanceledException)
             {
                 iLog.Warn(taskCanceledException.Message);
-                return 2;
+                resultCode = 2;
             }
             catch (Exception exception)
             {
                 iLog.Error(exception.Message);
                 Console.WriteLine("An unexpected error has occurred.");
-                Console.ReadKey();
-                return 1;
+                resultCode = 1;
             }
 
-            Console.WriteLine(terminatedOutput);
+            Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
-            return 0;
+            return resultCode;
         }
 
         /// <summary>
