@@ -31,7 +31,6 @@ namespace VACM.CLI.NET4_0
         public ConsoleWindow()
         {
             iLog.Info($"Preparing {nameof(ConsoleWindow)}...");
-
             PrepareTask();
             iLog.Info($"Starting task...");
             Task.Start();
