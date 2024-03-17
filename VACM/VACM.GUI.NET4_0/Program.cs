@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -7,6 +8,9 @@ namespace VACM.GUI.NET4_0
     public class Program
     {
         #region Arguments
+
+        private static readonly ILog iLog = LogManager.GetLogger
+            (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static bool DoForceColorTheme { get; private set; } = false;
         public static bool IsLightThemeEnabled { get; private set; } = false;
@@ -25,13 +29,21 @@ namespace VACM.GUI.NET4_0
         /// </summary>
         /// <param name="arguments">The command line arguments</param>
         [STAThread]
-        internal static void Main(string[] arguments)
+        internal static int Main(string[] arguments)
         {
+            if (iLog is null)
+            {
+                return 1;
+            }
+
+            iLog.Info("Application started...");
             Arguments = arguments;
             ParseArguments();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             new GraphicsWindow();
+
+            return 0;
         }
 
         /// <summary>
@@ -39,6 +51,8 @@ namespace VACM.GUI.NET4_0
         /// </summary>
         internal static void ParseArguments()
         {
+            iLog.Info("Parsing arguments...");
+
             if (Arguments.Count() == 0)
             {
                 return;
