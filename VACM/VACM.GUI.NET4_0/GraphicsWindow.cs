@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using log4net;
+using System.Threading;
 using System.Windows.Forms;
 using VACM.GUI.NET4_0.ViewModels;
 using VACM.GUI.NET4_0.Views;
@@ -10,6 +11,9 @@ namespace VACM.GUI.NET4_0
         #region Parameters
 
         private static bool isLightThemeEnabled;
+
+        private static readonly ILog iLog = LogManager.GetLogger
+            (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static bool IsLightThemeEnabled
         {
@@ -54,6 +58,8 @@ namespace VACM.GUI.NET4_0
         /// </summary>
         public GraphicsWindow()
         {
+            iLog.Info($"Preparing {nameof(GraphicsWindow)}...");
+
             var thread = new Thread(() =>
             {
                 if (!DoForceColorTheme)
