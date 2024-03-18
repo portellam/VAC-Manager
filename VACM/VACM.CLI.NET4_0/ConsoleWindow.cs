@@ -1,5 +1,4 @@
 ﻿using log4net;
-using System.Threading;
 using System.Threading.Tasks;
 using VACM.CLI.Views.NET4_0;
 

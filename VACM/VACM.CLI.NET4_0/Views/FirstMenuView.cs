@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using VACM.CLI.Views.NET4_0;
 
 namespace VACM.CLI.NET4_0.Views
 {
