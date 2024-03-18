@@ -1,7 +1,6 @@
 ﻿using log4net;
 using System.Threading.Tasks;
 using VACM.CLI.NET4_0.Views;
-using VACM.CLI.Views.NET4_0;
 
 namespace VACM.CLI.NET4_0
 {
@@ -30,7 +29,7 @@ namespace VACM.CLI.NET4_0
         /// </summary>
         public ConsoleWindow()
         {
-            iLog.Info($"Preparing {nameof(ConsoleWindow)}...");
+            iLog.Info($"Opening {nameof(ConsoleWindow)}...");
             PrepareTask();
             iLog.Info($"Starting task...");
             Task.Start();
@@ -41,7 +40,7 @@ namespace VACM.CLI.NET4_0
         /// </summary>
         internal void PrepareTask()
         {
-            iLog.Info($"Preparing task...");
+            iLog.Info($"Opening {nameof(PrepareTask)}...");
 
             Task = new Task(() =>
             {
