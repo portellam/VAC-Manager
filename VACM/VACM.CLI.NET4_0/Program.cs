@@ -65,7 +65,6 @@ namespace VACM.CLI.NET4_0
                 iLog.Info($"Waiting on task completion...");
                 consoleWindow.Task.Wait();
                 resultCode = 0;
-                Console.WriteLine();
             }
             catch (TaskCanceledException taskCanceledException)
             {
