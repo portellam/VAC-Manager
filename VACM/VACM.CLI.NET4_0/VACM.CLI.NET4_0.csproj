@@ -52,8 +52,8 @@
     <Compile Include="ConsoleWindow.cs" />
     <Compile Include="ViewModels\Accessors\AssemblyInformationAccessor.cs" />
     <Compile Include="ViewModels\PrintMenu.cs" />
+    <Compile Include="Views\FileMenuView.cs" />
     <Compile Include="Views\FirstMenuView.cs" />
-    <Compile Include="Views\MainConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
