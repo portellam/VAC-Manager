@@ -29,6 +29,9 @@ namespace VACM.CLI.NET4_0.ViewModels
 
             while (true)
             {
+                int exitIndex = -1;
+                int firstIndex = 0;
+
                 nameAndActionList.ForEach(x =>
                 {
                     int index = nameAndActionList.IndexOf(x) + 1;
@@ -36,11 +39,13 @@ namespace VACM.CLI.NET4_0.ViewModels
                     Console.WriteLine(line);
                 });
 
-                Console.Write($"Enter [{1}-{nameAndActionList.Count}]:\t");
+                Console.WriteLine(string.Format("{0}. {1}", firstIndex, "Return"));
+                Console.WriteLine();
+                Console.Write($"Enter [{firstIndex}-{nameAndActionList.Count}]: ");
                 string input = Console.ReadLine();
 
                 if (string.IsNullOrEmpty(input) || !int.TryParse(input, out int result)
-                    || result < 1 || result > nameAndActionList.Count)
+                    || result < firstIndex || result > nameAndActionList.Count)
                 {
                     Console.WriteLine("Invalid option. Please try again.");
                     Console.WriteLine();
@@ -49,12 +54,11 @@ namespace VACM.CLI.NET4_0.ViewModels
 
                 result--;
 
-                string option = nameAndActionList[result].Key;
-                Action method = nameAndActionList[result].Value;
-
-                if (string.IsNullOrWhiteSpace(option) || method is null)
+                if (result == exitIndex
+                    || string.IsNullOrWhiteSpace(nameAndActionList[result].Key)
+                    || nameAndActionList[result].Value is null)
                 {
-                    if (ReturnToThePreviousMenuIfYes())
+                    if (AskToReturnToPreviousMenu())
                     {
                         break;
                     }
@@ -62,19 +66,89 @@ namespace VACM.CLI.NET4_0.ViewModels
                     continue;
                 }
 
+                Action method = nameAndActionList[result].Value;
                 method.Invoke();
             }
         }
 
         /// <summary>
-        /// Return to the previous menu if true.
+        /// Print names from list and invoke selected parameterless object.
+        /// </summary>
+        /// <param name="nameAndObjectTypeList">The name and object type list</param>
+        public static void PrintAndInvokeSelectedObject
+            (List<KeyValuePair<string, Type>> nameAndObjectTypeList)
+        {
+            if (nameAndObjectTypeList is null || nameAndObjectTypeList.Count == 0)
+            {
+                return;
+            }
+
+            while (true)
+            {
+                int exitIndex = -1;
+                int firstIndex = 0;
+
+                nameAndObjectTypeList.ForEach(x =>
+                {
+                    int index = nameAndObjectTypeList.IndexOf(x) + 1;
+                    string line = string.Format("{0}. {1}", index, x.Key);
+                    Console.WriteLine(line);
+                });
+
+                Console.WriteLine(string.Format("{0}. {1}", firstIndex, "Return"));
+                Console.WriteLine();
+                Console.Write($"Enter [{firstIndex}-{nameAndObjectTypeList.Count}]: ");
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(input) || !int.TryParse(input, out int result)
+                    || result < firstIndex || result > nameAndObjectTypeList.Count)
+                {
+                    Console.WriteLine("Invalid option. Please try again.");
+                    Console.WriteLine();
+                    continue;
+                }
+
+                result--;
+
+                if (result == exitIndex
+                    || string.IsNullOrWhiteSpace(nameAndObjectTypeList[result].Key)
+                    || nameAndObjectTypeList[result].Value is null)
+                {
+                    if (AskToReturnToPreviousMenu())
+                    {
+                        break;
+                    }
+
+                    continue;
+                }
+
+                Type type = nameAndObjectTypeList[result].Value;
+
+                try
+                {
+                    iLog.Info($"Creating instance of {nameof(type)}");
+                    Activator.CreateInstance(type);
+                }
+                catch(Exception exception)
+                {
+                    iLog.Error(exception.Message);
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Ask to return to the previous menu if true.
         /// </summary>
         /// <returns>True/False</returns>
-        internal static bool ReturnToThePreviousMenuIfYes()
+        internal static bool AskToReturnToPreviousMenu()
         {
-            Console.Write("Return to the previous menu? Enter [Y/n]:\t");
-            ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
-            Console.WriteLine();
+            Console.Write("Return to the previous menu? Enter [Y/n]: ");
+            ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();                          //NOTE: Will jump to next line without 'Enter' pressed.
+            Console.Write("");                                                          //NOTE: Padding.
+            Console.Read();                                                             //NOTE: Two lines of Console.Read will allow 'Enter' to be pressed, as if ReadKey was ReadLine.
+            Console.Read();
+            Console.WriteLine();                                                        //NOTE: Padding.
 
             switch (consoleKeyInfo.Key)
             {
