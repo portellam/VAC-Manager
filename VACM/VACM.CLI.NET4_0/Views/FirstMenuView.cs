@@ -10,14 +10,13 @@ namespace VACM.CLI.NET4_0.Views
     {
         #region Parameters
 
-        private readonly Dictionary<string, Action>
-            menuOptionAndMethodDictionary = new Dictionary<string, Action>
+        private readonly Dictionary<string, Type>
+            menuOptionAndMethodDictionary = new Dictionary<string, Type>
             {
-                { "File",       PrintFileMenu },
-                { "Devices",    PrintDeviceMenu },
-                { "Links",      PrintLinkMenu },
-                { "Repeaters",  PrintRepeaterMenu },
-                { "Exit",       null },
+                { "File",       typeof(FileMenuView) },
+                //{ "Devices",    typeof(FileMenuView) },
+                //{ "Links",      typeof(FileMenuView) },
+                //{ "Repeaters",  typeof(FileMenuView) },
             };
 
         private static readonly ILog iLog = LogManager.GetLogger
@@ -37,43 +36,17 @@ namespace VACM.CLI.NET4_0.Views
         }
 
         /// <summary>
-        /// Print file menu.
-        /// </summary>
-        internal static void PrintFileMenu()
-        {
-            iLog.Info($"Opening {nameof(PrintFileMenu)}...");
-            Console.WriteLine("File Menu");
-            Console.WriteLine();
-        }
-
-        /// <summary>
         /// Print device menu.
         /// </summary>
         internal static void PrintDeviceMenu()
         {
             iLog.Info($"Opening {nameof(PrintDeviceMenu)}...");
+            Console.WriteLine();
             Console.WriteLine("Device Menu");
             Console.WriteLine();
-        }
 
-        /// <summary>
-        /// Print link menu.
-        /// </summary>
-        internal static void PrintLinkMenu()
-        {
-            iLog.Info($"Opening {nameof(PrintLinkMenu)}...");
-            Console.WriteLine("Link Menu");
-            Console.WriteLine();
-        }
+            //TODO: add code here.
 
-        /// <summary>
-        /// Print repeater menu.
-        /// </summary>
-        internal static void PrintRepeaterMenu()
-        {
-            iLog.Info($"Opening {nameof(PrintRepeaterMenu)}...");
-            Console.WriteLine("Repeater Menu");
-            Console.WriteLine();
         }
 
         /// <summary>
@@ -82,11 +55,38 @@ namespace VACM.CLI.NET4_0.Views
         internal void PrintFirstMenu()
         {
             iLog.Info($"Opening {nameof(PrintFirstMenu)}...");
+            Console.WriteLine();
             Console.WriteLine("Main Menu");
             Console.WriteLine();
 
-            PrintMenu.PrintAndInvokeSelectedAction
+            PrintMenu.PrintAndInvokeSelectedObject
                 (menuOptionAndMethodDictionary.ToList());
+        }
+
+        /// <summary>
+        /// Print link menu.
+        /// </summary>
+        internal static void PrintLinkMenu()
+        {
+            iLog.Info($"Opening {nameof(PrintLinkMenu)}...");
+            Console.WriteLine();
+            Console.WriteLine("Link Menu");
+            Console.WriteLine();
+
+            //TODO: add code here.
+        }
+
+        /// <summary>
+        /// Print repeater menu.
+        /// </summary>
+        internal static void PrintRepeaterMenu()
+        {
+            iLog.Info($"Opening {nameof(PrintRepeaterMenu)}...");
+            Console.WriteLine();
+            Console.WriteLine("Repeater Menu");
+            Console.WriteLine();
+
+            //TODO: add code here.
         }
 
         #endregion
