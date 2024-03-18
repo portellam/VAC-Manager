@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VACM.CLI.NET4_0.ViewModels;
 
 namespace VACM.CLI.NET4_0.Views
 {
@@ -32,7 +33,7 @@ namespace VACM.CLI.NET4_0.Views
         public FirstMenuView()
         {
             iLog.Info($"Opening {nameof(FirstMenuView)}...");
-            PrintMenuOptionsAndInvokeMethod();
+            PrintFirstMenu();
         }
 
         /// <summary>
@@ -76,49 +77,16 @@ namespace VACM.CLI.NET4_0.Views
         }
 
         /// <summary>
-        /// Print menu options and invoke related method.
+        /// Print first menu.
         /// </summary>
-        internal void PrintMenuOptionsAndInvokeMethod()
+        internal void PrintFirstMenu()
         {
-            iLog.Info($"Opening {nameof(PrintMenuOptionsAndInvokeMethod)}...");
+            iLog.Info($"Opening {nameof(PrintFirstMenu)}...");
             Console.WriteLine("Main Menu");
             Console.WriteLine();
 
-            while (true)
-            {
-                List<KeyValuePair<string, Action>> menuOptionAndMethodList =
-                    menuOptionAndMethodDictionary.ToList();
-
-                menuOptionAndMethodList.ForEach(x =>
-                {
-                    int index = menuOptionAndMethodList.IndexOf(x) + 1;
-                    string line = string.Format("{0}. {1}", index, x.Key);
-                    Console.WriteLine(line);
-                });
-
-                Console.Write($"Enter [{1}-{menuOptionAndMethodList.Count}]:\t");
-                string input = Console.ReadLine();
-
-                if (string.IsNullOrEmpty(input) || !int.TryParse(input, out int result)
-                    || result < 1 || result > menuOptionAndMethodList.Count)
-                {
-                    Console.WriteLine("Invalid option. Please try again.");
-                    Console.WriteLine();
-                    continue;
-                }
-
-                result--;
-
-                string option = menuOptionAndMethodList[result].Key;
-                Action method = menuOptionAndMethodList[result].Value;
-
-                if (string.IsNullOrWhiteSpace(option) || method is null)
-                {
-                    break;
-                }
-
-                method.Invoke();
-            }
+            PrintMenu.PrintAndInvokeSelectedAction
+                (menuOptionAndMethodDictionary.ToList());
         }
 
         #endregion
