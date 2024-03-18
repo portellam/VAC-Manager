@@ -79,6 +79,7 @@
     <Compile Include="Extensions\WMIRegistryEventListener.cs" />
     <Compile Include="GraphicsWindow.cs" />
     <Compile Include="Models\DeviceListModel.cs" />
+    <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\RepeaterDataModel.cs" />
     <Compile Include="Models\RepeaterModel.cs" />
     <Compile Include="Structs\Channel.cs" />
