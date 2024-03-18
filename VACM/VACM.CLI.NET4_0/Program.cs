@@ -80,7 +80,7 @@ namespace VACM.CLI.NET4_0
                 resultCode = 1;
             }
 
-            Console.WriteLine("Press any key to exit...");
+            Console.Write("Press any key to exit...");
             Console.ReadKey();
             return resultCode;
         }
