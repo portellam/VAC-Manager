@@ -1,5 +1,6 @@
 ﻿using log4net;
 using System.Threading.Tasks;
+using VACM.CLI.NET4_0.Views;
 using VACM.CLI.Views.NET4_0;
 
 namespace VACM.CLI.NET4_0
@@ -44,7 +45,7 @@ namespace VACM.CLI.NET4_0
 
             Task = new Task(() =>
             {
-                new MainConsole();
+                new FirstMenuView();
             });
         }
 
