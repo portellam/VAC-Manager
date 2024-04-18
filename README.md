@@ -1,7 +1,7 @@
 # Virtual Audio Cable Manager
 User interface to create, manage, and automate instances of [Virtual Audio Cable](#licensing) (VAC) audio repeaters.
 
-**[-Latest release-](#https://github.com/portellam/vac-manager/releases/latest) | [View master branch...](https://github.com/portellam/vac-manager/tree/master)**
+**[~Latest release~](#https://github.com/portellam/vac-manager/releases/latest) | [View master branch...](https://github.com/portellam/vac-manager/tree/master)**
 
 ## Table of Contents
 - [Why?](#why)
