@@ -13,7 +13,7 @@ User interface to create, manage, and automate instances of [Virtual Audio Cable
 - [Download](#download)
 - [Features](#features)
 - [Requirements](#requirements)
-- [Keywords](#usage)
+- [Keywords](#keywords)
 - [Credits](#credits)
 - [Licenses](#licenses)
 - [Contact](#contact)
