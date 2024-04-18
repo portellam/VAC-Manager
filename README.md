@@ -1,7 +1,7 @@
 # Virtual Audio Cable Manager
 User interface to create, manage, and automate instances of [Virtual Audio Cable](#licenses) (VAC) audio repeaters for Microsoft Windows. Includes GUI and Console applications. Supports Windows XP, Server 2003 to Windows 10.
 
-**[~Latest release~](#https://github.com/portellam/vac-manager/releases/latest) | [View master branch...](https://github.com/portellam/vac-manager/tree/master)**
+**[~Latest release~](#https://github.com/portellam/vac-manager/releases/latest) | [View develop branch...](https://github.com/portellam/vac-manager/tree/develop)**
 
 ## Table of Contents
 - [Why?](#why)
@@ -13,7 +13,6 @@ User interface to create, manage, and automate instances of [Virtual Audio Cable
 - [Keywords](#usage)
 - [Credits](#credits)
 - [Licenses](#licenses)
-- [Contact](#contact)
 
 ### Why?
 #### Preface
@@ -50,7 +49,7 @@ This is called **[multiplexing](#multiplexing)**.
   - 32-bit (x86) and `.NET 4.0`:&nbsp;NT 5.0; XP and Server 2003.
   - 64-bit (x64) and `.NET 4.8`:&nbsp;NT 6.0 and 6.1; Vista and 7.
   - 64-bit (x64) and `.NET 8.0`:&ensp;&nbsp;NT 8 and above; 8, 8.1, 10, and 11.
-- A minimum of one *VAC* pair.
+- A minimum of one *VAC* pair.About
 
 ### Keywords
 #### multiplexing
@@ -63,63 +62,3 @@ This is called **[multiplexing](#multiplexing)**.
 Virtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.
 
 VAC Manager GPL-3.0, Copyleft © 2024 Alexander Portell.
-
-### Contact
-Did you encounter a bug? Do you need help? Notice any dead links? Please contact by [raising an issue](https://github.com/portellam/vac-manager/issues) with the project itself.
-
-## TODO (subject to change):
-- Development:
- - [x] Choose GUI type: WinForms
-	- [x] Choose design pattern: Model-ViewModel-View
-		- [x] Models
-			- [x] Audio device model
-			- [ ] Repeater model
-			- [x] Repeater data model
-		- [x] Views
-			- [x] Main form
-				- [x] Create GUI layout.
-				- [ ] Create all hotkeys.
-				- [ ] Create all backend logic for accesing and manipulating model data and other forms.
-			- [x] About form
-			- [ ] Grid table
-				- [ ] Present audio devices and repeaters in heirarchical list format.
-				- [ ] Validate Main form logic works here.
-			- [ ] Canvas graph
-				- [ ] Present audio repeaters as pairs of devices with links on a graph.
-				- [ ] Validate Main form logic works here.
-
-	- [ ] Logic
-		- [ ] File
-			- [ ] Open
-			- [ ] New
-			- [ ] Save
-			- [ ] Close
-		- [ ] Devices
-			- [ ] Add
-			- [ ] Remove
-			- [ ] Reload
-			- [ ] Import from file (.xml file).
-			- [ ] Export from file (.xml file).
-		- [ ] Links
-		- [ ] Repeaters
-			- [ ] Generate automation scripts (.bat files).
-			- [ ] Generate Window task (.xml file ?).
-		- [x] Dark mode
-			- [ ] Dark mode compatible with Windows registry calls.
-	- [ ] Windows 32-bit support
-		- [ ] Windows NT 5.x:	.NET 4.0 compatible C# code and NuGet dependencies.
-		- [ ] Windows NT 6.x:	.NET 4.8 compatible C# code and NuGet dependencies.
-	- [ ] Windows 64-bit support
-		- [ ] Windows NT 6.1+:	.NET 4.8 compatible C# code and NuGet dependencies.
-		- [ ] Windows NT 10.0+:	.NET 8.0 compatible C# code and NuGet dependencies.
-
-- Unit testing:
-	- [ ] Higher priority
-		- [ ] Backend logic
-	- [ ] Lower priority
-		- [ ] Viewmodel logic (NOTE: is this even necessary or feasible with Mocking?).
-
-- [ ] Create installer/uninstaller.
-
-- README
-	- [ ] Add demo pics.
