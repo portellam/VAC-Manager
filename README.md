@@ -1,15 +1,16 @@
 # Virtual Audio Cable Manager
 User interface to create, manage, and automate instances of [Virtual Audio Cable](#licenses) (VAC) audio repeaters for Microsoft Windows. Includes GUI and Console applications. Supports Windows XP to Windows 11.
 
-**[~Latest release~](#https://github.com/portellam/vac-manager/releases/latest) | [View develop branch...](https://github.com/portellam/vac-manager/tree/develop)**
+**[~Latest release~](#https://github.com/portellam/vac-manager/releases/latest) | [View develop branch...](https://github.com/portellam/vac-manager/tree/develop)
 
 ## Table of Contents
 - [What is VAC?](#what-is-vac)
   - [1. VAC Control Panel](#1-vac-control-panel) 
-  - [2. VAC Audio Repeater](#2-vac-audio-repeater) 
+  - [2. VAC Audio Repeater](#2-vac-audio-repeater)
 - [Why?](#why)
   - [1. Mirror Audio Sources](#1-mirror-audio-sources)
   - [2. Multiplexing](#2-multiplexing)
+- [Download](#download)
 - [Features](#features)
 - [Requirements](#requirements)
 - [Keywords](#keywords)
@@ -40,6 +41,9 @@ Want to broadcast video game audio and voice chat together to your headphones, b
 Or you want to play music directly to your voice chat, by a virtual microphone? You can do that, too.
 
 These examples are known as **[multiplexing](#multiplexing)**.
+
+### Download
+See the [Releases](https://github.com/portellam/vac-manager/releases) tab.
 
 ### Features
 - Load/Save audio stream setup to/from file.
