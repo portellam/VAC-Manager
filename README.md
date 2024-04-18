@@ -20,7 +20,7 @@ User interface to create, manage, and automate instances of [Virtual Audio Cable
 - [Contact](#contact)
 
 ### What is VAC?
-VAC is a software suite which includes an Audio Repeater, and Control Panel.
+*VAC* is a software suite which includes an Audio Repeater, and Control Panel.
 
 #### 1. VAC Control Panel
 *VAC Control Panel* allows for the creation of Virtual Audio devices (Cables) or VACs.
@@ -35,7 +35,7 @@ By default, Windows will allow for up to one output cable to "listen" to one inp
 ### Why?
 #### 1. Mirror Audio Sources
 By default, Windows allows for a Video source to be mirrored across multiple displays.
-**VAC Manager** aims to do the same, but for Audio.
+**VAC Manager** aims to do the same, but for Audio and with a nice user interface.
 
 #### 2. Multiplexing
 Want to broadcast video game audio and voice chat together to your headphones, but on separate lines for game session recording or streaming? You can do that.
@@ -52,6 +52,8 @@ See the [Releases](https://github.com/portellam/vac-manager/releases) tab.
 - Manage audio stream setup of current or foreign Windows machine(s).
 - Easily automate audio stream setup with Windows Tasks and startup scripts.
 - Fault-tolerance of audio device disconnect or reconnect.
+- WinForm GUI application
+- Console application
 
 ### Requirements
 - [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
