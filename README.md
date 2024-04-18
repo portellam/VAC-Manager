@@ -1,5 +1,5 @@
 # Virtual Audio Cable Manager
-User interface to create, manage, and automate instances of [Virtual Audio Cable](#licensing) (VAC) audio repeaters for Microsoft Windows. Supports Windows XP, Server 2003 to Windows 10.
+User interface to create, manage, and automate instances of [Virtual Audio Cable](#licenses) (VAC) audio repeaters for Microsoft Windows. Supports Windows XP, Server 2003 to Windows 10.
 
 **[~Latest release~](#https://github.com/portellam/vac-manager/releases/latest) | [View master branch...](https://github.com/portellam/vac-manager/tree/master)**
 
@@ -70,6 +70,8 @@ VAC Manager GPL-3.0, Copyleft © 2024 Alexander Portell.
 
 ### Contact
 Did you encounter a bug? Do you need help? Notice any dead links? Please contact by [raising an issue](https://github.com/portellam/vac-manager/issues) with the project itself.
+
+
 
 ## TODO (subject to change):
 - Development:
