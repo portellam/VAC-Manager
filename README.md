@@ -34,13 +34,12 @@ By default, Windows allows for a Video source to be mirrored across multiple dis
 
 #### 2. Multiplexing
 Want to broadcast video game audio and voice chat together to your headphones, but on separate lines for game session recording or streaming? You can do that.
-Or you want to play music directly to your voice chat, by a virtual microphone?
-This is called **multiplexing**.
+Or you want to play music directly to your voice chat, by a virtual microphone? You can do that, too.
 
- For Windows machines with many audio devices, such that the end-user only has to physically turn on or off the audio device, and not in software.
+This is called **[multiplexing](#multiplexing)**.
 
 ### Download
-- See the [Releases](https://github.com/portellam/vac-manager/releases) tab.
+See the [Releases](https://github.com/portellam/vac-manager/releases) tab.
 
 ### Features
 - Load/Save audio stream setup to/from file.
