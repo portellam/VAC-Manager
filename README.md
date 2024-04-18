@@ -12,7 +12,7 @@ User interface to create, manage, and automate instances of [Virtual Audio Cable
   - [2. Multiplexing](#2-multiplexing)
 - [Features](#features)
 - [Requirements](#requirements)
-- [Keywords](#usage)
+- [Keywords](#keywords)
 - [Credits](#credits)
 - [Licenses](#licenses)
 
