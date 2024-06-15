@@ -12,11 +12,7 @@ Includes GUI and Console applications. Supports Windows XP to Windows 11.
 
 ## Table of Contents
 - [What is VAC?](#what-is-vac)
-  - [1. VAC Control Panel](#1-vac-control-panel)
-  - [2. VAC Audio Repeater](#2-vac-audio-repeater)
 - [Why?](#why)
-  - [1. Mirror Audio Sources](#1-mirror-audio-sources)
-  - [2. Multiplexing](#2-multiplexing)
 - [Download](#download)
 - [Features](#features)
 - [Requirements](#requirements)
@@ -57,13 +53,8 @@ These examples are known as **[multiplexing](#multiplexing)**.
 See the **Releases page** ([Codeberg][codeberg-issues],
 [GitHub][github-issues]).
 
-[Codeberg][codeberg-issues],
-[GitHub][github-issues]
-
 [codeberg-issues]: https://codeberg.org/portellam/VAC-Manager/releases/latest
 [github-issues]:   https://github.com/portellam/VAC-Manager/releases/latest
-
-[Releases](https://github.com/portellam/vac-manager/releases)
 
 ### Features
 - Load/Save audio stream setup to/from file.
@@ -80,7 +71,7 @@ See the **Releases page** ([Codeberg][codeberg-issues],
   - 32-bit (x86) and `.NET 4.0`: NT 5.0; XP and Server 2003.
   - 64-bit (x64) and `.NET 4.8`: NT 6.0 and 6.1; Vista and 7.
   - 64-bit (x64) and `.NET 8.0`: NT 8 and above; 8, 8.1, 10, and 11.
-- A minimum of one *VAC* pair.
+- A minimum of one **VAC** pair.
 
 [VAC Audio Repeater]: https://vac.muzychenko.net/en/repeater.htm
 [VAC Control Panel]: https://vac.muzychenko.net/en/download.htm
@@ -89,7 +80,7 @@ See the **Releases page** ([Codeberg][codeberg-issues],
 #### multiplexing
 *In telecommunications and computer networking, multiplexing (sometimes*
 *contracted to muxing) is a method by which multiple analog or digital signals*
-*are combined into one signal over a shared medium.* [Wikipedia]*
+*are combined into one signal over a shared medium.* [Wikipedia]
 
 [Wikipedia]: https://en.wikipedia.org/wiki/Multiplexing
 
@@ -99,9 +90,9 @@ See the **Releases page** ([Codeberg][codeberg-issues],
 [Eugene Muzychenko]: (https://eugene.muzychenko.net/EMuzychenko_Resume_Eng.htm)
 
 ### Licenses
-Virtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.
+**Virtual Audio Cable**. Copyright © 1998-2024. Eugene V. Muzychenko.
 
-VAC Manager GPL-3.0, Copyleft © 2024 Alexander Portell.
+**VAC Manager**. GPL-3.0, Copyleft © 2024. Alexander Portell.
 
 ### Contact
 Did you encounter a bug? Do you need help? Please visit the **Issues page**
