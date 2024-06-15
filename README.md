@@ -89,7 +89,7 @@ See the **Releases page** ([Codeberg][codeberg-issues],
 #### multiplexing
 *In telecommunications and computer networking, multiplexing (sometimes*
 *contracted to muxing) is a method by which multiple analog or digital signals*
-*are combined into one signal over a shared medium.* [Wikipedia]*
+*are combined into one signal over a shared medium.* [Wikipedia]
 
 [Wikipedia]: https://en.wikipedia.org/wiki/Multiplexing
 
@@ -99,9 +99,9 @@ See the **Releases page** ([Codeberg][codeberg-issues],
 [Eugene Muzychenko]: (https://eugene.muzychenko.net/EMuzychenko_Resume_Eng.htm)
 
 ### Licenses
-Virtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.
+**Virtual Audio Cable**. Copyright © 1998-2024. Eugene V. Muzychenko.
 
-VAC Manager GPL-3.0, Copyleft © 2024 Alexander Portell.
+**VAC Manager**. GPL-3.0, Copyleft © 2024. Alexander Portell.
 
 ### Contact
 Did you encounter a bug? Do you need help? Please visit the **Issues page**
