@@ -50,11 +50,8 @@ You can do that, too.
 These examples are known as **[multiplexing](#multiplexing)**.
 
 ### Download
-See the **Releases page** ([Codeberg][codeberg-issues],
-[GitHub][github-issues]).
-
-[codeberg-issues]: https://codeberg.org/portellam/VAC-Manager/releases/latest
-[github-issues]:   https://github.com/portellam/VAC-Manager/releases/latest
+Download the Latest Release:&ensp;[Codeberg][codeberg-releases],
+[GitHub][github-releases]
 
 ### Features
 - Load/Save audio stream setup to/from file.
