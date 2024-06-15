@@ -1,12 +1,18 @@
 # Virtual Audio Cable Manager
 ### Status: In-development
-User interface to create, manage, and automate instances of [Virtual Audio Cable](#licenses) (VAC) audio repeaters for Microsoft Windows. Includes GUI and Console applications. Supports Windows XP to Windows 11.
+User interface to create, manage, and automate instances of
+[Virtual Audio Cable](#licenses) (VAC) audio repeaters for Microsoft Windows.
+Includes GUI and Console applications. Supports Windows XP to Windows 11.
 
-**[~Latest release~](#https://github.com/portellam/vac-manager/releases/latest) | [View master branch...](https://github.com/portellam/vac-manager/tree/master)**
+**Download the Latest Release:**&ensp;[Codeberg][codeberg-releases],
+[GitHub][github-releases]
+
+[codeberg-releases]: https://codeberg.org/portellam/VAC-Manager/releases/latest
+[github-releases]:   https://github.com/portellam/VAC-Manager/releases/latest
 
 ## Table of Contents
 - [What is VAC?](#what-is-vac)
-  - [1. VAC Control Panel](#1-vac-control-panel) 
+  - [1. VAC Control Panel](#1-vac-control-panel)
   - [2. VAC Audio Repeater](#2-vac-audio-repeater)
 - [Why?](#why)
   - [1. Mirror Audio Sources](#1-mirror-audio-sources)
@@ -22,29 +28,42 @@ User interface to create, manage, and automate instances of [Virtual Audio Cable
 *VAC* is a software suite which includes an Audio Repeater, and Control Panel.
 
 #### 1. VAC Control Panel
-*VAC Control Panel* allows for the creation of Virtual Audio devices (Cables) or VACs.
-VACs are created in pairs; one Line-In (input, capture) and Line-Out (output, render).
-Many VAC pairs may be created.
+*VAC Control Panel* allows for the creation of Virtual Audio devices (Cables) or
+VACs. VACs are created in pairs; one Line-In (input, capture) and Line-Out
+(output, render). Many VAC pairs may be created.
 
 #### 2. VAC Audio Repeater
-*VAC Audio Repeater* is a useful tool which allows for an audio stream to passthrough between two devices (cables).
-By default, Windows will allow for up to one output cable to "listen" to one input, equivalent to an "audio repeater".
+*VAC Audio Repeater* is a useful tool which allows for an audio stream to
+passthrough between two devices (cables). By default, Windows will allow for up
+to one output cable to "listen" to one input, equivalent to an "audio repeater".
 *VAC Audio Repeater* allows for many more of these to exist.
 
 ### Why?
 #### 1. Mirror Audio Sources
-By default, Windows allows for a Video source to be mirrored across multiple displays.
-**VAC Manager** aims to do the same, but for Audio and with a nice user interface.
+By default, Windows allows for a Video source to be mirrored across multiple
+displays. **VAC Manager** aims to do the same, but for Audio and with a nice
+user interface.
 
 #### 2. Multiplexing
-Want to broadcast video game audio and voice chat together to your headphones, but on separate lines for game session recording or streaming? You can do that.
+Want to broadcast video game audio and voice chat together to your headphones,
+but on separate lines for game session recording or streaming? You can do that.
 
-Or you want to play music directly to your voice chat, by a virtual microphone? You can do that, too.
+Or you want to play music directly to your voice chat, by a virtual microphone?
+You can do that, too.
 
 These examples are known as **[multiplexing](#multiplexing)**.
 
 ### Download
-See the [Releases](https://github.com/portellam/vac-manager/releases) tab.
+See the **Releases page** ([Codeberg][codeberg-issues],
+[GitHub][github-issues]).
+
+[Codeberg][codeberg-issues],
+[GitHub][github-issues]
+
+[codeberg-issues]: https://codeberg.org/portellam/VAC-Manager/releases/latest
+[github-issues]:   https://github.com/portellam/VAC-Manager/releases/latest
+
+[Releases](https://github.com/portellam/vac-manager/releases)
 
 ### Features
 - Load/Save audio stream setup to/from file.
@@ -55,22 +74,38 @@ See the [Releases](https://github.com/portellam/vac-manager/releases) tab.
 - Console application
 
 ### Requirements
-- [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
-- [VAC Control Panel](https://vac.muzychenko.net/en/download.htm)
+- [VAC Audio Repeater]
+- [VAC Control Panel]
 - Microsoft Windows:
   - 32-bit (x86) and `.NET 4.0`: NT 5.0; XP and Server 2003.
   - 64-bit (x64) and `.NET 4.8`: NT 6.0 and 6.1; Vista and 7.
   - 64-bit (x64) and `.NET 8.0`: NT 8 and above; 8, 8.1, 10, and 11.
 - A minimum of one *VAC* pair.
 
+[VAC Audio Repeater]: https://vac.muzychenko.net/en/repeater.htm
+[VAC Control Panel]: https://vac.muzychenko.net/en/download.htm
+
 ### Keywords
 #### multiplexing
-*In telecommunications and computer networking, multiplexing (sometimes contracted to muxing) is a method by which multiple analog or digital signals are combined into one signal over a shared medium.* [Wikipedia](https://en.wikipedia.org/wiki/Multiplexing)
+*In telecommunications and computer networking, multiplexing (sometimes*
+*contracted to muxing) is a method by which multiple analog or digital signals*
+*are combined into one signal over a shared medium.* [Wikipedia]*
+
+[Wikipedia]: https://en.wikipedia.org/wiki/Multiplexing
 
 ### Credits
-[Eugene Muzychenko](https://eugene.muzychenko.net/EMuzychenko_Resume_Eng.htm) for creating Virtual Audio Cable.
+[Eugene Muzychenko] for creating Virtual Audio Cable.
+
+[Eugene Muzychenko]: (https://eugene.muzychenko.net/EMuzychenko_Resume_Eng.htm)
 
 ### Licenses
 Virtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.
 
 VAC Manager GPL-3.0, Copyleft © 2024 Alexander Portell.
+
+### Contact
+Did you encounter a bug? Do you need help? Please visit the **Issues page**
+([Codeberg][codeberg-issues], [GitHub][github-issues]).
+
+[codeberg-issues]: https://codeberg.org/portellam/generate-evdev/issues
+[github-issues]:   https://github.com/portellam/generate-evdev/issues
