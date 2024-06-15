@@ -12,11 +12,7 @@ Includes GUI and Console applications. Supports Windows XP to Windows 11.
 
 ## Table of Contents
 - [What is VAC?](#what-is-vac)
-  - [1. VAC Control Panel](#1-vac-control-panel)
-  - [2. VAC Audio Repeater](#2-vac-audio-repeater)
 - [Why?](#why)
-  - [1. Mirror Audio Sources](#1-mirror-audio-sources)
-  - [2. Multiplexing](#2-multiplexing)
 - [Download](#download)
 - [Features](#features)
 - [Requirements](#requirements)
