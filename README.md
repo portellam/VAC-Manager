@@ -57,13 +57,8 @@ These examples are known as **[multiplexing](#multiplexing)**.
 See the **Releases page** ([Codeberg][codeberg-issues],
 [GitHub][github-issues]).
 
-[Codeberg][codeberg-issues],
-[GitHub][github-issues]
-
 [codeberg-issues]: https://codeberg.org/portellam/VAC-Manager/releases/latest
 [github-issues]:   https://github.com/portellam/VAC-Manager/releases/latest
-
-[Releases](https://github.com/portellam/vac-manager/releases)
 
 ### Features
 - Load/Save audio stream setup to/from file.
@@ -80,7 +75,7 @@ See the **Releases page** ([Codeberg][codeberg-issues],
   - 32-bit (x86) and `.NET 4.0`: NT 5.0; XP and Server 2003.
   - 64-bit (x64) and `.NET 4.8`: NT 6.0 and 6.1; Vista and 7.
   - 64-bit (x64) and `.NET 8.0`: NT 8 and above; 8, 8.1, 10, and 11.
-- A minimum of one *VAC* pair.
+- A minimum of one **VAC** pair.
 
 [VAC Audio Repeater]: https://vac.muzychenko.net/en/repeater.htm
 [VAC Control Panel]: https://vac.muzychenko.net/en/download.htm
