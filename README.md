@@ -70,9 +70,9 @@ cable).
 | [.NET 4.8]   | 64-bit (x64)     | NT 6.0 and 6.1; Vista and 7        |
 | [.NET 8.0]   | 64-bit (x64)     | NT 8 and above; 8, 8.1, 10, and 11 |
 
-[.NET 4.0]: (#)
-[.NET 4.8]: (#)
-[.NET 8.0]: (#)
+[.NET 4.0]: (https://dotnet.microsoft.com/en-us/download/dotnet-framework/net40)
+[.NET 4.8]: (https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48)
+[.NET 8.0]: ((https://dotnet.microsoft.com/en-us/download/dotnet/8.0))
 
 ### 4. Download
 Download the Latest Release:&ensp;[Codeberg][codeberg-releases],
