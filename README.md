@@ -4,7 +4,7 @@ User interface to create, manage, and automate instances of
 [Virtual Audio Cable](#licenses) (VAC) audio repeaters for Microsoft Windows.
 Includes GUI and Console applications. Supports Windows XP to Windows 11.
 
-### Status: In-Development
+## Status: In-Development
 
 ## Table of Contents
 - [1. What is VAC?](#1-what-is-vac)
