@@ -17,7 +17,12 @@ namespace VACM.NET4_0.Models
     public class RepeaterModel : INotifyPropertyChanged
     {
         /*
-         * TODO:
+         * NEW TODO:
+         * -remove DeviceControl references, use Device model.
+         *  -why? To make this class independent of ViewModel logic.
+         *  -idea is to reduce parsing of bloated objects and params.
+         * 
+         * OLD TODO:
          * -add logic to determine lesser property value between Input and output,
          *      and set max value to that.
          * -parse the VAC manual and reference it for this app README and popups.
