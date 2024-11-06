@@ -77,22 +77,20 @@ namespace VACM.NET4_0.Repositories
     }
 
     /// <summary>
-    /// Get device by ID.
+    /// Get the absent device list.
     /// </summary>
-    /// <param name="id">the device ID</param>
-    /// <returns>The device.</returns>
-    public DeviceModel GetDeviceById(string id)
+    /// <returns>The absent device list.</returns>
+    public List<DeviceModel> GetAbsentDeviceList()
     {
-      if (
-        id is null
-        || id == string.Empty
-      )
+      if (deviceModelHashSet is null)
       {
-        return null;
+        return new List<DeviceModel>();
       }
 
-      return deviceModelHashSet
-        .FirstOrDefault(x => x.Id == id);
+      return
+        deviceModelHashSet
+          .Where(x => ! x.IsPresent)
+          .ToList();
     }
 
     /// <summary>
@@ -112,6 +110,25 @@ namespace VACM.NET4_0.Repositories
 
       return deviceModelHashSet
         .FirstOrDefault(x => x.Name == name);
+    }
+
+    /// <summary>
+    /// Get device by ID.
+    /// </summary>
+    /// <param name="id">the device ID</param>
+    /// <returns>The device.</returns>
+    public DeviceModel GetDeviceById(string id)
+    {
+      if (
+        id is null
+        || id == string.Empty
+      )
+      {
+        return null;
+      }
+
+      return deviceModelHashSet
+        .FirstOrDefault(x => x.Id == id);
     }
 
     /// <summary>
