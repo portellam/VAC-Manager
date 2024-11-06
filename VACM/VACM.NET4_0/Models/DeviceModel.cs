@@ -1,18 +1,91 @@
 ﻿using NAudio.CoreAudioApi;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using VACM.NET4_0.Structs;
 
 namespace VACM.NET4_0.Models
 {
   public class DeviceModel
   {
     #region Parameters
-    public string Id { get; private set; }
-    public bool IsInput { get; private set; }
-    public bool IsOutput { get; private set; }
-    public bool IsPresent { get; private set; }
-    public bool IsSelected { get; set; }
-    public string Name { get; private set; }
+    private bool isInput;
+    private bool isOutput;
+    private bool isPresent;
+    private bool isSelected;
+    private string name;
 
+    public string Id { get; private set; }
+
+    public bool IsInput
+    {
+      get
+      {
+        return isInput;
+      }
+      set
+      {
+        isInput = value;
+        OnPropertyChanged(nameof(ChannelConfig));
+      }
+    }
+
+    public bool IsOutput
+    {
+      get
+      {
+        return isOutput;
+      }
+      set
+      {
+        isOutput = value;
+        OnPropertyChanged(nameof(ChannelConfig));
+      }
+    }
+
+    public bool IsPresent
+    {
+      get
+      {
+        return isPresent;
+      }
+      set
+      {
+        isPresent = value;
+        OnPropertyChanged(nameof(ChannelConfig));
+      }
+    }
+
+    public bool IsSelected
+    {
+      get
+      {
+        return isSelected;
+      }
+      set
+      {
+        isSelected = value;
+        OnPropertyChanged(nameof(ChannelConfig));
+      }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public string Name
+    {
+      get
+      {
+        return name;
+      }
+      set
+      {
+        name = value;
+        OnPropertyChanged(nameof(ChannelConfig));
+      }
+    }
+
+    /// <summary>
+    /// The present device state.
+    /// </summary>
     private DeviceState Present =
       DeviceState.Active
       | DeviceState.Unplugged
@@ -21,12 +94,11 @@ namespace VACM.NET4_0.Models
     #endregion
 
     #region Logic
-
     /// <summary>
     /// Constructors
     /// </summary>
-    /// <param name="mMDevice"></param>
-    /// <param name="isSelected"></param>
+    /// <param name="mMDevice">The actual device</param>
+    /// <param name="isSelected">True/false is the device selected</param>
     [ExcludeFromCodeCoverage]
     public DeviceModel
       (
@@ -47,11 +119,11 @@ namespace VACM.NET4_0.Models
     /// <summary>
     /// Constructor
     /// </summary>
-    /// <param name="id"></param>
-    /// <param name="name"></param>
-    /// <param name="deviceState"></param>
-    /// <param name="dataFlow"></param>
-    /// <param name="isSelected"></param>
+    /// <param name="id">The device ID</param>
+    /// <param name="name">The device name</param>
+    /// <param name="deviceState">The device state</param>
+    /// <param name="dataFlow">The device dataflow</param>
+    /// <param name="isSelected">True/false is the device selected</param>
     [ExcludeFromCodeCoverage]
     public DeviceModel
       (
@@ -72,16 +144,23 @@ namespace VACM.NET4_0.Models
       SetDataFlow(dataFlow);
     }
 
-    public void ToggleIsPresent()
+    /// <summary>
+    /// Logs event when property has changed.
+    /// </summary>
+    /// <param name="propertyName">The property name</param>
+    private void OnPropertyChanged(string propertyName)
     {
-      IsPresent = !IsPresent;
+      PropertyChanged?.Invoke
+        (
+          this, 
+          new PropertyChangedEventArgs(propertyName)
+        );
     }
 
-    public void ToggleIsSelected()
-    {
-      IsSelected = !IsSelected;
-    }
-
+    /// <summary>
+    /// Set the device dataflow
+    /// </summary>
+    /// <param name="dataFlow">The device data flow</param>
     private void SetDataFlow(DataFlow dataFlow)
     {
       IsInput = DataFlow.Capture == dataFlow;
@@ -93,7 +172,23 @@ namespace VACM.NET4_0.Models
       }
 
       IsInput = true;
-      IsInput = true;
+      IsOutput = true;
+    }
+
+    /// <summary>
+    /// Toggle the device presence.
+    /// </summary>
+    public void ToggleIsPresent()
+    {
+      IsPresent = !IsPresent;
+    }
+
+    /// <summary>
+    /// Toggle the device selection.
+    /// </summary>
+    public void ToggleIsSelected()
+    {
+      IsSelected = !IsSelected;
     }
     #endregion
   }
