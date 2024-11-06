@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using VACM.NET4_0.Models;
 using VACM.NET4_0.ViewModels;
 
@@ -6,15 +7,17 @@ namespace VACM.NET4_0.Controllers
 {
   public class RepeaterController
   {
+    #region Parameters
     private RepeaterModel RepeaterModel;
     private RepeaterViewModel RepeaterViewModel;
-    //TODO: add repeater repository?
+    #endregion
 
+    #region Logic
     /// <summary>
     /// Controller
     /// </summary>
-    /// <param name="repeaterModel"></param>
-    /// <param name="repeaterViewModel"></param>
+    /// <param name="repeaterModel">The repeater model</param>
+    /// <param name="repeaterViewModel">The repeater view model</param>
     [ExcludeFromCodeCoverage]
     public RepeaterController
       (
@@ -29,33 +32,32 @@ namespace VACM.NET4_0.Controllers
     /// <summary>
     /// Add the repeater.
     /// </summary>
-    /// <param name="doStartRepeater">True/false start the repeater</param>
-    public void AddRepeater(bool doStartRepeater)
+    public void AddRepeater()
     {
-      // add repeater to repository
+      // add repeater to repository?
       // add repeater to view
-      // start repeater
     }
 
     /// <summary>
     /// Delete the repeater.
     /// </summary>
-    /// <param name="doStopRepeater">True/false stop the repeater</param>
-    public void DeleteRepeater(bool doStopRepeater)
+    public void DeleteRepeater()
     {
-      // stop repeater
+      // TODO: in View, have StopRepeater precede DeleteRepeater?
       // remove repeater from view
-      // remove repeater from repository
+      // remove repeater from repository?
     }
 
     /// <summary>
     /// Restart the repeater.
     /// </summary>
     /// <returns>0 if successful, 1 if failed.</returns>
-    public byte RestartRepeater()
+    public async Task<byte> RestartRepeater()
     {
-      if (this.StopRepeater() != 0
-        || this.StartRepeater() != 0)
+      if (
+        StopRepeater().Result != 0
+        || StartRepeater().Result != 0
+        )
       {
         return 1;
       }
@@ -67,7 +69,7 @@ namespace VACM.NET4_0.Controllers
     /// Start the repeater.
     /// </summary>
     /// <returns>0 if successful, 1 if failed.</returns>
-    public byte StartRepeater()
+    public async Task<byte> StartRepeater()
     {
       // try to start repeater.
       // verify if repeater is started.
@@ -80,7 +82,7 @@ namespace VACM.NET4_0.Controllers
     /// Stop the repeater.
     /// </summary>
     /// <returns>0 if successful, 1 if failed.</returns>
-    public byte StopRepeater()
+    public async Task<byte> StopRepeater()
     {
       // try to stop repeater.
       // verify if repeater is stopped.
@@ -93,11 +95,12 @@ namespace VACM.NET4_0.Controllers
     /// Update the repeater.
     /// </summary>
     /// <param name="doStopRepeater">True/false stop the repeater</param>
-    public void UpdateRepeater(bool doStopRepeater)
+    public async void UpdateRepeater(bool doStopRepeater)
     {
-      // update repeater in repository
+      // update repeater in repository?
       // update repeater in view
       // restart repeater
     }
+    #endregion
   }
 }

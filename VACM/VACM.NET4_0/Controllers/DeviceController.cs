@@ -1,22 +1,27 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using VACM.NET4_0.Models;
-using VACM.NET4_0.Repositories;
 
 namespace VACM.NET4_0.Controllers
 {
   public class DeviceController
   {
+    #region Parameters
     private DeviceModel DeviceModel;
-    private DeviceRepository DeviceRepository;
+    private DeviceViewModel DeviceViewModel;
+    #endregion
 
+    #region Logic
     /// <summary>
-    /// 
+    /// Constructor
     /// </summary>
-    /// <param name="deviceModel"></param>
+    /// <param name="deviceModel">The device model</param>
+    /// <param name="deviceModel">The device view model</param>
     [ExcludeFromCodeCoverage]
-    public DeviceController(DeviceModel deviceModel)
+    public DeviceController(DeviceModel deviceModel, DeviceViewModel deviceViewModel)
     {
       DeviceModel = deviceModel;
+      DeviceViewModel = deviceViewModel;
     }
 
     /// <summary>
@@ -39,7 +44,7 @@ namespace VACM.NET4_0.Controllers
     /// Disable the device.
     /// </summary>
     /// <returns>0 if successful, 1 if failed.</returns>
-    public byte DisableDevice()
+    public async Task<byte> DisableDevice()
     {
       // try to disable device.
       // verify if device is disabled.
@@ -52,7 +57,7 @@ namespace VACM.NET4_0.Controllers
     /// Enable the device.
     /// </summary>
     /// <returns>0 if successful, 1 if failed.</returns>
-    public byte EnableDevice()
+    public async Task<byte> EnableDevice()
     {
       // try to enable device.
       // verify if device is enabled.
@@ -64,9 +69,11 @@ namespace VACM.NET4_0.Controllers
     /// <summary>
     /// Update the device.
     /// </summary>
-    public void UpdateDevice()
+    /// <param name="isPresent">True/False is device present</param>
+    public void UpdateDevice(bool isPresent)
     {
       // update device in repository.
     }
+    #endregion
   }
 }
