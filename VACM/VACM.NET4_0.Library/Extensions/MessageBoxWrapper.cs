@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Forms;
-using VACM.NET4_0.Library.ViewModels.Accessors;
+using VACM.NET4_0.Backend.ViewModels.Accessors;
 using MessageBox = System.Windows.MessageBox;
 
-namespace VACM.NET4_0.Library.Extensions
+namespace VACM.NET4_0.Backend.Extensions
 {
     /// <summary>
     /// Wrapper for MessageBox library

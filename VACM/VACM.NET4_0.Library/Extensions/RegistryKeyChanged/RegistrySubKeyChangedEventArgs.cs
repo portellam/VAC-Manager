@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 
-namespace VACM.NET4_0.Library.Extensions.RegistrySubKeyChanged
+namespace VACM.NET4_0.Backend.Extensions.RegistrySubKeyChanged
 {
   public class RegistrySubKeyChangedEventArgs : System.EventArgs
   {

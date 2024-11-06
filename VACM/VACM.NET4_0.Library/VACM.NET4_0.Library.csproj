@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B5B16153-9C97-4A5C-A524-27F2F7067BD2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>VACM.NET4_0.Library</RootNamespace>
-    <AssemblyName>VACM.NET4_0.Library</AssemblyName>
+    <RootNamespace>VACM.NET4_0.Backend</RootNamespace>
+    <AssemblyName>VACM.NET4_0.Backend</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>VACM.NET4_0.Library.Program</StartupObject>
+    <StartupObject>VACM.NET4_0.Backend.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ConsoleControl, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7edd23586f5e297f, processorArchitecture=MSIL">

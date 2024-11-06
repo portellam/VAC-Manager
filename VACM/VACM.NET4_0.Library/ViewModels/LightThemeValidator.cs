@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using VACM.NET4_0.Library.Extensions;
-using VACM.NET4_0.Library.Extensions.PropertyValueChanged;
+using VACM.NET4_0.Backend.Extensions;
+using VACM.NET4_0.Backend.Extensions.PropertyValueChanged;
 
-namespace VACM.NET4_0.Library.ViewModels
+namespace VACM.NET4_0.Backend.ViewModels
 {
   public class LightThemeValidator
   {

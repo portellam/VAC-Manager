@@ -1,9 +1,9 @@
 ﻿using NAudio.CoreAudioApi;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using VACM.NET4_0.Library.Structs;
+using VACM.NET4_0.Backend.Structs;
 
-namespace VACM.NET4_0.Library.Models
+namespace VACM.NET4_0.Backend.Models
 {
   public class DeviceModel
   {

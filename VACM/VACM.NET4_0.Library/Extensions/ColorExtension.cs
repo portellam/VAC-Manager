@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_0.Library.Extensions
+﻿namespace VACM.NET4_0.Backend.Extensions
 {
   public static class ColorExtension
   {

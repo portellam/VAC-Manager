@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using VACM.NET4_0.Library.ViewModels.Accessors;
-using VACM.NET4_0.Library.ViewModels;
+using VACM.NET4_0.Backend.ViewModels.Accessors;
+using VACM.NET4_0.Backend.ViewModels;
 
-namespace VACM.NET4_0.Library.Views
+namespace VACM.NET4_0.Backend.Views
 {
     /// <summary>
     /// About form view

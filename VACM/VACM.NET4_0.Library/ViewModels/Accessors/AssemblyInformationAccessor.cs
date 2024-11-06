@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace VACM.NET4_0.Library.ViewModels.Accessors
+namespace VACM.NET4_0.Backend.ViewModels.Accessors
 {
   public class AssemblyInformationAccessor
   {

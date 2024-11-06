@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_0.Library.Extensions.PropertyValueChanged
+﻿namespace VACM.NET4_0.Backend.Extensions.PropertyValueChanged
 {
   public delegate void PropertyValueChangedDelegate
   (

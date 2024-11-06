@@ -6,16 +6,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using VACM.NET4_0.Library.Models;
-using VACM.NET4_0.Library.ViewModels;
-using VACM.NET4_0.Library.ViewModels.Accessors;
-using VACM.NET4_0.Library.ViewModels.ColorTable;
-using VACM.NET4_0.Library.Extensions;
-using VACM.NET4_0.Library.Extensions.PropertyValueChanged;
+using VACM.NET4_0.Backend.Models;
+using VACM.NET4_0.Backend.ViewModels;
+using VACM.NET4_0.Backend.ViewModels.Accessors;
+using VACM.NET4_0.Backend.ViewModels.ColorTable;
+using VACM.NET4_0.Backend.Extensions;
+using VACM.NET4_0.Backend.Extensions.PropertyValueChanged;
 using PropertyValueChangedEventArgs =
-    VACM.NET4_0.Library.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
+    VACM.NET4_0.Backend.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
 
-namespace VACM.NET4_0.Library.Views
+namespace VACM.NET4_0.Backend.Views
 {
     public partial class MainForm : Form
     {

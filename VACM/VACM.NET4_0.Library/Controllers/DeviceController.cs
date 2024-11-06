@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using VACM.NET4_0.Library.Models;
+using VACM.NET4_0.Backend.Models;
 
-namespace VACM.NET4_0.Library.Controllers
+namespace VACM.NET4_0.Backend.Controllers
 {
   public class DeviceController
   {
