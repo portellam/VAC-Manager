@@ -9,7 +9,7 @@ namespace VACM.NET4_0.Models
     #region Parameters
     private List<MMDevice> MMDeviceList { get; set; }
 
-    public List<Device> DeviceList { get; private set; }
+    public List<DeviceModel> DeviceList { get; private set; }
 
     public Dictionary<string, string> PresentWaveInDeviceList
     {
@@ -83,13 +83,13 @@ namespace VACM.NET4_0.Models
       }
 
       bool isSelected = false;
-      DeviceList = new List<Device>();
+      DeviceList = new List<DeviceModel>();
 
       MMDeviceList
         .ForEach(x => DeviceList
           .Add
           (
-            new Device
+            new DeviceModel
             (
               x,
               isSelected

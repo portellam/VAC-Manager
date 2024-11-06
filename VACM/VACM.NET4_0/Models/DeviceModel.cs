@@ -1,8 +1,9 @@
 ﻿using NAudio.CoreAudioApi;
+using System.Diagnostics.CodeAnalysis;
 
 namespace VACM.NET4_0.Models
 {
-  public class Device
+  public class DeviceModel
   {
     #region Parameters
     public string Id { get; private set; }
@@ -19,8 +20,15 @@ namespace VACM.NET4_0.Models
 
     #endregion
 
-    #region Constructors
-    public Device
+    #region Logic
+
+    /// <summary>
+    /// Constructors
+    /// </summary>
+    /// <param name="mMDevice"></param>
+    /// <param name="isSelected"></param>
+    [ExcludeFromCodeCoverage]
+    public DeviceModel
       (
         MMDevice mMDevice,
         bool isSelected
@@ -36,7 +44,16 @@ namespace VACM.NET4_0.Models
       SetDataFlow(mMDevice.DataFlow);
     }
 
-    public Device
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="name"></param>
+    /// <param name="deviceState"></param>
+    /// <param name="dataFlow"></param>
+    /// <param name="isSelected"></param>
+    [ExcludeFromCodeCoverage]
+    public DeviceModel
       (
         string id,
         string name,
@@ -54,7 +71,6 @@ namespace VACM.NET4_0.Models
 
       SetDataFlow(dataFlow);
     }
-    #endregion
 
     public void ToggleIsPresent()
     {
@@ -73,11 +89,12 @@ namespace VACM.NET4_0.Models
 
       if (dataFlow != DataFlow.All)
       {
-        return;      
+        return;
       }
 
       IsInput = true;
       IsInput = true;
     }
+    #endregion
   }
 }

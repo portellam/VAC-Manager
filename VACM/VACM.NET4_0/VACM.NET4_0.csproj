@@ -67,6 +67,8 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Consoles\MainConsole.cs" />
+    <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\RepeaterController.cs" />
     <Compile Include="Extensions\ColorExtension.cs" />
     <Compile Include="Extensions\DialogCenteringService.cs" />
     <Compile Include="Extensions\MessageBoxWrapper.cs" />
@@ -78,9 +80,13 @@
     <Compile Include="Extensions\WMIRegistryEventListener.cs" />
     <Compile Include="ConsoleWindow.cs" />
     <Compile Include="GraphicsWindow.cs" />
-    <Compile Include="Models\DeviceListModel.cs" />
-    <Compile Include="Models\RepeaterDataModel.cs" />
+    <Compile Include="Models\DeviceModel.cs" />
+    <Compile Include="Models\DeviceDictModel.cs" />
+    <Compile Include="Models\OldDeviceListModel.cs" />
+    <Compile Include="Models\OldRepeaterDataModel.cs" />
     <Compile Include="Models\RepeaterModel.cs" />
+    <Compile Include="Repositories\DeviceRepository.cs" />
+    <Compile Include="Repositories\RepeaterRepository.cs" />
     <Compile Include="Structs\Channel.cs" />
     <Compile Include="Structs\ChannelConfig.cs" />
     <Compile Include="ViewModels\Accessors\AssemblyInformationAccessor.cs" />
@@ -94,6 +100,7 @@
     <Compile Include="ViewModels\FormColorUpdater.cs" />
     <Compile Include="ViewModels\LightThemeValidator.cs" />
     <Compile Include="ViewModels\Renderer\ToolStripDarkRenderer.cs" />
+    <Compile Include="ViewModels\RepeaterViewModel.cs" />
     <Compile Include="Views\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,5 +147,6 @@
   <ItemGroup>
     <Content Include="Console.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

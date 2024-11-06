@@ -173,7 +173,7 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        internal DeviceListModel deviceListModel;
+        internal OldDeviceListModel deviceListModel;
         internal DeviceControl inputDeviceControl { get; set; }
         internal DeviceControl outputDeviceControl { get; set; }
         internal RepeaterDataModel repeaterDataModel { get; set; }
@@ -298,7 +298,7 @@ namespace VACM.NET4_0.Views
         /// </summary>
         internal void SetDeviceListModel()
         {
-            deviceListModel = new DeviceListModel();
+            deviceListModel = new OldDeviceListModel();
         }
 
         /// <summary>

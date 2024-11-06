@@ -71,6 +71,76 @@ namespace VACM.NET4_0.Repositories
         .FirstOrDefault(x => x.Id == id);
     }
 
+    public List<DeviceModel> GetDeviceList()
+    {
+      if (deviceModelHashSet is null)
+      {
+        return new List<DeviceModel>();
+      }
+
+      return
+        deviceModelHashSet
+          .ToList();
+    }
+
+    public List<DeviceModel> GetInputDeviceList()
+    {
+      if (deviceModelHashSet is null)
+      {
+        return new List<DeviceModel>();
+      }
+
+      return
+        deviceModelHashSet
+          .Where(x => x.IsInput)
+          .ToList();
+    }
+
+    public List<DeviceModel> GetOutputDeviceList()
+    {
+      if (deviceModelHashSet is null)
+      {
+        return new List<DeviceModel>();
+      }
+
+      return
+        deviceModelHashSet
+          .Where(x => x.IsOutput)
+          .ToList();
+    }
+
+    public List<DeviceModel> GetDeviceListByName(string name)
+    {
+      if (
+        deviceModelHashSet is null
+        || name is null
+        || name == string.Empty
+        )
+      {
+        return new List<DeviceModel>();
+      }
+
+      return
+        deviceModelHashSet
+          .Where(x => x.Name
+            .ToLower()
+            .Contains(name.ToLower()))
+          .ToList();
+    }
+
+    public List<DeviceModel> GetPresentDeviceList()
+    {
+      if (deviceModelHashSet is null)
+      {
+        return new List<DeviceModel>();
+      }
+
+      return
+        deviceModelHashSet
+          .Where(x => x.IsPresent)
+          .ToList();
+    }
+
     public bool UpdateDevice(DeviceModel deviceModel)
     {
       if (deviceModel is null)

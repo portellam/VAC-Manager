@@ -5,13 +5,13 @@ using VACM.NET4_0.ViewModels;
 
 namespace VACM.NET4_0.Models
 {
-    public class RepeaterDataModel
-    {
+    public class OldRepeaterDataModel
+  {
         //TODO: validate user control validation works as intended!
 
         #region Parameters
 
-        public Dictionary<DeviceControl, Dictionary<DeviceControl, RepeaterModel>>
+        public Dictionary<DeviceControl, Dictionary<DeviceControl, OldRepeaterModel>>
             RepeaterData
         { get; private set; }
 
@@ -41,7 +41,7 @@ namespace VACM.NET4_0.Models
         public RepeaterDataModel()
         {
             RepeaterData = new Dictionary<DeviceControl,
-                Dictionary<DeviceControl, RepeaterModel>>();
+                Dictionary<DeviceControl, OldRepeaterModel>>();
         }
 
         /// <summary>
@@ -82,14 +82,14 @@ namespace VACM.NET4_0.Models
         /// <param name="firstDeviceControl">The first device control</param>
         /// <param name="secondDeviceControl">The second device control</param>
         /// <returns>The dictionary object</returns>
-        internal Dictionary<DeviceControl, RepeaterModel> GetDictionary
+        internal Dictionary<DeviceControl, OldRepeaterModel> GetDictionary
             (DeviceControl firstDeviceControl, DeviceControl secondDeviceControl)
         {
-            return new Dictionary<DeviceControl, RepeaterModel>
+            return new Dictionary<DeviceControl, OldRepeaterModel>
             {
                 {
                     secondDeviceControl,
-                    new RepeaterModel(firstDeviceControl, secondDeviceControl)
+                    new OldRepeaterModel(firstDeviceControl, secondDeviceControl)
                 },
             };
         }
