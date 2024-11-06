@@ -2,104 +2,142 @@
 
 namespace VACM.NET4_0.ViewModels.Accessors
 {
-    public class AssemblyInformationAccessor
+  public class AssemblyInformationAccessor
+  {
+    #region Parameters
+
+    public static string AssemblyTitle
     {
-        #region Parameters
+      get
+      {
+        object[] attributes = Assembly
+          .GetExecutingAssembly()
+          .GetCustomAttributes
+          (
+            typeof(AssemblyTitleAttribute)
+            , false
+          );
 
-        public static string AssemblyTitle
+        if (attributes.Length > 0)
         {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().
-                    GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+          AssemblyTitleAttribute titleAttribute =
+            (AssemblyTitleAttribute)attributes[0];
 
-                if (attributes.Length > 0)
-                {
-                    AssemblyTitleAttribute titleAttribute =
-                        (AssemblyTitleAttribute)attributes[0];
-                    if (titleAttribute.Title != "")
-                    {
-                        return titleAttribute.Title;
-                    }
-                }
-
-                return System.IO.Path.GetFileNameWithoutExtension
-                    (Assembly.GetExecutingAssembly().CodeBase);
-            }
+          if (titleAttribute.Title != "")
+          {
+            return titleAttribute.Title;
+          }
         }
 
-        public static string AssemblyVersion
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            }
-        }
-
-        public static string AssemblyDescription
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly()
-                    .GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-
-                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
-            }
-        }
-
-        public static string AssemblyProduct
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().
-                    GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-
-                return ((AssemblyProductAttribute)attributes[0]).Product;
-            }
-        }
-
-        public static string AssemblyCopyright
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly()
-                    .GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
-            }
-        }
-
-        public static string AssemblyCompany
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly()
-                    .GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-
-                return ((AssemblyCompanyAttribute)attributes[0]).Company;
-            }
-        }
-
-        #endregion
+        return
+          System
+            .IO
+            .Path
+            .GetFileNameWithoutExtension
+            (
+              Assembly
+              .GetExecutingAssembly()
+              .CodeBase
+            );
+      }
     }
+
+    public static string AssemblyVersion
+    {
+      get
+      {
+        return
+          Assembly
+          .GetExecutingAssembly()
+          .GetName()
+          .Version
+          .ToString();
+      }
+    }
+
+    public static string AssemblyDescription
+    {
+      get
+      {
+        object[] attributes = Assembly
+          .GetExecutingAssembly()
+          .GetCustomAttributes
+          (
+            typeof(AssemblyDescriptionAttribute),
+            false
+          );
+
+        if (attributes.Length == 0)
+        {
+          return "";
+        }
+
+        return
+          (
+            (AssemblyDescriptionAttribute)attributes[0]
+          ).Description;
+      }
+    }
+
+    public static string AssemblyProduct
+    {
+      get
+      {
+        object[] attributes = Assembly
+          .GetExecutingAssembly().
+            GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+
+        if (attributes.Length == 0)
+        {
+          return "";
+        }
+
+        return
+          (
+            (AssemblyProductAttribute)attributes[0]
+          )
+          .Product;
+      }
+    }
+
+    public static string AssemblyCopyright
+    {
+      get
+      {
+        object[] attributes = Assembly.GetExecutingAssembly()
+          .GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+
+        if (attributes.Length == 0)
+        {
+          return "";
+        }
+
+        return
+          (
+            (AssemblyCopyrightAttribute)attributes[0]
+          ).Copyright;
+      }
+    }
+
+    public static string AssemblyCompany
+    {
+      get
+      {
+        object[] attributes = Assembly.GetExecutingAssembly()
+          .GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+
+        if (attributes.Length == 0)
+        {
+          return "";
+        }
+
+        return
+          (
+            (AssemblyCompanyAttribute)attributes[0]
+          ).Company;
+      }
+    }
+
+    #endregion
+  }
 }
