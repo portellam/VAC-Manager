@@ -1,16 +1,11 @@
-﻿using NAudio.CoreAudioApi;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using VACM.NET4_0.Extensions;
 using VACM.NET4_0.Structs;
-using VACM.NET4_0.ViewModels;
 
 namespace VACM.NET4_0.Models
 {
@@ -513,7 +508,6 @@ namespace VACM.NET4_0.Models
     #endregion
 
     #region Logic
-
     /// <summary>
     /// Constructor
     /// </summary>
@@ -543,9 +537,13 @@ namespace VACM.NET4_0.Models
     /// Logs event when property has changed.
     /// </summary>
     /// <param name="propertyName">The property name</param>
-    internal void OnPropertyChanged(string propertyName)
+    private void OnPropertyChanged(string propertyName)
     {
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+      PropertyChanged?.Invoke
+      (
+        this,
+        new PropertyChangedEventArgs(propertyName)
+      );
     }
 
     /// <summary>
