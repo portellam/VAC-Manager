@@ -78,6 +78,46 @@ namespace VACM.NET4_0.Repositories
     }
 
     /// <summary>
+    /// Get repeater list with absent devices.
+    /// </summary>
+    /// <returns>The repeater list with absent devices.</returns>
+    public List<RepeaterModel> GetAbsentRepeaterList()
+    {
+      if (RepeaterModelHashSet is null)
+      {
+        return new List<RepeaterModel>();
+      }
+
+      return
+        RepeaterModelHashSet
+          .Where(x =>
+            ! x.InputDeviceModel.IsPresent
+            || ! x.OutputDeviceModel.IsPresent
+          )
+          .ToList();
+    }
+
+    /// <summary>
+    /// Get repeater list with present devices.
+    /// </summary>
+    /// <returns>The repeater list with present devices.</returns>
+    public List<RepeaterModel> GetPresentRepeaterList()
+    {
+      if (RepeaterModelHashSet is null)
+      {
+        return new List<RepeaterModel>();
+      }
+
+      return
+        RepeaterModelHashSet
+          .Where(x =>
+            x.InputDeviceModel.IsPresent
+            && x.OutputDeviceModel.IsPresent
+          )
+          .ToList();
+    }
+
+    /// <summary>
     /// Get repeater by ID.
     /// </summary>
     /// <param name="id">the repeater ID</param>
@@ -149,26 +189,6 @@ namespace VACM.NET4_0.Repositories
 
       return
         RepeaterModelHashSet
-          .ToList();
-    }
-
-    /// <summary>
-    /// Get repeater list with present devices.
-    /// </summary>
-    /// <returns>The repeater list with present devices.</returns>
-    public List<RepeaterModel> GetPresentRepeaterList()
-    {
-      if (RepeaterModelHashSet is null)
-      {
-        return new List<RepeaterModel>();
-      }
-
-      return
-        RepeaterModelHashSet
-          .Where(x =>
-            x.InputDeviceModel.IsPresent
-            && x.OutputDeviceModel.IsPresent
-          )
           .ToList();
     }
 
