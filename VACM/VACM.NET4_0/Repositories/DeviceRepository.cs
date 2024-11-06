@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NAudio.CoreAudioApi;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using VACM.NET4_0.Models;
@@ -12,6 +13,11 @@ namespace VACM.NET4_0.Repositories
     /// The collection of devices.
     /// </summary>
     private HashSet<DeviceModel> deviceModelHashSet;
+
+    /// <summary>
+    /// The collection of actual devices.
+    /// </summary>
+    private List<MMDevice> MMDeviceList;
     #endregion
 
     #region Logic
@@ -22,6 +28,10 @@ namespace VACM.NET4_0.Repositories
     public DeviceRepository()
     {
       deviceModelHashSet = new HashSet<DeviceModel>();
+      MMDeviceList = new List<MMDevice>();
+
+      SetMMDeviceList();
+      SetDeviceModelHashSet();
     }
 
     /// <summary>
@@ -248,6 +258,48 @@ namespace VACM.NET4_0.Repositories
       }
 
       return true;
+    }
+
+    /// <summary>
+    /// Set the device model hash set.
+    /// </summary>
+    public void SetDeviceModelHashSet()
+    {
+      if (MMDeviceList.Count == 0)
+      {
+        return;
+      }
+
+      bool isSelected = false;
+
+      MMDeviceList
+        .ForEach(x =>
+          deviceModelHashSet
+            .Add
+            (
+              new DeviceModel
+              (
+                x,
+                isSelected
+              )
+            )
+        );
+    }
+
+    /// <summary>
+    /// Set the actual device list.
+    /// </summary>
+    public void SetMMDeviceList()
+    {
+      MMDeviceList = new MMDeviceEnumerator()
+        .EnumerateAudioEndPoints
+        (
+          DataFlow.All,
+          DeviceState.All
+        )
+        .Distinct()
+        .OrderBy(x => x.ID)
+        .ToList();
     }
     #endregion
   }
