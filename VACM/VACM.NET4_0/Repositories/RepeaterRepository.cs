@@ -137,6 +137,42 @@ namespace VACM.NET4_0.Repositories
     }
 
     /// <summary>
+    /// Get repeater list.
+    /// </summary>
+    /// <returns>The repeater list.</returns>
+    public List<RepeaterModel> GetRepeaterList()
+    {
+      if (RepeaterModelHashSet is null)
+      {
+        return new List<RepeaterModel>();
+      }
+
+      return
+        RepeaterModelHashSet
+          .ToList();
+    }
+
+    /// <summary>
+    /// Get repeater list with present devices.
+    /// </summary>
+    /// <returns>The repeater list with present devices.</returns>
+    public List<RepeaterModel> GetPresentRepeaterList()
+    {
+      if (RepeaterModelHashSet is null)
+      {
+        return new List<RepeaterModel>();
+      }
+
+      return
+        RepeaterModelHashSet
+          .Where(x =>
+            x.InputDeviceModel.IsPresent
+            && x.OutputDeviceModel.IsPresent
+          )
+          .ToList();
+    }
+
+    /// <summary>
     /// Update repeater.
     /// </summary>
     /// <param name="repeaterModel">The repeater to update.</param>
