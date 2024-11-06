@@ -7,14 +7,28 @@ namespace VACM.NET4_0.Repositories
 {
   public class RepeaterRepository
   {
+    #region Parameters
+    /// <summary>
+    /// The collection of repeaters.
+    /// </summary>
     private HashSet<RepeaterModel> RepeaterModelHashSet;
+    #endregion
 
+    #region Logic
+    /// <summary>
+    /// Constructor
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public RepeaterRepository()
     {
       RepeaterModelHashSet = new HashSet<RepeaterModel>();
     }
 
+    /// <summary>
+    /// Add repeater.
+    /// </summary>
+    /// <param name="repeaterModel">The repeater to add</param>
+    /// <returns>True/false if repeater is added</returns>
     public bool AddRepeater(RepeaterModel RepeaterModel)
     {
       if (RepeaterModel is null)
@@ -36,6 +50,11 @@ namespace VACM.NET4_0.Repositories
       return true;
     }
 
+    /// <summary>
+    /// Delete repeater.
+    /// </summary>
+    /// <param name="repeaterModel">The repeater to delete</param>
+    /// <returns>True/false delete a repeater</returns>
     public bool DeleteRepeater(RepeaterModel RepeaterModel)
     {
       if (RepeaterModel is null)
@@ -57,6 +76,11 @@ namespace VACM.NET4_0.Repositories
       return true;
     }
 
+    /// <summary>
+    /// Get repeater by ID.
+    /// </summary>
+    /// <param name="id">the repeater ID</param>
+    /// <returns>The repeater.</returns>
     public RepeaterModel GetRepeater(int? id)
     {
       if (
@@ -71,6 +95,11 @@ namespace VACM.NET4_0.Repositories
         .FirstOrDefault(x => x.Id == id);
     }
 
+    /// <summary>
+    /// Update repeater.
+    /// </summary>
+    /// <param name="repeaterModel">The repeater to update.</param>
+    /// <returns>True/false if the repeater is updated.</returns>
     public bool UpdateRepeater(RepeaterModel RepeaterModel)
     {
       if (RepeaterModel is null)
@@ -93,5 +122,6 @@ namespace VACM.NET4_0.Repositories
 
       return true;
     }
+    #endregion
   }
 }
