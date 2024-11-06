@@ -81,9 +81,6 @@
     <Compile Include="ConsoleWindow.cs" />
     <Compile Include="GraphicsWindow.cs" />
     <Compile Include="Models\DeviceModel.cs" />
-    <Compile Include="Models\DeviceDictModel.cs" />
-    <Compile Include="Models\OldDeviceListModel.cs" />
-    <Compile Include="Models\OldRepeaterDataModel.cs" />
     <Compile Include="Models\RepeaterModel.cs" />
     <Compile Include="Repositories\DeviceRepository.cs" />
     <Compile Include="Repositories\RepeaterRepository.cs" />
