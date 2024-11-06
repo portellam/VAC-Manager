@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B5B16153-9C97-4A5C-A524-27F2F7067BD2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>VACM.NET4_0</RootNamespace>
-    <AssemblyName>VACM.NET4_0</AssemblyName>
+    <RootNamespace>VACM.NET4_0.Library</RootNamespace>
+    <AssemblyName>VACM.NET4_0.Library</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -120,6 +120,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="ViewModels\DeviceControl.resx">
       <DependentUpon>DeviceControl.cs</DependentUpon>

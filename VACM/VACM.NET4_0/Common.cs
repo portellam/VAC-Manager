@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using VACM.NET4_0.Extensions;
+using VACM.NET4_0.Library.Extensions;
 
-namespace VACM.NET4_0
+namespace VACM.NET4_0.Library
 {
     public class Common
     {

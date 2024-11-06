@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_0.Structs
+﻿namespace VACM.NET4_0.Library.Structs
 {
     public enum Direction
     {

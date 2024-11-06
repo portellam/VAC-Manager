@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 
-namespace VACM.NET4_0
+namespace VACM.NET4_0.Library
 {
     public class Program
     {

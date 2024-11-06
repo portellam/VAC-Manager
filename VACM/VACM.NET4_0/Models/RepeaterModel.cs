@@ -5,9 +5,9 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using VACM.NET4_0.Structs;
+using VACM.NET4_0.Library.Structs;
 
-namespace VACM.NET4_0.Models
+namespace VACM.NET4_0.Library.Models
 {
   public class RepeaterModel : INotifyPropertyChanged
   {

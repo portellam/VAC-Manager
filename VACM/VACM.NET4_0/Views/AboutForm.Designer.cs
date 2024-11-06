@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace VACM.NET4_0.Views
+namespace VACM.NET4_0.Library.Views
 {
     partial class AboutForm
     {

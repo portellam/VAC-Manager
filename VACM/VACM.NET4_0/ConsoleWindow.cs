@@ -1,7 +1,7 @@
 ﻿using System.Threading;
-using VACM.NET4_0.Consoles;
+using VACM.NET4_0.Library.Consoles;
 
-namespace VACM.NET4_0
+namespace VACM.NET4_0.Library
 {
     public class ConsoleWindow
     {

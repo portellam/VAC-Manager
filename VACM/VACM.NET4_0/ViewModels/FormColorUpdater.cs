@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace VACM.NET4_0.ViewModels
+namespace VACM.NET4_0.Library.ViewModels
 {
   public class FormColorUpdater
   {

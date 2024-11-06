@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_0.Extensions.PropertyValueChanged
+﻿namespace VACM.NET4_0.Library.Extensions.PropertyValueChanged
 {
   public class PropertyValueChangedEventArgs : System.EventArgs
   {

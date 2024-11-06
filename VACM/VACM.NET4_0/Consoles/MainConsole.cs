@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_0.Consoles
+﻿namespace VACM.NET4_0.Library.Consoles
 {
   public class MainConsole
   {

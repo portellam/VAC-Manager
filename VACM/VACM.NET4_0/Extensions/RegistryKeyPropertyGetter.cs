@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 
-namespace VACM.NET4_0.Extensions
+namespace VACM.NET4_0.Library.Extensions
 {
   public class RegistryKeyPropertyGetter
   {

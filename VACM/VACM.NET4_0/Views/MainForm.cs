@@ -6,16 +6,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using VACM.NET4_0.Models;
-using VACM.NET4_0.ViewModels;
-using VACM.NET4_0.ViewModels.Accessors;
-using VACM.NET4_0.ViewModels.ColorTable;
-using VACM.NET4_0.Extensions;
-using VACM.NET4_0.Extensions.PropertyValueChanged;
+using VACM.NET4_0.Library.Models;
+using VACM.NET4_0.Library.ViewModels;
+using VACM.NET4_0.Library.ViewModels.Accessors;
+using VACM.NET4_0.Library.ViewModels.ColorTable;
+using VACM.NET4_0.Library.Extensions;
+using VACM.NET4_0.Library.Extensions.PropertyValueChanged;
 using PropertyValueChangedEventArgs =
-    VACM.NET4_0.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
+    VACM.NET4_0.Library.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
 
-namespace VACM.NET4_0.Views
+namespace VACM.NET4_0.Library.Views
 {
     public partial class MainForm : Form
     {
@@ -173,11 +173,11 @@ namespace VACM.NET4_0.Views
             }
         }
 
-        internal OldDeviceListModel deviceListModel;
+        //internal OldDeviceListModel deviceListModel; //REPLACE
         internal DeviceControl inputDeviceControl { get; set; }
         internal DeviceControl outputDeviceControl { get; set; }
-        internal RepeaterDataModel repeaterDataModel { get; set; }
-        internal string fileName;
+        //internal RepeaterDataModel repeaterDataModel { get; set; } //REPLACE
+    internal string fileName;
 
         internal List<Control> controlList = new List<Control>();
 

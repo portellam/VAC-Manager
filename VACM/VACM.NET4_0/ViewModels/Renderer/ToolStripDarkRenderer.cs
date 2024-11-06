@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
-using VACM.NET4_0.ViewModels.ColorTable;
+using VACM.NET4_0.Library.ViewModels.ColorTable;
 
-namespace VACM.NET4_0.ViewModels.Renderer
+namespace VACM.NET4_0.Library.ViewModels.Renderer
 {
   public class ToolStripDarkRenderer : ToolStripProfessionalRenderer
   {

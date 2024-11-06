@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_0.Extensions.RegistrySubKeyChanged
+﻿namespace VACM.NET4_0.Library.Extensions.RegistrySubKeyChanged
 {
   public delegate void RegistrySubKeyChangedDelegate
   (

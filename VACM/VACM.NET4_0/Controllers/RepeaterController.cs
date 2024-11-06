@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using VACM.NET4_0.Models;
-using VACM.NET4_0.ViewModels;
+using VACM.NET4_0.Library.Models;
+using VACM.NET4_0.Library.ViewModels;
 
-namespace VACM.NET4_0.Controllers
+namespace VACM.NET4_0.Library.Controllers
 {
   public class RepeaterController
   {

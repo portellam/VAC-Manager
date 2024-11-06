@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
-using VACM.NET4_0.ViewModels;
-using VACM.NET4_0.Views;
+using VACM.NET4_0.Library.ViewModels;
+using VACM.NET4_0.Library.Views;
 
-namespace VACM.NET4_0
+namespace VACM.NET4_0.Library
 {
     public class GraphicsWindow
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using VACM.NET4_0.Models;
+using VACM.NET4_0.Library.Models;
 
-namespace VACM.NET4_0.Repositories
+namespace VACM.NET4_0.Library.Repositories
 {
   public class DeviceRepository
   {

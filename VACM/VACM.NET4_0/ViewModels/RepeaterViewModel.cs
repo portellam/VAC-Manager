@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using VACM.NET4_0.Extensions;
-using VACM.NET4_0.Models;
+using VACM.NET4_0.Library.Extensions;
+using VACM.NET4_0.Library.Models;
 using static System.Windows.Forms.LinkLabel;
 
-namespace VACM.NET4_0.ViewModels
+namespace VACM.NET4_0.Library.ViewModels
 {
   public class RepeaterViewModel
   {
