@@ -17,7 +17,12 @@ namespace VACM.NET4_0.Models
       {
         return DeviceList
           .Where(x => x.IsInput && x.IsPresent)
-          .ToDictionary(x => x.Id, x => x.Name);
+          .ToDictionary
+          (
+            x => x.Id,
+            x => x.Name
+          );
+
       }
     }
 
@@ -27,7 +32,12 @@ namespace VACM.NET4_0.Models
       {
         return DeviceList
           .Where(x => x.IsOutput && x.IsPresent)
-          .ToDictionary(x => x.Id, x => x.Name);
+          .ToDictionary
+          (
+            x => x.Id,
+            x => x.Name
+          );
+
       }
     }
 
@@ -37,7 +47,12 @@ namespace VACM.NET4_0.Models
       {
         return DeviceList
           .Where(x => x.IsInput && x.IsSelected)
-          .ToDictionary(x => x.Id, x => x.Name);
+          .ToDictionary
+          (
+            x => x.Id,
+            x => x.Name
+          );
+
       }
     }
 
@@ -47,7 +62,12 @@ namespace VACM.NET4_0.Models
       {
         return DeviceList
           .Where(x => x.IsOutput && x.IsSelected)
-          .ToDictionary(x => x.Id, x => x.Name);
+          .ToDictionary
+          (
+            x => x.Id,
+            x => x.Name
+          );
+
       }
     }
 
@@ -57,7 +77,12 @@ namespace VACM.NET4_0.Models
       {
         return DeviceList
           .Where(x => x.IsInput)
-          .ToDictionary(x => x.Id, x => x.Name);
+          .ToDictionary
+          (
+            x => x.Id,
+            x => x.Name
+          );
+
       }
     }
 
@@ -67,12 +92,16 @@ namespace VACM.NET4_0.Models
       {
         return DeviceList
           .Where(x => x.IsOutput)
-          .ToDictionary(x => x.Id, x => x.Name);
+          .ToDictionary
+          (
+            x => x.Id,
+            x => x.Name
+          );
       }
     }
     #endregion
 
-    #region Constructors
+    #region Logic
     public DeviceDictModel()
     {
       SetMMDeviceList();
@@ -97,7 +126,6 @@ namespace VACM.NET4_0.Models
           )
         );
     }
-    #endregion
     
     public void SetMMDeviceList()
     {
@@ -111,5 +139,6 @@ namespace VACM.NET4_0.Models
         .OrderBy(x => x.ID)
         .ToList();
     }
+    #endregion
   }
 }
