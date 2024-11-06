@@ -7,14 +7,28 @@ namespace VACM.NET4_0.Repositories
 {
   public class DeviceRepository
   {
+    #region Parameters
+    /// <summary>
+    /// The collection of devices.
+    /// </summary>
     private HashSet<DeviceModel> deviceModelHashSet;
+    #endregion
 
+    #region Logic
+    /// <summary>
+    /// Constructor
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public DeviceRepository()
     {
       deviceModelHashSet = new HashSet<DeviceModel>();
     }
 
+    /// <summary>
+    /// Add device.
+    /// </summary>
+    /// <param name="deviceModel">The device to add</param>
+    /// <returns>True/false if device is added</returns>
     public bool AddDevice(DeviceModel deviceModel)
     {
       if (deviceModel is null)
@@ -22,7 +36,7 @@ namespace VACM.NET4_0.Repositories
         return false;
       }
 
-      DeviceModel actualDeviceModel = GetDevice(deviceModel.Id);
+      DeviceModel actualDeviceModel = GetDeviceById(deviceModel.Id);
 
       if (
         actualDeviceModel != null
@@ -36,6 +50,11 @@ namespace VACM.NET4_0.Repositories
       return true;
     }
 
+    /// <summary>
+    /// Delete device.
+    /// </summary>
+    /// <param name="deviceModel">The device to delete</param>
+    /// <returns>True/false delete a device</returns>
     public bool DeleteDevice(DeviceModel deviceModel)
     {
       if (deviceModel is null)
@@ -43,7 +62,7 @@ namespace VACM.NET4_0.Repositories
         return false;
       }
 
-      DeviceModel actualDeviceModel = GetDevice(deviceModel.Id);
+      DeviceModel actualDeviceModel = GetDeviceById(deviceModel.Id);
 
       if (
         actualDeviceModel is null
@@ -57,7 +76,12 @@ namespace VACM.NET4_0.Repositories
       return true;
     }
 
-    public DeviceModel GetDevice(string id)
+    /// <summary>
+    /// Get device by ID.
+    /// </summary>
+    /// <param name="id">the device ID</param>
+    /// <returns>The device.</returns>
+    public DeviceModel GetDeviceById(string id)
     {
       if (
         id is null
@@ -71,6 +95,29 @@ namespace VACM.NET4_0.Repositories
         .FirstOrDefault(x => x.Id == id);
     }
 
+    /// <summary>
+    /// Get device by name.
+    /// </summary>
+    /// <param name="name">the device name</param>
+    /// <returns>The device.</returns>
+    public DeviceModel GetDeviceByName(string name)
+    {
+      if (
+        name is null
+        || name == string.Empty
+      )
+      {
+        return null;
+      }
+
+      return deviceModelHashSet
+        .FirstOrDefault(x => x.Name == name);
+    }
+
+    /// <summary>
+    /// Get the device list.
+    /// </summary>
+    /// <returns>The device list.</returns>
     public List<DeviceModel> GetDeviceList()
     {
       if (deviceModelHashSet is null)
@@ -83,33 +130,12 @@ namespace VACM.NET4_0.Repositories
           .ToList();
     }
 
-    public List<DeviceModel> GetInputDeviceList()
-    {
-      if (deviceModelHashSet is null)
-      {
-        return new List<DeviceModel>();
-      }
-
-      return
-        deviceModelHashSet
-          .Where(x => x.IsInput)
-          .ToList();
-    }
-
-    public List<DeviceModel> GetOutputDeviceList()
-    {
-      if (deviceModelHashSet is null)
-      {
-        return new List<DeviceModel>();
-      }
-
-      return
-        deviceModelHashSet
-          .Where(x => x.IsOutput)
-          .ToList();
-    }
-
-    public List<DeviceModel> GetDeviceListByName(string name)
+    /// <summary>
+    /// Get the device list by name.
+    /// </summary>
+    /// <param name="name">The device(s) name(s).</param>
+    /// <returns>The device list.</returns>
+    public List<DeviceModel> GetDeviceList(string name)
     {
       if (
         deviceModelHashSet is null
@@ -128,6 +154,44 @@ namespace VACM.NET4_0.Repositories
           .ToList();
     }
 
+    /// <summary>
+    /// Get the input device list.
+    /// </summary>
+    /// <returns>The input device list.</returns>
+    public List<DeviceModel> GetInputDeviceList()
+    {
+      if (deviceModelHashSet is null)
+      {
+        return new List<DeviceModel>();
+      }
+
+      return
+        deviceModelHashSet
+          .Where(x => x.IsInput)
+          .ToList();
+    }
+
+    /// <summary>
+    /// Get the output device list.
+    /// </summary>
+    /// <returns>The output device list.</returns>
+    public List<DeviceModel> GetOutputDeviceList()
+    {
+      if (deviceModelHashSet is null)
+      {
+        return new List<DeviceModel>();
+      }
+
+      return
+        deviceModelHashSet
+          .Where(x => x.IsOutput)
+          .ToList();
+    }
+
+    /// <summary>
+    /// Get the present device list.
+    /// </summary>
+    /// <returns>The present device list.</returns>
     public List<DeviceModel> GetPresentDeviceList()
     {
       if (deviceModelHashSet is null)
@@ -141,6 +205,11 @@ namespace VACM.NET4_0.Repositories
           .ToList();
     }
 
+    /// <summary>
+    /// Update device.
+    /// </summary>
+    /// <param name="deviceModel">The device to update.</param>
+    /// <returns>True/false if the device is updated.</returns>
     public bool UpdateDevice(DeviceModel deviceModel)
     {
       if (deviceModel is null)
@@ -148,7 +217,7 @@ namespace VACM.NET4_0.Repositories
         return false;
       }
 
-      DeviceModel actualDeviceModel = GetDevice(deviceModel.Id);
+      DeviceModel actualDeviceModel = GetDeviceById(deviceModel.Id);
 
       if (
         actualDeviceModel is null
@@ -163,5 +232,6 @@ namespace VACM.NET4_0.Repositories
 
       return true;
     }
+    #endregion
   }
 }
