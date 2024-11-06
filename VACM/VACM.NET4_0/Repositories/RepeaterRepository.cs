@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Xml.Linq;
 using VACM.NET4_0.Models;
 
 namespace VACM.NET4_0.Repositories
@@ -93,6 +94,46 @@ namespace VACM.NET4_0.Repositories
 
       return RepeaterModelHashSet
         .FirstOrDefault(x => x.Id == id);
+    }
+
+    /// <summary>
+    /// Get repeater by input device name.
+    /// </summary>
+    /// <param name="name">the input device name</param>
+    /// <returns>The repeater of the input.</returns>
+    public RepeaterModel GetRepeaterByInputName(string name)
+    {
+      if (
+        RepeaterModelHashSet is null
+          || name is null
+          || name == string.Empty
+      )
+      {
+        return null;
+      }
+
+      return RepeaterModelHashSet
+        .FirstOrDefault(x => x.Input == name);
+    }
+
+    /// <summary>
+    /// Get repeater by output device name.
+    /// </summary>
+    /// <param name="name">the output device name</param>
+    /// <returns>The repeater of the output.</returns>
+    public RepeaterModel GetRepeaterByOutputName(string name)
+    {
+      if (
+        RepeaterModelHashSet is null
+          || name is null
+          || name == string.Empty
+      )
+      {
+        return null;
+      }
+
+      return RepeaterModelHashSet
+        .FirstOrDefault(x => x.Output == name);
     }
 
     /// <summary>
