@@ -1,7 +1,9 @@
-﻿namespace VACM.NET4_0.Extensions
+﻿namespace VACM.NET4_8_1.Extensions
 {
   public static class ColorExtension
   {
+    #region Logic
+
     /// <summary>
     /// Convert Media Color (WPF) to Drawing Color (WinForm)
     /// </summary>
@@ -37,5 +39,7 @@
           drawingColor.B
         );
     }
+
+    #endregion
   }
 }

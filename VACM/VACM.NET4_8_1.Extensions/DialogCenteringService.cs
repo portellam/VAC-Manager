@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace VACM.NET4_0.Extensions
+namespace VACM.NET4_8_1.Extensions
 {
   public sealed class DialogCenteringService : IDisposable
   {
