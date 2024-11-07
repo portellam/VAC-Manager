@@ -2,6 +2,8 @@
 {
   public static class ColorExtension
   {
+    #region Logic
+
     /// <summary>
     /// Convert Media Color (WPF) to Drawing Color (WinForm)
     /// </summary>
@@ -37,5 +39,7 @@
           drawingColor.B
         );
     }
+
+    #endregion
   }
 }

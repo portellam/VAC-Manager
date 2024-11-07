@@ -9,6 +9,8 @@ namespace VACM.NET4_0.Extensions
   /// </summary>
   public class MessageBoxWrapper
   {
+    #region Parameters
+
     private readonly static string errorCaption = "Error";
     private readonly static string noticeCaption = "Notice";
     private readonly static string warningCaption = "Warning";
@@ -18,6 +20,10 @@ namespace VACM.NET4_0.Extensions
     {
       AssemblyTitle = assemblyTitle;
     }
+
+    #endregion
+
+    #region Logic
 
     /// <summary>
     /// Show MessageBox with predefined caption which user must close with "Yes" or
@@ -33,6 +39,8 @@ namespace VACM.NET4_0.Extensions
         AssemblyTitle
       );
     }
+
+
 
     /// <summary>
     /// Show centered MessageBox with predefined caption which user must close with
@@ -303,5 +311,7 @@ namespace VACM.NET4_0.Extensions
     {
       Show(parentObject, messageBoxText, warningCaption);
     }
+
+    #endregion
   }
 }
