@@ -5,9 +5,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4B94DAB6-717D-4713-919D-ED7A73A5E39A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>VACM.NET4_8_1.GUI</RootNamespace>
-    <AssemblyName>VACM.NET4_8_1.GUI</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>VACM.NET4_8.GUI</RootNamespace>
+    <AssemblyName>VACM.NET4_8.GUI</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -29,6 +29,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

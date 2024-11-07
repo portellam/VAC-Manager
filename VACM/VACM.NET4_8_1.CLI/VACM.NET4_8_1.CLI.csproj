@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{25558978-1885-4CB9-A85C-3205C4D3E608}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>VACM.NET4_8_1.CLI</RootNamespace>
-    <AssemblyName>VACM.NET4_8_1.CLI</AssemblyName>
+    <RootNamespace>VACM.NET4_8.CLI</RootNamespace>
+    <AssemblyName>VACM.NET4_8.CLI</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
