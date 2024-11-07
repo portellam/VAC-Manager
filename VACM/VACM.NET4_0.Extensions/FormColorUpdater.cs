@@ -2,19 +2,11 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace VACM.NET4_0.Backend.ViewModels
+namespace VACM.NET4_0.Extensions
 {
   public class FormColorUpdater
   {
     #region Parameters
-
-    private static bool IsLightThemeEnabled
-    {
-      get
-      {
-        return GraphicsWindow.IsLightThemeEnabled;
-      }
-    }
 
     private readonly static Color darkBackColor = Color
       .FromArgb
@@ -27,6 +19,8 @@ namespace VACM.NET4_0.Backend.ViewModels
     private readonly static Color darkTextColor = Color.White;
     private readonly static Color lightBackColor = Color.White;
     private readonly static Color lightTextColor = Color.Black;
+
+    public static bool IsLightThemeEnabled { get; set; }
 
     public static Color BackColor
     {
@@ -63,6 +57,20 @@ namespace VACM.NET4_0.Backend.ViewModels
     #region Logic
 
     /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="isLightThemeEnabled">True/false is light theme enabled</param>
+    public FormColorUpdater(bool? isLightThemeEnabled)
+    {
+      if (isLightThemeEnabled is null)
+      {
+        isLightThemeEnabled = true;
+      }
+
+      IsLightThemeEnabled = (bool)isLightThemeEnabled;
+    }
+
+    /// <summary>
     /// Set the colors of every control in list, given dark mode is enabled or not.
     /// </summary>
     /// <param name="controlList">The control list</param>
@@ -85,7 +93,7 @@ namespace VACM.NET4_0.Backend.ViewModels
     /// Set the colors of the tool strip item, given dark mode is enabled or not.
     /// </summary>
     /// <param name="toolStripItem">The tool strip item</param>
-    private  static void SetColorsOfToolStripItem
+    private static void SetColorsOfToolStripItem
       (ToolStripItem toolStripItem)
     {
       toolStripItem.BackColor = BackColor;

@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using VACM.NET4_0.Backend.Extensions;
-using VACM.NET4_0.Backend.Extensions.PropertyValueChanged;
+using VACM.NET4_0.Extensions.PropertyValueChanged;
 
-namespace VACM.NET4_0.Backend.ViewModels
+namespace VACM.NET4_0.Extensions
 {
   public class LightThemeValidator
   {
@@ -49,8 +48,6 @@ namespace VACM.NET4_0.Backend.ViewModels
       }
     }
 
-    private bool isLightThemeEnabled;
-
     private bool systemUsesLightTheme
     {
       get
@@ -85,14 +82,29 @@ namespace VACM.NET4_0.Backend.ViewModels
     {
       get
       {
-        return GraphicsWindow.IsLightThemeEnabled;
+        if (isLightThemeEnabled is null)
+        {
+          return true;
+        }
+
+        return (bool)isLightThemeEnabled;
       }
       private set
       {
-        GraphicsWindow.IsLightThemeEnabled = value;
+        if (isLightThemeEnabled is null)
+        {
+          value = true;
+        }
+        else
+        {
+          value = (bool)isLightThemeEnabled;
+        }
+
         OnLightThemeIsEnabledValueChanged();
       }
     }
+
+    private bool? isLightThemeEnabled;
 
     public string WatchedPropertyIsLightThemeEnabledName
     {
@@ -112,9 +124,15 @@ namespace VACM.NET4_0.Backend.ViewModels
     /// <summary>
     /// Constructor
     /// </summary>
-    public LightThemeValidator()
+    public LightThemeValidator
+    (
+      bool doForceColorTheme,
+      bool? isLightThemeEnabled
+    )
     {
-      if (GraphicsWindow.DoForceColorTheme)
+      isLightThemeEnabled = this.isLightThemeEnabled;
+
+      if (doForceColorTheme)
       {
         return;
       }

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace VACM.NET4_0.Backend.ViewModels.ColorTable
+namespace VACM.NET4_0.Extensions.ColorTable
 {
   public class DarkColorTable : ProfessionalColorTable
   {
