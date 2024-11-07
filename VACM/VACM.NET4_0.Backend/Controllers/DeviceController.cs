@@ -7,11 +7,14 @@ namespace VACM.NET4_0.Backend.Controllers
   public class DeviceController
   {
     #region Parameters
+
     private DeviceModel DeviceModel;
     private DeviceViewModel DeviceViewModel;
+
     #endregion
 
     #region Logic
+
     /// <summary>
     /// Constructor
     /// </summary>
@@ -74,6 +77,7 @@ namespace VACM.NET4_0.Backend.Controllers
     {
       // update device in repository.
     }
+
     #endregion
   }
 }

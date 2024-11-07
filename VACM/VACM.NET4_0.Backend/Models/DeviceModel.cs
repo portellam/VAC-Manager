@@ -8,6 +8,7 @@ namespace VACM.NET4_0.Backend.Models
   public class DeviceModel
   {
     #region Parameters
+
     private bool isInput;
     private bool isOutput;
     private bool isPresent;
@@ -94,6 +95,7 @@ namespace VACM.NET4_0.Backend.Models
     #endregion
 
     #region Logic
+
     /// <summary>
     /// Constructors
     /// </summary>
@@ -190,6 +192,7 @@ namespace VACM.NET4_0.Backend.Models
     {
       IsSelected = !IsSelected;
     }
+
     #endregion
   }
 }

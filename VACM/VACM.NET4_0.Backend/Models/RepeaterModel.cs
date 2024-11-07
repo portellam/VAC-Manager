@@ -33,6 +33,7 @@ namespace VACM.NET4_0.Backend.Models
      */
 
     #region Parameters
+
     public int Id { get; private set; }
 
     private byte bitsPerSample;
@@ -508,6 +509,7 @@ namespace VACM.NET4_0.Backend.Models
     #endregion
 
     #region Logic
+
     /// <summary>
     /// Constructor
     /// </summary>
@@ -606,6 +608,7 @@ namespace VACM.NET4_0.Backend.Models
       ResyncAtPercentage = byte.Parse(infoList[7]);
       SamplingRateKHz = uint.Parse(infoList[0]);
     }
+
     #endregion
   }
 }

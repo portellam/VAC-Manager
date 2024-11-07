@@ -8,13 +8,16 @@ namespace VACM.NET4_0.Backend.Repositories
   public class RepeaterRepository
   {
     #region Parameters
+
     /// <summary>
     /// The collection of repeaters.
     /// </summary>
     private HashSet<RepeaterModel> RepeaterModelHashSet;
+    
     #endregion
 
     #region Logic
+
     /// <summary>
     /// Constructor
     /// </summary>
@@ -218,6 +221,7 @@ namespace VACM.NET4_0.Backend.Repositories
 
       return true;
     }
+
     #endregion
   }
 }

@@ -9,6 +9,7 @@ namespace VACM.NET4_0.Backend.Repositories
   public class DeviceRepository
   {
     #region Parameters
+
     /// <summary>
     /// The collection of devices.
     /// </summary>
@@ -18,9 +19,11 @@ namespace VACM.NET4_0.Backend.Repositories
     /// The collection of actual devices.
     /// </summary>
     private List<MMDevice> MMDeviceList;
+
     #endregion
 
     #region Logic
+
     /// <summary>
     /// Constructor
     /// </summary>
@@ -301,6 +304,7 @@ namespace VACM.NET4_0.Backend.Repositories
         .OrderBy(x => x.ID)
         .ToList();
     }
+
     #endregion
   }
 }
