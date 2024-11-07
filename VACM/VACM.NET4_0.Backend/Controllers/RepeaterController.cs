@@ -1,13 +1,13 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using VACM.NET4_0.Backend.Models;
-using VACM.NET4_0.Backend.ViewModels;
 
 namespace VACM.NET4_0.Backend.Controllers
 {
   public class RepeaterController
   {
     #region Parameters
+
     private RepeaterModel RepeaterModel;
     private RepeaterViewModel RepeaterViewModel;
     #endregion
@@ -101,6 +101,7 @@ namespace VACM.NET4_0.Backend.Controllers
       // update repeater in view
       // restart repeater
     }
+
     #endregion
   }
 }
