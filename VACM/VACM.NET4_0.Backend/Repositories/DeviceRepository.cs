@@ -2,7 +2,19 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Xml.Linq;
 using VACM.NET4_0.Backend.Models;
+
+/*
+ * TODO:
+ * 
+ * -organize methods by type, then name, then overrides.
+ * -refactor comments
+ * -device ability
+ * -refer DeviceModel as abstract.
+ * -refer MMDevice as actual.
+ * 
+ */
 
 namespace VACM.NET4_0.Backend.Repositories
 {
@@ -16,9 +28,14 @@ namespace VACM.NET4_0.Backend.Repositories
     private HashSet<DeviceModel> deviceModelHashSet;
 
     /// <summary>
-    /// The collection of actual devices.
+    /// The list of actual devices.
     /// </summary>
     private List<MMDevice> MMDeviceList;
+
+    /// <summary>
+    /// The collection of actual devices.
+    /// </summary>
+    private MMDeviceEnumerator mMDeviceEnumerator;
 
     #endregion
 
@@ -32,16 +49,81 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       deviceModelHashSet = new HashSet<DeviceModel>();
       MMDeviceList = new List<MMDevice>();
+      mMDeviceEnumerator = new MMDeviceEnumerator();
 
       SetMMDeviceList();
       SetDeviceModelHashSet();
     }
 
     /// <summary>
+    /// Get actual device by abstract device.
+    /// </summary>
+    /// <param name="deviceModel">the abstract device</param>
+    /// <returns>The MMDevice.</returns>
+    private MMDevice GetMMDevice(DeviceModel deviceModel)
+    {
+      DeviceModel actualDeviceModel = GetDeviceById(deviceModel.Id);
+
+      if (actualDeviceModel is null)
+      {
+        return null;
+      }
+
+      return MMDeviceList
+        .FirstOrDefault(x => x.ID == actualDeviceModel.Id);
+    }
+
+    /// <summary>
+    /// Get actual device by ID.
+    /// </summary>
+    /// <param name="id">the actual device ID</param>
+    /// <returns>The MMDevice.</returns>
+    private MMDevice GetMMDevice(string id)
+    {
+      if (
+        id is null
+        || id == string.Empty
+      )
+      {
+        return null;
+      }
+
+      return MMDeviceList
+        .FirstOrDefault(x => x.ID == id);
+    }
+
+    /// <summary>
+    /// Disable actual device.
+    /// </summary>
+    /// <param name="mMDevice">the actual device</param>
+    private void DisableMMDevice(MMDevice mMDevice)
+    {
+      if (
+          mMDevice is null
+          || mMDevice.State == DeviceState.Disabled
+        )
+      {
+        return;
+      }
+
+      mMDevice
+        .AudioClient
+        .Stop();
+
+      mMDevice
+      .AudioClient
+      .Reset();
+
+      mMDevice
+        .AudioSessionManager
+        .RefreshSessions();
+    }
+
+    /// <summary>
     /// Add device.
     /// </summary>
     /// <param name="deviceModel">The device to add</param>
-    /// <returns>True/false if device is added</returns>
+    /// <returns>True/false if device is added.</returns>
     public bool AddDevice(DeviceModel deviceModel)
     {
       if (deviceModel is null)
@@ -53,7 +135,7 @@ namespace VACM.NET4_0.Backend.Repositories
 
       if (
         actualDeviceModel != null
-        || ! deviceModelHashSet
+        || !deviceModelHashSet
           .Add(deviceModel)
         )
       {
@@ -79,7 +161,7 @@ namespace VACM.NET4_0.Backend.Repositories
 
       if (
         actualDeviceModel is null
-        || ! deviceModelHashSet
+        || !deviceModelHashSet
           .Remove(actualDeviceModel)
         )
       {
@@ -90,20 +172,31 @@ namespace VACM.NET4_0.Backend.Repositories
     }
 
     /// <summary>
-    /// Get the absent device list.
+    /// Update device.
     /// </summary>
-    /// <returns>The absent device list.</returns>
-    public List<DeviceModel> GetAbsentDeviceList()
+    /// <param name="deviceModel">The device to update.</param>
+    /// <returns>True/false if the device is updated.</returns>
+    public bool UpdateDevice(DeviceModel deviceModel)
     {
-      if (deviceModelHashSet is null)
+      if (deviceModel is null)
       {
-        return new List<DeviceModel>();
+        return false;
       }
 
-      return
-        deviceModelHashSet
-          .Where(x => ! x.IsPresent)
-          .ToList();
+      DeviceModel actualDeviceModel = GetDeviceById(deviceModel.Id);
+
+      if (
+        actualDeviceModel is null
+        || !deviceModelHashSet
+          .Remove(actualDeviceModel)
+        || !deviceModelHashSet
+          .Add(deviceModel)
+        )
+      {
+        return false;
+      }
+
+      return true;
     }
 
     /// <summary>
@@ -142,6 +235,23 @@ namespace VACM.NET4_0.Backend.Repositories
 
       return deviceModelHashSet
         .FirstOrDefault(x => x.Id == id);
+    }
+
+    /// <summary>
+    /// Get the absent device list.
+    /// </summary>
+    /// <returns>The absent device list.</returns>
+    public List<DeviceModel> GetAbsentDeviceList()
+    {
+      if (deviceModelHashSet is null)
+      {
+        return new List<DeviceModel>();
+      }
+
+      return
+        deviceModelHashSet
+          .Where(x => !x.IsPresent)
+          .ToList();
     }
 
     /// <summary>
@@ -236,31 +346,65 @@ namespace VACM.NET4_0.Backend.Repositories
     }
 
     /// <summary>
-    /// Update device.
+    /// Disable the device.
     /// </summary>
-    /// <param name="deviceModel">The device to update.</param>
-    /// <returns>True/false if the device is updated.</returns>
-    public bool UpdateDevice(DeviceModel deviceModel)
+    /// <param name="deviceModel">the device model</param>
+    public void DisableDevice(DeviceModel deviceModel)
     {
-      if (deviceModel is null)
-      {
-        return false;
-      }
+      MMDevice mMDevice = GetMMDevice(deviceModel.Id);
+      DisableMMDevice(mMDevice);
+    }
 
-      DeviceModel actualDeviceModel = GetDeviceById(deviceModel.Id);
-
+    /// <summary>
+    /// Disable the device.
+    /// </summary>
+    /// <param name="id">the device id</param>
+    public void DisableDevice(string id)
+    {
       if (
-        actualDeviceModel is null
-        || ! deviceModelHashSet
-          .Remove(actualDeviceModel)
-        || ! deviceModelHashSet
-          .Add(deviceModel)
+          id is null
+          || id == string.Empty
         )
       {
-        return false;
+        return;
       }
 
-      return true;
+      MMDevice mMDevice = GetMMDevice(id);
+      DisableMMDevice(mMDevice);
+    }
+
+    /// <summary>
+    /// Enable the device.
+    /// </summary>
+    /// <param name="deviceModel">the device model</param>
+    public void EnableDevice(DeviceModel deviceModel)
+    {
+      MMDevice mMDevice = GetMMDevice(deviceModel.Id);
+
+      mMDevice
+        .AudioClient
+        .Start();
+
+      mMDevice
+        .AudioSessionManager
+        .RefreshSessions();
+    }
+
+    /// <summary>
+    /// Enable the device.
+    /// </summary>
+    /// <param name="deviceModel">the device model</param>
+    public void EnableDevice(DeviceModel deviceModel)
+    {
+      MMDevice mMDevice = GetMMDevice(deviceModel.Id);
+
+      mMDevice
+        .AudioClient
+        .Start();
+
+      mMDevice
+        .AudioSessionManager
+        .RefreshSessions();
     }
 
     /// <summary>
@@ -294,7 +438,7 @@ namespace VACM.NET4_0.Backend.Repositories
     /// </summary>
     public void SetMMDeviceList()
     {
-      MMDeviceList = new MMDeviceEnumerator()
+      MMDeviceList = mMDeviceEnumerator
         .EnumerateAudioEndPoints
         (
           DataFlow.All,
