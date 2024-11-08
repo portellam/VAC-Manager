@@ -1,30 +1,54 @@
-﻿using NAudio.CoreAudioApi;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using VACM.NET4_0.Backend.Structs;
 
 namespace VACM.NET4_0.Backend.Models
 {
-  public class DeviceModel
+  public class DeviceModel : IDeviceModel
   {
     #region Parameters
 
-    private bool isInput;
-    private bool isOutput;
-    private bool isPresent;
-    private bool isSelected;
+    private int id;
+    private bool? isInput;
+    private bool? isOutput;
+    private bool? isPresent;
+    private string actualId;
     private string name;
 
-    public string Id { get; private set; }
+    public int Id
+    {
+      get
+      {
+        return id;
+      }
+      set
+      {
+        id = value;
+        OnPropertyChanged(nameof(id));
+      }
+    }
+
+    public bool IsDuplex
+    {
+      get
+      {
+        return IsInput == IsOutput;
+      }
+    }
 
     public bool IsInput
     {
       get
       {
-        return isInput;
+        return isInput.Value;
       }
       set
       {
+        if (isInput is null)
+        {
+          return;
+        }
+
         isInput = value;
         OnPropertyChanged(nameof(ChannelConfig));
       }
@@ -34,10 +58,15 @@ namespace VACM.NET4_0.Backend.Models
     {
       get
       {
-        return isOutput;
+        return isOutput.Value;
       }
       set
       {
+        if (isOutput is null)
+        {
+          return;
+        }
+
         isOutput = value;
         OnPropertyChanged(nameof(ChannelConfig));
       }
@@ -47,29 +76,34 @@ namespace VACM.NET4_0.Backend.Models
     {
       get
       {
-        return isPresent;
+        return isPresent.Value;
       }
       set
       {
+        if (isPresent is null)
+        {
+          return;
+        }
+
         isPresent = value;
         OnPropertyChanged(nameof(ChannelConfig));
       }
     }
 
-    public bool IsSelected
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public string ActualId
     {
       get
       {
-        return isSelected;
+        return actualId;
       }
       set
       {
-        isSelected = value;
-        OnPropertyChanged(nameof(ChannelConfig));
+        actualId = value;
+        OnPropertyChanged(nameof(actualId));
       }
     }
-
-    public event PropertyChangedEventHandler PropertyChanged;
 
     public string Name
     {
@@ -84,14 +118,6 @@ namespace VACM.NET4_0.Backend.Models
       }
     }
 
-    /// <summary>
-    /// The present device state.
-    /// </summary>
-    private DeviceState Present =
-      DeviceState.Active
-      | DeviceState.Unplugged
-      | DeviceState.Disabled;
-
     #endregion
 
     #region Logic
@@ -99,51 +125,29 @@ namespace VACM.NET4_0.Backend.Models
     /// <summary>
     /// Abstract of the actual audio device.
     /// </summary>
-    /// <param name="mMDevice">The actual device</param>
-    /// <param name="isSelected">True/false is the device selected</param>
-    [ExcludeFromCodeCoverage]
-    public DeviceModel
-      (
-        MMDevice mMDevice,
-        bool isSelected
-      )
-    {
-      Id = mMDevice.ID;
-      Name = mMDevice.FriendlyName;
-      IsPresent = mMDevice.State == Present;
-      IsSelected = isSelected;
-      IsInput = false;
-      IsOutput = false;
-
-      SetDataFlow(mMDevice.DataFlow);
-    }
-
-    /// <summary>
-    /// Abstract of the actual audio device.
-    /// </summary>
     /// <param name="id">The device ID</param>
+    /// <param name="actualId">The actual device ID</param>
     /// <param name="name">The device name</param>
-    /// <param name="deviceState">The device state</param>
-    /// <param name="dataFlow">The device dataflow</param>
-    /// <param name="isSelected">True/false is the device selected</param>
+    /// <param name="isInput">True/false is an input device</param>
+    /// <param name="isOutput">True/false is an output device</param>
+    /// <param name="isPresent">True/false is the device present</param>
     [ExcludeFromCodeCoverage]
     public DeviceModel
-      (
-        string id,
-        string name,
-        DeviceState deviceState,
-        DataFlow dataFlow,
-        bool isSelected
-      )
+    (
+      int id,
+      string actualId,
+      string name,
+      bool? isInput,
+      bool? isOutput,
+      bool? isPresent
+    )
     {
       Id = id;
+      ActualId = actualId;
       Name = name;
-      IsPresent = deviceState == Present;
-      IsSelected = isSelected;
-      IsInput = false;
-      IsOutput = false;
-
-      SetDataFlow(dataFlow);
+      IsInput = isInput.Value;
+      IsOutput = isOutput.Value;
+      IsPresent = isPresent.Value;
     }
 
     /// <summary>
@@ -157,40 +161,6 @@ namespace VACM.NET4_0.Backend.Models
           this, 
           new PropertyChangedEventArgs(propertyName)
         );
-    }
-
-    /// <summary>
-    /// Set the device dataflow
-    /// </summary>
-    /// <param name="dataFlow">The device data flow</param>
-    private void SetDataFlow(DataFlow dataFlow)
-    {
-      IsInput = DataFlow.Capture == dataFlow;
-      IsOutput = DataFlow.Render == dataFlow;
-
-      if (dataFlow != DataFlow.All)
-      {
-        return;
-      }
-
-      IsInput = true;
-      IsOutput = true;
-    }
-
-    /// <summary>
-    /// Toggle the device presence.
-    /// </summary>
-    public void ToggleIsPresent()
-    {
-      IsPresent = !IsPresent;
-    }
-
-    /// <summary>
-    /// Toggle the device selection.
-    /// </summary>
-    public void ToggleIsSelected()
-    {
-      IsSelected = !IsSelected;
     }
 
     #endregion
