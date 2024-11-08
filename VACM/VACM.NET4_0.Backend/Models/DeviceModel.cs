@@ -97,7 +97,7 @@ namespace VACM.NET4_0.Backend.Models
     #region Logic
 
     /// <summary>
-    /// Constructors
+    /// Abstract of the actual audio device.
     /// </summary>
     /// <param name="mMDevice">The actual device</param>
     /// <param name="isSelected">True/false is the device selected</param>
@@ -119,7 +119,7 @@ namespace VACM.NET4_0.Backend.Models
     }
 
     /// <summary>
-    /// Constructor
+    /// Abstract of the actual audio device.
     /// </summary>
     /// <param name="id">The device ID</param>
     /// <param name="name">The device name</param>
