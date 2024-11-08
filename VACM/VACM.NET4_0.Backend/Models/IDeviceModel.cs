@@ -7,7 +7,7 @@ namespace VACM.NET4_0.Backend.Models
     #region Parameters
 
     int Id { get; set; }
-    bool IsDuplex { get; set; }
+    bool IsDuplex { get; }
     bool IsInput { get; set; }
     bool IsOutput { get; set; }
     bool IsPresent { get; set; }
