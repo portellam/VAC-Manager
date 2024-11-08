@@ -1,10 +1,10 @@
-# VAC-Manager
+# Virtual Audio Cable Manager
 ### In Development
 User interface to create, manage, and automate instances of
 [Virtual Audio Cable](#Licensing) (VAC) audio repeaters for Microsoft Windows XP
 and newer.
 
-### [Download](#4-download)
+### ~[Download](#4-download)~
 
 ## Table of Contents
 - [1. Why?](#1-why)
@@ -43,8 +43,9 @@ to only listen to the latter two audio sources (and not his/her own voice).
 - [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
 - [VAC Control Panel](https://vac.muzychenko.net/en/download.htm) <sup>[1]</sup>
 
-1. A minimum of one (1) "virtual audio cable" or input-and-output pair to faciliate
-[Mutiplexing](#1-multiplexing). Example: virtual Line In 1 > physical Line out(s).
+1. A minimum of one (1) virtual audio cable (Line-In and Line-Out pair) to
+faciliate [Mutiplexing](#1-multiplexing). Example: one (1) *virtual* Line-In > one
+or more *physical* Line-Out(s).
 
 ### 3.1. Operating System Requirements
 | Minimum Required Microsoft Windows version | CPU architecture | .NET version  |
