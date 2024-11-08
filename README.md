@@ -20,32 +20,38 @@ User interface to create, manage, and automate instances of
 
 ## Contents
 ### 1. Why?
-* Allow for multiplexing of audio streams for (example: Game broadcast/recording
-setup).
-* For Windows machines with many audio devices, such that the end-user only has to
-physically turn on or off the audio device, and not in software.
+- Allow for multiplexing of audio streams, of which is not natively supported in
+Microsoft Windows.
+- Examples include (but not limited to):
+  - audio broadcast setup.
+	- video game session recording/stream setup. <sup>[1]</sup>
+- Turnkey solution, no tedious work of opening or closing instances of VAC
+audio repeater.
+
+1. Given three audio sources, a local microphone, incoming voice chat audio,
+and game audio. Record each source as separate audio streams, and allow the user
+to only listen to the latter two audio sources (and not his/her own voice).
 
 ### 2. Features
-* Load/Save audio stream setup to/from file.
-* Manage audio stream setup of current or other Windows machine(s).
-* Start/stop audio repeaters from within the application.
-* Easily automate audio stream setup with Windows Tasks and startup scripts.
+- Load/Save audio stream setup to/from file.
+- Manage audio stream setup of current or other Windows machine(s).
+- Start/stop audio repeaters from within the application.
+- Easily automate audio stream setup with Windows Tasks and startup scripts.
 
 ## 3. Requirements
-* [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
-* [VAC Control Panel](https://vac.muzychenko.net/en/download.htm) <sup>[1](#1)</sup>
+- [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
+- [VAC Control Panel](https://vac.muzychenko.net/en/download.htm) <sup>[1]</sup>
 
-1.
-A minimum of one (1) "virtual audio cable" or input-and-output pair to faciliate
+1. A minimum of one (1) "virtual audio cable" or input-and-output pair to faciliate
 [Mutiplexing](#1-multiplexing). Example: virtual Line In 1 > physical Line out(s).
 
 ### 3.1. Operating System Requirements
-| Microsoft Windows version              | CPU architecture  | .NET version  |
-| :---                                   | :---:             | :---:         |
-| Windows 10 version 1809 or Server 2019 | 32-bit and 64-bit | 8.0		  	   |
-| Windows 7 SP1 or Server 2008 R2        | 32-bit and 64-bit | Framework 4.8 |
-| Windows Vista SP2 or Server 2008 SP2   | 32-bit and 64-bit | Framework 4.6 |
-| Windows XP SP3 or Server 2003 SP2      | 32-bit            | Framework 4.0 |
+| Minimum Required Microsoft Windows version | CPU architecture | .NET version  |
+| :---                                       | :---:            | :---:         |
+| Windows 10 ver. 1809 or Server 2019        | 32-bit or 64-bit | 8.0		  	    |
+| Windows 7 SP1 or Server 2008 R2            | 32-bit or 64-bit | Framework 4.8 |
+| Windows Vista SP2 or Server 2008 SP2       | 32-bit or 64-bit | Framework 4.6 |
+| Windows XP SP3 or Server 2003 SP2          | 32-bit           | Framework 4.0 |
 
 ### 4. Download
 No release is available at this time.
