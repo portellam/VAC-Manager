@@ -1,113 +1,103 @@
-# Virtual Audio Cable Manager
-### v0.5.1
+# VAC-Manager
+### In Development
 User interface to create, manage, and automate instances of
-[Virtual Audio Cable](#licenses) (VAC) audio repeaters for Microsoft Windows.
-Includes GUI and Console applications. Supports Windows XP to Windows 11.
+[Virtual Audio Cable](#Licensing) (VAC) audio repeaters for Microsoft Windows XP
+and newer.
 
-## Status: In-Development
+### [Download](#4-download)
 
 ## Table of Contents
-- [1. What is VAC?](#1-what-is-vac)
-    - [1.1. VAC Control Panel](#11-vac-control-panel)
-    - [1.2. VAC Audio Repeater](#12-vac-audio-repeater)
-- [2. Why?](#2-why)
-    - [2.1. Mirror Audio Sources](#21-mirror-audio-sources)
-    - [2.2. Multiplexing](#22-multiplexing)
+- [1. Why?](#1-why)
+- [2. Features](#2-features)
 - [3. Requirements](#3-requirements)
+    - [3.1. Operating System Requirements](#31-operating-system-requirements)
 - [4. Download](#4-download)
-- [5. Features](#5-features)
-- [6. Keywords](#6-keywords)
-    - [6.1. Multiplexing](#21-multiplexing)
-- [7. Credits](#7-credits)
-- [8. Licenses](#8-licenses)
-- [9. Contact](#9-contact)
+- [5. Usage](#5-usage)
+    - [5.1. Install](#61-install)
+- [6. Contact](#7-contact)
+- [7. Keywords](#8-keywords)
+- [8. Credits](#8-credits)
+- [9. Licenses](#9-licenses)
 
 ## Contents
-### 1. What is VAC?
-**Virtual Audio Cable** or **VAC** is a software suite which includes an
-Audio Repeater application, and a Control Panel to run one or more Audio
-Repeater(s) as desired.
+### 1. Why?
+- Allow for multiplexing of audio streams, of which is not natively supported in
+Microsoft Windows.
+- Examples include (but not limited to):
+  - audio broadcast setup.
+	- video game session recording/stream setup. <sup>[1]</sup>
+- Turnkey solution, no tedious work of opening or closing instances of VAC
+audio repeater.
 
-#### 1.1. VAC Control Panel
-*VAC Control Panel* allows for the creation of Virtual Audio devices (Cables) or
-VACs. VACs are created in pairs; one Line-In (input, capture) and Line-Out
-(output, render). Many VAC pairs may be created.
+1. Given three audio sources, a local microphone, incoming voice chat audio,
+and game audio. Record each source as separate audio streams, and allow the user
+to only listen to the latter two audio sources (and not his/her own voice).
 
-#### 1.2. VAC Audio Repeater
-*VAC Audio Repeater* is a useful tool which allows for an audio stream to
-passthrough between two devices (cables). By default, Windows will allow for up
-to one output cable to "listen" to one input, equivalent to an "audio repeater".
-*VAC Audio Repeater* allows for many more of these to exist.
+### 2. Features
+- Load/Save audio stream setup to/from file.
+- Manage audio stream setup of current or other Windows machine(s).
+- Start/stop audio repeaters from within the application.
+- Easily automate audio stream setup with Windows Tasks and startup scripts.
 
-### 2. Why?
-#### 2.1. Mirror Audio Sources
-By default, Windows allows for a Video source to be mirrored across multiple
-displays. **VAC Manager** aims to do the same, but for Audio and with a nice
-user interface.
+## 3. Requirements
+- [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
+- [VAC Control Panel](https://vac.muzychenko.net/en/download.htm) <sup>[1]</sup>
 
-#### 2.2. Multiplexing
-Want to broadcast video game audio and voice chat together to your headphones,
-but on separate lines for game session recording or streaming? You can do that.
+1. A minimum of one (1) "virtual audio cable" or input-and-output pair to faciliate
+[Mutiplexing](#1-multiplexing). Example: virtual Line In 1 > physical Line out(s).
 
-Or you want to play music directly to your voice chat, by a virtual microphone?
-You can do that, too.
-
-These examples are known as **[multiplexing](#multiplexing)**.
-
-### 3. Requirements
-- A minimum of one **VAC** pair (one virtual input cable and one virtual output
-cable).
-
-- [VAC Audio Repeater]
-- [VAC Control Panel]
-
-[VAC Audio Repeater]: https://vac.muzychenko.net/en/repeater.htm
-[VAC Control Panel]: https://vac.muzychenko.net/en/download.htm
-
-- Microsoft .NET Desktop Runtime:
-
-| .NET version                                                                     | Targeted Microsoft Windows version | CPU architecture |
-| :------------------------------------------------------------------------------- | :--------------------------------- | :--------------: |
-| [.NET 4.0](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net40)   | NT 5.0; XP and Server 2003         | 32-bit (x86)     |
-| [.NET 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48)   | NT 6.0 and 6.1; Vista and 7        | 64-bit (x64)     |
-| [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)               | NT 8 and above; 8, 8.1, 10, and 11 | 64-bit (x64)     |
+### 3.1. Operating System Requirements
+| Minimum Required Microsoft Windows version | CPU architecture | .NET version  |
+| :---                                       | :---:            | :---:         |
+| Windows 10 ver. 1809 or Server 2019        | 32-bit or 64-bit | 8.0		  	    |
+| Windows 7 SP1 or Server 2008 R2            | 32-bit or 64-bit | Framework 4.8 |
+| Windows Vista SP2 or Server 2008 SP2       | 32-bit or 64-bit | Framework 4.6 |
+| Windows XP SP3 or Server 2003 SP2          | 32-bit           | Framework 4.0 |
 
 ### 4. Download
-Download the Latest Release:&ensp;[Codeberg][codeberg-releases],
-[GitHub][github-releases]
+**No release is available at this time.**
+
+- Download the Latest Release:&ensp;~[Codeberg][codeberg-releases],
+[GitHub][github-releases]~
 
 [codeberg-releases]: https://codeberg.org/portellam/VAC-Manager/releases/latest
 [github-releases]:   https://github.com/portellam/VAC-Manager/releases/latest
 
-### 5. Features
-- Load/Save audio stream setup to/from file.
-- Manage audio stream setup of current or foreign Windows machine(s).
-- Easily automate audio stream setup with Windows Tasks and startup scripts.
-- Fault-tolerance of audio device disconnect or reconnect.
-- WinForm GUI application.
-- Command Prompt/Console application.
+### 5. Usage
+#### 5.1. Install
+TODO: add details here.
 
-### 6. Keywords
-#### 6.1. Multiplexing
-*In telecommunications and computer networking, multiplexing (sometimes*
-*contracted to muxing) is a method by which multiple analog or digital signals*
-*are combined into one signal over a shared medium.* [Wikipedia article]
+#### 5.2. Graphics User Interface (GUI) version
+TODO:
+- add details here.
+- make `vac-manager.exe`
 
-[Wikipedia article]: https://en.wikipedia.org/wiki/Multiplexing
+#### 5.3. Command Line Interface (CLI) version
+TODO:
+- explain console version input parameters.
+- make `vac-manager-cli.exe`
 
-### 7. Credits
-[Eugene Muzychenko] for creating Virtual Audio Cable.
+### 6. Contact
+Did you encounter a bug? Do you need help? Please visit the
+**Issues page** ([Codeberg][codeberg-issues], [GitHub][github-issues]).
 
-[Eugene Muzychenko]: (https://eugene.muzychenko.net/EMuzychenko_Resume_Eng.htm)
+[codeberg-issues]: https://codeberg.org/portellam/parse-iommu-devices/issues
+[github-issues]:   https://github.com/portellam/parse-iommu-devices/issues
 
-### 8. Licenses
-**Virtual Audio Cable**. Copyright © 1998-2024. Eugene V. Muzychenko.
+## 7. Keywords
+#### 1. Multiplexing
+*In telecommunications and computer networking, multiplexing*
+*(sometimes contractedto muxing) is a method by which multiple analog or digital*
+*signals are combined into one signal over a shared medium.* [Wikipedia](k1)
 
-**VAC Manager**. GPL-3.0, Copyleft © 2024. Alexander Portell.
+[k1]: https://en.wikipedia.org/wiki/Multiplexing
 
-### 9. Contact
-Did you encounter a bug? Do you need help? Please visit the **Issues page**
-([Codeberg][codeberg-issues], [GitHub][github-issues]).
+## 8. Credits
+[Eugene Muzychenko][credits1] for creating Virtual Audio Cable.
 
-[codeberg-issues]: https://codeberg.org/portellam/VAC-Manager/issues
-[github-issues]:   https://github.com/portellam/VAC-Manager/issues
+[credits1]: https://eugene.muzychenko.net/EMuzychenko_Resume_Eng.htm
+
+## 9. Licenses
+Virtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.
+
+VAC Manager GPL-3.0, Copyleft © 2024 Alexander Portell.
