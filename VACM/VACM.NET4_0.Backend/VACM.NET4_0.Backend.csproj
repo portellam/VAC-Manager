@@ -68,7 +68,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consoles\MainConsole.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\RepeaterController.cs" />
     <Compile Include="Models\DeviceModel.cs" />
