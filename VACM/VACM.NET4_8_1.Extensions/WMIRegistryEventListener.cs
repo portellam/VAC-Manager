@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management;
 using System.Security.Principal;
-using VACM.NET4_8_1.Extensions.RegistrySubKeyChanged;
+using VACM.NET4_8.Extensions.RegistrySubKeyChanged;
 
-namespace VACM.NET4_8_1.Extensions
+namespace VACM.NET4_8.Extensions
 {
   public class WMIRegistryEventListener : IDisposable
   {

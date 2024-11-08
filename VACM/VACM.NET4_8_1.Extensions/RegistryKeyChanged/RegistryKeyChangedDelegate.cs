@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_8_1.Extensions.RegistrySubKeyChanged
+﻿namespace VACM.NET4_8.Extensions.RegistrySubKeyChanged
 {
   #region Delegates
 

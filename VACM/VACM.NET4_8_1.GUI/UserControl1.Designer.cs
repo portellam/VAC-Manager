@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_8_1.GUI
+﻿namespace VACM.NET4_8.GUI
 {
     partial class UserControl1
     {

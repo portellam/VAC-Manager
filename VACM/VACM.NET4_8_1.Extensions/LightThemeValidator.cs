@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using VACM.NET4_8_1.Extensions.PropertyValueChanged;
+using VACM.NET4_8.Extensions.PropertyValueChanged;
 
-namespace VACM.NET4_8_1.Extensions
+namespace VACM.NET4_8.Extensions
 {
   public class LightThemeValidator
   {

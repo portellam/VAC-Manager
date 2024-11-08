@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VACM.NET4_8_1.CLI
+namespace VACM.NET4_8.CLI
 {
   internal class Program
   {
