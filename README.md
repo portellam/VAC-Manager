@@ -1,7 +1,8 @@
 # VAC-Manager
 ### In Development
 User interface to create, manage, and automate instances of
-[Virtual Audio Cable](#Licensing) (VAC) audio repeaters.
+[Virtual Audio Cable](#Licensing) (VAC) audio repeaters for Microsoft Windows XP
+and newer.
 
 ### [Download](#4-download)
 
@@ -54,9 +55,9 @@ to only listen to the latter two audio sources (and not his/her own voice).
 | Windows XP SP3 or Server 2003 SP2          | 32-bit           | Framework 4.0 |
 
 ### 4. Download
-No release is available at this time.
+**No release is available at this time.**
 
-- ~Download the Latest Release:&ensp;[Codeberg][codeberg-releases],
+- Download the Latest Release:&ensp;~[Codeberg][codeberg-releases],
 [GitHub][github-releases]~
 
 [codeberg-releases]: https://codeberg.org/portellam/VAC-Manager/releases/latest
