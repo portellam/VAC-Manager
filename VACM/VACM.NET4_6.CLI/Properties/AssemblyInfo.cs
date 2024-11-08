@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("VAC Manager")]
-[assembly: AssemblyDescription("Command line interface (CLI) to create, manage, and automate instances of Virtual Audio Cable (VAC) audio repeaters. This application version is targeted for either 32-bit (x86) or 64-bit (x64) versions of Virtual Audio Cable. Required dependencies include Microsoft .NET Framework version 4.8. Supported operating systems include Microsoft Windows 7 SP1/Server 2008 R2 or newer.")]
+[assembly: AssemblyDescription("Command line interface (CLI) to create, manage, and automate instances of Virtual Audio Cable (VAC) audio repeaters. This application version is targeted for either 32-bit (x86) or 64-bit (x64) versions of Virtual Audio Cable. Required dependencies include Microsoft .NET Framework version 4.6. Supported operating systems include Microsoft Windows Vista SP2/Server 2008 SP2 or newer.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Virtual Audio Cable Manager")]
