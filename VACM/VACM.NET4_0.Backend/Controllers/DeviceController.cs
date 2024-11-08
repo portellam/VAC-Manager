@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using VACM.NET4_0.Backend.Models;
+using VACM.NET4_0.Backend.Repositories;
 
 namespace VACM.NET4_0.Backend.Controllers
 {
@@ -8,8 +8,7 @@ namespace VACM.NET4_0.Backend.Controllers
   {
     #region Parameters
 
-    private DeviceModel DeviceModel;
-    private DeviceViewModel DeviceViewModel;
+    private DeviceRepository DeviceRepository;
 
     #endregion
 
@@ -18,19 +17,17 @@ namespace VACM.NET4_0.Backend.Controllers
     /// <summary>
     /// Constructor
     /// </summary>
-    /// <param name="deviceModel">The device model</param>
-    /// <param name="deviceModel">The device view model</param>
+    /// <param name="deviceRepository">The device repository</param>
     [ExcludeFromCodeCoverage]
-    public DeviceController(DeviceModel deviceModel, DeviceViewModel deviceViewModel)
+    public DeviceController(DeviceRepository deviceRepository)
     {
-      DeviceModel = deviceModel;
-      DeviceViewModel = deviceViewModel;
+      DeviceRepository = deviceRepository;
     }
 
     /// <summary>
     /// Add the device.
     /// </summary>
-    public void AddDevice()
+    public void AddDevice(string id)
     {
       // add device to repository.
     }
@@ -38,7 +35,7 @@ namespace VACM.NET4_0.Backend.Controllers
     /// <summary>
     /// Delete the device.
     /// </summary>
-    public void DeleteDevice()
+    public void DeleteDevice(string id)
     {
       // delete device from repository.
     }
@@ -47,7 +44,7 @@ namespace VACM.NET4_0.Backend.Controllers
     /// Disable the device.
     /// </summary>
     /// <returns>0 if successful, 1 if failed.</returns>
-    public async Task<byte> DisableDevice()
+    public async Task<byte> DisableDevice(string id)
     {
       // try to disable device.
       // verify if device is disabled.
@@ -60,7 +57,7 @@ namespace VACM.NET4_0.Backend.Controllers
     /// Enable the device.
     /// </summary>
     /// <returns>0 if successful, 1 if failed.</returns>
-    public async Task<byte> EnableDevice()
+    public async Task<byte> EnableDevice(string id)
     {
       // try to enable device.
       // verify if device is enabled.
@@ -73,7 +70,7 @@ namespace VACM.NET4_0.Backend.Controllers
     /// Update the device.
     /// </summary>
     /// <param name="isPresent">True/False is device present</param>
-    public void UpdateDevice(bool isPresent)
+    public void UpdateDevice(string id, bool isPresent)
     {
       // update device in repository.
     }
