@@ -1,0 +1,12 @@
+﻿namespace VACM.NET4_6.Extensions.RegistrySubKeyChanged
+{
+  #region Delegates
+
+  public delegate void RegistrySubKeyChangedDelegate
+  (
+    object sender,
+    RegistrySubKeyChangedEventArgs registrySubKeyChangedEventArgs
+  );
+
+  #endregion
+}
