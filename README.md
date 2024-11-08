@@ -1,8 +1,8 @@
 # VAC-Manager
 ### In Development
-User interface to create, manage, and automate instances of
-[Virtual Audio Cable](#Licensing) (VAC) audio repeaters for Microsoft Windows XP
-and newer.
+Easily multiplex multiple audio sources. Create, manage, and automate
+instances of [Virtual Audio Cable](#Licensing) (VAC) audio repeaters. Compatible
+with Microsoft Windows XP SP3 to 10/11.
 
 ### [Download](#4-download)
 
@@ -24,12 +24,12 @@ and newer.
 - Allow for multiplexing of audio streams, of which is not natively supported in
 Microsoft Windows.
 - Examples include (but not limited to):
-  - audio broadcast setup.
-	- video game session recording/stream setup. <sup>[1]</sup>
+  * audio broadcaster setup.
+  * video game session recording/stream setup.<sup>[**1**]</sup>
 - Turnkey solution, no tedious work of opening or closing instances of VAC
 audio repeater.
 
-1. Given three audio sources, a local microphone, incoming voice chat audio,
+**[1]** Given three audio sources, a local microphone, incoming voice chat audio,
 and game audio. Record each source as separate audio streams, and allow the user
 to only listen to the latter two audio sources (and not his/her own voice).
 
@@ -41,13 +41,13 @@ to only listen to the latter two audio sources (and not his/her own voice).
 
 ## 3. Requirements
 - [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
-- [VAC Control Panel](https://vac.muzychenko.net/en/download.htm) <sup>[1]</sup>
+- [VAC Control Panel](https://vac.muzychenko.net/en/download.htm)<sup>[**1**]</sup>
 
-1. A minimum of one (1) "virtual audio cable" or input-and-output pair to faciliate
+**[1]** A minimum of one (1) "virtual audio cable" or input-and-output pair to faciliate
 [Mutiplexing](#1-multiplexing). Example: virtual Line In 1 > physical Line out(s).
 
 ### 3.1. Operating System Requirements
-| Minimum Required Microsoft Windows version | CPU architecture | .NET version  |
+| Minimum OS version                         | CPU architecture | .NET version  |
 | :---                                       | :---:            | :---:         |
 | Windows 10 ver. 1809 or Server 2019        | 32-bit or 64-bit | 8.0		  	    |
 | Windows 7 SP1 or Server 2008 R2            | 32-bit or 64-bit | Framework 4.8 |
