@@ -1,91 +1,96 @@
 # VAC-Manager
- Open-source user interface to create, manage, and automate instances of [Virtual Audio Cable](#Licensing) (VAC) audio repeaters.
+### In Development
+User interface to create, manage, and automate instances of
+[Virtual Audio Cable](#Licensing) (VAC) audio repeaters.
 
-## Installation
-Download from "Releases" the setup executable for your Windows machine architecture (32-bit or 64-bit). This application is targeted for Windows NT 5.0 (XP / Server 2003) and newer (Vista / 7 / 8 / 10 / 11).
+### [Download](#4-download)
 
-## Why use this?
-* Allow for multiplexing of audio streams for (example: Game broadcast/recording setup).
-* For Windows machines with many audio devices, such that the end-user only has to physically turn on or off the audio device, and not in software.
+## Table of Contents
+- [1. Why?](#1-why)
+- [2. Features](#2-features)
+- [3. Requirements](#3-requirements)
+    - [3.1. Operating System Requirements](#31-operating-system-requirements)
+- [4. Download](#4-download)
+- [5. Usage](#5-usage)
+    - [5.1. Install](#61-install)
+- [6. Contact](#7-contact)
+- [7. Keywords](#8-keywords)
+- [8. Credits](#8-credits)
+- [9. Licenses](#9-licenses)
 
-## Features
+## Contents
+### 1. Why?
+* Allow for multiplexing of audio streams for (example: Game broadcast/recording
+setup).
+* For Windows machines with many audio devices, such that the end-user only has to
+physically turn on or off the audio device, and not in software.
+
+### 2. Features
 * Load/Save audio stream setup to/from file.
-* Manage audio stream setup of current or foreign Windows machine(s).
+* Manage audio stream setup of current or other Windows machine(s).
+* Start/stop audio repeaters from within the application.
 * Easily automate audio stream setup with Windows Tasks and startup scripts.
 
-## Requirements
+## 3. Requirements
 * [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
 * [VAC Control Panel](https://vac.muzychenko.net/en/download.htm) <sup>[1](#1)</sup>
-* Microsoft .NET (version 4.0 for 32-bit, version 4.8 and 8.0 for 64-bit). 
 
-#### 1.
-A minimum of one (1) "virtual audio cable" or input-and-output pair to faciliate [multiplexing](#multiplexing). Example: virtual Line In 1 > physical Line out(s).
+1.
+A minimum of one (1) "virtual audio cable" or input-and-output pair to faciliate
+[Mutiplexing](#1-multiplexing). Example: virtual Line In 1 > physical Line out(s).
 
-## Keywords
-#### multiplexing
-*In telecommunications and computer networking, multiplexing (sometimes contracted to muxing) is a method by which multiple analog or digital signals are combined into one signal over a shared medium.* [Wikipedia](https://en.wikipedia.org/wiki/Multiplexing)
+### 3.1. Operating System Requirements
+| Microsoft Windows version              | CPU architecture  | .NET version  |
+| :---                                   | :---:             | :---:         |
+| Windows 10 version 1809 or Server 2019 | 32-bit and 64-bit | 8.0		  	   |
+| Windows 7 SP1 or Server 2008 R2        | 32-bit and 64-bit | Framework 4.8 |
+| Windows Vista SP2 or Server 2008 SP2   | 32-bit and 64-bit | Framework 4.6 |
+| Windows XP SP3 or Server 2003 SP2      | 32-bit            | Framework 4.0 |
 
-## Credits
-[Eugene Muzychenko](https://eugene.muzychenko.net/EMuzychenko_Resume_Eng.htm) for creating Virtual Audio Cable.
+### 4. Download
+No release is available at this time.
 
-## Licensing
+- ~Download the Latest Release:&ensp;[Codeberg][codeberg-releases],
+[GitHub][github-releases]~
+
+[codeberg-releases]: https://codeberg.org/portellam/VAC-Manager/releases/latest
+[github-releases]:   https://github.com/portellam/VAC-Manager/releases/latest
+
+### 5. Usage
+#### 5.1. Install
+TODO: add details here.
+
+#### 5.2. Graphics User Interface (GUI) version
+TODO:
+- add details here.
+- make `vac-manager.exe`
+
+#### 5.3. Command Line Interface (CLI) version
+TODO:
+- explain console version input parameters.
+- make `vac-manager-cli.exe`
+
+### 6. Contact
+Did you encounter a bug? Do you need help? Please visit the
+**Issues page** ([Codeberg][codeberg-issues], [GitHub][github-issues]).
+
+[codeberg-issues]: https://codeberg.org/portellam/parse-iommu-devices/issues
+[github-issues]:   https://github.com/portellam/parse-iommu-devices/issues
+
+## 7. Keywords
+#### 1. Multiplexing
+*In telecommunications and computer networking, multiplexing*
+*(sometimes contractedto muxing) is a method by which multiple analog or digital*
+*signals are combined into one signal over a shared medium.* [Wikipedia](k1)
+
+[k1]: https://en.wikipedia.org/wiki/Multiplexing
+
+## 8. Credits
+[Eugene Muzychenko][credits1] for creating Virtual Audio Cable.
+
+[credits1]: https://eugene.muzychenko.net/EMuzychenko_Resume_Eng.htm
+
+## 9. Licenses
 Virtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.
 
 VAC Manager GPL-3.0, Copyleft © 2024 Alexander Portell.
-
-## TO DO (subject to change)
-- Development:
- - [x] Choose GUI type: WinForms
-	- [x] Choose design pattern: Model-ViewModel-View
-		- [x] Models
-			- [x] Audio device model
-			- [ ] Repeater model
-			- [x] Repeater data model
-		- [x] Views
-			- [x] Main form
-				- [x] Create GUI layout.
-				- [ ] Create all hotkeys.
-				- [ ] Create all backend logic for accesing and manipulating model data and other forms.
-			- [x] About form
-			- [ ] Grid table
-				- [ ] Present audio devices and repeaters in heirarchical list format.
-				- [ ] Validate Main form logic works here.
-			- [ ] Canvas graph
-				- [ ] Present audio repeaters as pairs of devices with links on a graph.
-				- [ ] Validate Main form logic works here.
-
-	- [ ] Logic
-		- [ ] File
-			- [ ] Open
-			- [ ] New
-			- [ ] Save
-			- [ ] Close
-		- [ ] Devices
-			- [ ] Add
-			- [ ] Remove
-			- [ ] Reload
-			- [ ] Import from file (.xml file).
-			- [ ] Export from file (.xml file).
-		- [ ] Links
-		- [ ] Repeaters
-			- [ ] Generate automation scripts (.bat files).
-			- [ ] Generate Window task (.xml file ?).
-		- [x] Dark mode
-			- [ ] Dark mode compatible with Windows registry calls.
-	- [ ] Windows 32-bit support
-		- [ ] Windows NT 5.x:	.NET 4.0 compatible C# code and NuGet dependencies.
-		- [ ] Windows NT 6.x:	.NET 4.8 compatible C# code and NuGet dependencies.
-	- [ ] Windows 64-bit support
-		- [ ] Windows NT 6.1+:	.NET 4.8 compatible C# code and NuGet dependencies.
-		- [ ] Windows NT 10.0+:	.NET 8.0 compatible C# code and NuGet dependencies.
-
-- Unit testing:
-	- [ ] Higher priority
-		- [ ] Backend logic
-	- [ ] Lower priority
-		- [ ] Viewmodel logic (NOTE: is this even necessary or feasible with Mocking?).
-
-- [ ] Create installer/uninstaller.
-
-- README
-	- [ ] Add demo pics.
