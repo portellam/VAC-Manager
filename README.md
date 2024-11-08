@@ -25,11 +25,11 @@ with Microsoft Windows XP SP3 to 10/11.
 Microsoft Windows.
 - Examples include (but not limited to):
   * audio broadcaster setup.
-  * video game session recording/stream setup.<sup>[A]</sup>
+  * video game session recording/stream setup.<sup>[**1**]</sup>
 - Turnkey solution, no tedious work of opening or closing instances of VAC
 audio repeater.
 
-**\*** Given three audio sources, a local microphone, incoming voice chat audio,
+**[1]** Given three audio sources, a local microphone, incoming voice chat audio,
 and game audio. Record each source as separate audio streams, and allow the user
 to only listen to the latter two audio sources (and not his/her own voice).
 
@@ -41,9 +41,9 @@ to only listen to the latter two audio sources (and not his/her own voice).
 
 ## 3. Requirements
 - [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
-- [VAC Control Panel](https://vac.muzychenko.net/en/download.htm)<sup>[**\***]</sup>
+- [VAC Control Panel](https://vac.muzychenko.net/en/download.htm)<sup>[**1**]</sup>
 
-**\*** A minimum of one (1) "virtual audio cable" or input-and-output pair to faciliate
+**[1]** A minimum of one (1) "virtual audio cable" or input-and-output pair to faciliate
 [Mutiplexing](#1-multiplexing). Example: virtual Line In 1 > physical Line out(s).
 
 ### 3.1. Operating System Requirements
