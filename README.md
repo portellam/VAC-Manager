@@ -47,7 +47,7 @@ A. A minimum of one (1) "virtual audio cable" or input-and-output pair to facili
 [Mutiplexing](#1-multiplexing). Example: virtual Line In 1 > physical Line out(s).
 
 ### 3.1. Operating System Requirements
-| Minimum Required Microsoft Windows version | CPU architecture | .NET version  |
+| Minimum OS version                         | CPU architecture | .NET version  |
 | :---                                       | :---:            | :---:         |
 | Windows 10 ver. 1809 or Server 2019        | 32-bit or 64-bit | 8.0		  	    |
 | Windows 7 SP1 or Server 2008 R2            | 32-bit or 64-bit | Framework 4.8 |
