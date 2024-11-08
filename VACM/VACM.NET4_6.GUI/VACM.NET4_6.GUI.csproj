@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4B94DAB6-717D-4713-919D-ED7A73A5E39A}</ProjectGuid>
+    <ProjectGuid>{123DF575-D7E0-45E9-B8E1-C727779F2E35}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>VACM.NET4_6.GUI</RootNamespace>
     <AssemblyName>VACM.NET4_6.GUI</AssemblyName>

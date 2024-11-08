@@ -4,17 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{89577933-445E-485E-9885-D5E05B925372}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VACM.NET4_6.Extensions</RootNamespace>
-    <AssemblyName>VACM.NET4_6.Extensions</AssemblyName>
+    <ProjectGuid>{58534C08-7F22-4EF1-823A-BC0258455119}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>VACM.NET4_6.CLI</RootNamespace>
+    <AssemblyName>VACM.NET4_6.CLI</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,13 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,20 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorExtension.cs" />
-    <Compile Include="ColorTable\DarkColorTable.cs" />
-    <Compile Include="DialogCenteringService.cs" />
-    <Compile Include="FormColorUpdater.cs" />
-    <Compile Include="LightThemeValidator.cs" />
-    <Compile Include="MessageBoxWrapper.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyValueChanged\PropertyValueChangedDelegate.cs" />
-    <Compile Include="PropertyValueChanged\PropertyValueChangedEventArgs.cs" />
-    <Compile Include="RegistryKeyChanged\RegistryKeyChangedDelegate.cs" />
-    <Compile Include="RegistryKeyChanged\RegistrySubKeyChangedEventArgs.cs" />
-    <Compile Include="RegistryKeyPropertyGetter.cs" />
-    <Compile Include="Renderer\ToolStripDarkRenderer.cs" />
-    <Compile Include="WMIRegistryEventListener.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
