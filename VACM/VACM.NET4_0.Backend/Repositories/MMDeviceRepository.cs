@@ -1,13 +1,16 @@
 ﻿using NAudio.CoreAudioApi;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace VACM.NET4_0.Backend.Repositories
 {
-  public class MMDeviceRepository
+  public class MMDeviceRepository : IMMDeviceRepository
   {
     #region Parameters
+
+    public event PropertyChangedEventHandler PropertyChanged;
 
     /// <summary>
     /// The list of actual devices.
@@ -15,7 +18,7 @@ namespace VACM.NET4_0.Backend.Repositories
     private List<MMDevice> MMDeviceList;
 
     /// <summary>
-    /// The collection of actual devices.
+    /// The enumerator of actual devices.
     /// </summary>
     private MMDeviceEnumerator mMDeviceEnumerator;
 
@@ -31,14 +34,14 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       mMDeviceEnumerator = new MMDeviceEnumerator();
 
-      SetMMDeviceList();
+      SetList();
     }
 
     /// <summary>
-    /// Disable MMDevice.
+    /// Disable an actual device.
     /// </summary>
-    /// <param name="mMDevice">the MMDevice</param>
-    private void DisableMMDevice(MMDevice mMDevice)
+    /// <param name="mMDevice">the actual device</param>
+    private void Disable(MMDevice mMDevice)
     {
       if (
           mMDevice is null
@@ -62,41 +65,10 @@ namespace VACM.NET4_0.Backend.Repositories
     }
 
     /// <summary>
-    /// Get MMDevice.
+    /// Enable an actual device.
     /// </summary>
-    /// <param name="id">the MMDevice ID to get</param>
-    /// <returns>The MMDevice.</returns>
-    public MMDevice GetMMDevice(string id)
-    {
-      if (string.IsNullOrEmpty(id))
-      {
-        return null;
-      }
-
-      return MMDeviceList
-        .FirstOrDefault(x => x.ID == id);
-    }
-
-    /// <summary>
-    /// Disable MMDevice.
-    /// </summary>
-    /// <param name="id">the MMDevice ID to disable</param>
-    public void DisableDevice(string id)
-    {
-      if (string.IsNullOrEmpty(id))
-      {
-        return;
-      }
-
-      MMDevice mMDevice = GetMMDevice(id);
-      DisableMMDevice(mMDevice);
-    }
-
-    /// <summary>
-    /// Enable MMDevice.
-    /// </summary>
-    /// <param name="mMDevice">the MMDevice to enable</param>
-    private void EnableMMDevice(MMDevice mMDevice)
+    /// <param name="mMDevice">the actual device</param>
+    private void Enable(MMDevice mMDevice)
     {
       if (
           mMDevice is null
@@ -116,24 +88,103 @@ namespace VACM.NET4_0.Backend.Repositories
     }
 
     /// <summary>
-    /// Enable MMDevice.
+    /// Logs event when property has changed.
     /// </summary>
-    /// <param name="id">the MMDevice ID to enable</param>
-    public void EnableDevice(string id)
+    /// <param name="propertyName">The property name</param>
+    private void OnPropertyChanged(string propertyName)
+    {
+      PropertyChanged?.Invoke
+        (
+          this,
+          new PropertyChangedEventArgs(propertyName)
+        );
+    }
+
+    /// <summary>
+    /// Get an actual device.
+    /// </summary>
+    /// <param name="id">the actual device ID</param>
+    /// <returns>The actual device.</returns>
+    public MMDevice Get(string id)
+    {
+      if (string.IsNullOrEmpty(id))
+      {
+        return null;
+      }
+
+      return MMDeviceList
+        .FirstOrDefault(x => x.ID == id);
+    }
+
+    /// <summary>
+    /// Get a list of actual devices.
+    /// </summary>
+    /// <param name="idList">the actual device ID list</param>
+    /// <returns>A list of actual devices.</returns>
+    public List<MMDevice> GetRange(List<string> idList)
+    {
+      if
+      (
+        idList is null
+        || idList.Count == 0
+        || MMDeviceList is null
+        || MMDeviceList.Count == 0
+      )
+      {
+        return null;
+      }
+
+      List<MMDevice> mMDeviceList = new List<MMDevice>();
+
+      idList
+        .ForEach
+        (
+          id =>
+          mMDeviceList
+            .Add
+            (
+              MMDeviceList
+                .FirstOrDefault(y => y.ID == id)
+            )
+        );
+
+      return mMDeviceList;
+    }
+
+    /// <summary>
+    /// Disable an actual device.
+    /// </summary>
+    /// <param name="id">the actual device ID</param>
+    public void Disable(string id)
     {
       if (string.IsNullOrEmpty(id))
       {
         return;
       }
 
-      MMDevice mMDevice = GetMMDevice(id);
-      EnableMMDevice(mMDevice);
+      MMDevice mMDevice = Get(id);
+      Disable(mMDevice);
     }
 
     /// <summary>
-    /// Set the MMDevice list.
+    /// Enable an actual device.
     /// </summary>
-    public void SetMMDeviceList()
+    /// <param name="id">the actual device ID</param>
+    public void Enable(string id)
+    {
+      if (string.IsNullOrEmpty(id))
+      {
+        return;
+      }
+
+      MMDevice mMDevice = Get(id);
+      Enable(mMDevice);
+    }
+
+    /// <summary>
+    /// Set the actual device list.
+    /// </summary>
+    public void SetList()
     {
       MMDeviceList = mMDeviceEnumerator
         .EnumerateAudioEndPoints
