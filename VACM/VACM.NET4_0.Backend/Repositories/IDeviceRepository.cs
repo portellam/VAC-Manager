@@ -7,13 +7,20 @@ namespace VACM.NET4_0.Backend.Repositories
 {
   public interface IDeviceRepository
   {
+    #region Parameters
+
+    event PropertyChangedEventHandler PropertyChanged;
+    IEnumerable<DeviceModel> DeviceModelIEnumerable { get; set; }
+
+    #endregion
+
+    #region Logic
+
     bool InsertActual(DeviceModel deviceModel);
     bool RemoveActual(DeviceModel deviceModel);
     bool UpdateActual(DeviceModel deviceModel);
     DeviceModel Get(string actualId);
     DeviceModel Get(int deviceModelId);
-    event PropertyChangedEventHandler PropertyChanged;
-    IEnumerable<DeviceModel> DeviceModelIEnumerable { get; set; }
     IEnumerable<DeviceModel> GetAllAbsent();
     IEnumerable<DeviceModel> GetAll();
     IEnumerable<DeviceModel> GetAllInput();
@@ -60,5 +67,7 @@ namespace VACM.NET4_0.Backend.Repositories
       bool? isOutput,
       bool? isPresent
     );
+
+    #endregion
   }
 }
