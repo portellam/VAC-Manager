@@ -10,57 +10,43 @@ namespace VACM.NET4_0.Backend.Repositories
     #region Parameters
 
     event PropertyChangedEventHandler PropertyChanged;
-    IEnumerable<DeviceModel> DeviceModelIEnumerable { get; set; }
+    IList<DeviceModel> DeviceModelIList { get; set; }
 
     #endregion
 
     #region Logic
 
-    bool InsertActual(DeviceModel deviceModel);
-    bool RemoveActual(DeviceModel deviceModel);
-    bool UpdateActual(DeviceModel deviceModel);
     DeviceModel Get(string actualId);
-    DeviceModel Get(int deviceModelId);
-    IEnumerable<DeviceModel> GetAllAbsent();
-    IEnumerable<DeviceModel> GetAll();
-    IEnumerable<DeviceModel> GetAllInput();
-    IEnumerable<DeviceModel> GetAllOutput();
-    IEnumerable<DeviceModel> GetAllPresent();
-    IEnumerable<DeviceModel> GetAllSelected();
-    MMDevice GetActual(string actualId);
-    IEnumerable<MMDevice> GetActualRange(List<string> actualIdList);
-    void DisableActual(string actualId);
-    void EnableActual(string actualId);
-    
+    DeviceModel Get(int? id);
+    List<DeviceModel> GetAllAbsent();
+    List<DeviceModel> GetAll();
+    List<DeviceModel> GetAllInput();
+    List<DeviceModel> GetAllOutput();
+    List<DeviceModel> GetAllPresent();
+    void Insert(MMDevice mMDevice);
+
     void Insert
     (
-      int Id,
       string actualId,
       string name,
-      bool isInput,
-      bool isOutput,
+      bool? isInput,
+      bool? isOutput,
       bool? isPresent
     );
 
     void Remove
     (
-      int Id
+      int? Id
     );
 
     void Remove
     (
-      string actualId
-    );
-
-    void Remove
-    (
-      int Id,
       string actualId
     );
 
     void Update
     (
-      int Id,
+      int? id,
       string actualId,
       string name,
       bool? isInput,
