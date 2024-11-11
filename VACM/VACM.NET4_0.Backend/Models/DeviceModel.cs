@@ -9,14 +9,17 @@ namespace VACM.NET4_0.Backend.Models
   {
     #region Parameters
 
-    private int id;
+    private uint id;
+    private string actualId;
     private bool? isInput;
     private bool? isOutput;
     private bool? isPresent;
-    private string actualId;
     private string name;
 
-    public int Id
+    /// <summary>
+    /// Primary Key
+    /// </summary>
+    public uint Id
     {
       get
       {
@@ -26,6 +29,22 @@ namespace VACM.NET4_0.Backend.Models
       {
         id = value;
         OnPropertyChanged(nameof(id));
+      }
+    }
+
+    /// <summary>
+    /// Foreign key
+    /// </summary>
+    public string ActualId
+    {
+      get
+      {
+        return actualId;
+      }
+      set
+      {
+        actualId = value;
+        OnPropertyChanged(nameof(actualId));
       }
     }
 
@@ -93,19 +112,6 @@ namespace VACM.NET4_0.Backend.Models
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    public string ActualId
-    {
-      get
-      {
-        return actualId;
-      }
-      set
-      {
-        actualId = value;
-        OnPropertyChanged(nameof(actualId));
-      }
-    }
-
     public string Name
     {
       get
@@ -131,7 +137,7 @@ namespace VACM.NET4_0.Backend.Models
     [ExcludeFromCodeCoverage]
     public DeviceModel
     (
-      int id,
+      uint id,
       MMDevice mMDevice
     )
     {
@@ -155,7 +161,7 @@ namespace VACM.NET4_0.Backend.Models
     [ExcludeFromCodeCoverage]
     public DeviceModel
     (
-      int id,
+      uint id,
       string actualId,
       string name,
       bool? isInput,
