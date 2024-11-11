@@ -71,7 +71,14 @@
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\RepeaterController.cs" />
     <Compile Include="Models\DeviceModel.cs" />
+    <Compile Include="Models\IDeviceModel.cs" />
+    <Compile Include="Models\IRepositoryModel.cs" />
+    <Compile Include="Models\MMDeviceOverride.cs" />
     <Compile Include="Models\RepeaterModel.cs" />
+    <Compile Include="Repositories\IDeviceRepository.cs" />
+    <Compile Include="Repositories\IMMDeviceRepository.cs" />
+    <Compile Include="Repositories\IRepeaterRepository.cs" />
+    <Compile Include="Repositories\MMDeviceRepository.cs" />
     <Compile Include="Repositories\DeviceRepository.cs" />
     <Compile Include="Repositories\RepeaterRepository.cs" />
     <Compile Include="Structs\Channel.cs" />
