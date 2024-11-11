@@ -120,6 +120,7 @@ namespace VACM.NET4_0.Backend.Repositories
           new PropertyChangedEventArgs(propertyName)
         );
     }
+
     public DeviceModel Get(int? id)
     {
       if
@@ -135,6 +136,7 @@ namespace VACM.NET4_0.Backend.Repositories
         deviceModelHashSet
           .FirstOrDefault(x => x.Id == id);
     }
+
     public DeviceModel Get(string actualId)
     {
       if (string.IsNullOrWhiteSpace(actualId))
