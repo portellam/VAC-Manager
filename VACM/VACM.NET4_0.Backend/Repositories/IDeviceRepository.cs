@@ -10,7 +10,6 @@ namespace VACM.NET4_0.Backend.Repositories
     #region Parameters
 
     event PropertyChangedEventHandler PropertyChanged;
-    IList<DeviceModel> DeviceModelIList { get; set; }
 
     #endregion
 
