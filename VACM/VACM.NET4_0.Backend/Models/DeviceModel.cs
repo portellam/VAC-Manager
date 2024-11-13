@@ -5,7 +5,7 @@ using VACM.NET4_0.Backend.Structs;
 
 namespace VACM.NET4_0.Backend.Models
 {
-  public class DeviceModel : IDeviceModel
+  public class DeviceModel : IDeviceModel, INotifyPropertyChanged
   {
     #region Parameters
 
