@@ -1,5 +1,4 @@
-﻿using AudioSwitcher.AudioApi.CoreAudio;
-using NAudio.CoreAudioApi;
+﻿using NAudio.CoreAudioApi;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,7 +35,6 @@ namespace VACM.NET4_0.Backend.Repositories
     [ExcludeFromCodeCoverage]
     public MMDeviceRepository()
     {
-      coreAudioController = new CoreAudioController();
       mMDeviceEnumerator = new MMDeviceEnumerator();
       Update();
     }
@@ -222,28 +220,6 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       MMDevice mMDevice = Get(id);
       Enable(mMDevice);
-    }
-
-    /// <summary>
-    /// Set the actual device as default (for its dataflow).
-    /// </summary>
-    /// <param name="id">the actual device ID</param>
-    public void SetAsDefault(string id)   //TODO: implement!
-    {
-      MMDevice mMDevice = Get(id);
-
-      if (mMDevice is null)
-      {
-        return;
-      }
-
-      CoreAudioDevice coreAudioDevice = coreAudioController
-        .GetAudioDevice
-        (
-          Guid.Parse(id)
-        );
-
-      coreAudioDevice.SetAsDefault(); //TODO: make as async?
     }
 
     /// <summary>
