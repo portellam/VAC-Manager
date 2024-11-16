@@ -24,5 +24,19 @@ namespace VACM.NET4_0.Backend.Models
     string Name { get; set; }
 
     #endregion
+
+    #region Logic
+
+    void Deconstruct
+    (
+      out uint id,
+      out string actualId,
+      out string name,
+      out bool? isInput,
+      out bool? isOutput,
+      out bool? isPresent
+    );
+
+    #endregion
   }
 }

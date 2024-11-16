@@ -5,7 +5,9 @@ using VACM.NET4_0.Backend.Structs;
 
 namespace VACM.NET4_0.Backend.Models
 {
-  public class DeviceModel : IDeviceModel, INotifyPropertyChanged
+  public class DeviceModel :
+    IDeviceModel,
+    INotifyPropertyChanged
   {
     #region Parameters
 
@@ -145,7 +147,7 @@ namespace VACM.NET4_0.Backend.Models
       ActualId = mMDevice.ID;
       Name = mMDevice.FriendlyName;
       IsInput = mMDevice.DataFlow == DataFlow.Capture;
-      IsOutput =  mMDevice.DataFlow == DataFlow.Capture;
+      IsOutput = mMDevice.DataFlow == DataFlow.Capture;
       IsPresent = IsNotAbsent(mMDevice.State);
     }
 
@@ -175,6 +177,34 @@ namespace VACM.NET4_0.Backend.Models
       IsInput = isInput.Value;
       IsOutput = isOutput.Value;
       IsPresent = isPresent.Value;
+    }
+
+    /// <summary>
+    /// Deconstructor
+    /// </summary>
+    /// <param name="id">The device ID</param>
+    /// <param name="actualId">The actual device ID</param>
+    /// <param name="name">The device name</param>
+    /// <param name="isInput">True/false is an input device</param>
+    /// <param name="isOutput">True/false is an output device</param>
+    /// <param name="isPresent">True/false is the device present</param>
+    [ExcludeFromCodeCoverage]
+    public void Deconstruct
+    (
+      out uint id,
+      out string actualId,
+      out string name,
+      out bool? isInput,
+      out bool? isOutput,
+      out bool? isPresent
+    )
+    {
+      id = Id;
+      actualId = ActualId;
+      name = Name;
+      isInput = IsInput;
+      isOutput = IsOutput;
+      isPresent = IsPresent;
     }
 
     /// <summary>
