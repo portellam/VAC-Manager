@@ -16,12 +16,14 @@ namespace VACM.NET4_0.Backend.Repositories
     #region Logic
 
     DeviceModel Get(string actualId);
-    DeviceModel Get(int? id);
+    DeviceModel Get(uint? id);
     List<DeviceModel> GetAllAbsent();
     List<DeviceModel> GetAll();
     List<DeviceModel> GetAllInput();
     List<DeviceModel> GetAllOutput();
     List<DeviceModel> GetAllPresent();
+    List<DeviceModel> GetRange(List<string> actualIdList);
+    List<DeviceModel> GetRange(List<uint?> idList);
     void Insert(MMDevice mMDevice);
 
     void Insert
@@ -35,7 +37,7 @@ namespace VACM.NET4_0.Backend.Repositories
 
     void Remove
     (
-      int? Id
+      uint? Id
     );
 
     void Remove
@@ -45,7 +47,13 @@ namespace VACM.NET4_0.Backend.Repositories
 
     void Update
     (
-      int? id,
+      uint? id,
+      MMDevice mMDevice
+    );
+
+    void Update
+    (
+      uint? id,
       string actualId,
       string name,
       bool? isInput,
