@@ -9,7 +9,9 @@ using VACM.NET4_0.Backend.Structs;
 
 namespace VACM.NET4_0.Backend.Models
 {
-  public class RepeaterModel : INotifyPropertyChanged
+  public class RepeaterModel :
+    INotifyPropertyChanged,
+    IRepeaterModel
   {
     /*
      * NEW TODO:
@@ -32,28 +34,85 @@ namespace VACM.NET4_0.Backend.Models
      *      after exit of GUI.
      */
 
-    #region Parameters
 
-    public int Id { get; private set; }
-
-    private byte bitsPerSample;
-    private byte buffers;
-    private byte prefill;
-    private byte resyncAt;
-    private ChannelConfig channelConfig;
-    private string pathName;
-    private string windowName;
-    private uint samplingRate;
-    private ushort bufferMs;
+    #region Default Parameters
 
     public byte defaultBitsPerSample = BitsPerSampleOptions[2];
     public byte defaultBufferAmount = BufferOptions[2];
     public byte defaultPrefillPercentage = PrefillOptions[2];
     public byte defaultResyncAtPercentage = ResyncAtOptions[3];
-    public string defaultPathName = Common.ExpectedExecutableFullPath;
+    //public string defaultPathName = Common.ExpectedExecutableFullPath; //FIXME
     public string defaultWindowName = "{0} to {1}";
-    public uint defaultSamplingRateKHz = SamplingRateOptions[5];
+    public uint defaultSampleRateKHz = SamplingRateOptions[5];
     public ushort defaultBufferDurationMs = BufferMsOptions[2];
+
+    #endregion
+
+    #region Parameters
+
+    private uint id;
+    private uint inputDeviceId;
+    private uint outputDeviceId;
+    private byte bitsPerSample;
+    private byte bufferAmount;
+    private byte prefillPercentage;
+    private byte resyncAtPercentage;
+    private ChannelConfig channelConfig;
+    private List<Channel> channelList;
+    private string inputDeviceName;
+    private string outputDeviceName;
+    private string pathName;
+    private string windowName;
+    private uint sampleRateKHz;
+    private ushort bufferDurationMs;
+
+    /// <summary>
+    /// Primary Key
+    /// </summary>
+    public uint Id
+    {
+      get
+      {
+        return id;
+      }
+      set
+      {
+        id = value;
+        OnPropertyChanged(nameof(Id));
+      }
+    }
+
+    /// <summary>
+    /// Foreign key
+    /// </summary>
+    public uint InputDeviceId
+    {
+      get
+      {
+        return inputDeviceId;
+      }
+      set
+      {
+        inputDeviceId = value;
+        OnPropertyChanged(nameof(InputDeviceId));
+      }
+    }
+
+    /// <summary>
+    /// Foreign key
+    /// </summary>
+    public uint OutputDeviceId
+    {
+      get
+      {
+        return outputDeviceId;
+      }
+      set
+      {
+        outputDeviceId = value;
+        OnPropertyChanged(nameof(OutputDeviceId));
+      }
+    }
 
     public ChannelConfig ChannelConfig
     {
@@ -74,19 +133,18 @@ namespace VACM.NET4_0.Backend.Models
       }
     }
 
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    /// TODO: determine what this does?
     public IEnumerable<ChannelConfig> ChannelConfigEnum
     {
       get
       {
-        return Enum.GetValues(typeof(ChannelConfig))
-            .Cast<ChannelConfig>();
+        return Enum
+          .GetValues(typeof(ChannelConfig))
+          .Cast<ChannelConfig>();
       }
     }
-
-    public DeviceModel InputDeviceModel { get; private set; }
-    public DeviceModel OutputDeviceModel { get; private set; }
-
-    public event PropertyChangedEventHandler PropertyChanged;
 
     /// <summary>
     /// The amount of bits per sample.
@@ -99,8 +157,11 @@ namespace VACM.NET4_0.Backend.Models
       }
       set
       {
-        if (value >= 8
-            && value <= 32)
+        if
+        (
+          value >= 8
+          && value <= 32
+        )
         {
           bitsPerSample = value;
         }
@@ -120,18 +181,21 @@ namespace VACM.NET4_0.Backend.Models
     {
       get
       {
-        return buffers;
+        return bufferAmount;
       }
       set
       {
-        if (value >= 1
-            && value <= byte.MaxValue)
+        if
+        (
+          value >= 1
+          && value <= byte.MaxValue
+        )
         {
-          buffers = value;
+          bufferAmount = value;
         }
         else
         {
-          buffers = 8;
+          bufferAmount = 8;
         }
 
         OnPropertyChanged(nameof(BufferAmount));
@@ -162,18 +226,21 @@ namespace VACM.NET4_0.Backend.Models
     {
       get
       {
-        return prefill;
+        return prefillPercentage;
       }
       set
       {
-        if (value >= PrefillOptions.FirstOrDefault()
-            && value <= PrefillOptions.Last())
+        if
+        (
+          value >= PrefillOptions.FirstOrDefault()
+          && value <= PrefillOptions.Last()
+        )
         {
-          prefill = value;
+          prefillPercentage = value;
         }
         else
         {
-          prefill = 50;
+          prefillPercentage = 50;
         }
 
         OnPropertyChanged(nameof(PrefillPercentage));
@@ -188,18 +255,22 @@ namespace VACM.NET4_0.Backend.Models
     {
       get
       {
-        return resyncAt;
+        return resyncAtPercentage;
       }
       set
       {
-        if (value >= 0
-            && value < prefill)
+        if
+        (
+          value >= 0
+          && value < prefillPercentage
+        )
         {
-          resyncAt = value;
+          resyncAtPercentage = value;
         }
         else
         {
-          resyncAt = (byte)Math.Round((double)(prefill / 2));
+          resyncAtPercentage = (byte)Math
+            .Round((double)(prefillPercentage / 2));
         }
 
         OnPropertyChanged(nameof(ResyncAtPercentage));
@@ -209,37 +280,58 @@ namespace VACM.NET4_0.Backend.Models
     /// <summary>
     /// The individual Channels available to the repeater, given the Channel layout.
     /// </summary>
-    public List<Channel> ChannelList;
-
-    /// <summary>
-    /// The input devices's display name.
-    /// </summary>
-    public string Input
+    public List<Channel> ChannelList
     {
       get
       {
-        if (InputDeviceModel.Name.Length > 31)
-        {
-          return InputDeviceModel.Name.Substring(0, 31);
-        }
-
-        return InputDeviceModel.Name;
+        return channelList;
+      }
+      set
+      {
+        channelList = value;
+        OnPropertyChanged(nameof(ChannelList));
       }
     }
 
     /// <summary>
-    /// The output device's display name.
+    /// The input device name.
     /// </summary>
-    public string Output
+    public string InputDeviceName
     {
       get
       {
-        if (InputDeviceModel.Name.Length > 31)
+        return inputDeviceName;
+      }
+      set
+      {
+        if (value.Length > 31)
         {
-          return InputDeviceModel.Name.Substring(0, 31);
+          value = value.Substring(0, 31);
         }
 
-        return InputDeviceModel.Name;
+        inputDeviceName = value;
+        OnPropertyChanged(nameof(InputDeviceName));
+      }
+    }
+
+    /// <summary>
+    /// The output device name.
+    /// </summary>
+    public string OutputDeviceName
+    {
+      get
+      {
+        return outputDeviceName;
+      }
+      set
+      {
+        if (value.Length > 31)
+        {
+          value = value.Substring(0, 31);
+        }
+
+        OutputDeviceName = value;
+        OnPropertyChanged(nameof(OutputDeviceName));
       }
     }
 
@@ -256,7 +348,11 @@ namespace VACM.NET4_0.Backend.Models
       {
         if (!File.Exists(value))
         {
-          return;
+          pathName = string.Empty;
+        }
+        else
+        {
+          pathName = value;
         }
 
         pathName = value;
@@ -275,7 +371,17 @@ namespace VACM.NET4_0.Backend.Models
       }
       set
       {
-        windowName = value.Replace("{0}", Input).Replace("{1}", Output);
+        windowName = value
+          .Replace
+          (
+            "{0}",
+            InputDeviceName
+          ).Replace
+          (
+            "{1}",
+            OutputDeviceName
+          );
+
         OnPropertyChanged(nameof(WindowName));
       }
     }
@@ -310,7 +416,7 @@ namespace VACM.NET4_0.Backend.Models
         }
 
         uint bit = 1;
-        List<Channel> newChannels = new List<Channel>();
+        List<Channel> newChanneList = new List<Channel>();
 
         while (value != 0)
         {
@@ -318,15 +424,15 @@ namespace VACM.NET4_0.Backend.Models
 
           if (digit > 0)
           {
-            newChannels.Add(
-                (Channel)digit);
+            newChanneList
+              .Add((Channel)digit);
           }
 
           value -= digit;
           bit <<= 1;
         }
 
-        ChannelList = newChannels;
+        ChannelList = newChanneList;
         OnPropertyChanged(nameof(ChannelMask));
       }
     }
@@ -334,25 +440,28 @@ namespace VACM.NET4_0.Backend.Models
     /// <summary>
     /// The sampling rate in KiloHertz.
     /// </summary>
-    public uint SamplingRateKHz
+    public uint SampleRateKHz
     {
       get
       {
-        return samplingRate;
+        return sampleRateKHz;
       }
       set
       {
-        if (value >= SamplingRateOptions.FirstOrDefault()
-            && value <= SamplingRateOptions.Last())
+        if
+        (
+          value >= SamplingRateOptions.FirstOrDefault()
+          && value <= SamplingRateOptions.Last()
+        )
         {
-          samplingRate = value;
+          sampleRateKHz = value;
         }
         else
         {
-          samplingRate = 48000;
+          sampleRateKHz = 48000;
         }
 
-        OnPropertyChanged(nameof(SamplingRateKHz));
+        OnPropertyChanged(nameof(SampleRateKHz));
       }
     }
 
@@ -363,18 +472,21 @@ namespace VACM.NET4_0.Backend.Models
     {
       get
       {
-        return bufferMs;
+        return bufferDurationMs;
       }
       set
       {
-        if (value >= 1
-            && value <= ushort.MaxValue)
+        if
+        (
+          value >= 1
+          && value <= ushort.MaxValue
+        )
         {
-          bufferMs = value;
+          bufferDurationMs = value;
         }
         else
         {
-          bufferMs = 500;
+          bufferDurationMs = 500;
         }
 
         OnPropertyChanged(nameof(BufferDurationMs));
@@ -393,7 +505,7 @@ namespace VACM.NET4_0.Backend.Models
         nameof(ChannelMask),
         nameof(PrefillPercentage),
         nameof(ResyncAtPercentage),
-        nameof(SamplingRateKHz)
+        nameof(SampleRateKHz)
       };
 
     /// <summary>
@@ -513,27 +625,88 @@ namespace VACM.NET4_0.Backend.Models
     /// <summary>
     /// Constructor
     /// </summary>
-    /// <param name="inputDeviceModel">The input device model</param>
-    /// <param name="outputDeviceModel">The output device model</param>
+    /// <param name="id">The repeater ID</param>
+    /// <param name="inputDeviceId">The input device ID</param>
+    /// <param name="outputDeviceId">The output device ID</param>
     [ExcludeFromCodeCoverage]
     public RepeaterModel
-      (
-        DeviceModel inputDeviceModel,
-        DeviceModel outputDeviceModel
-      )
+    (
+      uint id,
+      uint inputDeviceId,
+      uint outputDeviceId
+    )
     {
+
+      InputDeviceId = inputDeviceId;
+      OutputDeviceId = outputDeviceId;
       BitsPerSample = defaultBitsPerSample;
       BufferDurationMs = defaultBufferDurationMs;
       BufferAmount = defaultBufferAmount;
       ChannelConfig = channelConfig;
-      InputDeviceModel = inputDeviceModel;
-      OutputDeviceModel = outputDeviceModel;
-      PathName = defaultPathName;
+      PathName = pathName;
       PrefillPercentage = defaultPrefillPercentage;
       ResyncAtPercentage = defaultResyncAtPercentage;
-      SamplingRateKHz = defaultSamplingRateKHz;
+      SampleRateKHz = defaultSampleRateKHz;
       WindowName = defaultWindowName;
     }
+
+    /// <summary>
+    /// Deconstructor
+    /// </summary>
+    /// <param name="id">The repeater ID</param>
+    /// <param name="inputDeviceId">The input device ID</param>
+    /// <param name="outputDeviceId">The output device ID</param>
+    /// <param name="bitsPerSample">The amount of bits per sample</param>
+    /// <param name="bufferAmount">The buffer amount</param>
+    /// <param name="bufferDurationMs">The buffer duration in milliseconds</param>
+    /// <param name="channelList">The channel list</param>
+    /// <param name="channelMask">The channel mask</param>
+    /// <param name="pathName">The path name</param>
+    /// <param name="prefillPercentage">The prefill percentage</param>
+    /// <param name="propertyList">The property list</param>
+    /// <param name="resyncAtPercentage">The resync at percentage</param>
+    /// <param name="sampleRateKHz">The sample rate in KiloHertz</param>
+    /// <param name="windowName">The window name</param>
+    [ExcludeFromCodeCoverage]
+    public void Deconstruct
+    (
+      out uint id,
+      out uint inputDeviceId,
+      out uint outputDeviceId,
+      out byte bitsPerSample,
+      out byte bufferAmount,
+      out ushort bufferDurationMs,
+      out List<Channel> channelList,
+      out uint channelMask,
+      out string pathName,
+      out byte prefillPercentage,
+      out List<string> propertyList,
+      out byte resyncAtPercentage,
+      out uint sampleRateKHz,
+      out string windowName
+    )
+    {
+      id = Id;
+      inputDeviceId = InputDeviceId;
+      outputDeviceId = OutputDeviceId;
+      bitsPerSample = BitsPerSample;
+      bufferDurationMs = BufferDurationMs;
+      bufferAmount = BufferAmount;
+      channelConfig = ChannelConfig;
+      channelList = ChannelList;
+      channelMask = ChannelMask;
+      pathName = PathName;
+      prefillPercentage = PrefillPercentage;
+      propertyList = PropertyList;
+      resyncAtPercentage = ResyncAtPercentage;
+      sampleRateKHz = SampleRateKHz;
+      windowName = WindowName;
+    }
+
+    //~RepeaterModel()
+    //{
+    //  //destruct
+    //}
 
     /// <summary>
     /// Logs event when property has changed.
@@ -558,9 +731,9 @@ namespace VACM.NET4_0.Backend.Models
       return
         $"start " +
         $"/min \"audiorepeater\" \"{PathName}\" " +
-        $"/Input:\"{Input}\" " +
-        $"/Output:\"{Output}\" " +
-        $"/SamplingRate:{SamplingRateKHz} " +
+        $"/Input:\"{InputDeviceName}\" " +
+        $"/Output:\"{OutputDeviceName}\" " +
+        $"/SamplingRate:{SampleRateKHz} " +
         $"/BitsPerSample:{BitsPerSample} " +
         $"/Channels:{ChannelList.Count} " +
         $"/ChanCfg:custom={ChannelMask} " +
@@ -572,13 +745,13 @@ namespace VACM.NET4_0.Backend.Models
     }
 
     /// <summary>
-    /// Compiles output for a canvas graph file.
+    /// Compiles output to save to text file.
     /// </summary>
     /// <returns>The output</returns>
-    public string ToSaveData()
+    public override string ToString()
     {
       return
-        $"{SamplingRateKHz}\n" +
+        $"{SampleRateKHz}\n" +
         $"{BitsPerSample}\n" +
         $"{ChannelMask}\n" +
         $"{(int)ChannelConfig}\n" +
@@ -589,24 +762,34 @@ namespace VACM.NET4_0.Backend.Models
     }
 
     /// <summary>
-    /// Sets the Constructor properties.
+    /// Set properties.
     /// </summary>
     /// <param name="infoList">The info list</param>
-    public void SetConstructorProperties(List<string> infoList)
+    public void Set(List<string> infoList)
     {
-      if (infoList is null)
+      if
+      (
+        infoList is null
+        || !byte.TryParse(infoList[5], out byte bitsPerSample)
+        || !ushort.TryParse(infoList[4], out ushort bufferDurationMs)
+        || !int.TryParse(infoList[3], out int channelConfig)
+        || !uint.TryParse(infoList[2], out uint channelMask)
+        || !byte.TryParse(infoList[6], out byte prefillPercentage)
+        || !byte.TryParse(infoList[7], out byte resyncAtPercentage)
+        || !uint.TryParse(infoList[0], out uint samplingRateKHz)
+      )
       {
         return;
       }
 
-      BitsPerSample = byte.Parse(infoList[1]);
-      BufferAmount = byte.Parse(infoList[5]);
-      BufferDurationMs = ushort.Parse(infoList[4]);
-      ChannelConfig = (ChannelConfig)int.Parse(infoList[3]);
-      ChannelMask = uint.Parse(infoList[2]);
-      PrefillPercentage = byte.Parse(infoList[6]);
-      ResyncAtPercentage = byte.Parse(infoList[7]);
-      SamplingRateKHz = uint.Parse(infoList[0]);
+      BitsPerSample = bitsPerSample;
+      BufferAmount = bitsPerSample;
+      BufferDurationMs = bufferDurationMs;
+      ChannelConfig = (ChannelConfig)channelConfig;
+      ChannelMask = channelMask;
+      PrefillPercentage = prefillPercentage;
+      ResyncAtPercentage = resyncAtPercentage;
+      SampleRateKHz = samplingRateKHz;
     }
 
     #endregion
