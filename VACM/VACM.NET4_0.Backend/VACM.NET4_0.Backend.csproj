@@ -35,20 +35,15 @@
     <StartupObject>VACM.NET4_0.Backend.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ConsoleControl, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7edd23586f5e297f, processorArchitecture=MSIL">
-      <HintPath>..\packages\ConsoleControl.1.3.0\lib\net40-client\ConsoleControl.dll</HintPath>
+    <Reference Include="AudioSwitcher.AudioApi, Version=1.1.0.0, Culture=neutral, PublicKeyToken=5d3d81ef23a33a3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AudioSwitcher.AudioApi.CoreAudio.1.1.8\lib\net40\AudioSwitcher.AudioApi.dll</HintPath>
     </Reference>
-    <Reference Include="ConsoleControlAPI, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7c86b8a36b9c33e2, processorArchitecture=MSIL">
-      <HintPath>..\packages\ConsoleControlAPI.1.3.0\lib\net40\ConsoleControlAPI.dll</HintPath>
+    <Reference Include="AudioSwitcher.AudioApi.CoreAudio, Version=1.1.8.0, Culture=neutral, PublicKeyToken=5d3d81ef23a33a3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AudioSwitcher.AudioApi.CoreAudio.1.1.8\lib\net40\AudioSwitcher.AudioApi.CoreAudio.dll</HintPath>
     </Reference>
     <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
-    <Reference Include="PagedControl, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PagedControl.2.2.0\lib\net35\PagedControl.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -56,24 +51,20 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TabControl, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TabControl.2.1.2\lib\net35\TabControl.dll</HintPath>
-    </Reference>
     <Reference Include="VACM.NET4_0.Extensions">
       <HintPath>..\VACM.NET4_0.Extensions\bin\Debug\VACM.NET4_0.Extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\IDeviceController.cs" />
+    <Compile Include="Controllers\IRepeaterController.cs" />
     <Compile Include="Controllers\RepeaterController.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\IDeviceModel.cs" />
-    <Compile Include="Models\IRepositoryModel.cs" />
-    <Compile Include="Models\MMDeviceOverride.cs" />
+    <Compile Include="Models\IRepeaterModel.cs" />
     <Compile Include="Models\RepeaterModel.cs" />
     <Compile Include="Repositories\IDeviceRepository.cs" />
     <Compile Include="Repositories\IMMDeviceRepository.cs" />
