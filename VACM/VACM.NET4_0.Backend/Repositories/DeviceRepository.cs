@@ -1,9 +1,9 @@
 ﻿using NAudio.CoreAudioApi;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Xml.Linq;
 using VACM.NET4_0.Backend.Models;
 
 /*
@@ -19,7 +19,7 @@ using VACM.NET4_0.Backend.Models;
 
 namespace VACM.NET4_0.Backend.Repositories
 {
-  public class DeviceRepository : IDeviceRepository
+  public class DeviceRepository : IDeviceRepository, INotifyPropertyChanged
   {
     #region Parameters
 
@@ -41,7 +41,7 @@ namespace VACM.NET4_0.Backend.Repositories
     public DeviceRepository(List<MMDevice> mMDeviceList)
     {
       deviceModelHashSet = new HashSet<DeviceModel>();
-      int id = 0;
+      uint id = 0;
 
       mMDeviceList
         .ForEach
@@ -58,6 +58,11 @@ namespace VACM.NET4_0.Backend.Repositories
             deviceModelHashSet
               .Add(deviceModel);
 
+            if (id == uint.MaxValue)
+            {
+              return;
+            }
+
             id++;
           }
         );
@@ -71,9 +76,9 @@ namespace VACM.NET4_0.Backend.Repositories
         || deviceState == DeviceState.Unplugged;
     }
 
-    private int GetNewId()
+    private uint GetNewId()
     {
-      int id = 0;
+      uint id = 0;
 
       deviceModelHashSet
         .ToList()
@@ -92,7 +97,7 @@ namespace VACM.NET4_0.Backend.Repositories
       return id;
     }
 
-    private int GetNewId(int? id)
+    private uint GetNewId(uint? id)
     {
       if
       (
@@ -105,7 +110,7 @@ namespace VACM.NET4_0.Backend.Repositories
         return GetNewId();
       }
 
-      return (int)id;
+      return (uint)id;
     }
 
     /// <summary>
@@ -121,7 +126,29 @@ namespace VACM.NET4_0.Backend.Repositories
         );
     }
 
-    public DeviceModel Get(int? id)
+    /// <summary>
+    /// Get the device.
+    /// </summary>
+    /// <param name="actualId">the actual device ID</param>
+    /// <returns>The device to get.</returns>
+    public DeviceModel Get(string actualId)
+    {
+      if (string.IsNullOrWhiteSpace(actualId))
+      {
+        return null;
+      }
+
+      return
+        deviceModelHashSet
+          .FirstOrDefault(x => x.ActualId == actualId);
+    }
+
+    /// <summary>
+    /// Get the device.
+    /// </summary>
+    /// <param name="id">the device ID</param>
+    /// <returns>The device to get.</returns>
+    public DeviceModel Get(uint? id)
     {
       if
       (
@@ -135,18 +162,6 @@ namespace VACM.NET4_0.Backend.Repositories
       return
         deviceModelHashSet
           .FirstOrDefault(x => x.Id == id);
-    }
-
-    public DeviceModel Get(string actualId)
-    {
-      if (string.IsNullOrWhiteSpace(actualId))
-      {
-        return null;
-      }
-
-      return
-        deviceModelHashSet
-          .FirstOrDefault(x => x.ActualId == actualId);
     }
 
     /// <summary>
@@ -233,6 +248,80 @@ namespace VACM.NET4_0.Backend.Repositories
           .ToList();
     }
 
+    /// <summary>
+    /// Get a device list.
+    /// </summary>
+    /// <param name="actualIdList">the list of actual device IDs</param>
+    /// <returns>The device list.</returns>
+    public List<DeviceModel> GetRange(List<string> actualIdList)
+    {
+      if
+      (
+        deviceModelHashSet is null
+        || actualIdList is null
+        || actualIdList.Count() == 0
+      )
+      {
+        return new List<DeviceModel>();
+      }
+
+      List<DeviceModel> deviceModelList = new List<DeviceModel>();
+
+      actualIdList
+        .ForEach
+        (
+          x =>
+          {
+            DeviceModel deviceModel = Get(x);
+
+            if (deviceModel != null)
+            {
+              deviceModelList
+                .Add(deviceModel);
+            }
+          }
+        );
+
+      return deviceModelList;
+    }
+
+    /// <summary>
+    /// Get a device list.
+    /// </summary>
+    /// <param name="idList">the list of device IDs</param>
+    /// <returns>The device list.</returns>
+    public List<DeviceModel> GetRange(List<uint?> idList)
+    {
+      if
+      (
+        deviceModelHashSet is null
+        || idList is null
+        || idList.Count() == 0
+      )
+      {
+        return new List<DeviceModel>();
+      }
+
+      List<DeviceModel> deviceModelList = new List<DeviceModel>();
+
+      idList
+        .ForEach
+        (
+          x =>
+          {
+            DeviceModel deviceModel = Get(x);
+
+            if (deviceModel != null)
+            {
+              deviceModelList
+                .Add(deviceModel);
+            }
+          }
+        );
+
+      return deviceModelList;
+    }
+
     public void Insert(MMDevice mMDevice)
     {
       if (mMDevice is null)
@@ -259,6 +348,21 @@ namespace VACM.NET4_0.Backend.Repositories
       bool? isPresent
     )
     {
+      if (deviceModelHashSet.Count() >= Global.MaxEndpointCount)
+      {
+        Console.WriteLine
+          (
+            string.Format
+            (
+              "Cancelled device addition. " +
+              "Device list amount will exceed maximum amount of {1}.",
+              Global.MaxEndpointCount
+            )
+          );
+
+        return;
+      }
+
       DeviceModel deviceModel = Get(actualId);
 
       if (deviceModel != null)
@@ -280,7 +384,7 @@ namespace VACM.NET4_0.Backend.Repositories
         .Add(deviceModel);
     }
 
-    public void Remove(int? id)
+    public void Remove(uint? id)
     {
       if
       (
@@ -306,9 +410,18 @@ namespace VACM.NET4_0.Backend.Repositories
         .RemoveWhere(x => x.ActualId == actualId);
     }
 
+    /// <summary>
+    /// Update the device.
+    /// </summary>
+    /// <param name="id">The device ID</param>
+    /// <param name="actualId">The actual device ID</param>
+    /// <param name="name">The actual device name</param>
+    /// <param name="isInput">True/false is the device</param>
+    /// <param name="isOutput"></param>
+    /// <param name="isPresent"></param>
     public void Update
     (
-      int? id,
+      uint? id,
       string actualId,
       string name,
       bool? isInput,
@@ -332,6 +445,36 @@ namespace VACM.NET4_0.Backend.Repositories
           isOutput,
           isPresent
         );
+    }
+
+    /// <summary>
+    /// Update the device.
+    /// </summary>
+    /// <param name="id">The device ID</param>
+    /// <param name="mMDevice">The actual device</param>
+    public void Update
+    (
+      uint? id,
+      MMDevice mMDevice
+    )
+    {
+      if
+      (
+        mMDevice is null
+      )
+      {
+        return;
+      }
+
+      Update
+      (
+        id,
+        mMDevice.ID,
+        mMDevice.FriendlyName,
+        mMDevice.DataFlow == DataFlow.Capture,
+        mMDevice.DataFlow == DataFlow.Render,
+        IsPresent(mMDevice.State)
+      );
     }
 
     #endregion
