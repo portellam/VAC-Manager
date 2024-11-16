@@ -47,15 +47,16 @@ namespace VACM.NET4_0.Backend.Models
       out uint outputDeviceId,
       out byte bitsPerSample,
       out byte bufferAmount,
-      out ushort bufferDurationMs,
-      out List<Channel> channelList,
-      out uint channelMask,
-      out string pathName,
       out byte prefillPercentage,
-      out List<string> propertyList,
       out byte resyncAtPercentage,
+      out List<string> propertyList,
+      out string inputDeviceName,
+      out string outputDeviceName,
+      out string pathName,
+      out string windowName,
+      out uint channelMask,
       out uint sampleRateKHz,
-      out string windowName
+      out ushort bufferDurationMs
     );
 
     string ToCommand();
