@@ -1,14 +1,31 @@
 ﻿using NAudio.CoreAudioApi;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel;
+using VACM.NET4_0.Backend.Models;
 
 namespace VACM.NET4_0.Backend.Controllers
 {
   public interface IDeviceController
   {
+    #region Parameters
 
+    event PropertyChangedEventHandler PropertyChanged;
+
+    #endregion
+
+    #region Logic
+    
+    DeviceModel Get(string actualId);
+    DeviceModel Get(uint? id);
+    List<DeviceModel> GetAll();
+    List<DeviceModel> GetAllAbsent();
+    List<DeviceModel> GetAllInput();
+    List<DeviceModel> GetAllOutput();
+    List<DeviceModel> GetAllPresent();
+    List<DeviceModel> GetRange(List<string> actualIdList);
+    List<DeviceModel> GetRange(List<uint?> idList);
+    void DisableActual(string actualId);
+    void EnableActual(string actualId);
     void Insert(MMDevice mMDevice);
 
     void Insert
@@ -19,14 +36,17 @@ namespace VACM.NET4_0.Backend.Controllers
       bool? isOutput,
       bool? isPresent
     );
-    void Remove(int? id);
+
+    void Remove(uint? id);
 
     void Remove(string actualId);
 
     void Update
     (
-      int? id,
+      uint? id,
       MMDevice mMDevice
     );
+
+    #endregion
   }
 }
