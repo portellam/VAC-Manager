@@ -41,6 +41,8 @@ namespace VACM.NET4_0.Backend.Controllers
 
     void Remove(string actualId);
 
+    void SetAsDefault(string actualId);
+
     void Update
     (
       uint? id,
