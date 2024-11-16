@@ -14,11 +14,12 @@ namespace VACM.NET4_0.Backend.Repositories
 
     #region Logic
 
+    List<MMDevice> GetAll();
     List<MMDevice> GetRange(List<string> idList);
     MMDevice Get(string id);
     void Disable(string id);
     void Enable(string id);
-    void SetList();
+    void Update();
 
     #endregion
   }
