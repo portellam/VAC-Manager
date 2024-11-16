@@ -1,4 +1,6 @@
-﻿using NAudio.CoreAudioApi;
+﻿using AudioSwitcher.AudioApi.CoreAudio;
+using NAudio.CoreAudioApi;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +8,9 @@ using System.Linq;
 
 namespace VACM.NET4_0.Backend.Repositories
 {
-  public class MMDeviceRepository : IMMDeviceRepository
+  public class MMDeviceRepository :
+    IMMDeviceRepository,
+    INotifyPropertyChanged
   {
     #region Parameters
 
@@ -32,9 +36,9 @@ namespace VACM.NET4_0.Backend.Repositories
     [ExcludeFromCodeCoverage]
     public MMDeviceRepository()
     {
+      coreAudioController = new CoreAudioController();
       mMDeviceEnumerator = new MMDeviceEnumerator();
-
-      SetList();
+      Update();
     }
 
     /// <summary>
@@ -55,13 +59,33 @@ namespace VACM.NET4_0.Backend.Repositories
         .AudioClient
         .Stop();
 
+      Console
+        .WriteLine
+        (
+          string
+          .Format
+          (
+            "Audio '{1}' device disabled.",
+            mMDevice.FriendlyName
+          )
+        );
+
+
       mMDevice
-      .AudioClient
-      .Reset();
+        .AudioClient
+        .Reset();
+
+      Console
+        .WriteLine
+        ("Reset audio devices.");
 
       mMDevice
         .AudioSessionManager
         .RefreshSessions();
+
+      Console
+        .WriteLine
+        ("Refreshed audio devices.");
     }
 
     /// <summary>
@@ -82,9 +106,24 @@ namespace VACM.NET4_0.Backend.Repositories
         .AudioClient
         .Start();
 
+      Console
+        .WriteLine
+        (
+          string
+          .Format
+          (
+            "Audio '{1}' device enabled.",
+            mMDevice.FriendlyName
+          )
+        );
+
       mMDevice
         .AudioSessionManager
         .RefreshSessions();
+
+      Console
+        .WriteLine
+        ("Refreshed audio devices.");
     }
 
     /// <summary>
@@ -107,13 +146,31 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <returns>The actual device.</returns>
     public MMDevice Get(string id)
     {
-      if (string.IsNullOrEmpty(id))
+      if (string.IsNullOrWhiteSpace(id))
       {
         return null;
       }
 
       return MMDeviceList
         .FirstOrDefault(x => x.ID == id);
+    }
+
+    /// <summary>
+    /// Get the list of actual devices.
+    /// </summary>
+    /// <returns>The list of actual devices.</returns>
+    public List<MMDevice> GetAll()
+    {
+      if
+      (
+        MMDeviceList is null
+        || MMDeviceList.Count == 0
+      )
+      {
+        return new List<MMDevice>();
+      }
+
+      return MMDeviceList;
     }
 
     /// <summary>
@@ -141,11 +198,7 @@ namespace VACM.NET4_0.Backend.Repositories
         (
           id =>
           mMDeviceList
-            .Add
-            (
-              MMDeviceList
-                .FirstOrDefault(y => y.ID == id)
-            )
+            .Add(Get(id))
         );
 
       return mMDeviceList;
@@ -157,11 +210,6 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <param name="id">the actual device ID</param>
     public void Disable(string id)
     {
-      if (string.IsNullOrEmpty(id))
-      {
-        return;
-      }
-
       MMDevice mMDevice = Get(id);
       Disable(mMDevice);
     }
@@ -172,19 +220,36 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <param name="id">the actual device ID</param>
     public void Enable(string id)
     {
-      if (string.IsNullOrEmpty(id))
-      {
-        return;
-      }
-
       MMDevice mMDevice = Get(id);
       Enable(mMDevice);
     }
 
     /// <summary>
+    /// Set the actual device as default (for its dataflow).
+    /// </summary>
+    /// <param name="id">the actual device ID</param>
+    public void SetAsDefault(string id)   //TODO: implement!
+    {
+      MMDevice mMDevice = Get(id);
+
+      if (mMDevice is null)
+      {
+        return;
+      }
+
+      CoreAudioDevice coreAudioDevice = coreAudioController
+        .GetAudioDevice
+        (
+          Guid.Parse(id)
+        );
+
+      coreAudioDevice.SetAsDefault(); //TODO: make as async?
+    }
+
+    /// <summary>
     /// Set the actual device list.
     /// </summary>
-    public void SetList()
+    public void Update()
     {
       MMDeviceList = mMDeviceEnumerator
         .EnumerateAudioEndPoints
@@ -195,6 +260,10 @@ namespace VACM.NET4_0.Backend.Repositories
         .Distinct()
         .OrderBy(x => x.ID)
         .ToList();
+
+      Console
+        .WriteLine
+        ("Updated audio devices.");
     }
 
     #endregion
