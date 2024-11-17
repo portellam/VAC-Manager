@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using VACM.NET4_0.Backend.Models;
 
 namespace VACM.NET4_0.Backend.Repositories
 {
@@ -15,6 +13,58 @@ namespace VACM.NET4_0.Backend.Repositories
     #endregion
 
     #region Logic
+
+    RepeaterModel Get(uint? id);
+    
+    RepeaterModel Get
+    (
+      uint? firstDeviceId,
+      uint? secondDeviceId
+    );
+
+    List<RepeaterModel> GetAll();
+    List<RepeaterModel> GetRange(List<uint?> idList);
+    void Insert(RepeaterModel repeaterModel);
+
+    //void Insert
+    //(
+    //  string actualId,
+    //  string name,
+    //  bool? isInput,
+    //  bool? isOutput,
+    //  bool? isPresent
+    //);
+
+    void Remove
+    (
+      uint? id
+    );
+
+    void Remove
+    (
+      uint? firstDeviceId,
+      uint? secondDeviceId
+    );
+
+    void Update(RepeaterModel repeaterModel);
+
+    void Update
+    (
+      uint id,
+      uint inputDeviceId,
+      uint outputDeviceId,
+      byte bitsPerSample,
+      byte bufferAmount,
+      byte prefillPercentage,
+      byte resyncAtPercentage,
+      string inputDeviceName,
+      string outputDeviceName,
+      string pathName,
+      string windowName,
+      uint channelMask,
+      uint sampleRateKHz,
+      ushort bufferDurationMs
+    );
 
     #endregion
   }
