@@ -330,7 +330,7 @@ namespace VACM.NET4_0.Backend.Models
           value = value.Substring(0, 31);
         }
 
-        OutputDeviceName = value;
+        outputDeviceName = value;
         OnPropertyChanged(nameof(OutputDeviceName));
       }
     }
