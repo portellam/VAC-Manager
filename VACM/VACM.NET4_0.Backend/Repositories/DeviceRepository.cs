@@ -20,7 +20,9 @@ using VACM.NET4_0.Backend.Models;
 
 namespace VACM.NET4_0.Backend.Repositories
 {
-  public class DeviceRepository : IDeviceRepository, INotifyPropertyChanged
+  public class DeviceRepository :
+    IDeviceRepository,
+    INotifyPropertyChanged
   {
     #region Parameters
 
@@ -47,7 +49,7 @@ namespace VACM.NET4_0.Backend.Repositories
     }
 
     /// <summary>
-    /// The next valid repeater ID.
+    /// The next valid device ID.
     /// </summary>
     private uint NextId
     {
@@ -83,7 +85,11 @@ namespace VACM.NET4_0.Backend.Repositories
               new DeviceModel
               (
                 id,
-                x
+                x.ID,
+                x.FriendlyName,
+                x.DataFlow == DataFlow.Capture,
+                x.DataFlow == DataFlow.Render,
+                IsPresent(x.State)
               );
 
             DeviceModelHashSet
@@ -99,49 +105,40 @@ namespace VACM.NET4_0.Backend.Repositories
         );
     }
 
+    /// <summary>
+    /// Construct a device.
+    /// </summary>
+    /// <param name="id">The device ID</param>
+    /// <param name="mMDevice"></param>
+    /// <returns></returns>
+    private DeviceModel Construct
+    (
+      uint id,
+      MMDevice mMDevice
+    )
+    {
+      return new DeviceModel
+      (
+        id,
+        x.ID,
+        x.FriendlyName,
+        x.DataFlow == DataFlow.Capture,
+        x.DataFlow == DataFlow.Render,
+        IsPresent(x.State)
+      );
+    }
+
+    /// <summary>
+    /// Is present.
+    /// </summary>
+    /// <param name="deviceState">The device state</param>
+    /// <returns>True/false is the device present.</returns>
     private bool IsPresent(DeviceState deviceState)
     {
       return
         deviceState == DeviceState.Active
         || deviceState == DeviceState.Disabled
         || deviceState == DeviceState.Unplugged;
-    }
-
-    private uint GetNewId()
-    {
-      uint id = 0;
-
-      DeviceModelHashSet
-        .ToList()
-        .ForEach
-        (
-          x =>
-          {
-            if (x.Id > id)
-            {
-              id = x.Id;
-            }
-          }
-        );
-
-      id++;
-      return id;
-    }
-
-    private uint GetNewId(uint? id)
-    {
-      if
-      (
-        id is null
-        || id < 0
-        || DeviceModelHashSet
-          .Any(x => x.Id == id)
-      )
-      {
-        return GetNewId();
-      }
-
-      return (uint)id;
     }
 
     /// <summary>
@@ -366,6 +363,7 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (mMDevice is null)
       {
+        Debug.WriteLine("Failed to update actual device. Device is null.");
         return;
       }
 
@@ -408,12 +406,21 @@ namespace VACM.NET4_0.Backend.Repositories
 
       if (deviceModel != null)
       {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to insert device. Device already exists\t=> Id: '{1}'",
+            deviceModel.Id
+          )
+        );
+
         return;
       }
 
       deviceModel = new DeviceModel
         (
-          GetNewId(),
+          NextId,
           actualId,
           name,
           isInput,
@@ -421,19 +428,36 @@ namespace VACM.NET4_0.Backend.Repositories
           isPresent
         );
 
-      DeviceModelHashSet
-        .Add(deviceModel);
+      if (!DeviceModelHashSet.Add(deviceModel))
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to insert device\t=> Id: '{1}'",
+            deviceModel.Id
+          )
+        );
+
+        return;
+      }
+
+      Debug.WriteLine
+        (
+          string.Format
+          (
+            "Inserted device\t=> Id: '{1}'",
+            deviceModel.Id
+          )
+        );
     }
 
     public void Remove(uint? id)
     {
-      if
-      (
-        id is null
-        || id < 0
-      )
+      if (id is null)
       {
-        return;
+        Debug.WriteLine("Failed to remove device. Device ID is null.");
+        return null;
       }
 
       DeviceModelHashSet
@@ -452,7 +476,7 @@ namespace VACM.NET4_0.Backend.Repositories
     }
 
     /// <summary>
-    /// Remove a list of repeaters.
+    /// Remove a list of devices.
     /// </summary>
     /// <param name="name">The device name</param>
     public void RemoveRange(string name)
@@ -484,48 +508,66 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <summary>
     /// Update a device.
     /// </summary>
-    /// <param name="id">The device ID</param>
-    /// <param name="actualId">The actual device ID</param>
-    /// <param name="name">The actual device name</param>
-    /// <param name="isInput">True/false is an input device</param>
-    /// <param name="isOutput">True/false is an output device</param>
-    /// <param name="isPresent">True/false is the device present</param>
-    public void Update
-    (
-      uint? id,
-      string actualId,
-      string name,
-      bool? isInput,
-      bool? isOutput,
-      bool? isPresent
-    )
+    /// <param name="deviceModel">The device</param>
+    public void Update(DeviceModel deviceModel)
     {
-      DeviceModel deviceModel = Get(actualId);
-
       if (deviceModel is null)
       {
+        Debug.WriteLine("Failed to update device. Device is null.");
         return;
       }
 
-      deviceModel = new DeviceModel
+      if
+      (
+        DeviceModelHashSet
+          .RemoveWhere
+          (x => x.Id == deviceModel.Id) == 0
+      )
+      {
+        Debug.WriteLine
         (
-          GetNewId(id),
-          actualId,
-          name,
-          isInput,
-          isOutput,
-          isPresent
+          string.Format
+          (
+            "Failed to update device. Device does not exist\t=> Id: '{1}'",
+            deviceModel.Id
+          )
         );
+
+        return;
+      }
+
+      if (!DeviceModelHashSet.Add(deviceModel))
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to update device\t=> Id: '{1}'",
+            deviceModel.Id
+          )
+        );
+
+        return;
+      }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Updated device\t=> Id: '{1}'",
+          deviceModel.Id
+        )
+      );
     }
 
     /// <summary>
-    /// Update the device.
+    /// Update a device.
     /// </summary>
     /// <param name="id">The device ID</param>
     /// <param name="mMDevice">The actual device</param>
     public void Update
     (
-      uint? id,
+      uint id,
       MMDevice mMDevice
     )
     {
@@ -534,10 +576,18 @@ namespace VACM.NET4_0.Backend.Repositories
         mMDevice is null
       )
       {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to update device. Actual device is null\t=> Id: '{1}'",
+            id
+          )
+        );
         return;
       }
 
-      Update
+      DeviceModel deviceModel = new DeviceModel
       (
         id,
         mMDevice.ID,
@@ -546,6 +596,40 @@ namespace VACM.NET4_0.Backend.Repositories
         mMDevice.DataFlow == DataFlow.Render,
         IsPresent(mMDevice.State)
       );
+
+      Update(deviceModel);
+    }
+
+    /// <summary>
+    /// Update a device.
+    /// </summary>
+    /// <param name="id">The device ID</param>
+    /// <param name="actualId">The actual device ID</param>
+    /// <param name="name">The actual device name</param>
+    /// <param name="isInput">True/false is an input device</param>
+    /// <param name="isOutput">True/false is an output device</param>
+    /// <param name="isPresent">True/false is the device present</param>
+    public void Update
+    (
+      uint id,
+      string actualId,
+      string name,
+      bool? isInput,
+      bool? isOutput,
+      bool? isPresent
+    )
+    {
+      DeviceModel deviceModel = new DeviceModel
+        (
+          id,
+          actualId,
+          name,
+          isInput,
+          isOutput,
+          isPresent
+        );
+
+      Update(deviceModel);
     }
 
     #endregion
