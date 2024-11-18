@@ -358,6 +358,76 @@ namespace VACM.NET4_0.Backend.Repositories
       return deviceModelList;
     }
 
+    /// <summary>
+    /// Insert a device.
+    /// </summary>
+    /// <param name="deviceModel">The device</param>
+    public void Insert(DeviceModel deviceModel)
+    {
+      if (deviceModel is null)
+      {
+        Debug.WriteLine("Failed to insert device. Device is null.");
+        return;
+      }
+
+      if (DeviceModelHashSet.Count() >= Global.MaxEndpointCount)
+      {
+        Console.WriteLine
+        (
+          string.Format
+          (
+            "Failed to insert device. Device list will exceed maximum of {1}.",
+            Global.MaxEndpointCount
+          )
+        );
+
+        return;
+      }
+
+      uint id = deviceModel.Id;
+
+      if (IdList.Contains(id))
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Device ID is not valid\t=> Id: '{1}'",
+            id
+          )
+        );
+
+        id = NextId;
+      }
+
+      if (!DeviceModelHashSet.Add(deviceModel))
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to insert device\t=> Id: '{1}'",
+            id
+          )
+        );
+
+        return;
+      }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Inserted device\t=> Id: '{1}'",
+          id
+        )
+      );
+    }
+
+    /// <summary>
+    /// Insert a device.
+    /// </summary>
+    /// <param name="mMDevice">The actual device</param>
     public void Insert(MMDevice mMDevice)
     {
       if (mMDevice is null)
@@ -376,7 +446,14 @@ namespace VACM.NET4_0.Backend.Repositories
       );
     }
 
-
+    /// <summary>
+    /// Insert a device.
+    /// </summary>
+    /// <param name="actualId">The actual device ID</param>
+    /// <param name="name">The actual device name</param>
+    /// <param name="isInput">True/false is an input device</param>
+    /// <param name="isOutput">True/false is an output device</param>
+    /// <param name="isPresent">True/false is the device present</param>
     public void Insert
     (
       string actualId,
@@ -386,69 +463,17 @@ namespace VACM.NET4_0.Backend.Repositories
       bool? isPresent
     )
     {
-      if (DeviceModelHashSet.Count() >= Global.MaxEndpointCount)
-      {
-        Console.WriteLine
-          (
-            string.Format
-            (
-              "Cancelled device addition. " +
-              "Device list amount will exceed maximum amount of {1}.",
-              Global.MaxEndpointCount
-            )
-          );
+      DeviceModel deviceModel = new DeviceModel
+      (
+        NextId,
+        actualId,
+        name,
+        isInput,
+        isOutput,
+        isPresent
+      );
 
-        return;
-      }
-
-      DeviceModel deviceModel = Get(actualId);
-
-      if (deviceModel != null)
-      {
-        Debug.WriteLine
-        (
-          string.Format
-          (
-            "Failed to insert device. Device already exists\t=> Id: '{1}'",
-            deviceModel.Id
-          )
-        );
-
-        return;
-      }
-
-      deviceModel = new DeviceModel
-        (
-          NextId,
-          actualId,
-          name,
-          isInput,
-          isOutput,
-          isPresent
-        );
-
-      if (!DeviceModelHashSet.Add(deviceModel))
-      {
-        Debug.WriteLine
-        (
-          string.Format
-          (
-            "Failed to insert device\t=> Id: '{1}'",
-            deviceModel.Id
-          )
-        );
-
-        return;
-      }
-
-      Debug.WriteLine
-        (
-          string.Format
-          (
-            "Inserted device\t=> Id: '{1}'",
-            deviceModel.Id
-          )
-        );
+      Insert(deviceModel);
     }
 
     /// <summary>
@@ -560,7 +585,7 @@ namespace VACM.NET4_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to remove device. Name does not exist\t=> Name: '{1}'",
+            "Failed to remove device. Device does not exist\t=> Name: '{1}'",
             name
           )
         );
