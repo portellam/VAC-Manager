@@ -35,15 +35,11 @@ namespace VACM.NET4_0.Backend.Repositories
       bool? isPresent
     );
 
-    void Remove
-    (
-      uint? Id
-    );
+    void Remove(uint? Id);
 
-    void Remove
-    (
-      string actualId
-    );
+    void Remove(string actualId);
+
+    void RemoveRange(string name);
 
     void Update
     (
