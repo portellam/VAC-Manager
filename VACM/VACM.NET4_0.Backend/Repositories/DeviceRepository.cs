@@ -452,27 +452,87 @@ namespace VACM.NET4_0.Backend.Repositories
         );
     }
 
+    /// <summary>
+    /// Remove a device.
+    /// </summary>
+    /// <param name="id">The device ID</param>
     public void Remove(uint? id)
     {
       if (id is null)
       {
         Debug.WriteLine("Failed to remove device. Device ID is null.");
-        return null;
+        return;
       }
 
-      DeviceModelHashSet
+      int count = DeviceModelHashSet
         .RemoveWhere(x => x.Id == id);
+
+      if (count == 0)
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to remove device. Device does not exist\t=> Id: '{1}'",
+            id
+          )
+        );
+
+        return;
+      }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Removed device\t=> Id: '{1}'",
+          id
+        )
+      );
     }
 
+    /// <summary>
+    /// Remove device(s).
+    /// </summary>
+    /// <param name="actualId">The actual device ID</param>
     public void Remove(string actualId)
     {
       if (string.IsNullOrWhiteSpace(actualId))
       {
+        Debug.WriteLine
+        (
+          "Failed to remove device. " +
+          "Actual device ID is null or whitespace."
+        );
+
         return;
       }
 
-      DeviceModelHashSet
+      int count = DeviceModelHashSet
         .RemoveWhere(x => x.ActualId == actualId);
+
+      if (count == 0)
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to remove device. Device does not exist\t=> ActualId: '{1}'",
+            actualId
+          )
+        );
+
+        return;
+      }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Removed devices\t=> Count: '{1}'",
+          count
+        )
+      );
     }
 
     /// <summary>
