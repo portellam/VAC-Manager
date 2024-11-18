@@ -1,7 +1,7 @@
-﻿using NAudio.CoreAudioApi;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using VACM.NET4_0.Backend.Models;
@@ -18,6 +18,36 @@ namespace VACM.NET4_0.Backend.Repositories
     /// The collection of repeaters.
     /// </summary>
     private HashSet<RepeaterModel> RepeaterModelHashSet;
+
+    /// <summary>
+    /// The list of repeater IDs.
+    /// </summary>
+    private List<uint> repeaterIdList
+    {
+      get
+      {
+        List<uint> list =
+          RepeaterModelHashSet
+            .Select(x => x.Id)
+            .ToList();
+
+        list.Sort();
+        return list;
+      }
+    }
+
+    /// <summary>
+    /// The next valid repeater ID.
+    /// </summary>
+    private uint nextId
+    {
+      get
+      {
+        uint id = repeaterIdList.LastOrDefault();
+        id++;
+        return id;
+      }
+    }
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -45,12 +75,27 @@ namespace VACM.NET4_0.Backend.Repositories
 
       if (repeaterModel is null)
       {
+        Debug.WriteLine
+        (
+          "Failed to remove repeater. Repeater is null."
+        );
+
         return false;
       }
 
-      return RepeaterModelHashSet
-        .RemoveWhere
-        (x => x.Id == repeaterModel.Id) > 0;
+      int count = RepeaterModelHashSet
+        .RemoveWhere(x => x.Id == repeaterModel.Id);
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Removed repeaters\t=> Count: '{1}'" +
+          count
+        )
+      );
+
+      return count > 0;
     }
 
     /// <summary>
@@ -64,6 +109,15 @@ namespace VACM.NET4_0.Backend.Repositories
         this,
         new PropertyChangedEventArgs(propertyName)
       );
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "PropertyChanged: '{1}'" +
+          propertyName
+        )
+      );
     }
 
     /// <summary>
@@ -73,16 +127,32 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <returns>The repeater.</returns>
     public RepeaterModel Get(uint? id)
     {
-      if (
-        id is null
-        || id < 0
-      )
+      if (id is null)
       {
         return null;
       }
 
-      return RepeaterModelHashSet
+      RepeaterModel repeaterModel = RepeaterModelHashSet
         .FirstOrDefault(x => x.Id == id);
+
+      if (repeaterModel is null)
+      {
+        Debug.WriteLine("Repeater is null.");
+      }
+
+      else
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Got repeater\t=> Id: '{1}'" +
+            repeaterModel.Id
+          )
+        );
+      }
+
+      return repeaterModel;
     }
 
     /// <summary>
@@ -103,10 +173,16 @@ namespace VACM.NET4_0.Backend.Repositories
         && secondDeviceId is null
       )
       {
+        Debug.WriteLine
+        (
+          "Failed to get repeater. " +
+          "Either first device ID or second device ID is null."
+        );
+
         return null;
       }
 
-      return RepeaterModelHashSet
+      RepeaterModel repeaterModel = RepeaterModelHashSet
         .FirstOrDefault
         (
           x =>
@@ -118,46 +194,25 @@ namespace VACM.NET4_0.Backend.Repositories
             && x.OutputDeviceId == firstDeviceId
           )
         );
-    }
 
-    /// <summary>
-    /// Get repeater by input device name.
-    /// </summary>
-    /// <param name="name">the input device name</param>
-    /// <returns>The repeater of the input.</returns>
-    public RepeaterModel GetRepeaterByInputName(string name)
-    {
-      if (
-        RepeaterModelHashSet is null
-          || name is null
-          || name == string.Empty
-      )
+      if (repeaterModel is null)
       {
-        return null;
+        Debug.WriteLine("Repeater is null.");
+      }
+      
+      else
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Got repeater\t=> Id: '{1}'" +
+            repeaterModel.Id
+          )
+        );
       }
 
-      return RepeaterModelHashSet
-        .FirstOrDefault(x => x.InputDeviceName == name);
-    }
-
-    /// <summary>
-    /// Get repeater by output device name.
-    /// </summary>
-    /// <param name="name">the output device name</param>
-    /// <returns>The repeater of the output.</returns>
-    public RepeaterModel GetRepeaterByOutputName(string name)
-    {
-      if (
-        RepeaterModelHashSet is null
-          || name is null
-          || name == string.Empty
-      )
-      {
-        return null;
-      }
-
-      return RepeaterModelHashSet
-        .FirstOrDefault(x => x.OutputDeviceName == name);
+      return repeaterModel;
     }
 
     /// <summary>
@@ -168,12 +223,116 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (RepeaterModelHashSet is null)
       {
+        Debug.WriteLine("Failed to get repeaters. Repeater collection is null.");
         return new List<RepeaterModel>();
       }
 
-      return
-        RepeaterModelHashSet
-          .ToList();
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got repeaters => Count: {1}",
+          RepeaterModelHashSet.Count()
+        )
+      );
+
+      return RepeaterModelHashSet.ToList();
+    }
+
+    /// <summary>
+    /// Get repeater list by device name.
+    /// </summary>
+    /// <param name="deviceName">The device name</param>
+    /// <param name="isInputDevice">True/false is input device</param>
+    /// <param name="isOutputDevice">True/false is output device</param>
+    /// <returns>The repeater list.</returns>
+    public List<RepeaterModel> GetRange
+    (
+      string deviceName,
+      bool isInputDevice,
+      bool isOutputDevice
+    )
+    {
+      if (string.IsNullOrWhiteSpace(deviceName))
+      {
+        Debug.WriteLine("Failed to get repeaters.");
+        return new List<RepeaterModel>();
+      }
+
+      List<RepeaterModel> repeaterModelList = new List<RepeaterModel>();
+
+      RepeaterModelHashSet
+        .ToList()
+        .ForEach
+        (
+          x =>
+          {
+            if
+            (
+              isInputDevice
+              && x.InputDeviceName == deviceName
+            )
+            {
+              Debug.WriteLine
+              (
+                string.Format
+                (
+                  "Found input device => Name: {1}",
+                  deviceName
+                )
+              );
+
+              repeaterModelList.Add(x);
+            }
+
+            else if
+            (
+              isOutputDevice
+              && x.OutputDeviceName == deviceName
+            )
+            {
+              Debug.WriteLine
+              (
+                string.Format
+                (
+                  "Found output device => Name: {1}",
+                  deviceName
+                )
+              );
+
+              repeaterModelList.Add(x);
+            }
+
+            else if
+            (
+              x.InputDeviceName == deviceName
+              || x.OutputDeviceName == deviceName
+            )
+            {
+              Debug.WriteLine
+              (
+                string.Format
+                (
+                  "Found duplex device => Name: {1}",
+                  deviceName
+                )
+              );
+
+              repeaterModelList.Add(x);
+            }
+          }
+        );
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got repeaters => Count: {1}",
+          repeaterModelList.Count()
+        )
+      );
+
+      return repeaterModelList;
     }
 
     /// <summary>
@@ -191,50 +350,158 @@ namespace VACM.NET4_0.Backend.Repositories
         || RepeaterModelHashSet.Count == 0
       )
       {
+        Debug.WriteLine
+        (
+          "Failed to get repeaters. " +
+          "Repeater ID list is either null or empty, " +
+          "or repeater collection is either null or empty."
+        );
+
         return null;
       }
 
-      List<RepeaterModel> repeaterList = new List<RepeaterModel>();
+      List<RepeaterModel> repeaterModelList = new List<RepeaterModel>();
 
       idList
         .ForEach
         (
           id =>
-          repeaterList
+          repeaterModelList
             .Add(Get(id))
         );
 
-      return repeaterList;
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got repeaters => Count: {1}",
+          repeaterModelList.Count()
+        )
+      );
+
+      return repeaterModelList;
     }
 
     /// <summary>
-    /// Add a repeater.
+    /// Insert a repeater.
     /// </summary>
     /// <param name="repeaterModel">The repeater</param>
     public void Insert(RepeaterModel repeaterModel)
     {
       if (repeaterModel is null)
       {
+        Debug.WriteLine("Failed to insert repeater. Repeater is null.");
         return;
       }
 
       if (RepeaterModelHashSet.Count() >= Global.MaxRepeaterCount)
       {
         Console.WriteLine
+        (
+          string.Format
           (
-            string.Format
-            (
-              "Cancelled repeater addition. " +
-              "Repeater list amount will exceed maximum amount of {1}.",
-              Global.MaxRepeaterCount
-            )
-          );
+            "Failed to insert repeater. Repeater list will exceed maximum of {1}.",
+            Global.MaxRepeaterCount
+          )
+        );
 
         return;
       }
 
+        uint id = repeaterModel.Id;
 
-      RepeaterModelHashSet.Add(repeaterModel);
+      if (repeaterIdList.Contains(id))
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Repeater ID is not valid\t=> Id: '{1}'" +
+            id
+          )
+        );
+
+        id = nextId;
+      }
+
+      if (!RepeaterModelHashSet.Add(repeaterModel))
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to insert repeater\t=> Id: '{1}'" +
+            id
+          )
+        );
+
+        return;
+      }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Inserted repeater\t=> Id: '{1}'" +
+          id
+        )
+      );
+    }
+
+    /// <summary>
+    /// Insert a repeater.
+    /// </summary>
+    /// <param name="id">The repeater ID</param>
+    /// <param name="inputDeviceId">The input device ID</param>
+    /// <param name="outputDeviceId">The output device ID</param>
+    /// <param name="bitsPerSample">The amount of bits per sample</param>
+    /// <param name="bufferAmount">The buffer amount</param>
+    /// <param name="bufferDurationMs">The buffer duration in milliseconds</param>
+    /// <param name="channelMask">The channel mask</param>
+    /// <param name="pathName">The path name</param>
+    /// <param name="prefillPercentage">The prefill percentage</param>
+    /// <param name="resyncAtPercentage">The resync at percentage</param>
+    /// <param name="sampleRateKHz">The sample rate in KiloHertz</param>
+    /// <param name="windowName">The window name</param>
+    public void Insert
+    (
+      uint id,
+      uint inputDeviceId,
+      uint outputDeviceId,
+      byte bitsPerSample,
+      byte bufferAmount,
+      byte prefillPercentage,
+      byte resyncAtPercentage,
+      string inputDeviceName,
+      string outputDeviceName,
+      string pathName,
+      string windowName,
+      uint channelMask,
+      uint sampleRateKHz,
+      ushort bufferDurationMs
+    )
+    {
+      RepeaterModel repeaterModel = new RepeaterModel
+      (
+        id,
+        inputDeviceId,
+        outputDeviceId
+      )
+      {
+        BitsPerSample = bitsPerSample,
+        BufferAmount = bufferAmount,
+        PrefillPercentage = prefillPercentage,
+        ResyncAtPercentage = resyncAtPercentage,
+        InputDeviceName = inputDeviceName,
+        OutputDeviceName = outputDeviceName,
+        PathName = pathName,
+        WindowName = windowName,
+        ChannelMask = channelMask,
+        SampleRateKHz = sampleRateKHz,
+        BufferDurationMs = bufferDurationMs
+      };
+
+      Update(repeaterModel);
     }
 
     /// <summary>
@@ -245,10 +512,34 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (id is null)
       {
+        Debug.WriteLine("Failed to remove repeater. Repeater ID is null.");
         return;
       }
 
       bool isSuccess = Remove((uint)id);
+
+      if (!isSuccess)
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to remove repeater\t=> Id: '{1}'" +
+            id
+          )
+        );
+
+        return;
+      }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Removed repeater\t=> Id: '{1}'" +
+          id
+        )
+      );
     }
 
     /// <summary>
@@ -262,15 +553,15 @@ namespace VACM.NET4_0.Backend.Repositories
       uint? secondDeviceId
     )
     {
-      RepeaterModel repeaterModel =
-        Get
-        (
-          firstDeviceId,
-          secondDeviceId
-        );
+      RepeaterModel repeaterModel = Get
+      (
+        firstDeviceId,
+        secondDeviceId
+      );
 
       if (repeaterModel is null)
       {
+        Debug.WriteLine("Failed to update repeater. Repeater is null.");
         return;
       }
 
@@ -285,6 +576,7 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (repeaterModel is null)
       {
+        Debug.WriteLine("Failed to update repeater. Repeater is null.");
         return;
       }
 
@@ -295,11 +587,40 @@ namespace VACM.NET4_0.Backend.Repositories
           (x => x.Id == repeaterModel.Id) == 0
       )
       {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to update repeater. Repeater does not exist\t=> Id: '{1}'" +
+            repeaterModel.Id
+          )
+        );
+
         return;
       }
 
-      RepeaterModelHashSet
-        .Add(repeaterModel);
+      if (!RepeaterModelHashSet.Add(repeaterModel))
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to update repeater\t=> Id: '{1}'" +
+            repeaterModel.Id
+          )
+        );
+
+        return;
+      }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Updated repeater\t=> Id: '{1}'" +
+          repeaterModel.Id
+        )
+      );
     }
 
     /// <summary>
@@ -311,11 +632,9 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <param name="bitsPerSample">The amount of bits per sample</param>
     /// <param name="bufferAmount">The buffer amount</param>
     /// <param name="bufferDurationMs">The buffer duration in milliseconds</param>
-    /// <param name="channelList">The channel list</param>
     /// <param name="channelMask">The channel mask</param>
     /// <param name="pathName">The path name</param>
     /// <param name="prefillPercentage">The prefill percentage</param>
-    /// <param name="propertyList">The property list</param>
     /// <param name="resyncAtPercentage">The resync at percentage</param>
     /// <param name="sampleRateKHz">The sample rate in KiloHertz</param>
     /// <param name="windowName">The window name</param>
