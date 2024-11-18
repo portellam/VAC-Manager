@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Xml.Linq;
 using VACM.NET4_0.Backend.Models;
 
 namespace VACM.NET4_0.Backend.Repositories
@@ -62,40 +63,6 @@ namespace VACM.NET4_0.Backend.Repositories
     public RepeaterRepository()
     {
       RepeaterModelHashSet = new HashSet<RepeaterModel>();
-    }
-
-    /// <summary>
-    /// Remove a repeater.
-    /// </summary>
-    /// <param name="id">The repeater ID</param>
-    /// <returns>True/false remove a repeater if the repeater exists.</returns>
-    private bool Remove(uint id)
-    {
-      RepeaterModel repeaterModel = Get(id);
-
-      if (repeaterModel is null)
-      {
-        Debug.WriteLine
-        (
-          "Failed to remove repeater. Repeater is null."
-        );
-
-        return false;
-      }
-
-      int count = RepeaterModelHashSet
-        .RemoveWhere(x => x.Id == repeaterModel.Id);
-
-      Debug.WriteLine
-      (
-        string.Format
-        (
-          "Removed repeaters\t=> Count: '{1}'",
-          count
-        )
-      );
-
-      return count > 0;
     }
 
     /// <summary>
@@ -223,7 +190,7 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (RepeaterModelHashSet is null)
       {
-        Debug.WriteLine("Failed to get repeaters. Repeater collection is null.");
+        Debug.WriteLine("Failed to get repeater(s). Repeater collection is null.");
         return new List<RepeaterModel>();
       }
 
@@ -231,7 +198,7 @@ namespace VACM.NET4_0.Backend.Repositories
       (
         string.Format
         (
-          "Got repeaters => Count: {1}",
+          "Got repeater(s) => Count: {1}",
           RepeaterModelHashSet.Count()
         )
       );
@@ -255,7 +222,7 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (string.IsNullOrWhiteSpace(deviceName))
       {
-        Debug.WriteLine("Failed to get repeaters.");
+        Debug.WriteLine("Failed to get repeater(s).");
         return new List<RepeaterModel>();
       }
 
@@ -327,7 +294,7 @@ namespace VACM.NET4_0.Backend.Repositories
       (
         string.Format
         (
-          "Got repeaters => Count: {1}",
+          "Got repeater(s) => Count: {1}",
           repeaterModelList.Count()
         )
       );
@@ -352,7 +319,7 @@ namespace VACM.NET4_0.Backend.Repositories
       {
         Debug.WriteLine
         (
-          "Failed to get repeaters. " +
+          "Failed to get repeater(s). " +
           "Repeater ID list is either null or empty, " +
           "or repeater collection is either null or empty."
         );
@@ -374,7 +341,7 @@ namespace VACM.NET4_0.Backend.Repositories
       (
         string.Format
         (
-          "Got repeaters => Count: {1}",
+          "Got repeater(s) => Count: {1}",
           repeaterModelList.Count()
         )
       );
@@ -501,7 +468,7 @@ namespace VACM.NET4_0.Backend.Repositories
         BufferDurationMs = bufferDurationMs
       };
 
-      Update(repeaterModel);
+      Insert(repeaterModel);
     }
 
     /// <summary>
@@ -516,7 +483,31 @@ namespace VACM.NET4_0.Backend.Repositories
         return;
       }
 
-      Remove((uint)id);
+      int count = RepeaterModelHashSet
+        .RemoveWhere(x => x.Id == id);
+
+      if (count == 0)
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to remove repeater. Repeater does not exist\t=> Id: '{1}'",
+            id
+          )
+        );
+
+        return;
+      }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Removed repeater\t=> Id: '{1}'",
+          id
+        )
+      );
     }
 
     /// <summary>
@@ -538,11 +529,37 @@ namespace VACM.NET4_0.Backend.Repositories
 
       if (repeaterModel is null)
       {
-        Debug.WriteLine("Failed to update repeater. Repeater is null.");
+        Debug.WriteLine("Failed to remove repeater. Repeater is null.");
         return;
       }
 
-      Remove(repeaterModel.Id);
+      int count = RepeaterModelHashSet
+        .RemoveWhere(x => x.Id == repeaterModel.Id);
+
+      if (count == 0)
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to remove Repeater. " +
+            "Repeater does not exist\t=> FirstDeviceId: '{1}', SecondDeviceId '{2}'",
+            firstDeviceId,
+            secondDeviceId
+          )
+        );
+
+        return;
+      }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Removed repeater(s)\t=> Count: '{1}'",
+          count
+        )
+      );
     }
 
     /// <summary>
@@ -570,11 +587,26 @@ namespace VACM.NET4_0.Backend.Repositories
           || x.OutputDeviceName == deviceName
         );
 
+      if (count == 0)
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to remove repeater. " +
+            "Repeater name does not exist\t=> DeviceName: '{1}'",
+            deviceName
+          )
+        );
+
+        return;
+      }
+
       Debug.WriteLine
       (
         string.Format
         (
-          "Removed repeaters\t=> Count: '{1}'",
+          "Removed repeater(s)\t=> Count: '{1}'",
           count
         )
       );
