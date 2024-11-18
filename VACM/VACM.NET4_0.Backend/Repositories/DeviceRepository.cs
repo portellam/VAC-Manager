@@ -135,8 +135,7 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <returns>True/false is the device present.</returns>
     private bool IsPresent(DeviceState deviceState)
     {
-      return
-        deviceState == DeviceState.Active
+      return deviceState == DeviceState.Active
         || deviceState == DeviceState.Disabled
         || deviceState == DeviceState.Unplugged;
     }
@@ -529,7 +528,7 @@ namespace VACM.NET4_0.Backend.Repositories
       (
         string.Format
         (
-          "Removed devices\t=> Count: '{1}'",
+          "Removed device(s)\t=> Count: '{1}'",
           count
         )
       );
@@ -555,11 +554,25 @@ namespace VACM.NET4_0.Backend.Repositories
       int count = DeviceModelHashSet
         .RemoveWhere(x => x.Name == name);
 
+      if (count == 0)
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Failed to remove device. Name does not exist\t=> Name: '{1}'",
+            name
+          )
+        );
+
+        return;
+      }
+
       Debug.WriteLine
       (
         string.Format
         (
-          "Removed devices\t=> Count: '{1}'" +
+          "Removed device(s)\t=> Count: '{1}'",
           count
         )
       );
