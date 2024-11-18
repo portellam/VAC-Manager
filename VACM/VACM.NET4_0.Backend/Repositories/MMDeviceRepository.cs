@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -131,10 +132,19 @@ namespace VACM.NET4_0.Backend.Repositories
     private void OnPropertyChanged(string propertyName)
     {
       PropertyChanged?.Invoke
+      (
+        this,
+        new PropertyChangedEventArgs(propertyName)
+      );
+
+      Debug.WriteLine
+      (
+        string.Format
         (
-          this,
-          new PropertyChangedEventArgs(propertyName)
-        );
+          "PropertyChanged: '{1}'" +
+          propertyName
+        )
+      );
     }
 
     /// <summary>

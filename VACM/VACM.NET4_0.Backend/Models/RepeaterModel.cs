@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -720,6 +721,15 @@ namespace VACM.NET4_0.Backend.Models
       (
         this,
         new PropertyChangedEventArgs(propertyName)
+      );
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "PropertyChanged: '{1}'" +
+          propertyName
+        )
       );
     }
 

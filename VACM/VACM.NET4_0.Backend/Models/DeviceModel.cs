@@ -1,5 +1,6 @@
 ﻿using NAudio.CoreAudioApi;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using VACM.NET4_0.Backend.Structs;
 
@@ -227,10 +228,19 @@ namespace VACM.NET4_0.Backend.Models
     private void OnPropertyChanged(string propertyName)
     {
       PropertyChanged?.Invoke
+      (
+        this,
+        new PropertyChangedEventArgs(propertyName)
+      );
+
+      Debug.WriteLine
+      (
+        string.Format
         (
-          this,
-          new PropertyChangedEventArgs(propertyName)
-        );
+          "PropertyChanged: '{1}'" +
+          propertyName
+        )
+      );
     }
 
     #endregion
