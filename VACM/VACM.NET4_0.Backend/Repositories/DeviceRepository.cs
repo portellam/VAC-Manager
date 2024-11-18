@@ -27,7 +27,37 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <summary>
     /// The collection of devices.
     /// </summary>
-    private HashSet<DeviceModel> deviceModelHashSet;
+    private HashSet<DeviceModel> DeviceModelHashSet;
+
+    /// <summary>
+    /// The list of device IDs.
+    /// </summary>
+    private List<uint> IdList
+    {
+      get
+      {
+        List<uint> list =
+          DeviceModelHashSet
+            .Select(x => x.Id)
+            .ToList();
+
+        list.Sort();
+        return list;
+      }
+    }
+
+    /// <summary>
+    /// The next valid repeater ID.
+    /// </summary>
+    private uint NextId
+    {
+      get
+      {
+        uint id = IdList.LastOrDefault();
+        id++;
+        return id;
+      }
+    }
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -41,7 +71,7 @@ namespace VACM.NET4_0.Backend.Repositories
     [ExcludeFromCodeCoverage]
     public DeviceRepository(List<MMDevice> mMDeviceList)
     {
-      deviceModelHashSet = new HashSet<DeviceModel>();
+      DeviceModelHashSet = new HashSet<DeviceModel>();
       uint id = 0;
 
       mMDeviceList
@@ -56,7 +86,7 @@ namespace VACM.NET4_0.Backend.Repositories
                 x
               );
 
-            deviceModelHashSet
+            DeviceModelHashSet
               .Add(deviceModel);
 
             if (id == uint.MaxValue)
@@ -81,7 +111,7 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       uint id = 0;
 
-      deviceModelHashSet
+      DeviceModelHashSet
         .ToList()
         .ForEach
         (
@@ -104,7 +134,7 @@ namespace VACM.NET4_0.Backend.Repositories
       (
         id is null
         || id < 0
-        || deviceModelHashSet
+        || DeviceModelHashSet
           .Any(x => x.Id == id)
       )
       {
@@ -149,7 +179,7 @@ namespace VACM.NET4_0.Backend.Repositories
       }
 
       return
-        deviceModelHashSet
+        DeviceModelHashSet
           .FirstOrDefault(x => x.ActualId == actualId);
     }
 
@@ -170,7 +200,7 @@ namespace VACM.NET4_0.Backend.Repositories
       }
 
       return
-        deviceModelHashSet
+        DeviceModelHashSet
           .FirstOrDefault(x => x.Id == id);
     }
 
@@ -180,13 +210,13 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <returns>The device list.</returns>
     public List<DeviceModel> GetAll()
     {
-      if (deviceModelHashSet is null)
+      if (DeviceModelHashSet is null)
       {
         return new List<DeviceModel>();
       }
 
       return
-        deviceModelHashSet
+        DeviceModelHashSet
           .ToList();
     }
 
@@ -196,13 +226,13 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <returns>The absent device list.</returns>
     public List<DeviceModel> GetAllAbsent()
     {
-      if (deviceModelHashSet is null)
+      if (DeviceModelHashSet is null)
       {
         return new List<DeviceModel>();
       }
 
       return
-        deviceModelHashSet
+        DeviceModelHashSet
           .Where(x => !x.IsPresent)
           .ToList();
     }
@@ -213,13 +243,13 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <returns>The input device list.</returns>
     public List<DeviceModel> GetAllInput()
     {
-      if (deviceModelHashSet is null)
+      if (DeviceModelHashSet is null)
       {
         return new List<DeviceModel>();
       }
 
       return
-        deviceModelHashSet
+        DeviceModelHashSet
           .Where(x => x.IsInput)
           .ToList();
     }
@@ -230,13 +260,13 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <returns>The output device list.</returns>
     public List<DeviceModel> GetAllOutput()
     {
-      if (deviceModelHashSet is null)
+      if (DeviceModelHashSet is null)
       {
         return new List<DeviceModel>();
       }
 
       return
-        deviceModelHashSet
+        DeviceModelHashSet
           .Where(x => x.IsOutput)
           .ToList();
     }
@@ -247,13 +277,13 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <returns>The present device list.</returns>
     public List<DeviceModel> GetAllPresent()
     {
-      if (deviceModelHashSet is null)
+      if (DeviceModelHashSet is null)
       {
         return new List<DeviceModel>();
       }
 
       return
-        deviceModelHashSet
+        DeviceModelHashSet
           .Where(x => x.IsPresent)
           .ToList();
     }
@@ -267,7 +297,7 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if
       (
-        deviceModelHashSet is null
+        DeviceModelHashSet is null
         || actualIdList is null
         || actualIdList.Count() == 0
       )
@@ -304,7 +334,7 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if
       (
-        deviceModelHashSet is null
+        DeviceModelHashSet is null
         || idList is null
         || idList.Count() == 0
       )
@@ -349,6 +379,7 @@ namespace VACM.NET4_0.Backend.Repositories
       );
     }
 
+
     public void Insert
     (
       string actualId,
@@ -358,7 +389,7 @@ namespace VACM.NET4_0.Backend.Repositories
       bool? isPresent
     )
     {
-      if (deviceModelHashSet.Count() >= Global.MaxEndpointCount)
+      if (DeviceModelHashSet.Count() >= Global.MaxEndpointCount)
       {
         Console.WriteLine
           (
@@ -390,7 +421,7 @@ namespace VACM.NET4_0.Backend.Repositories
           isPresent
         );
 
-      deviceModelHashSet
+      DeviceModelHashSet
         .Add(deviceModel);
     }
 
@@ -405,7 +436,7 @@ namespace VACM.NET4_0.Backend.Repositories
         return;
       }
 
-      deviceModelHashSet
+      DeviceModelHashSet
         .RemoveWhere(x => x.Id == id);
     }
 
@@ -416,19 +447,49 @@ namespace VACM.NET4_0.Backend.Repositories
         return;
       }
 
-      deviceModelHashSet
+      DeviceModelHashSet
         .RemoveWhere(x => x.ActualId == actualId);
     }
 
     /// <summary>
-    /// Update the device.
+    /// Remove a list of repeaters.
+    /// </summary>
+    /// <param name="name">The device name</param>
+    public void RemoveRange(string name)
+    {
+      if (string.IsNullOrWhiteSpace(name))
+      {
+        Debug.WriteLine
+        (
+          "Failed to remove device. " +
+          "Device name is null or whitespace."
+        );
+
+        return;
+      }
+
+      int count = DeviceModelHashSet
+        .RemoveWhere(x => x.Name == name);
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Removed devices\t=> Count: '{1}'" +
+          count
+        )
+      );
+    }
+
+    /// <summary>
+    /// Update a device.
     /// </summary>
     /// <param name="id">The device ID</param>
     /// <param name="actualId">The actual device ID</param>
     /// <param name="name">The actual device name</param>
-    /// <param name="isInput">True/false is the device</param>
-    /// <param name="isOutput"></param>
-    /// <param name="isPresent"></param>
+    /// <param name="isInput">True/false is an input device</param>
+    /// <param name="isOutput">True/false is an output device</param>
+    /// <param name="isPresent">True/false is the device present</param>
     public void Update
     (
       uint? id,
