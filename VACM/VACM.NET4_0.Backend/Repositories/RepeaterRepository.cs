@@ -22,7 +22,7 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <summary>
     /// The list of repeater IDs.
     /// </summary>
-    private List<uint> repeaterIdList
+    private List<uint> IdList
     {
       get
       {
@@ -39,11 +39,11 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <summary>
     /// The next valid repeater ID.
     /// </summary>
-    private uint nextId
+    private uint NextId
     {
       get
       {
-        uint id = repeaterIdList.LastOrDefault();
+        uint id = IdList.LastOrDefault();
         id++;
         return id;
       }
@@ -410,7 +410,7 @@ namespace VACM.NET4_0.Backend.Repositories
 
         uint id = repeaterModel.Id;
 
-      if (repeaterIdList.Contains(id))
+      if (IdList.Contains(id))
       {
         Debug.WriteLine
         (
@@ -421,7 +421,7 @@ namespace VACM.NET4_0.Backend.Repositories
           )
         );
 
-        id = nextId;
+        id = NextId;
       }
 
       if (!RepeaterModelHashSet.Add(repeaterModel))
@@ -578,8 +578,6 @@ namespace VACM.NET4_0.Backend.Repositories
           count
         )
       );
-
-      return;
     }
 
     /// <summary>
