@@ -1,5 +1,4 @@
-﻿using NAudio.CoreAudioApi;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using VACM.NET4_0.Backend.Structs;
@@ -136,26 +135,6 @@ namespace VACM.NET4_0.Backend.Models
     /// Abstract of the actual audio device.
     /// </summary>
     /// <param name="id">The device ID</param>
-    /// <param name="mMDevice">The actual device</param>
-    [ExcludeFromCodeCoverage]
-    public DeviceModel
-    (
-      uint id,
-      MMDevice mMDevice
-    )
-    {
-      Id = id;
-      ActualId = mMDevice.ID;
-      Name = mMDevice.FriendlyName;
-      IsInput = mMDevice.DataFlow == DataFlow.Capture;
-      IsOutput = mMDevice.DataFlow == DataFlow.Capture;
-      IsPresent = IsNotAbsent(mMDevice.State);
-    }
-
-    /// <summary>
-    /// Abstract of the actual audio device.
-    /// </summary>
-    /// <param name="id">The device ID</param>
     /// <param name="actualId">The actual device ID</param>
     /// <param name="name">The device name</param>
     /// <param name="isInput">True/false is an input device</param>
@@ -206,19 +185,6 @@ namespace VACM.NET4_0.Backend.Models
       isInput = IsInput;
       isOutput = IsOutput;
       isPresent = IsPresent;
-    }
-
-    /// <summary>
-    /// Is present.
-    /// </summary>
-    /// <param name="deviceState">The device state</param>
-    /// <returns>True/false is the device present.</returns>
-    private bool IsNotAbsent(DeviceState deviceState)
-    {
-      return
-        deviceState == DeviceState.Active
-        || deviceState == DeviceState.Disabled
-        || deviceState == DeviceState.Unplugged;
     }
 
     /// <summary>
