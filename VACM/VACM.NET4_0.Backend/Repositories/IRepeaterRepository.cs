@@ -23,17 +23,34 @@ namespace VACM.NET4_0.Backend.Repositories
     );
 
     List<RepeaterModel> GetAll();
+    
+    List<RepeaterModel> GetRange
+    (
+      string deviceName,
+      bool isInputDevice,
+      bool isOutputDevice
+    );
+    
     List<RepeaterModel> GetRange(List<uint?> idList);
     void Insert(RepeaterModel repeaterModel);
 
-    //void Insert
-    //(
-    //  string actualId,
-    //  string name,
-    //  bool? isInput,
-    //  bool? isOutput,
-    //  bool? isPresent
-    //);
+    void Insert
+    (
+      uint id,
+      uint inputDeviceId,
+      uint outputDeviceId,
+      byte bitsPerSample,
+      byte bufferAmount,
+      byte prefillPercentage,
+      byte resyncAtPercentage,
+      string inputDeviceName,
+      string outputDeviceName,
+      string pathName,
+      string windowName,
+      uint channelMask,
+      uint sampleRateKHz,
+      ushort bufferDurationMs
+    );
 
     void Remove
     (
