@@ -63,6 +63,11 @@ namespace VACM.NET4_0.Backend.Repositories
       uint? secondDeviceId
     );
 
+    void RemoveRange
+    (
+      string deviceName
+    );
+
     void Update(RepeaterModel repeaterModel);
 
     void Update
