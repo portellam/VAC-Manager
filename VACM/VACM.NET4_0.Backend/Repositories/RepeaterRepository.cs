@@ -90,7 +90,7 @@ namespace VACM.NET4_0.Backend.Repositories
       (
         string.Format
         (
-          "Removed repeaters\t=> Count: '{1}'" +
+          "Removed repeaters\t=> Count: '{1}'",
           count
         )
       );
@@ -114,7 +114,7 @@ namespace VACM.NET4_0.Backend.Repositories
       (
         string.Format
         (
-          "PropertyChanged: '{1}'" +
+          "PropertyChanged: '{1}'",
           propertyName
         )
       );
@@ -146,7 +146,7 @@ namespace VACM.NET4_0.Backend.Repositories
         (
           string.Format
           (
-            "Got repeater\t=> Id: '{1}'" +
+            "Got repeater\t=> Id: '{1}'",
             repeaterModel.Id
           )
         );
@@ -206,7 +206,7 @@ namespace VACM.NET4_0.Backend.Repositories
         (
           string.Format
           (
-            "Got repeater\t=> Id: '{1}'" +
+            "Got repeater\t=> Id: '{1}'",
             repeaterModel.Id
           )
         );
@@ -408,7 +408,7 @@ namespace VACM.NET4_0.Backend.Repositories
         return;
       }
 
-        uint id = repeaterModel.Id;
+      uint id = repeaterModel.Id;
 
       if (IdList.Contains(id))
       {
@@ -416,7 +416,7 @@ namespace VACM.NET4_0.Backend.Repositories
         (
           string.Format
           (
-            "Repeater ID is not valid\t=> Id: '{1}'" +
+            "Repeater ID is not valid\t=> Id: '{1}'",
             id
           )
         );
@@ -430,7 +430,7 @@ namespace VACM.NET4_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to insert repeater\t=> Id: '{1}'" +
+            "Failed to insert repeater\t=> Id: '{1}'",
             id
           )
         );
@@ -442,7 +442,7 @@ namespace VACM.NET4_0.Backend.Repositories
       (
         string.Format
         (
-          "Inserted repeater\t=> Id: '{1}'" +
+          "Inserted repeater\t=> Id: '{1}'",
           id
         )
       );
@@ -574,7 +574,7 @@ namespace VACM.NET4_0.Backend.Repositories
       (
         string.Format
         (
-          "Removed repeaters\t=> Count: '{1}'" +
+          "Removed repeaters\t=> Count: '{1}'",
           count
         )
       );
@@ -603,7 +603,7 @@ namespace VACM.NET4_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to update repeater. Repeater does not exist\t=> Id: '{1}'" +
+            "Failed to update repeater. Repeater does not exist\t=> Id: '{1}'",
             repeaterModel.Id
           )
         );
@@ -617,7 +617,7 @@ namespace VACM.NET4_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to update repeater\t=> Id: '{1}'" +
+            "Failed to update repeater\t=> Id: '{1}'",
             repeaterModel.Id
           )
         );
@@ -629,7 +629,7 @@ namespace VACM.NET4_0.Backend.Repositories
       (
         string.Format
         (
-          "Updated repeater\t=> Id: '{1}'" +
+          "Updated repeater\t=> Id: '{1}'",
           repeaterModel.Id
         )
       );
