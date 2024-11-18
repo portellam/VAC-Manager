@@ -24,6 +24,7 @@ namespace VACM.NET4_0.Backend.Repositories
     List<DeviceModel> GetAllPresent();
     List<DeviceModel> GetRange(List<string> actualIdList);
     List<DeviceModel> GetRange(List<uint?> idList);
+    void Insert(DeviceModel deviceModel);
     void Insert(MMDevice mMDevice);
 
     void Insert
@@ -36,20 +37,19 @@ namespace VACM.NET4_0.Backend.Repositories
     );
 
     void Remove(uint? Id);
-
     void Remove(string actualId);
-
     void RemoveRange(string name);
+    void Update(DeviceModel deviceModel);
 
     void Update
     (
-      uint? id,
+      uint id,
       MMDevice mMDevice
     );
 
     void Update
     (
-      uint? id,
+      uint id,
       string actualId,
       string name,
       bool? isInput,
