@@ -121,7 +121,7 @@ namespace VACM.NET4_0.Backend.Repositories
     }
 
     /// <summary>
-    /// Get repeater by ID.
+    /// Get repeater.
     /// </summary>
     /// <param name="id">the repeater ID</param>
     /// <returns>The repeater.</returns>
@@ -156,7 +156,7 @@ namespace VACM.NET4_0.Backend.Repositories
     }
 
     /// <summary>
-    /// Get repeater by ID.
+    /// Get repeater.
     /// </summary>
     /// <param name="firstDeviceId">The first device ID</param>
     /// <param name="secondDeviceId">The second device ID</param>
@@ -240,7 +240,7 @@ namespace VACM.NET4_0.Backend.Repositories
     }
 
     /// <summary>
-    /// Get repeater list by device name.
+    /// Get repeater list.
     /// </summary>
     /// <param name="deviceName">The device name</param>
     /// <param name="isInputDevice">True/false is input device</param>
@@ -516,30 +516,7 @@ namespace VACM.NET4_0.Backend.Repositories
         return;
       }
 
-      bool isSuccess = Remove((uint)id);
-
-      if (!isSuccess)
-      {
-        Debug.WriteLine
-        (
-          string.Format
-          (
-            "Failed to remove repeater\t=> Id: '{1}'" +
-            id
-          )
-        );
-
-        return;
-      }
-
-      Debug.WriteLine
-      (
-        string.Format
-        (
-          "Removed repeater\t=> Id: '{1}'" +
-          id
-        )
-      );
+      Remove((uint)id);
     }
 
     /// <summary>
@@ -566,6 +543,43 @@ namespace VACM.NET4_0.Backend.Repositories
       }
 
       Remove(repeaterModel.Id);
+    }
+
+    /// <summary>
+    /// Remove a list of repeaters.
+    /// </summary>
+    /// <param name="deviceName">The input or output device name</param>
+    public void RemoveRange(string deviceName)
+    {
+      if (string.IsNullOrWhiteSpace(deviceName))
+      {
+        Debug.WriteLine
+        (
+          "Failed to remove repeater. " +
+          "Input or output device name is null or whitespace."
+        );
+
+        return;
+      }
+
+      int count = RepeaterModelHashSet
+        .RemoveWhere
+        (
+          x =>
+          x.InputDeviceName == deviceName
+          || x.OutputDeviceName == deviceName
+        );
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Removed repeaters\t=> Count: '{1}'" +
+          count
+        )
+      );
+
+      return;
     }
 
     /// <summary>
