@@ -1,5 +1,5 @@
-# Virtual Audio Cable Audio Repeater Manager
-**or** *VAC Audio Repeater Manager*
+# Audio Repeater Manager for Virtual Audio Cable
+**or** VACARM
 ### In Development
 Easily multiplex multiple audio sources. Create, manage, and automate
 instances of [Virtual Audio Cable](#Licensing) (VAC) audio repeaters. Compatible
@@ -95,8 +95,8 @@ faciliate [multiplexing](#71-multiplexing).
 - Download the Latest Release:&ensp;~[Codeberg][codeberg-releases],
 [GitHub][github-releases]~
 
-[codeberg-releases]: https://codeberg.org/portellam/VAC-Manager/releases/latest
-[github-releases]:   https://github.com/portellam/VAC-Manager/releases/latest
+[codeberg-releases]: https://codeberg.org/portellam/audio-repeater-manager-for-virtual-audio-cable/releases/latest
+[github-releases]:   https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/releases/latest
 
 ## 5. Usage
 ### 5.1. Install
@@ -105,19 +105,19 @@ TODO: add details here.
 ### 5.2. Graphics User Interface (GUI) version
 TODO:
 - add details here.
-- make `vacarm.exe`
+- make `VACARM-GUI.exe`
 
-### 5.3. Command Line Interface (CLI) version
+### 5.3. Terminal User Interface version
 TODO:
 - explain console version input parameters.
-- make `vacarm-cli.exe`
+- make `VACARM-TUI.exe`
 
 ## 6. Contact
 Did you encounter a bug? Do you need help? Please visit the
 **Issues page** ([Codeberg][codeberg-issues], [GitHub][github-issues]).
 
-[codeberg-issues]: https://github.com/portellam/vac-manager/issues
-[github-issues]:   https://github.com/portellam/vac-manager/issues
+[codeberg-issues]: https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
+[github-issues]:   https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
 
 ## 7. Keywords
 ### 7.1. Multiplexing
