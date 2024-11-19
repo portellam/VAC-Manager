@@ -17,8 +17,9 @@ namespace VACM.NET4_0.Backend.Repositories
 
     DeviceModel Get(string actualId);
     DeviceModel Get(uint? id);
-    List<DeviceModel> GetAllAbsent();
     List<DeviceModel> GetAll();
+    List<DeviceModel> GetAllAbsent();
+    List<DeviceModel> GetAllDuplex();
     List<DeviceModel> GetAllInput();
     List<DeviceModel> GetAllOutput();
     List<DeviceModel> GetAllPresent();
