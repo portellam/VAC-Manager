@@ -66,6 +66,79 @@ namespace VACM.NET4_0.Backend.Repositories
     }
 
     /// <summary>
+    /// Does repeater contain device.
+    /// </summary>
+    /// <param name="repeaterModel">The repeater</param>
+    /// <param name="deviceName">The device name</param>
+    /// <param name="isInputDevice">True/false is input device</param>
+    /// <param name="isOutputDevice">True/false is output device</param>
+    /// <returns>True/false does repeater contain device.</returns>
+    private bool RepeaterContainsDevice
+    (
+      RepeaterModel repeaterModel,
+      string deviceName,
+      bool isInputDevice,
+      bool isOutputDevice
+    )
+    {
+      if
+      (
+        isInputDevice
+        && repeaterModel.InputDeviceName == deviceName
+      )
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Found input device => Name: {1}",
+            deviceName
+          )
+        );
+
+        return true;
+      }
+
+      else if
+      (
+        isOutputDevice
+        && repeaterModel.OutputDeviceName == deviceName
+      )
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Found output device => Name: {1}",
+            deviceName
+          )
+        );
+
+        return true;
+      }
+
+      else if
+      (
+        repeaterModel.InputDeviceName == deviceName
+        || repeaterModel.OutputDeviceName == deviceName
+      )
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Found duplex device => Name: {1}",
+            deviceName
+          )
+        );
+
+        return true;
+      }
+
+      return false;
+    }
+
+    /// <summary>
     /// Logs event when property has changed.
     /// </summary>
     /// <param name="propertyName">The property name</param>
@@ -96,6 +169,12 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (id is null)
       {
+        Debug.WriteLine
+        (
+          "Failed to get repeater. " +
+          "Repeater ID is null."
+        );
+
         return null;
       }
 
@@ -206,6 +285,8 @@ namespace VACM.NET4_0.Backend.Repositories
       return RepeaterModelHashSet.ToList();
     }
 
+    
+
     /// <summary>
     /// Get repeater list.
     /// </summary>
@@ -236,55 +317,15 @@ namespace VACM.NET4_0.Backend.Repositories
           {
             if
             (
-              isInputDevice
-              && x.InputDeviceName == deviceName
+              RepeaterContainsDevice
+              (
+                x,
+                deviceName,
+                isInputDevice,
+                isOutputDevice
+              )
             )
             {
-              Debug.WriteLine
-              (
-                string.Format
-                (
-                  "Found input device => Name: {1}",
-                  deviceName
-                )
-              );
-
-              repeaterModelList.Add(x);
-            }
-
-            else if
-            (
-              isOutputDevice
-              && x.OutputDeviceName == deviceName
-            )
-            {
-              Debug.WriteLine
-              (
-                string.Format
-                (
-                  "Found output device => Name: {1}",
-                  deviceName
-                )
-              );
-
-              repeaterModelList.Add(x);
-            }
-
-            else if
-            (
-              x.InputDeviceName == deviceName
-              || x.OutputDeviceName == deviceName
-            )
-            {
-              Debug.WriteLine
-              (
-                string.Format
-                (
-                  "Found duplex device => Name: {1}",
-                  deviceName
-                )
-              );
-
               repeaterModelList.Add(x);
             }
           }
@@ -311,10 +352,10 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if
       (
-        idList is null
-        || idList.Count == 0
-        || RepeaterModelHashSet is null
+        RepeaterModelHashSet is null
         || RepeaterModelHashSet.Count == 0
+        || idList is null
+        || idList.Count == 0
       )
       {
         Debug.WriteLine
@@ -324,7 +365,7 @@ namespace VACM.NET4_0.Backend.Repositories
           "or repeater collection is either null or empty."
         );
 
-        return null;
+        return new List<RepeaterModel>();
       }
 
       List<RepeaterModel> repeaterModelList = new List<RepeaterModel>();
