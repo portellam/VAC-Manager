@@ -24,7 +24,7 @@ with Microsoft Windows XP SP3 to 10/11.
 - [9. Licenses](#9-licenses)
 
 ## 1. Why?
-- Allows for **multiplexing**(#71-multiplexing) of audio streams, of which is
+- Allows for [**multiplexing**](#71-multiplexing) of audio streams, of which is
 not natively supported in Microsoft Windows.
 - Examples include (but not limited to):
   * video game session recording/stream setup.
