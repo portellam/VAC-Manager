@@ -1,4 +1,4 @@
-# Virtual Audio Cable Manager
+# Virtual Audio Cable Audio Repeater Manager (VAC Audio Repeater Manager)
 ### In Development
 Easily multiplex multiple audio sources. Create, manage, and automate
 instances of [Virtual Audio Cable](#Licensing) (VAC) audio repeaters. Compatible
@@ -21,17 +21,24 @@ with Microsoft Windows XP SP3 to 10/11.
 
 ## Contents
 ### 1. Why?
-- Allow for multiplexing of audio streams, of which is not natively supported in
+- Allows for multiplexing of audio streams, of which is not natively supported in
 Microsoft Windows.
 - Examples include (but not limited to):
-  * audio broadcaster setup.
   * video game session recording/stream setup.<sup>[**1**]</sup>
+  * music recording.<sup>[**2**]</sup>
 - Turnkey solution, no tedious work of opening or closing instances of VAC
 audio repeater.
 
 **[1]** Given three audio sources, a local microphone, incoming voice chat audio,
-and game audio. Record each source as separate audio streams, and allow the user
-to only listen to the latter two audio sources (and not his/her own voice).
+and game audio: record each source as separate audio streams; and specify to only
+listen to two of the three audio sources (incoming voice and game audio).
+
+**[2]** Given multiple incoming audio sources (instruments and microphones),
+a time-keeping audio source (a Metronome), and the incoming/outgoing voice chat
+between audio engineer and music band: record all channels from music band
+separately, for optimal future remastering; allow for future editor(s) to mitigate
+time-keeping audio and audio engineer communication within master recording.
+`Come on Dave, give me a break...` - *Unchained*, Van Halen
 
 ### 2. Features
 - Load/Save audio stream setup to/from file.
@@ -82,8 +89,8 @@ TODO:
 Did you encounter a bug? Do you need help? Please visit the
 **Issues page** ([Codeberg][codeberg-issues], [GitHub][github-issues]).
 
-[codeberg-issues]: https://codeberg.org/portellam/parse-iommu-devices/issues
-[github-issues]:   https://github.com/portellam/parse-iommu-devices/issues
+[codeberg-issues]: https://github.com/portellam/vac-manager/issues
+[github-issues]:   https://github.com/portellam/vac-manager/issues
 
 ## 7. Keywords
 #### 1. Multiplexing
