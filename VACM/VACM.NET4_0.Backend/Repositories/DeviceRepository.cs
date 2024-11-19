@@ -171,6 +171,12 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (string.IsNullOrWhiteSpace(actualId))
       {
+        Debug.WriteLine
+        (
+          "Failed to get device. " +
+          "Actual device ID is either null or whitespace."
+        );
+
         return null;
       }
 
@@ -186,18 +192,39 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <returns>The device to get.</returns>
     public DeviceModel Get(uint? id)
     {
-      if
-      (
-        id is null
-        || id < 0
-      )
+      if (id is null)
       {
+        Debug.WriteLine
+        (
+          "Failed to get device. " +
+          "Device ID is null."
+        );
+
         return null;
       }
 
-      return
-        DeviceModelHashSet
-          .FirstOrDefault(x => x.Id == id);
+      DeviceModel deviceModel = DeviceModelHashSet
+        .FirstOrDefault(x => x.Id == id);
+
+
+      if (deviceModel is null)
+      {
+        Debug.WriteLine("Device is null.");
+      }
+
+      else
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Got device\t=> Id: '{1}'",
+            deviceModel.Id
+          )
+        );
+      }
+
+      return deviceModel;
     }
 
     /// <summary>
@@ -208,12 +235,20 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (DeviceModelHashSet is null)
       {
+        Debug.WriteLine("Failed to get device(s). Device collection is null.");
         return new List<DeviceModel>();
       }
 
-      return
-        DeviceModelHashSet
-          .ToList();
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got device(s) => Count: {1}",
+          DeviceModelHashSet.Count()
+        )
+      );
+
+      return DeviceModelHashSet.ToList();
     }
 
     /// <summary>
@@ -234,6 +269,35 @@ namespace VACM.NET4_0.Backend.Repositories
     }
 
     /// <summary>
+    /// Get the duplex device list.
+    /// </summary>
+    /// <returns>The duplex device list.</returns>
+    public List<DeviceModel> GetAllDuplex()
+    {
+      if (DeviceModelHashSet is null)
+      {
+        Debug.WriteLine("Failed to get duplex device(s). Device collection is null.");
+        return new List<DeviceModel>();
+      }
+
+      List<DeviceModel> deviceModelList = DeviceModelHashSet
+        .Where(x => x.IsDuplex)
+        .ToList();
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got duplex device(s) => Count: {1}",
+          deviceModelList.Count()
+        )
+      );
+
+      return deviceModelList;
+    }
+
+
+    /// <summary>
     /// Get the input device list.
     /// </summary>
     /// <returns>The input device list.</returns>
@@ -241,13 +305,24 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (DeviceModelHashSet is null)
       {
+        Debug.WriteLine("Failed to get input device(s). Device collection is null.");
         return new List<DeviceModel>();
       }
 
-      return
-        DeviceModelHashSet
-          .Where(x => x.IsInput)
-          .ToList();
+      List<DeviceModel> deviceModelList = DeviceModelHashSet
+        .Where(x => x.IsInput)
+        .ToList();
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got input device(s) => Count: {1}",
+          deviceModelList.Count()
+        )
+      );
+
+      return deviceModelList;
     }
 
     /// <summary>
@@ -258,13 +333,24 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (DeviceModelHashSet is null)
       {
+        Debug.WriteLine("Failed to get output device(s). Device collection is null.");
         return new List<DeviceModel>();
       }
 
-      return
-        DeviceModelHashSet
-          .Where(x => x.IsOutput)
-          .ToList();
+      List<DeviceModel> deviceModelList = DeviceModelHashSet
+        .Where(x => x.IsOutput)
+        .ToList();
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got output device(s) => Count: {1}",
+          deviceModelList.Count()
+        )
+      );
+
+      return deviceModelList;
     }
 
     /// <summary>
@@ -275,13 +361,24 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (DeviceModelHashSet is null)
       {
+        Debug.WriteLine("Failed to get present device(s). Device collection is null.");
         return new List<DeviceModel>();
       }
 
-      return
-        DeviceModelHashSet
-          .Where(x => x.IsPresent)
-          .ToList();
+      List<DeviceModel> deviceModelList = DeviceModelHashSet
+        .Where(x => x.IsPresent)
+        .ToList();
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got present device(s) => Count: {1}",
+          deviceModelList.Count()
+        )
+      );
+
+      return deviceModelList;
     }
 
     /// <summary>
@@ -294,10 +391,18 @@ namespace VACM.NET4_0.Backend.Repositories
       if
       (
         DeviceModelHashSet is null
+        || DeviceModelHashSet.Count == 0
         || actualIdList is null
         || actualIdList.Count() == 0
       )
       {
+        Debug.WriteLine
+        (
+          "Failed to get device(s). " +
+          "Device ID list is either null or empty, " +
+          "or device collection is either null or empty."
+        );
+
         return new List<DeviceModel>();
       }
 
@@ -310,7 +415,7 @@ namespace VACM.NET4_0.Backend.Repositories
           {
             DeviceModel deviceModel = Get(x);
 
-            if (deviceModel != null)
+            if (!(deviceModel is null))
             {
               deviceModelList
                 .Add(deviceModel);
@@ -330,12 +435,20 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if
       (
-        DeviceModelHashSet is null
-        || idList is null
-        || idList.Count() == 0
+        idList is null
+        || idList.Count == 0
+        || DeviceModelHashSet is null
+        || DeviceModelHashSet.Count == 0
       )
       {
-        return new List<DeviceModel>();
+        Debug.WriteLine
+        (
+          "Failed to get device(s). " +
+          "Device ID list is either null or empty, " +
+          "or device collection is either null or empty."
+        );
+
+        return null;
       }
 
       List<DeviceModel> deviceModelList = new List<DeviceModel>();
@@ -343,17 +456,19 @@ namespace VACM.NET4_0.Backend.Repositories
       idList
         .ForEach
         (
-          x =>
-          {
-            DeviceModel deviceModel = Get(x);
-
-            if (deviceModel != null)
-            {
-              deviceModelList
-                .Add(deviceModel);
-            }
-          }
+          id =>
+          deviceModelList
+            .Add(Get(id))
         );
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got device(s) => Count: {1}",
+          deviceModelList.Count()
+        )
+      );
 
       return deviceModelList;
     }
