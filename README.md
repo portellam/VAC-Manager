@@ -29,7 +29,7 @@ not natively supported in Microsoft Windows.
 - Examples include (but not limited to):
   * video game session recording/stream setup.
 <sup>[**1**](#11-example-video-games)</sup>
-  * music recording.<sup>[**2**](#12-example-music-recording-session)</sup>
+  * music recording. <sup>[**2**](#12-example-music-recording-session)</sup>
 - **Turnkey** solution, no tedious work of opening or closing instances of VAC
 audio repeater.
 
