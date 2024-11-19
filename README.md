@@ -22,32 +22,34 @@ with Microsoft Windows XP SP3 to 10/11.
 
 ## Contents
 ### 1. Why?
-- Allows for multiplexing of audio streams, of which is not natively supported in
+- Allows for **multiplexing** of audio streams, of which is not natively supported in
 Microsoft Windows.
 - Examples include (but not limited to):
-  * video game session recording/stream setup.<sup>[**1**]</sup>
-  * music recording.<sup>[**2**]</sup>
-- Turnkey solution, no tedious work of opening or closing instances of VAC
+  * video game session recording/stream setup.<sup>[**1**]</sup>(#11-video-game-setup)
+  * music recording.<sup>[**2**]</sup>(#12-music-recording-session)
+- **Turnkey** solution, no tedious work of opening or closing instances of VAC
 audio repeater.
 
-**[1]** Given three audio sources:
-- a local microphone
-- incoming voice chat audio,
-- game audio
+##### 1.1. Video Game Setup
+- Given three audio sources:
+  * a local microphone
+  * incoming voice chat audio
+  * game audio
 
-Allow for the following:
-1. Record each source as separate audio streams.
-2. Specify to only listen to two of the three audio sources (incoming voice and game audio).
+- Allow for the following:
+    1. Record each source as separate audio streams.
+    2. Specify to only listen to two of the three audio sources (incoming voice and game audio).
 
-**[2]** Given:
-- multiple incoming audio sources (instruments and microphones)
-- a time-keeping audio source (a Metronome)
-- the incoming/outgoing voice chat between audio engineer and band
+#### 1.2. Music Recording Session
+- Given:
+  * multiple incoming audio sources (instruments and microphones)
+  * a time-keeping audio source (a Metronome)
+  * the incoming/outgoing communication between audio engineer and band
 
-Allow for the following:
-1. Record all channels from music band separately, for optimal future
+- Allow for the following:
+  * Record all channels from music band separately, for optimal future
 remastering.
-2. Allow for future editor(s) to mitigate unnecessary audio sources
+  * Allow for future editor(s) to mitigate unnecessary audio sources
 (time-keeping audio and audio engineer communication) within master recording.
 
 `Come on Dave, give me a break...` - *Unchained*, Van Halen
