@@ -9,8 +9,8 @@ with Microsoft Windows XP SP3 to Windows 10 and 11.
 
 ## Table of Contents
 - [1. Why?](#1-why)
-  - [1.1. Example: Video Games](#11-example-video-games)
-  - [1.2. Example: Music Recording](#12-example-music-recording-session)
+  - [1.1. Use-case: Software-defined Multiplexing](#11-use-case-software-defined-multiplexing)
+  - [1.2.  Real-world equivalent: Hardware-defined Multiplexing](#12-real-world-equivalent-hardware-defined-multiplexing)
 - [2. Features](#2-features)
 - [3. Requirements](#3-requirements)
     - [3.1. Example](#31-example)
@@ -26,36 +26,42 @@ with Microsoft Windows XP SP3 to Windows 10 and 11.
 ## 1. Why?
 - Allows for [multiplexing](#71-multiplexing) of audio streams, of which is
 not natively supported in Microsoft Windows.
-- Examples include (but not limited to):
-  * video game session recording/stream setup.
-<sup>[**1**](#11-example-video-games)</sup>
-  * music recording. <sup>[**2**](#12-example-music-recording-session)</sup>
+- For example, effectively treat a
+[video game session](#11-use-case-software-defined-multiplexing) like a
+[music recording](#12-real-world-equivalent-hardware-defined-multiplexing).
 - **Turnkey** solution, no tedious work of opening or closing instances of VAC
 audio repeater.
 
-### 1.1. Example: Video Games
-Given three (3) audio sources:
-- a local microphone
-- incoming voice chat audio
-- game audio
+### 1.1. Use-case: Software-defined Multiplexing
+Given:
+- one (1) Gaming PC (to run VACARM).
+- one (1) Recording PC (optional: to run VACARM).
+- three (3) audio sources:
+  * a local microphone.
+  * incoming voice chat audio.
+  * game audio.
+- cables and/or adapters to transfer audio (and video) from the Gaming PC to the
+Recording PC.
+ 
+Allows:
+1. Specify to only listen to two of the three audio sources
+(incoming voice and game audio) on the Gaming PC.
+2. Record each source as separate audio streams on the Recording PC,
+for future audio/video editing.
 
-Allow for the following:
-1. Record each source as separate audio streams.
-2. Specify to only listen to two of the three audio sources
-(incoming voice and game audio).
-
-### 1.2. Example: Music Recording
+### 1.2. Real-world equivalent: Hardware-defined Multiplexing
 `(Come on, Dave, give me a break)` - *Unchained*, Van Halen
 
 Given:
-- multiple incoming audio sources (instruments and microphones)
-- a time-keeping audio source (a Metronome)
-- the incoming/outgoing communication between audio engineer and band
+- multiple incoming audio sources (instruments and microphones).
+- a time-keeping audio source (a Metronome).
+- the incoming/outgoing communication between audio engineer and band.
 
-Allow for the following:
-- Record all channels from music band separately, for optimal future
+Allows:
+1. Listen to all sources together, but record separately. 
+    a. Record all channels from music band separately, for optimal future
 remastering.
-- Allow for future editor(s) to mitigate unnecessary audio sources
+    b. Allow for future editor(s) to mitigate unnecessary audio sources
 (time-keeping audio and audio engineer communication) within master recording.
 
 ## 2. Features
