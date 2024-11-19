@@ -45,6 +45,8 @@ Allow for the following:
 (incoming voice and game audio).
 
 ### 1.2. Example: Music Recording
+`(Come on, Dave, give me a break)` - *Unchained*, Van Halen
+
 Given:
 - multiple incoming audio sources (instruments and microphones)
 - a time-keeping audio source (a Metronome)
@@ -55,8 +57,6 @@ Allow for the following:
 remastering.
 - Allow for future editor(s) to mitigate unnecessary audio sources
 (time-keeping audio and audio engineer communication) within master recording.
-
-`(Come on, Dave, give me a break)` - *Unchained*, Van Halen
 
 ## 2. Features
 - Load/Save audio stream setup to/from file.
