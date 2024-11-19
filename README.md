@@ -9,38 +9,40 @@ with Microsoft Windows XP SP3 to 10/11.
 
 ## Table of Contents
 - [1. Why?](#1-why)
+  - [Example: Video Games](#11-example-video-games)
+  - [Example: Music Recording](#12-example-music-recording-session)
 - [2. Features](#2-features)
 - [3. Requirements](#3-requirements)
     - [3.1. Operating System Requirements](#31-operating-system-requirements)
 - [4. Download](#4-download)
 - [5. Usage](#5-usage)
-    - [5.1. Install](#61-install)
-- [6. Contact](#7-contact)
-- [7. Keywords](#8-keywords)
+    - [5.1. Install](#51-install)
+- [6. Contact](#6-contact)
+- [7. Keywords](#7-keywords)
 - [8. Credits](#8-credits)
 - [9. Licenses](#9-licenses)
 
-## Contents
-### 1. Why?
+## 1. Why?
 - Allows for **multiplexing** of audio streams, of which is not natively supported in
 Microsoft Windows.
 - Examples include (but not limited to):
-  * video game session recording/stream setup.<sup>[**1**](#11-video-game-setup)</sup>
-  * music recording.<sup>[**2**](#12-music-recording-session)</sup>
+  * video game session recording/stream setup.<sup>[**1**](#11-example-video-games)</sup>
+  * music recording.<sup>[**2**](#12-example-music-recording-session)</sup>
 - **Turnkey** solution, no tedious work of opening or closing instances of VAC
 audio repeater.
 
-#### 1.1. Video Game Setup
-Given three audio sources:
+### 1.1. Example: Video Games
+Given three (3) audio sources:
 - a local microphone
 - incoming voice chat audio
 - game audio
 
 Allow for the following:
 1. Record each source as separate audio streams.
-2. Specify to only listen to two of the three audio sources (incoming voice and game audio).
+2. Specify to only listen to two of the three audio sources
+(incoming voice and game audio).
 
-#### 1.2. Music Recording Session
+### 1.2. Example: Music Recording
 Given:
 - multiple incoming audio sources (instruments and microphones)
 - a time-keeping audio source (a Metronome)
@@ -54,7 +56,7 @@ remastering.
 
 `Come on Dave, give me a break...` - *Unchained*, Van Halen
 
-### 2. Features
+## 2. Features
 - Load/Save audio stream setup to/from file.
 - Manage audio stream setup of current or other Windows machine(s).
 - Start/stop audio repeaters from within the application.
@@ -76,7 +78,7 @@ or more *physical* Line-Out(s).
 | Windows Vista SP2 or Server 2008 SP2       | 32-bit or 64-bit | Framework 4.6 |
 | Windows XP SP3 or Server 2003 SP2          | 32-bit           | Framework 4.0 |
 
-### 4. Download
+## 4. Download
 **No release is available at this time.**
 
 - Download the Latest Release:&ensp;~[Codeberg][codeberg-releases],
@@ -85,29 +87,29 @@ or more *physical* Line-Out(s).
 [codeberg-releases]: https://codeberg.org/portellam/VAC-Manager/releases/latest
 [github-releases]:   https://github.com/portellam/VAC-Manager/releases/latest
 
-### 5. Usage
-#### 5.1. Install
+## 5. Usage
+### 5.1. Install
 TODO: add details here.
 
-#### 5.2. Graphics User Interface (GUI) version
+### 5.2. Graphics User Interface (GUI) version
 TODO:
 - add details here.
 - make `vac-manager.exe`
 
-#### 5.3. Command Line Interface (CLI) version
+### 5.3. Command Line Interface (CLI) version
 TODO:
 - explain console version input parameters.
 - make `vac-manager-cli.exe`
 
-### 6. Contact
+## 6. Contact
 Did you encounter a bug? Do you need help? Please visit the
 **Issues page** ([Codeberg][codeberg-issues], [GitHub][github-issues]).
 
 [codeberg-issues]: https://github.com/portellam/vac-manager/issues
 [github-issues]:   https://github.com/portellam/vac-manager/issues
 
-## 7. Keywords
-#### 1. Multiplexing
+### 7. Keywords
+### 1. Multiplexing
 *In telecommunications and computer networking, multiplexing*
 *(sometimes contractedto muxing) is a method by which multiple analog or digital*
 *signals are combined into one signal over a shared medium.* [Wikipedia](k1)
