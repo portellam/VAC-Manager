@@ -23,10 +23,11 @@ with Microsoft Windows XP SP3 to 10/11.
 - [9. Licenses](#9-licenses)
 
 ## 1. Why?
-- Allows for **multiplexing** of audio streams, of which is not natively supported in
-Microsoft Windows.
+- Allows for **multiplexing**(#71-multiplexing) of audio streams, of which is
+not natively supported in Microsoft Windows.
 - Examples include (but not limited to):
-  * video game session recording/stream setup.<sup>[**1**](#11-example-video-games)</sup>
+  * video game session recording/stream setup.
+<sup>[**1**](#11-example-video-games)</sup>
   * music recording.<sup>[**2**](#12-example-music-recording-session)</sup>
 - **Turnkey** solution, no tedious work of opening or closing instances of VAC
 audio repeater.
@@ -64,16 +65,17 @@ remastering.
 
 ## 3. Requirements
 - [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
-- [VAC Control Panel](https://vac.muzychenko.net/en/download.htm)<sup>[**1**]</sup>
+- [VAC Control Panel](https://vac.muzychenko.net/en/download.htm)
+<sup>[**1**]</sup>
 
 **[1]** A minimum of one (1) virtual audio cable (Line-In and Line-Out pair) to
-faciliate [Mutiplexing](#1-multiplexing). Example: one (1) *virtual* Line-In > one
-or more *physical* Line-Out(s).
+faciliate [Mutiplexing](#71-multiplexing).
+Example: one (1) *virtual* Line-In to one or more *physical* Line-Out(s).
 
 ### 3.1. Operating System Requirements
 | Minimum OS version                         | CPU architecture | .NET version  |
 | :---                                       | :---:            | :---:         |
-| Windows 10 ver. 1809 or Server 2019        | 32-bit or 64-bit | 8.0		  	    |
+| Windows 10 ver. 1809 or Server 2019        | 32-bit or 64-bit | Core 8.0  	|
 | Windows 7 SP1 or Server 2008 R2            | 32-bit or 64-bit | Framework 4.8 |
 | Windows Vista SP2 or Server 2008 SP2       | 32-bit or 64-bit | Framework 4.6 |
 | Windows XP SP3 or Server 2003 SP2          | 32-bit           | Framework 4.0 |
@@ -109,10 +111,11 @@ Did you encounter a bug? Do you need help? Please visit the
 [github-issues]:   https://github.com/portellam/vac-manager/issues
 
 ### 7. Keywords
-### 1. Multiplexing
+#### 7.1. Multiplexing
 *In telecommunications and computer networking, multiplexing*
-*(sometimes contractedto muxing) is a method by which multiple analog or digital*
-*signals are combined into one signal over a shared medium.* [Wikipedia](k1)
+*(sometimes contracted to muxing) is a method by which multiple analog or*
+*digital signals are combined into one signal over a shared medium.*
+[Wikipedia](k1)
 
 [k1]: https://en.wikipedia.org/wiki/Multiplexing
 
