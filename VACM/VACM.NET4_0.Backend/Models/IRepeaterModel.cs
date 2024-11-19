@@ -49,6 +49,7 @@ namespace VACM.NET4_0.Backend.Models
       out byte bufferAmount,
       out byte prefillPercentage,
       out byte resyncAtPercentage,
+      out ChannelConfig channelConfig,
       out List<string> propertyList,
       out string inputDeviceName,
       out string outputDeviceName,

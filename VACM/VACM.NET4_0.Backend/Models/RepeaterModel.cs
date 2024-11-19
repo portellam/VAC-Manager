@@ -678,6 +678,7 @@ namespace VACM.NET4_0.Backend.Models
       out byte bufferAmount,
       out byte prefillPercentage,
       out byte resyncAtPercentage,
+      out ChannelConfig channelConfig,
       out List<string> propertyList,
       out string inputDeviceName,
       out string outputDeviceName,
@@ -694,7 +695,7 @@ namespace VACM.NET4_0.Backend.Models
       bitsPerSample = BitsPerSample;
       bufferDurationMs = BufferDurationMs;
       bufferAmount = BufferAmount;
-      //channelConfig = ChannelConfig;
+      channelConfig = ChannelConfig;
       channelMask = ChannelMask;
       inputDeviceName = InputDeviceName;
       outputDeviceName = OutputDeviceName;
