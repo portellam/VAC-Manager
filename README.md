@@ -30,15 +30,26 @@ Microsoft Windows.
 - Turnkey solution, no tedious work of opening or closing instances of VAC
 audio repeater.
 
-**[1]** Given three audio sources, a local microphone, incoming voice chat audio,
-and game audio: record each source as separate audio streams; and specify to only
-listen to two of the three audio sources (incoming voice and game audio).
+**[1]** Given three audio sources:
+- a local microphone
+- incoming voice chat audio,
+- game audio
 
-**[2]** Given multiple incoming audio sources (instruments and microphones),
-a time-keeping audio source (a Metronome), and the incoming/outgoing voice chat
-between audio engineer and music band: record all channels from music band
-separately, for optimal future remastering; allow for future editor(s) to mitigate
-time-keeping audio and audio engineer communication within master recording.
+Allow for the following:
+1. Record each source as separate audio streams.
+2. Specify to only listen to two of the three audio sources (incoming voice and game audio).
+
+**[2]** Given:
+- multiple incoming audio sources (instruments and microphones)
+- a time-keeping audio source (a Metronome)
+- the incoming/outgoing voice chat between audio engineer and band
+
+Allow for the following:
+1. Record all channels from music band separately, for optimal future
+remastering.
+2. Allow for future editor(s) to mitigate unnecessary audio sources
+(time-keeping audio and audio engineer communication) within master recording.
+
 `Come on Dave, give me a break...` - *Unchained*, Van Halen
 
 ### 2. Features
