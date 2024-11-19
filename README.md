@@ -56,7 +56,7 @@ remastering.
 - Allow for future editor(s) to mitigate unnecessary audio sources
 (time-keeping audio and audio engineer communication) within master recording.
 
-`Come on Dave, give me a break...` - *Unchained*, Van Halen
+`(Come on, Dave, give me a break)` - *Unchained*, Van Halen
 
 ## 2. Features
 - Load/Save audio stream setup to/from file.
