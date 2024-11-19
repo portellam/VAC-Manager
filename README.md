@@ -61,9 +61,9 @@ Given:
 
 Allows:
 1. Listen to all sources together, but record separately. 
-  a. Record all channels from music band separately, for optimal future
+  * Record all channels from music band separately, for optimal future
 remastering.
-  b. Allow for future editor(s) to mitigate unnecessary audio sources
+  * Allow for future editor(s) to mitigate unnecessary audio sources
 (time-keeping audio and audio engineer communication) within master recording.
 
 ## 2. Features
