@@ -3,7 +3,7 @@
 ### In Development
 Easily multiplex multiple audio sources. Create, manage, and automate
 instances of [Virtual Audio Cable](#Licensing) (VAC) audio repeaters. Compatible
-with Microsoft Windows XP SP3 to 10/11.
+with Microsoft Windows XP SP3 to Windows 10 and 11.
 
 ### ~[Download](#4-download)~
 
