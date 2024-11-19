@@ -285,8 +285,6 @@ namespace VACM.NET4_0.Backend.Repositories
       return RepeaterModelHashSet.ToList();
     }
 
-    
-
     /// <summary>
     /// Get repeater list.
     /// </summary>
