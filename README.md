@@ -69,11 +69,9 @@ remastering.
 - [VAC Control Panel](https://vac.muzychenko.net/en/download.htm)
 <sup>[**1**](#31-example)</sup>
 
-#### 3.1. Example
+### 3.1. Example
 A minimum of one (1) virtual audio cable (Line-In and Line-Out pair) to
 faciliate [multiplexing](#71-multiplexing).
-
-Example: one (1) *virtual* Line-In to one or more *physical* Line-Out(s).
 
 ### 3.2. Operating System Requirements
 | Minimum OS version                         | CPU architecture | .NET version  |
@@ -113,8 +111,11 @@ Did you encounter a bug? Do you need help? Please visit the
 [codeberg-issues]: https://github.com/portellam/vac-manager/issues
 [github-issues]:   https://github.com/portellam/vac-manager/issues
 
-### 7. Keywords
-#### 7.1. Multiplexing
+## 7. Keywords
+### 7.1. Multiplexing
+In the scope of this project: one *virtual* Line-In to one or more *physical*
+Line-Out(s).
+
 *In telecommunications and computer networking, multiplexing*
 *(sometimes contracted to muxing) is a method by which multiple analog or*
 *digital signals are combined into one signal over a shared medium.*
