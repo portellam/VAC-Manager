@@ -31,25 +31,25 @@ Microsoft Windows.
 audio repeater.
 
 #### 1.1. Video Game Setup
-- Given three audio sources:
-  * a local microphone
-  * incoming voice chat audio
-  * game audio
+Given three audio sources:
+- a local microphone
+- incoming voice chat audio
+- game audio
 
-- Allow for the following:
-    1. Record each source as separate audio streams.
-    2. Specify to only listen to two of the three audio sources (incoming voice and game audio).
+Allow for the following:
+1. Record each source as separate audio streams.
+2. Specify to only listen to two of the three audio sources (incoming voice and game audio).
 
 #### 1.2. Music Recording Session
-- Given:
-  * multiple incoming audio sources (instruments and microphones)
-  * a time-keeping audio source (a Metronome)
-  * the incoming/outgoing communication between audio engineer and band
+Given:
+- multiple incoming audio sources (instruments and microphones)
+- a time-keeping audio source (a Metronome)
+- the incoming/outgoing communication between audio engineer and band
 
-- Allow for the following:
-  * Record all channels from music band separately, for optimal future
+Allow for the following:
+- Record all channels from music band separately, for optimal future
 remastering.
-  * Allow for future editor(s) to mitigate unnecessary audio sources
+- Allow for future editor(s) to mitigate unnecessary audio sources
 (time-keeping audio and audio engineer communication) within master recording.
 
 `Come on Dave, give me a break...` - *Unchained*, Van Halen
