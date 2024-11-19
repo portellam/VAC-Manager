@@ -1,4 +1,5 @@
-# Virtual Audio Cable Audio Repeater Manager (VAC Audio Repeater Manager)
+# Virtual Audio Cable Audio Repeater Manager
+**or *VAC Audio Repeater Manager***
 ### In Development
 Easily multiplex multiple audio sources. Create, manage, and automate
 instances of [Virtual Audio Cable](#Licensing) (VAC) audio repeaters. Compatible
