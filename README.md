@@ -48,7 +48,8 @@ Allows:
 (incoming voice and game audio) on the Gaming PC.
 2. Record each source as separate audio streams on the Recording PC,
 for future audio/video editing.
-3. Optional: stream the audio and video via a Stream client on either PC.
+3. Optional: stream the audio and video via a broadcast or stream client on
+either PC.
 
 ### 1.2. Real-world equivalent: Hardware-defined Multiplexing
 `(Come on, Dave, give me a break)` - *Unchained*, Van Halen
@@ -60,9 +61,9 @@ Given:
 
 Allows:
 1. Listen to all sources together, but record separately. 
-    a. Record all channels from music band separately, for optimal future
+  a. Record all channels from music band separately, for optimal future
 remastering.
-    b. Allow for future editor(s) to mitigate unnecessary audio sources
+  b. Allow for future editor(s) to mitigate unnecessary audio sources
 (time-keeping audio and audio engineer communication) within master recording.
 
 ## 2. Features
@@ -104,12 +105,12 @@ TODO: add details here.
 ### 5.2. Graphics User Interface (GUI) version
 TODO:
 - add details here.
-- make `vac-manager.exe`
+- make `vacarm.exe`
 
 ### 5.3. Command Line Interface (CLI) version
 TODO:
 - explain console version input parameters.
-- make `vac-manager-cli.exe`
+- make `vacarm-cli.exe`
 
 ## 6. Contact
 Did you encounter a bug? Do you need help? Please visit the
