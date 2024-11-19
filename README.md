@@ -3,14 +3,12 @@
 ### In Development
 Easily multiplex multiple audio sources. Create, manage, and automate
 instances of [Virtual Audio Cable](#Licensing) (VAC) audio repeaters. Compatible
-with Microsoft Windows XP SP3 to Windows 10 and 11.
+with Microsoft Windows 2000 to Windows 11.
 
 ### ~[Download](#4-download)~
 
 ## Table of Contents
 - [1. Why?](#1-why)
-  - [1.1. Use-case: Software-defined Multiplexing](#11-use-case-software-defined-multiplexing)
-  - [1.2.  Real-world equivalent: Hardware-defined Multiplexing](#12-real-world-equivalent-hardware-defined-multiplexing)
 - [2. Features](#2-features)
 - [3. Requirements](#3-requirements)
     - [3.1. Example](#31-example)
@@ -34,8 +32,10 @@ audio repeater.
 
 ### 1.1. Use-case: Software-defined Multiplexing
 Given:
-- one (1) Gaming PC (to run VACARM).
-- one (1) Recording PC (optional: to run VACARM).
+- one (1) Gaming PC
+  * to play video games
+  * to run [VACARM](#virtual-audio-cable-audio-repeater-manager)
+- one (1) Recording PC
 - three (3) audio sources:
   * a local microphone.
   * incoming voice chat audio.
@@ -48,6 +48,7 @@ Allows:
 (incoming voice and game audio) on the Gaming PC.
 2. Record each source as separate audio streams on the Recording PC,
 for future audio/video editing.
+3. Optional: stream the audio and video via a Stream client on either PC.
 
 ### 1.2. Real-world equivalent: Hardware-defined Multiplexing
 `(Come on, Dave, give me a break)` - *Unchained*, Van Halen
