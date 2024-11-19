@@ -60,7 +60,7 @@ Given:
 - the incoming/outgoing communication between audio engineer and band.
 
 Allows:
-1. Listen to all sources together, but record separately. 
+- Listen to all sources together, but record separately. 
   * Record all channels from music band separately, for optimal future
 remastering.
   * Allow for future editor(s) to mitigate unnecessary audio sources
