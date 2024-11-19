@@ -25,12 +25,12 @@ with Microsoft Windows XP SP3 to 10/11.
 - Allows for **multiplexing** of audio streams, of which is not natively supported in
 Microsoft Windows.
 - Examples include (but not limited to):
-  * video game session recording/stream setup.<sup>[**1**]</sup>(#11-video-game-setup)
-  * music recording.<sup>[**2**]</sup>(#12-music-recording-session)
+  * video game session recording/stream setup.<sup>[**1**](#11-video-game-setup)</sup>
+  * music recording.<sup>[**2**](#12-music-recording-session)</sup>
 - **Turnkey** solution, no tedious work of opening or closing instances of VAC
 audio repeater.
 
-##### 1.1. Video Game Setup
+#### 1.1. Video Game Setup
 - Given three audio sources:
   * a local microphone
   * incoming voice chat audio
