@@ -1,5 +1,4 @@
 ﻿using NAudio.CoreAudioApi;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -46,11 +45,25 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <param name="mMDevice">the actual device</param>
     private void Disable(MMDevice mMDevice)
     {
-      if (
-          mMDevice is null
-          || mMDevice.State == DeviceState.Disabled
-        )
+      if (mMDevice is null)
       {
+        Debug.WriteLine("Failed to get audio device. Audio device is null.");
+        return;
+      }
+
+      if (mMDevice.State == DeviceState.Disabled)
+      {
+        Debug
+          .WriteLine
+          (
+            string
+            .Format
+            (
+              "Audio '{1}' device is already disabled.",
+              mMDevice.FriendlyName
+            )
+          );
+
         return;
       }
 
@@ -58,7 +71,7 @@ namespace VACM.NET4_0.Backend.Repositories
         .AudioClient
         .Stop();
 
-      Console
+      Debug
         .WriteLine
         (
           string
@@ -74,7 +87,7 @@ namespace VACM.NET4_0.Backend.Repositories
         .AudioClient
         .Reset();
 
-      Console
+      Debug
         .WriteLine
         ("Reset audio devices.");
 
@@ -82,7 +95,7 @@ namespace VACM.NET4_0.Backend.Repositories
         .AudioSessionManager
         .RefreshSessions();
 
-      Console
+      Debug
         .WriteLine
         ("Refreshed audio devices.");
     }
@@ -93,11 +106,25 @@ namespace VACM.NET4_0.Backend.Repositories
     /// <param name="mMDevice">the actual device</param>
     private void Enable(MMDevice mMDevice)
     {
-      if (
-          mMDevice is null
-          || mMDevice.State != DeviceState.Disabled
-        )
+      if (mMDevice is null)
       {
+        Debug.WriteLine("Failed to get audio device. Audio device is null.");
+        return;
+      }
+
+      if (mMDevice.State != DeviceState.Disabled)
+      {
+        Debug
+          .WriteLine
+          (
+            string
+            .Format
+            (
+              "Audio '{1}' device is already enabled.",
+              mMDevice.FriendlyName
+            )
+          );
+
         return;
       }
 
@@ -105,7 +132,7 @@ namespace VACM.NET4_0.Backend.Repositories
         .AudioClient
         .Start();
 
-      Console
+      Debug
         .WriteLine
         (
           string
@@ -120,7 +147,7 @@ namespace VACM.NET4_0.Backend.Repositories
         .AudioSessionManager
         .RefreshSessions();
 
-      Console
+      Debug
         .WriteLine
         ("Refreshed audio devices.");
     }
@@ -156,11 +183,36 @@ namespace VACM.NET4_0.Backend.Repositories
     {
       if (string.IsNullOrWhiteSpace(id))
       {
+        Debug.WriteLine
+        (
+          "Failed to get audio device. " +
+          "Actual device ID is either null or whitespace."
+        );
+
         return null;
       }
 
-      return MMDeviceList
+      MMDevice mMDevice = MMDeviceList
         .FirstOrDefault(x => x.ID == id);
+
+      if (mMDevice is null)
+      {
+        Debug.WriteLine("Audio device is null.");
+      }
+
+      else
+      {
+        Debug.WriteLine
+        (
+          string.Format
+          (
+            "Got audio device\t=> ID: '{1}'",
+            mMDevice.ID
+          )
+        );
+      }
+
+      return mMDevice;
     }
 
     /// <summary>
@@ -175,8 +227,23 @@ namespace VACM.NET4_0.Backend.Repositories
         || MMDeviceList.Count == 0
       )
       {
+        Debug.WriteLine
+        (
+          "Failed to get audio device(s). " +
+          "Audio device list is null or empty."
+        );
+
         return new List<MMDevice>();
       }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got audio device(s) => Count: {1}",
+          MMDeviceList.Count()
+        )
+      );
 
       return MMDeviceList;
     }
@@ -196,7 +263,14 @@ namespace VACM.NET4_0.Backend.Repositories
         || MMDeviceList.Count == 0
       )
       {
-        return null;
+        Debug.WriteLine
+        (
+          "Failed to get audio device(s). " +
+          "Either actual ID list is null or empty, " +
+          "or audio device list is null or empty."
+        );
+
+        return new List<MMDevice>();
       }
 
       List<MMDevice> mMDeviceList = new List<MMDevice>();
@@ -208,6 +282,15 @@ namespace VACM.NET4_0.Backend.Repositories
           mMDeviceList
             .Add(Get(id))
         );
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got audio device(s) => Count: {1}",
+          mMDeviceList.Count()
+        )
+      );
 
       return mMDeviceList;
     }
@@ -247,9 +330,8 @@ namespace VACM.NET4_0.Backend.Repositories
         .OrderBy(x => x.ID)
         .ToList();
 
-      Console
-        .WriteLine
-        ("Updated audio devices.");
+      Debug
+        .WriteLine("Updated audio devices.");
     }
 
     #endregion
