@@ -9,11 +9,12 @@ with Microsoft Windows XP SP3 to 10/11.
 
 ## Table of Contents
 - [1. Why?](#1-why)
-  - [Example: Video Games](#11-example-video-games)
-  - [Example: Music Recording](#12-example-music-recording-session)
+  - [1.1. Example: Video Games](#11-example-video-games)
+  - [1.2. Example: Music Recording](#12-example-music-recording-session)
 - [2. Features](#2-features)
 - [3. Requirements](#3-requirements)
-    - [3.1. Operating System Requirements](#31-operating-system-requirements)
+    - [3.1. Example](#31-example)
+    - [3.2. Operating System Requirements](#32-operating-system-requirements)
 - [4. Download](#4-download)
 - [5. Usage](#5-usage)
     - [5.1. Install](#51-install)
@@ -66,13 +67,15 @@ remastering.
 ## 3. Requirements
 - [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
 - [VAC Control Panel](https://vac.muzychenko.net/en/download.htm)
-<sup>[**1**]</sup>
+<sup>[**1**](#31-example)</sup>
 
-**[1]** A minimum of one (1) virtual audio cable (Line-In and Line-Out pair) to
+#### 3.1. Example
+A minimum of one (1) virtual audio cable (Line-In and Line-Out pair) to
 faciliate [Mutiplexing](#71-multiplexing).
+
 Example: one (1) *virtual* Line-In to one or more *physical* Line-Out(s).
 
-### 3.1. Operating System Requirements
+### 3.2. Operating System Requirements
 | Minimum OS version                         | CPU architecture | .NET version  |
 | :---                                       | :---:            | :---:         |
 | Windows 10 ver. 1809 or Server 2019        | 32-bit or 64-bit | Core 8.0  	|
