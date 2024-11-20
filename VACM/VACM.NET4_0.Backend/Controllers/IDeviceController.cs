@@ -14,7 +14,7 @@ namespace VACM.NET4_0.Backend.Controllers
     #endregion
 
     #region Logic
-    
+
     DeviceModel Get(string actualId);
     DeviceModel Get(uint? id);
     List<DeviceModel> GetAll();
