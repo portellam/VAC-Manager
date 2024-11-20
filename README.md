@@ -13,11 +13,13 @@ with Microsoft Windows 2000 to Windows 11.
   - [1.2. Real-World Equivalent](#12-real-world-equivalent)
 - [2. Features](#2-features)
 - [3. Requirements](#3-requirements)
-    - [3.1. Example](#31-example)
-    - [3.2. Operating System Requirements](#32-operating-system-requirements)
+  - [3.1. Example](#31-example)
+  - [3.2. Operating System Requirements](#32-operating-system-requirements)
 - [4. Download](#4-download)
 - [5. Usage](#5-usage)
-    - [5.1. Install](#51-install)
+  - [5.1. Install](#51-install)
+  - [5.2. Graphics User Interface (GUI)](#52-graphics-user-interface-gui)
+  - [5.3. Terminal User Interface (TUI)](#53-terminal-user-interface-tui)
 - [6. Contact](#6-contact)
 - [7. References](#7-references)
   - [7.1. Multiplexing](#71-multiplexing)
@@ -115,17 +117,13 @@ Reference: [Wikipedia](#72-net-framework-version-history)
 
 ## 5. Usage
 ### 5.1. Install
-TODO: add details here.
+WIP
 
-### 5.2. Graphics User Interface (GUI) version
-TODO:
-- add details here.
-- make `VACARM-GUI.exe`
+### 5.2. Graphics User Interface (GUI)
+WIP
 
-### 5.3. Terminal User Interface version
-TODO:
-- explain console version input parameters.
-- make `VACARM-TUI.exe`
+### 5.3. Terminal User Interface (TUI)
+WIP
 
 ## 6. Contact
 Did you encounter a bug? Do you need help? Please visit the
