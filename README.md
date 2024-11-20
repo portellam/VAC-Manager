@@ -24,6 +24,11 @@ with Microsoft Windows 2000 to Windows 11.
 ## 1. Why?
 - Allows for [multiplexing](#71-multiplexing) of audio streams, of which is
 not natively supported in Microsoft Windows.
+  * If a user wishes to listen to music, a video game, and more, the *same*
+audio output must be selected.
+  * Windows programs
+(example: media players, video games, Internet browsers, etc.) may only choose
+one (1) audio output (and input).
 - For example, effectively treat a
 [video game session](#11-use-case-software-defined-multiplexing) like a
 [music recording](#12-real-world-equivalent-hardware-defined-multiplexing).
@@ -32,24 +37,25 @@ audio repeater.
 
 ### 1.1. Use-case: Software-defined Multiplexing
 Given:
-- one (1) Gaming PC
-  * to play video games
-  * to run [VACARM](#virtual-audio-cable-audio-repeater-manager)
-- one (1) Recording PC
+- one (1) Gaming PC:
+  * to play video games.
+  * to run [Audio Repeater Manager](#audio-repeater-manager-for-virtual-audio-cable).
+  * to capture of the audio/video via a broadcast/stream client.
 - three (3) audio sources:
   * a local microphone.
   * incoming voice chat audio.
   * game audio.
-- cables and/or adapters to transfer audio (and video) from the Gaming PC to the
+- Optional: one (1) Recording PC:
+  * cables and/or adapters to transfer audio (and video) from the Gaming PC to the
 Recording PC.
- 
+  - to run a broadcast/stream client.
+
 Allows:
 1. Specify to only listen to two of the three audio sources
 (incoming voice and game audio) on the Gaming PC.
 2. Record each source as separate audio streams on the Recording PC,
 for future audio/video editing.
-3. Optional: stream the audio and video via a broadcast or stream client on
-either PC.
+3. Optional: capture the audio/video via a broadcast/stream client.
 
 ### 1.2. Real-world equivalent: Hardware-defined Multiplexing
 `(Come on, Dave, give me a break)` - *Unchained*, Van Halen
@@ -82,12 +88,15 @@ A minimum of one (1) virtual audio cable (Line-In and Line-Out pair) to
 faciliate [multiplexing](#71-multiplexing).
 
 ### 3.2. Operating System Requirements
-| Minimum OS version                         | CPU architecture | .NET version  |
-| :---                                       | :---:            | :---:         |
-| Windows 10 ver. 1809 or Server 2019        | 32-bit or 64-bit | Core 8.0  	|
-| Windows 7 SP1 or Server 2008 R2            | 32-bit or 64-bit | Framework 4.8 |
-| Windows Vista SP2 or Server 2008 SP2       | 32-bit or 64-bit | Framework 4.6 |
-| Windows XP SP3 or Server 2003 SP2          | 32-bit           | Framework 4.0 |
+| Minimum OS version                 | CPU architecture | .NET version      |
+| :---                               | :---:            | :---:             |
+| Windows 10 ver. 1809, Server 2019  | 32-bit or 64-bit | Core 8.0  	    |
+| Windows 7 SP1, Server 2008 R2      | 32-bit or 64-bit | Framework 4.8     |
+| Windows Vista SP2, Server 2008 SP2 | 32-bit or 64-bit | Framework 4.6     |
+| Windows XP SP3, Server 2003 SP2    | 32-bit           | Framework 4.0     |
+| Windows 2000 SP4                   | 32-bit           | Framework 2.0 SP1 |
+
+Reference: [Wikipedia](#72-.net-framework-version-history)
 
 ## 4. Download
 **No release is available at this time.**
@@ -119,7 +128,7 @@ Did you encounter a bug? Do you need help? Please visit the
 [codeberg-issues]: https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
 [github-issues]:   https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
 
-## 7. Keywords
+## 7. References
 ### 7.1. Multiplexing
 In the scope of this project: one *virtual* Line-In to one or more *physical*
 Line-Out(s).
@@ -127,9 +136,13 @@ Line-Out(s).
 *In telecommunications and computer networking, multiplexing*
 *(sometimes contracted to muxing) is a method by which multiple analog or*
 *digital signals are combined into one signal over a shared medium.*
-[Wikipedia](k1)
+[Wikipedia](r1)
 
-[k1]: https://en.wikipedia.org/wiki/Multiplexing
+### 7.2. .NET Framework version history
+See [Wikipedia](r2).
+
+[r1]: https://en.wikipedia.org/wiki/Multiplexing
+[r2]: https://en.wikipedia.org/wiki/.NET_Framework_version_history
 
 ## 8. Credits
 [Eugene Muzychenko][credits1] for creating Virtual Audio Cable.
