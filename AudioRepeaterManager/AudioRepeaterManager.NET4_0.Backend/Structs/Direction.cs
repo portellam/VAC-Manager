@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_0.Backend.Structs
+﻿namespace AudioRepeaterManager.NET4_0.Backend.Structs
 {
     public enum Direction
     {

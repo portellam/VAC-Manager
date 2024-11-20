@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VACM.NET4_6.CLI
+namespace AudioRepeaterManager.NET4_6.CLI
 {
   internal class Program
   {

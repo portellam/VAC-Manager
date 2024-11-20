@@ -1,7 +1,7 @@
 ﻿using NAudio.CoreAudioApi;
 using System.Windows.Forms;
 
-namespace VACM.NET4_0.Backend.ViewModels
+namespace AudioRepeaterManager.NET4_0.Backend.ViewModels
 {
     public partial class DeviceControl : UserControl
     {

@@ -2,16 +2,16 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using VACM.NET4_0.Backend.ViewModels.Accessors;
-using VACM.NET4_0.Extensions;
+using AudioRepeaterManager.NET4_0.Backend.ViewModels.Accessors;
+using AudioRepeaterManager.NET4_0.Extensions;
 
-namespace VACM.NET4_0.Backend
+namespace AudioRepeaterManager.NET4_0.Backend
 {
     public class Common
     {
         #region Application name logic
 
-        public readonly static string ApplicationNameAsAbbreviation = "VACM";
+        public readonly static string ApplicationNameAsAbbreviation = "AudioRepeaterManager";
 
         public readonly static string FileExtension = "." +
             ApplicationNameAsAbbreviation.ToLower();
@@ -151,7 +151,7 @@ namespace VACM.NET4_0.Backend
         {
             get
             {
-                return Directory.GetCurrentDirectory();                                 //NOTE: expected "C:\Program Files\VACM"
+                return Directory.GetCurrentDirectory();                                 //NOTE: expected "C:\Program Files\AudioRepeaterManager"
             }
         }
 
@@ -163,7 +163,7 @@ namespace VACM.NET4_0.Backend
             $"If problem persists, please restart\"{ApplicationNameAsAbbreviation}\".";
 
         public static readonly string SavePath =
-            $"{currentDirectory}{SavePartialPath}\\";                                   //NOTE: "C:\Program Files\VACM\save"
+            $"{currentDirectory}{SavePartialPath}\\";                                   //NOTE: "C:\Program Files\AudioRepeaterManager\save"
 
         #endregion File logic
 

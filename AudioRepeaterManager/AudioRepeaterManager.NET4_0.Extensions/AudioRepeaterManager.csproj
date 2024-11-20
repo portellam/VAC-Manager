@@ -7,8 +7,8 @@
     <ProjectGuid>{B8548226-B266-4521-93F4-0217A1FDCF7D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VACM.NET4_0.Extensions</RootNamespace>
-    <AssemblyName>VACM.NET4_0.Extensions</AssemblyName>
+    <RootNamespace>AudioRepeaterManager.NET4_0.Extensions</RootNamespace>
+    <AssemblyName>AudioRepeaterManager.NET4_0.Extensions</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

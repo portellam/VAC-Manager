@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_6.GUI
+﻿namespace AudioRepeaterManager.NET4_6.GUI
 {
     partial class UserControl1
     {

@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "VACM.NET8_0.GUI (Package)": {
+    "AudioRepeaterManager.NET8_0.GUI (Package)": {
       "commandName": "MsixPackage"
     },
-    "VACM.NET8_0.GUI (Unpackaged)": {
+    "AudioRepeaterManager.NET8_0.GUI (Unpackaged)": {
       "commandName": "Project"
     }
   }

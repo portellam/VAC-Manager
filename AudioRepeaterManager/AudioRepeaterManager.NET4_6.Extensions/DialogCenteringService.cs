@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace VACM.NET4_6.Extensions
+namespace AudioRepeaterManager.NET4_6.Extensions
 {
   public sealed class DialogCenteringService : IDisposable
   {

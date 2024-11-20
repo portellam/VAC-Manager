@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 
-namespace VACM.NET4_0.Backend
+namespace AudioRepeaterManager.NET4_0.Backend
 {
     public class Program
     {

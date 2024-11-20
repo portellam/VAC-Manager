@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Virtual Audio Cable Manager")]
 [assembly: AssemblyCopyright("VAC Manager Copyleft © 2024 Alexander Portell.\nVirtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.")]
-[assembly: AssemblyTrademark("VACM")]
+[assembly: AssemblyTrademark("AudioRepeaterManager")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

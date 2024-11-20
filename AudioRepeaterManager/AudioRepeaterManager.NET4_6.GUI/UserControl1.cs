@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VACM.NET4_6.GUI
+namespace AudioRepeaterManager.NET4_6.GUI
 {
     public partial class UserControl1: UserControl
     {

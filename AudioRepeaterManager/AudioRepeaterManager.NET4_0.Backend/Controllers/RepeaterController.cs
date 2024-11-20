@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using VACM.NET4_0.Backend.Models;
+using AudioRepeaterManager.NET4_0.Backend.Models;
 
-namespace VACM.NET4_0.Backend.Controllers
+namespace AudioRepeaterManager.NET4_0.Backend.Controllers
 {
   public class RepeaterController
   {

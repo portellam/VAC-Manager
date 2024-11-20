@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace VACM.NET4_0.Backend.Models
+namespace AudioRepeaterManager.NET4_0.Backend.Models
 {
   public interface IDeviceModel
   {

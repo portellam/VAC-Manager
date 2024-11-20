@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_6.Extensions.PropertyValueChanged
+﻿namespace AudioRepeaterManager.NET4_6.Extensions.PropertyValueChanged
 {
   public class PropertyValueChangedEventArgs : System.EventArgs
   {

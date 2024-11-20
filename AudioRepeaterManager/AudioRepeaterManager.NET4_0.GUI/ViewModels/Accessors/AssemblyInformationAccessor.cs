@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace VACM.NET4_0.Backend.ViewModels.Accessors
+namespace AudioRepeaterManager.NET4_0.Backend.ViewModels.Accessors
 {
   public class AssemblyInformationAccessor
   {

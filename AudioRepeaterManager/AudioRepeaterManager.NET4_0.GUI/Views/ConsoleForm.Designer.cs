@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_0.Backend.Views
+﻿namespace AudioRepeaterManager.NET4_0.Backend.Views
 {
     partial class ConsoleForm
     {

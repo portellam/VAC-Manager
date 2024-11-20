@@ -1,7 +1,7 @@
 ﻿using System.Threading;
-using VACM.NET4_0.Backend.Consoles;
+using AudioRepeaterManager.NET4_0.Backend.Consoles;
 
-namespace VACM.NET4_0.Backend
+namespace AudioRepeaterManager.NET4_0.Backend
 {
     public class ConsoleWindow
     {

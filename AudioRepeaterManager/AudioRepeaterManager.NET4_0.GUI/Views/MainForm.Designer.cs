@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 
-namespace VACM.NET4_0.Backend.Views
+namespace AudioRepeaterManager.NET4_0.Backend.Views
 {
     public partial class MainForm
     {

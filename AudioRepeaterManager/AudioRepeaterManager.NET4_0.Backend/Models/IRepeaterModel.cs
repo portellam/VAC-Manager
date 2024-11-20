@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using VACM.NET4_0.Backend.Structs;
+using AudioRepeaterManager.NET4_0.Backend.Structs;
 
-namespace VACM.NET4_0.Backend.Models
+namespace AudioRepeaterManager.NET4_0.Backend.Models
 {
   public interface IRepeaterModel
   {

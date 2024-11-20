@@ -5,9 +5,9 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Xml.Linq;
-using VACM.NET4_0.Backend.Models;
+using AudioRepeaterManager.NET4_0.Backend.Models;
 
-namespace VACM.NET4_0.Backend.Repositories
+namespace AudioRepeaterManager.NET4_0.Backend.Repositories
 {
   public class RepeaterRepository :
     INotifyPropertyChanged,

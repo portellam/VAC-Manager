@@ -1,10 +1,10 @@
 ﻿using NAudio.CoreAudioApi;
 using System.Collections.Generic;
 using System.ComponentModel;
-using VACM.NET4_0.Backend.Models;
-using VACM.NET4_0.Backend.Structs;
+using AudioRepeaterManager.NET4_0.Backend.Models;
+using AudioRepeaterManager.NET4_0.Backend.Structs;
 
-namespace VACM.NET4_0.Backend.Controllers
+namespace AudioRepeaterManager.NET4_0.Backend.Controllers
 {
   public interface IRepeaterController
   {

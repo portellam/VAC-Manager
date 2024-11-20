@@ -1,4 +1,4 @@
-﻿namespace VACM.NET8_0.Extensions.PropertyValueChanged
+﻿namespace AudioRepeaterManager.NET8_0.Extensions.PropertyValueChanged
 {
   #region Delegates
 

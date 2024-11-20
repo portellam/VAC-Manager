@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_0.Extensions.RegistrySubKeyChanged
+﻿namespace AudioRepeaterManager.NET4_0.Extensions.RegistrySubKeyChanged
 {
   #region Delegates
 

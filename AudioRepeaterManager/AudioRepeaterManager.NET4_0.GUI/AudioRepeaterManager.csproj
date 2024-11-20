@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{08CA9AFB-8EBA-4388-9587-C227AD817A2A}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>VACM.NET4_0.GUI</RootNamespace>
-    <AssemblyName>VACM.NET4_0.GUI</AssemblyName>
+    <RootNamespace>AudioRepeaterManager.NET4_0.GUI</RootNamespace>
+    <AssemblyName>AudioRepeaterManager.NET4_0.GUI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -40,8 +40,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="VACM.NET4_0.Extensions">
-      <HintPath>..\VACM.NET4_0.Extensions\bin\Debug\VACM.NET4_0.Extensions.dll</HintPath>
+    <Reference Include="AudioRepeaterManager.NET4_0.Extensions">
+      <HintPath>..\AudioRepeaterManager.NET4_0.Extensions\bin\Debug\AudioRepeaterManager.NET4_0.Extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

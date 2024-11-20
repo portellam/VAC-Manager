@@ -6,16 +6,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using VACM.NET4_0.Backend.Models;
-using VACM.NET4_0.Backend.ViewModels;
-using VACM.NET4_0.Backend.ViewModels.Accessors;
-using VACM.NET4_0.Backend.ViewModels.ColorTable;
-using VACM.NET4_0.Extensions;
-using VACM.NET4_0.Extensions.PropertyValueChanged;
+using AudioRepeaterManager.NET4_0.Backend.Models;
+using AudioRepeaterManager.NET4_0.Backend.ViewModels;
+using AudioRepeaterManager.NET4_0.Backend.ViewModels.Accessors;
+using AudioRepeaterManager.NET4_0.Backend.ViewModels.ColorTable;
+using AudioRepeaterManager.NET4_0.Extensions;
+using AudioRepeaterManager.NET4_0.Extensions.PropertyValueChanged;
 using PropertyValueChangedEventArgs =
-    VACM.NET4_0.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
+    AudioRepeaterManager.NET4_0.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
 
-namespace VACM.NET4_0.Backend.Views
+namespace AudioRepeaterManager.NET4_0.Backend.Views
 {
     public partial class MainForm : Form
     {

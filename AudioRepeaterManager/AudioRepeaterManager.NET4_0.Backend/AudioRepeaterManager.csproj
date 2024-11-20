@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B5B16153-9C97-4A5C-A524-27F2F7067BD2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>VACM.NET4_0.Backend</RootNamespace>
-    <AssemblyName>VACM.NET4_0.Backend</AssemblyName>
+    <RootNamespace>AudioRepeaterManager.NET4_0.Backend</RootNamespace>
+    <AssemblyName>AudioRepeaterManager.NET4_0.Backend</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>VACM.NET4_0.Backend.Program</StartupObject>
+    <StartupObject>AudioRepeaterManager.NET4_0.Backend.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AudioSwitcher.AudioApi, Version=1.1.0.0, Culture=neutral, PublicKeyToken=5d3d81ef23a33a3f, processorArchitecture=MSIL">
@@ -52,8 +52,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VACM.NET4_0.Extensions">
-      <HintPath>..\VACM.NET4_0.Extensions\bin\Debug\VACM.NET4_0.Extensions.dll</HintPath>
+    <Reference Include="AudioRepeaterManager.NET4_0.Extensions">
+      <HintPath>..\AudioRepeaterManager.NET4_0.Extensions\bin\Debug\AudioRepeaterManager.NET4_0.Extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

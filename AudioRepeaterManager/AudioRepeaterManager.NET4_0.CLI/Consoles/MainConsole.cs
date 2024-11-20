@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_0.Backend.Consoles
+﻿namespace AudioRepeaterManager.NET4_0.Backend.Consoles
 {
   public class MainConsole
   {

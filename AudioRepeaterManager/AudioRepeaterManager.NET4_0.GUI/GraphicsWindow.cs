@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
-using VACM.NET4_0.Backend.ViewModels;
-using VACM.NET4_0.Backend.Views;
+using AudioRepeaterManager.NET4_0.Backend.ViewModels;
+using AudioRepeaterManager.NET4_0.Backend.Views;
 
-namespace VACM.NET4_0.Backend
+namespace AudioRepeaterManager.NET4_0.Backend
 {
     public class GraphicsWindow
     {

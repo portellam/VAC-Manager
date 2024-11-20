@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VACM.NET4_0.Backend
+namespace AudioRepeaterManager.NET4_0.Backend
 {
   /*
    * TODO:
@@ -26,7 +26,7 @@ namespace VACM.NET4_0.Backend
           return WindowsNT5MaxEndpointCount;
         }
 
-        return VACMaxVirtualEndpointCount;
+        return AudioRepeaterManageraxVirtualEndpointCount;
       }
     }
 
@@ -54,7 +54,7 @@ namespace VACM.NET4_0.Backend
     /// <summary>
     /// Maximum amount of virtual endpoints (virtual audio cables) for VAC.
     /// </summary>
-    public readonly static uint VACMaxVirtualEndpointCount = 256;
+    public readonly static uint AudioRepeaterManageraxVirtualEndpointCount = 256;
 
     /// <summary>
     /// Maximum amount of endpoints (audio devices) for Windows 5.x and older.

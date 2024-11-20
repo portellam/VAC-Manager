@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace VACM.NET4_0.Backend.Views
+namespace AudioRepeaterManager.NET4_0.Backend.Views
 {
     public partial class ConsoleForm : Form
     {

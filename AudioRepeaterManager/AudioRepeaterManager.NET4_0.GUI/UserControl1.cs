@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace VACM.NET4_0.GUI
+namespace AudioRepeaterManager.NET4_0.GUI
 {
     public partial class UserControl1: UserControl
     {

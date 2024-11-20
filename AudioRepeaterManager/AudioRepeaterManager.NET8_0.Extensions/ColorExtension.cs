@@ -1,4 +1,4 @@
-﻿namespace VACM.NET8_0.Extensions
+﻿namespace AudioRepeaterManager.NET8_0.Extensions
 {
   public static class ColorExtension
   {

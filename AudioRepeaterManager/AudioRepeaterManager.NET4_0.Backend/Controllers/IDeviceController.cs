@@ -1,9 +1,9 @@
 ﻿using NAudio.CoreAudioApi;
 using System.Collections.Generic;
 using System.ComponentModel;
-using VACM.NET4_0.Backend.Models;
+using AudioRepeaterManager.NET4_0.Backend.Models;
 
-namespace VACM.NET4_0.Backend.Controllers
+namespace AudioRepeaterManager.NET4_0.Backend.Controllers
 {
   public interface IDeviceController
   {

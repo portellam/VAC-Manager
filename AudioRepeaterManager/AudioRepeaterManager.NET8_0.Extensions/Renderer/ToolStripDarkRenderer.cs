@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
-using VACM.NET8_0.Extensions.ColorTable;
+using AudioRepeaterManager.NET8_0.Extensions.ColorTable;
 
-namespace VACM.NET8_0.Backend.ViewModels.Renderer
+namespace AudioRepeaterManager.NET8_0.Backend.ViewModels.Renderer
 {
   public class ToolStripDarkRenderer : ToolStripProfessionalRenderer
   {

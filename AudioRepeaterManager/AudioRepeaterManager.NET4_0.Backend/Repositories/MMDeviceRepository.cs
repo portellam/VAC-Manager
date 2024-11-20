@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace VACM.NET4_0.Backend.Repositories
+namespace AudioRepeaterManager.NET4_0.Backend.Repositories
 {
   public class MMDeviceRepository :
     IMMDeviceRepository,

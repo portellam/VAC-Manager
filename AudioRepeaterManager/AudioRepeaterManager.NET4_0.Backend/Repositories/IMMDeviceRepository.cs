@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace VACM.NET4_0.Backend.Repositories
+namespace AudioRepeaterManager.NET4_0.Backend.Repositories
 {
   public interface IMMDeviceRepository
   {

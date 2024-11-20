@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 
-namespace VACM.NET4_6.Extensions.RegistrySubKeyChanged
+namespace AudioRepeaterManager.NET4_6.Extensions.RegistrySubKeyChanged
 {
   public class RegistrySubKeyChangedEventArgs : System.EventArgs
   {

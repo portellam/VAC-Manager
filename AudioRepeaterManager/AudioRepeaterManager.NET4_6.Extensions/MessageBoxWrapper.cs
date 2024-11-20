@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
 
-namespace VACM.NET4_6.Extensions
+namespace AudioRepeaterManager.NET4_6.Extensions
 {
   /// <summary>
   /// Wrapper for MessageBox library

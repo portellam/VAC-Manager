@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using VACM.NET4_0.Backend.Models;
-using VACM.NET4_0.Backend.Repositories;
+using AudioRepeaterManager.NET4_0.Backend.Models;
+using AudioRepeaterManager.NET4_0.Backend.Repositories;
 
-namespace VACM.NET4_0.Backend.Controllers
+namespace AudioRepeaterManager.NET4_0.Backend.Controllers
 {
   public class DeviceController :
     IDeviceController,

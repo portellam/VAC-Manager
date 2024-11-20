@@ -1,4 +1,4 @@
-﻿namespace VACM.NET4_0.Backend.ViewModels
+﻿namespace AudioRepeaterManager.NET4_0.Backend.ViewModels
 {
     partial class DeviceControl
     {

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using VACM.NET4_0.Backend.Models;
+using AudioRepeaterManager.NET4_0.Backend.Models;
 
 /*
  * TODO:
@@ -18,7 +18,7 @@ using VACM.NET4_0.Backend.Models;
  * 
  */
 
-namespace VACM.NET4_0.Backend.Repositories
+namespace AudioRepeaterManager.NET4_0.Backend.Repositories
 {
   public class DeviceRepository :
     IDeviceRepository,
