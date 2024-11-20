@@ -19,6 +19,9 @@ namespace AudioRepeaterManager.NET4_0.Backend.Controllers
     DeviceModel Get(uint? id);
     List<DeviceModel> GetAll();
     List<DeviceModel> GetAllAbsent();
+    List<DeviceModel> GetAllDisabled();
+    List<DeviceModel> GetAllEnabled();
+    List<DeviceModel> GetAllDuplex();
     List<DeviceModel> GetAllInput();
     List<DeviceModel> GetAllOutput();
     List<DeviceModel> GetAllPresent();
