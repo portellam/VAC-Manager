@@ -30,12 +30,12 @@ audio output must be selected.
 (example: media players, video games, Internet browsers, etc.) may only choose
 one (1) audio output (and input).
 - For example, effectively treat a
-[video game session](#11-use-case-software-defined-multiplexing) like a
+[video game session](#11-use-case-software-defined-multiplexing) like
 [music recording](#12-real-world-equivalent).
 - **Turnkey** solution, no tedious work of opening or closing instances of VAC
 audio repeater.
 
-### 1.1. Use-case: Software-defined Multiplexing
+### 1.1. Use-Case: Software-Defined Multiplexing
 Given:
 - one (1) Gaming PC:
   * to play video games.
@@ -57,7 +57,7 @@ Allows:
 for future audio/video editing.
 3. Optional: capture the audio/video via a broadcast/stream client.
 
-### 1.2. Real-world equivalent
+### 1.2. Real-World Equivalent
 `(Come on, Dave, give me a break)` - *Unchained*, Van Halen
 
 Given:
@@ -96,16 +96,16 @@ faciliate [multiplexing](#71-multiplexing).
 | Windows XP SP3, Server 2003 SP2    | 32-bit           | Framework 4.0     |
 | Windows 2000 SP4                   | 32-bit           | Framework 2.0 SP1 |
 
-Reference: [Wikipedia](#72-.net-framework-version-history)
+Reference: [Wikipedia](#72-net-framework-version-history)
 
 ## 4. Download
 **No release is available at this time.**
 
-- Download the Latest Release:&ensp;~[Codeberg][codeberg-releases],
-[GitHub][github-releases]~
+- Download the Latest Release:&ensp;~[Codeberg][41],
+[GitHub][42]~
 
-[codeberg-releases]: https://codeberg.org/portellam/audio-repeater-manager-for-virtual-audio-cable/releases/latest
-[github-releases]:   https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/releases/latest
+[41]: https://codeberg.org/portellam/audio-repeater-manager-for-virtual-audio-cable/releases/latest
+[42]: https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/releases/latest
 
 ## 5. Usage
 ### 5.1. Install
@@ -123,10 +123,10 @@ TODO:
 
 ## 6. Contact
 Did you encounter a bug? Do you need help? Please visit the
-**Issues page** ([Codeberg][codeberg-issues], [GitHub][github-issues]).
+**Issues page** ([Codeberg][61], [GitHub][62]).
 
-[codeberg-issues]: https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
-[github-issues]:   https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
+[61]: https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
+[62]:   https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
 
 ## 7. References
 ### 7.1. Multiplexing
@@ -136,18 +136,18 @@ Line-Out(s).
 *In telecommunications and computer networking, multiplexing*
 *(sometimes contracted to muxing) is a method by which multiple analog or*
 *digital signals are combined into one signal over a shared medium.*
-[Wikipedia](r1)
+[Wikipedia][711]
 
 ### 7.2. .NET Framework version history
-See [Wikipedia](r2).
+See [Wikipedia][721].
 
-[r1]: https://en.wikipedia.org/wiki/Multiplexing
-[r2]: https://en.wikipedia.org/wiki/.NET_Framework_version_history
+[711]: https://en.wikipedia.org/wiki/Multiplexing
+[721]: https://en.wikipedia.org/wiki/.NET_Framework_version_history
 
 ## 8. Credits
-[Eugene Muzychenko][credits1] for creating Virtual Audio Cable.
+[Eugene Muzychenko][91] for creating Virtual Audio Cable.
 
-[credits1]: https://eugene.muzychenko.net/EMuzychenko_Resume_Eng.htm
+[91]: https://eugene.muzychenko.net/EMuzychenko_Resume_Eng.htm
 
 ## 9. Licenses
 Virtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.
