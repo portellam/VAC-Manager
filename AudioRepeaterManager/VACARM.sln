@@ -3,29 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET8_0.CLI", "VACM.NET8_0.CLI\VACM.NET8_0.CLI.csproj", "{582641DA-7AF8-4554-BA61-84E66BF831FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET8_0.CLI", "AudioRepeaterManager.NET8_0.CLI\AudioRepeaterManager.NET8_0.CLI.csproj", "{582641DA-7AF8-4554-BA61-84E66BF831FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_0.Backend", "VACM.NET4_0.Backend\VACM.NET4_0.Backend.csproj", "{B5B16153-9C97-4A5C-A524-27F2F7067BD2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_0.Backend", "AudioRepeaterManager.NET4_0.Backend\AudioRepeaterManager.NET4_0.Backend.csproj", "{B5B16153-9C97-4A5C-A524-27F2F7067BD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET8_0.GUI", "VACM.NET8_0.GUI\VACM.NET8_0.GUI.csproj", "{98FED8AF-1862-4388-9CCA-935C4857B4E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET8_0.GUI", "AudioRepeaterManager.NET8_0.GUI\AudioRepeaterManager.NET8_0.GUI.csproj", "{98FED8AF-1862-4388-9CCA-935C4857B4E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_0.GUI", "VACM.NET4_0.GUI\VACM.NET4_0.GUI.csproj", "{08CA9AFB-8EBA-4388-9587-C227AD817A2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_0.GUI", "AudioRepeaterManager.NET4_0.GUI\AudioRepeaterManager.NET4_0.GUI.csproj", "{08CA9AFB-8EBA-4388-9587-C227AD817A2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_8.GUI", "VACM.NET4_8.GUI\VACM.NET4_8.GUI.csproj", "{4B94DAB6-717D-4713-919D-ED7A73A5E39A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_8.GUI", "AudioRepeaterManager.NET4_8.GUI\AudioRepeaterManager.NET4_8.GUI.csproj", "{4B94DAB6-717D-4713-919D-ED7A73A5E39A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_8.CLI", "VACM.NET4_8.CLI\VACM.NET4_8.CLI.csproj", "{25558978-1885-4CB9-A85C-3205C4D3E608}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_8.CLI", "AudioRepeaterManager.NET4_8.CLI\AudioRepeaterManager.NET4_8.CLI.csproj", "{25558978-1885-4CB9-A85C-3205C4D3E608}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_0.CLI", "VACM.NET4_0.CLI\VACM.NET4_0.CLI.csproj", "{145A5382-AC21-463D-8545-8E791466B2FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_0.CLI", "AudioRepeaterManager.NET4_0.CLI\AudioRepeaterManager.NET4_0.CLI.csproj", "{145A5382-AC21-463D-8545-8E791466B2FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_0.Extensions", "VACM.NET4_0.Extensions\VACM.NET4_0.Extensions.csproj", "{B8548226-B266-4521-93F4-0217A1FDCF7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_0.Extensions", "AudioRepeaterManager.NET4_0.Extensions\AudioRepeaterManager.NET4_0.Extensions.csproj", "{B8548226-B266-4521-93F4-0217A1FDCF7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_8.Extensions", "VACM.NET4_8.Extensions\VACM.NET4_8.Extensions.csproj", "{89577933-445E-485E-9885-D5E05B925372}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_8.Extensions", "AudioRepeaterManager.NET4_8.Extensions\AudioRepeaterManager.NET4_8.Extensions.csproj", "{89577933-445E-485E-9885-D5E05B925372}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET8_0.Extensions", "VACM.NET8_0.Extensions\VACM.NET8_0.Extensions.csproj", "{B5B5B219-E162-42EC-A69F-3185BC9D569A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET8_0.Extensions", "AudioRepeaterManager.NET8_0.Extensions\AudioRepeaterManager.NET8_0.Extensions.csproj", "{B5B5B219-E162-42EC-A69F-3185BC9D569A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET8_0.Backend", "VACM.NET8_0.Backend\VACM.NET8_0.Backend.csproj", "{FE4618C7-7931-4219-8325-58CE221E8AC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET8_0.Backend", "AudioRepeaterManager.NET8_0.Backend\AudioRepeaterManager.NET8_0.Backend.csproj", "{FE4618C7-7931-4219-8325-58CE221E8AC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_8.Backend", "VACM.NET4_8.Backend\VACM.NET4_8.Backend.csproj", "{518E6E75-6A95-4564-A5A9-657D31D5D5F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_8.Backend", "AudioRepeaterManager.NET4_8.Backend\AudioRepeaterManager.NET4_8.Backend.csproj", "{518E6E75-6A95-4564-A5A9-657D31D5D5F9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{62AB8C59-14E9-457D-94DD-A30375022D76}"
 	ProjectSection(SolutionItems) = preProject
@@ -33,13 +33,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_6.Extensions", "VACM.NET4_6.Extensions\VACM.NET4_6.Extensions.csproj", "{C9DF9B6B-EA9E-402B-86E9-7346495F4940}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_6.Extensions", "AudioRepeaterManager.NET4_6.Extensions\AudioRepeaterManager.NET4_6.Extensions.csproj", "{C9DF9B6B-EA9E-402B-86E9-7346495F4940}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_6.GUI", "VACM.NET4_6.GUI\VACM.NET4_6.GUI.csproj", "{123DF575-D7E0-45E9-B8E1-C727779F2E35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_6.GUI", "AudioRepeaterManager.NET4_6.GUI\AudioRepeaterManager.NET4_6.GUI.csproj", "{123DF575-D7E0-45E9-B8E1-C727779F2E35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_6.CLI", "VACM.NET4_6.CLI\VACM.NET4_6.CLI.csproj", "{58534C08-7F22-4EF1-823A-BC0258455119}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_6.CLI", "AudioRepeaterManager.NET4_6.CLI\AudioRepeaterManager.NET4_6.CLI.csproj", "{58534C08-7F22-4EF1-823A-BC0258455119}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VACM.NET4_6.Backend", "VACM.NET4_6.Backend\VACM.NET4_6.Backend.csproj", "{80D58F63-25DC-4082-9E33-81045C00E44C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_6.Backend", "AudioRepeaterManager.NET4_6.Backend\AudioRepeaterManager.NET4_6.Backend.csproj", "{80D58F63-25DC-4082-9E33-81045C00E44C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,5 @@
 # Audio Repeater Manager for Virtual Audio Cable
-**or** VACARM
+or **VACARM**
 ### In Development
 Easily multiplex multiple audio sources. Create, manage, and automate
 instances of [Virtual Audio Cable](#Licensing) (VAC) audio repeaters. Compatible
