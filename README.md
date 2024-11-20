@@ -152,4 +152,4 @@ See [Wikipedia](r2).
 ## 9. Licenses
 Virtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.
 
-VAC Manager GPL-3.0, Copyleft © 2024 Alexander Portell.
+VAC Audio Repeater Manager, or VACARM GPL-3.0, Copyleft © 2024 Alexander Portell.
