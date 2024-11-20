@@ -296,7 +296,6 @@ namespace VACM.NET4_0.Backend.Repositories
       return deviceModelList;
     }
 
-
     /// <summary>
     /// Get the input device list.
     /// </summary>

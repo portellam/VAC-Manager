@@ -15,7 +15,7 @@ namespace VACM.NET4_0.Backend.Repositories
     #region Logic
 
     RepeaterModel Get(uint? id);
-    
+
     RepeaterModel Get
     (
       uint? firstDeviceId,
@@ -23,14 +23,14 @@ namespace VACM.NET4_0.Backend.Repositories
     );
 
     List<RepeaterModel> GetAll();
-    
+
     List<RepeaterModel> GetRange
     (
       string deviceName,
       bool isInputDevice,
       bool isOutputDevice
     );
-    
+
     List<RepeaterModel> GetRange(List<uint?> idList);
     void Insert(RepeaterModel repeaterModel);
 
