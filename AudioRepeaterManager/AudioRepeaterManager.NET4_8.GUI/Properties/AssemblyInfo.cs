@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("VAC Manager")]
-[assembly: AssemblyDescription("Graphical user interface (GUI) to create, manage, and automate instances of Virtual Audio Cable (VAC) audio repeaters. This application version is targeted for either 32-bit (x86) or 64-bit (x64) versions of Virtual Audio Cable. Required dependencies include Microsoft .NET Framework version 4.8. Supported operating systems include Microsoft Windows 7 SP1/Server 2008 R2 or newer.")]
+[assembly: AssemblyTitle("VAC Audio Repeater Manager")]
+[assembly: AssemblyDescription("Graphical user interface (GUI) to create, manage, and automate instances of Virtual Audio Cable (VAC) audio repeaters. This application version supports Microsoft Windows 7 SP1 or Server 2008 R2, and newer.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Virtual Audio Cable Manager")]
-[assembly: AssemblyCopyright("VAC Manager Copyleft © 2024 Alexander Portell.\nVirtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.")]
-[assembly: AssemblyTrademark("AudioRepeaterManager")]
+[assembly: AssemblyProduct("Audio Repeater Manager for Virtual Audio Cable")]
+[assembly: AssemblyCopyright("VAC Audio Repeater Manager Copyleft © 2024 Alexander Portell.\nVirtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
