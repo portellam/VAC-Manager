@@ -1,5 +1,5 @@
-# Audio Repeater Manager for Virtual Audio Cable
-or **VACARM**
+# Virtual Audio Cable Audio Repeater Manager
+##### VAC Audio Repeater Manager (VACARM)
 ### In Development
 Easily multiplex multiple audio sources. Create, manage, and automate
 instances of [Virtual Audio Cable](#Licensing) (VAC) audio repeaters. Compatible
@@ -39,7 +39,7 @@ audio repeater.
 Given:
 - one (1) Gaming PC:
   * to play video games.
-  * to run [Audio Repeater Manager](#audio-repeater-manager-for-virtual-audio-cable).
+  * to run VAC Audio Repeater Manager.
   * to capture of the audio/video via a broadcast/stream client.
 - three (3) audio sources:
   * a local microphone.
