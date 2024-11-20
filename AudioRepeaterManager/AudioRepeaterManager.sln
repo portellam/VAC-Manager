@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET8_0.TUI", "AudioRepeaterManager.NET8_0.TUI\AudioRepeaterManager.NET8_0.TUI.csproj", "{582641DA-7AF8-4554-BA61-84E66BF831FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AudioRepeaterManager.NET8_0.TUI", "AudioRepeaterManager.NET8_0.TUI\AudioRepeaterManager.NET8_0.TUI.csproj", "{582641DA-7AF8-4554-BA61-84E66BF831FA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_0.Backend", "AudioRepeaterManager.NET4_0.Backend\AudioRepeaterManager.NET4_0.Backend.csproj", "{B5B16153-9C97-4A5C-A524-27F2F7067BD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET8_0.GUI", "AudioRepeaterManager.NET8_0.GUI\AudioRepeaterManager.NET8_0.GUI.csproj", "{98FED8AF-1862-4388-9CCA-935C4857B4E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AudioRepeaterManager.NET8_0.GUI", "AudioRepeaterManager.NET8_0.GUI\AudioRepeaterManager.NET8_0.GUI.csproj", "{98FED8AF-1862-4388-9CCA-935C4857B4E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_0.GUI", "AudioRepeaterManager.NET4_0.GUI\AudioRepeaterManager.NET4_0.GUI.csproj", "{08CA9AFB-8EBA-4388-9587-C227AD817A2A}"
 EndProject
@@ -21,9 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_8.Extensions", "AudioRepeaterManager.NET4_8.Extensions\AudioRepeaterManager.NET4_8.Extensions.csproj", "{89577933-445E-485E-9885-D5E05B925372}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET8_0.Extensions", "AudioRepeaterManager.NET8_0.Extensions\AudioRepeaterManager.NET8_0.Extensions.csproj", "{B5B5B219-E162-42EC-A69F-3185BC9D569A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AudioRepeaterManager.NET8_0.Extensions", "AudioRepeaterManager.NET8_0.Extensions\AudioRepeaterManager.NET8_0.Extensions.csproj", "{B5B5B219-E162-42EC-A69F-3185BC9D569A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET8_0.Backend", "AudioRepeaterManager.NET8_0.Backend\AudioRepeaterManager.NET8_0.Backend.csproj", "{FE4618C7-7931-4219-8325-58CE221E8AC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AudioRepeaterManager.NET8_0.Backend", "AudioRepeaterManager.NET8_0.Backend\AudioRepeaterManager.NET8_0.Backend.csproj", "{FE4618C7-7931-4219-8325-58CE221E8AC9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_8.Backend", "AudioRepeaterManager.NET4_8.Backend\AudioRepeaterManager.NET4_8.Backend.csproj", "{518E6E75-6A95-4564-A5A9-657D31D5D5F9}"
 EndProject
@@ -40,6 +40,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_6.TUI", "AudioRepeaterManager.NET4_6.TUI\AudioRepeaterManager.NET4_6.TUI.csproj", "{58534C08-7F22-4EF1-823A-BC0258455119}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_6.Backend", "AudioRepeaterManager.NET4_6.Backend\AudioRepeaterManager.NET4_6.Backend.csproj", "{80D58F63-25DC-4082-9E33-81045C00E44C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET2_0.Backend", "AudioRepeaterManager.NET2_0.Backend\AudioRepeaterManager.NET2_0.Backend.csproj", "{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET2_0.TUI", "AudioRepeaterManager.NET2_0.TUI\AudioRepeaterManager.NET2_0.TUI.csproj", "{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET2_0.GUI", "AudioRepeaterManager.NET2_0.GUI\AudioRepeaterManager.NET2_0.GUI.csproj", "{207C48BC-9821-446E-90BE-CCFEC33460DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET2_0.Extensions", "AudioRepeaterManager.NET2_0.Extensions\AudioRepeaterManager.NET2_0.Extensions.csproj", "{A85A10F1-4E75-4E79-BE66-07EB62177F37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -318,6 +326,70 @@ Global
 		{80D58F63-25DC-4082-9E33-81045C00E44C}.Release|x64.Build.0 = Release|Any CPU
 		{80D58F63-25DC-4082-9E33-81045C00E44C}.Release|x86.ActiveCfg = Release|Any CPU
 		{80D58F63-25DC-4082-9E33-81045C00E44C}.Release|x86.Build.0 = Release|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Debug|x64.Build.0 = Debug|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Debug|x86.Build.0 = Debug|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Release|ARM64.Build.0 = Release|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Release|x64.ActiveCfg = Release|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Release|x64.Build.0 = Release|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Release|x86.ActiveCfg = Release|Any CPU
+		{AA6E6DC2-B99F-4A73-9831-BC21686A44F8}.Release|x86.Build.0 = Release|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Debug|x64.Build.0 = Debug|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Debug|x86.Build.0 = Debug|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Release|ARM64.Build.0 = Release|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Release|x64.ActiveCfg = Release|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Release|x64.Build.0 = Release|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Release|x86.ActiveCfg = Release|Any CPU
+		{C2F9CB10-EE8C-4C94-A08B-7D41B0498DD4}.Release|x86.Build.0 = Release|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Debug|x64.Build.0 = Debug|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Debug|x86.Build.0 = Debug|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Release|ARM64.Build.0 = Release|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Release|x64.ActiveCfg = Release|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Release|x64.Build.0 = Release|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Release|x86.ActiveCfg = Release|Any CPU
+		{207C48BC-9821-446E-90BE-CCFEC33460DF}.Release|x86.Build.0 = Release|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Debug|x64.Build.0 = Debug|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Debug|x86.Build.0 = Debug|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Release|ARM64.Build.0 = Release|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Release|x64.ActiveCfg = Release|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Release|x64.Build.0 = Release|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Release|x86.ActiveCfg = Release|Any CPU
+		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
