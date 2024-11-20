@@ -1,15 +1,94 @@
 ﻿using System;
+using System.IO;
 
 namespace AudioRepeaterManager.NET4_0.Backend
 {
-  /*
-   * TODO:
-   * - add flags to toggle behavior.
-   */
-
+  /// <summary>
+  /// Global parameters
+  /// </summary>
   public class Global
   {
     #region Parameters
+
+    #region Application name
+
+    public readonly static string ReferencedApplicationName = "Virtual Audio Cable";
+    public readonly static string ReferencedFileExtension = ".vac";
+
+    #endregion
+
+    #region Executable path names
+
+    /// <summary>
+    /// The name of the executable.
+    /// </summary>
+    private readonly static string executableName = "audiorepeater.exe";
+
+    /// <summary>
+    /// Typically "C:\Program Files\Virtual Audio Cable\audiorepeater.exe".
+    /// </summary>
+    private static string executablePathNameForMatchedProcessAndSystem =
+      $"{systemRootPathName}Program Files\\{firstParentPathNameForExecutable}";
+
+    /// <summary>
+    /// Typically "C:\Program Files (x86)\Virtual Audio Cable\audiorepeater.exe".
+    /// </summary>
+    private static string executablePathNameForUnmatchedProcessAndSystem =
+      $"{systemRootPathName}Program Files (x86)\\{firstParentPathNameForExecutable}";
+
+    /// <summary>
+    /// Typically "Virtual Audio Cable\audiorepeater.exe".
+    /// </summary>
+    private readonly static string firstParentPathNameForExecutable =
+      $"{ReferencedApplicationName}\\{executableName}";
+
+    /// <summary>
+    /// Typically "C:\".
+    /// </summary>
+    private static string systemRootPathName = Path.GetPathRoot
+      (
+        Environment.GetFolderPath
+        (
+          Environment.SpecialFolder.System
+        )
+      );
+
+    /// <summary>
+    /// The expected executable full path name.
+    /// </summary>
+    public static string ExpectedExecutableFullPathName
+    {
+      get
+      {
+        if (Environment.Is64BitProcess == Environment.Is64BitOperatingSystem)
+        {
+          return executablePathNameForMatchedProcessAndSystem;
+        }
+
+        return executablePathNameForUnmatchedProcessAndSystem;
+      }
+    }
+
+
+    /// <summary>
+    /// Does audio repeater executable exist.
+    /// </summary>
+    public static bool DoesExecutableExist
+    {
+      get
+      {
+        if (systemRootPathName is null)
+        {
+          return false;
+        }
+
+        return File.Exists(ExpectedExecutableFullPathName);
+      }
+    }
+
+    #endregion
+
+    #region Limitations
 
     public static bool DoIgnoreSafeMaxRepeaterCount = false;
 
@@ -60,6 +139,8 @@ namespace AudioRepeaterManager.NET4_0.Backend
     /// Maximum amount of endpoints (audio devices) for Windows 5.x and older.
     /// </summary>
     public readonly static uint WindowsNT5MaxEndpointCount = 32;
+
+    #endregion
 
     #endregion
   }
