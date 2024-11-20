@@ -44,7 +44,7 @@ namespace VACM.NET4_0.Backend.Models
     public byte defaultResyncAtPercentage = ResyncAtOptions[3];
     //public string defaultPathName = Common.ExpectedExecutableFullPath; //FIXME
     public string defaultWindowName = "{0} to {1}";
-    public uint defaultSampleRateKHz = SamplingRateOptions[5];
+    public uint defaultSampleRateKHz = SampleRateOptions[5];
     public ushort defaultBufferDurationMs = BufferMsOptions[2];
 
     #endregion
@@ -439,7 +439,7 @@ namespace VACM.NET4_0.Backend.Models
     }
 
     /// <summary>
-    /// The sampling rate in KiloHertz.
+    /// The sample rate in KiloHertz.
     /// </summary>
     public uint SampleRateKHz
     {
@@ -451,8 +451,8 @@ namespace VACM.NET4_0.Backend.Models
       {
         if
         (
-          value >= SamplingRateOptions.FirstOrDefault()
-          && value <= SamplingRateOptions.Last()
+          value >= SampleRateOptions.FirstOrDefault()
+          && value <= SampleRateOptions.Last()
         )
         {
           sampleRateKHz = value;
@@ -581,9 +581,9 @@ namespace VACM.NET4_0.Backend.Models
       );
 
     /// <summary>
-    /// Available choices for Sampling rate in KiloHertz.
+    /// Available choices for sample rate in KiloHertz.
     /// </summary>
-    public static ReadOnlyCollection<uint> SamplingRateOptions =
+    public static ReadOnlyCollection<uint> SampleRateOptions =
       new ReadOnlyCollection<uint>(
         new uint[]
         {
@@ -746,7 +746,7 @@ namespace VACM.NET4_0.Backend.Models
         $"/min \"audiorepeater\" \"{PathName}\" " +
         $"/Input:\"{InputDeviceName}\" " +
         $"/Output:\"{OutputDeviceName}\" " +
-        $"/SamplingRate:{SampleRateKHz} " +
+        $"/SampleRate:{SampleRateKHz} " +
         $"/BitsPerSample:{BitsPerSample} " +
         $"/Channels:{ChannelList.Count} " +
         $"/ChanCfg:custom={ChannelMask} " +
@@ -789,7 +789,7 @@ namespace VACM.NET4_0.Backend.Models
         || !uint.TryParse(infoList[2], out uint channelMask)
         || !byte.TryParse(infoList[6], out byte prefillPercentage)
         || !byte.TryParse(infoList[7], out byte resyncAtPercentage)
-        || !uint.TryParse(infoList[0], out uint samplingRateKHz)
+        || !uint.TryParse(infoList[0], out uint sampleRateKHz)
       )
       {
         return;
@@ -802,7 +802,7 @@ namespace VACM.NET4_0.Backend.Models
       ChannelMask = channelMask;
       PrefillPercentage = prefillPercentage;
       ResyncAtPercentage = resyncAtPercentage;
-      SampleRateKHz = samplingRateKHz;
+      SampleRateKHz = sampleRateKHz;
     }
 
     #endregion
