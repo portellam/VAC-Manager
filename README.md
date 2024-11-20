@@ -110,8 +110,8 @@ Reference: [Wikipedia](#72-net-framework-version-history)
 - Download the Latest Release:&ensp;~[Codeberg][41],
 [GitHub][42]~
 
-[41]: https://codeberg.org/portellam/audio-repeater-manager-for-virtual-audio-cable/releases/latest
-[42]: https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/releases/latest
+[41]: https://codeberg.org/portellam/vac-audio-repeater-manager/releases/latest
+[42]: https://github.com/portellam/vac-audio-repeater-manager/releases/latest
 
 ## 5. Usage
 ### 5.1. Install
@@ -131,8 +131,8 @@ TODO:
 Did you encounter a bug? Do you need help? Please visit the
 **Issues page** ([Codeberg][61], [GitHub][62]).
 
-[61]: https://codeberg.org/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
-[62]:   https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
+[61]: https://codeberg.org/portellam/vac-audio-repeater-manager/issues
+[62]: https://github.com/portellam/vac-audio-repeater-manager/issues
 
 ## 7. References
 ### 7.1. Multiplexing
