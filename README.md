@@ -9,6 +9,8 @@ with Microsoft Windows 2000 to Windows 11.
 
 ## Table of Contents
 - [1. Why?](#1-why)
+  - [1.1. Use-Case: Software-Defined Multiplexing](#11-use-case-software-defined-multiplexing)
+  - [1.2. Real-World Equivalent](#12-real-world-equivalent)
 - [2. Features](#2-features)
 - [3. Requirements](#3-requirements)
     - [3.1. Example](#31-example)
@@ -17,7 +19,9 @@ with Microsoft Windows 2000 to Windows 11.
 - [5. Usage](#5-usage)
     - [5.1. Install](#51-install)
 - [6. Contact](#6-contact)
-- [7. Keywords](#7-keywords)
+- [7. References](#7-references)
+  - [7.1. Multiplexing](#71-multiplexing)
+  - [.NET Framework version history](#72-net-framework-version-history)
 - [8. Credits](#8-credits)
 - [9. Licenses](#9-licenses)
 
@@ -74,9 +78,11 @@ remastering.
 
 ## 2. Features
 - Load/Save audio stream setup to/from file.
+  - Configuration files
+  - `.bat` script files
 - Manage audio stream setup of current or other Windows machine(s).
 - Start/stop audio repeaters from within the application.
-- Easily automate audio stream setup with Windows Tasks and startup scripts.
+- Easily automate audio stream setup given user-input and/or arguments.
 
 ## 3. Requirements
 - [VAC Audio Repeater](https://vac.muzychenko.net/en/repeater.htm)
@@ -125,7 +131,7 @@ TODO:
 Did you encounter a bug? Do you need help? Please visit the
 **Issues page** ([Codeberg][61], [GitHub][62]).
 
-[61]: https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
+[61]: https://codeberg.org/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
 [62]:   https://github.com/portellam/audio-repeater-manager-for-virtual-audio-cable/issues
 
 ## 7. References
@@ -139,7 +145,7 @@ Line-Out(s).
 [Wikipedia][711]
 
 ### 7.2. .NET Framework version history
-See [Wikipedia][721].
+[Wikipedia][721].
 
 [711]: https://en.wikipedia.org/wiki/Multiplexing
 [721]: https://en.wikipedia.org/wiki/.NET_Framework_version_history
