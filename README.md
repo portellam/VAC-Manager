@@ -31,7 +31,7 @@ audio output must be selected.
 one (1) audio output (and input).
 - For example, effectively treat a
 [video game session](#11-use-case-software-defined-multiplexing) like a
-[music recording](#12-real-world-equivalent-hardware-defined-multiplexing).
+[music recording](#12-real-world-equivalent).
 - **Turnkey** solution, no tedious work of opening or closing instances of VAC
 audio repeater.
 
@@ -45,19 +45,19 @@ Given:
   * a local microphone.
   * incoming voice chat audio.
   * game audio.
-- Optional: one (1) Recording PC:
+- Optional: a separate PC to record; one (1) Recording PC:
   * cables and/or adapters to transfer audio (and video) from the Gaming PC to the
 Recording PC.
-  - to run a broadcast/stream client.
+  * to capture of the audio/video via a broadcast/stream client.
 
 Allows:
 1. Specify to only listen to two of the three audio sources
 (incoming voice and game audio) on the Gaming PC.
-2. Record each source as separate audio streams on the Recording PC,
+2. Record each source as separate audio streams on a (Gaming or separate) PC,
 for future audio/video editing.
 3. Optional: capture the audio/video via a broadcast/stream client.
 
-### 1.2. Real-world equivalent: Hardware-defined Multiplexing
+### 1.2. Real-world equivalent
 `(Come on, Dave, give me a break)` - *Unchained*, Van Halen
 
 Given:
