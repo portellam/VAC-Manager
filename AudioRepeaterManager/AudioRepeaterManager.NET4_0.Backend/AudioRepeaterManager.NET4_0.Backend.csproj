@@ -35,12 +35,6 @@
     <StartupObject>AudioRepeaterManager.NET4_0.Backend.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AudioSwitcher.AudioApi, Version=1.1.0.0, Culture=neutral, PublicKeyToken=5d3d81ef23a33a3f, processorArchitecture=MSIL">
-      <HintPath>..\packages\AudioSwitcher.AudioApi.CoreAudio.1.1.8\lib\net40\AudioSwitcher.AudioApi.dll</HintPath>
-    </Reference>
-    <Reference Include="AudioSwitcher.AudioApi.CoreAudio, Version=1.1.8.0, Culture=neutral, PublicKeyToken=5d3d81ef23a33a3f, processorArchitecture=MSIL">
-      <HintPath>..\packages\AudioSwitcher.AudioApi.CoreAudio.1.1.8\lib\net40\AudioSwitcher.AudioApi.CoreAudio.dll</HintPath>
-    </Reference>
     <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
@@ -52,15 +46,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="AudioRepeaterManager.NET4_0.Extensions">
-      <HintPath>..\AudioRepeaterManager.NET4_0.Extensions\bin\Debug\AudioRepeaterManager.NET4_0.Extensions.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\DeviceController.cs" />
-    <Compile Include="Controllers\IDeviceController.cs" />
-    <Compile Include="Controllers\IRepeaterController.cs" />
-    <Compile Include="Controllers\RepeaterController.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\IDeviceModel.cs" />

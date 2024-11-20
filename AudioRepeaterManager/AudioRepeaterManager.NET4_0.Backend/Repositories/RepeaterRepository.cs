@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Xml.Linq;
 using AudioRepeaterManager.NET4_0.Backend.Models;
 
 namespace AudioRepeaterManager.NET4_0.Backend.Repositories
