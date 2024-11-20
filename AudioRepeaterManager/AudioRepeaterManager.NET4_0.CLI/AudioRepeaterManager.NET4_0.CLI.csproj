@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{145A5382-AC21-463D-8545-8E791466B2FC}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>AudioRepeaterManager.NET4_0.CLI</RootNamespace>
-    <AssemblyName>AudioRepeaterManager.NET4_0.CLI</AssemblyName>
+    <RootNamespace>AudioRepeaterManager.NET4_0.TUI</RootNamespace>
+    <AssemblyName>AudioRepeaterManager.NET4_0.TUI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

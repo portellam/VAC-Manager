@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AudioRepeaterManager.NET4_6.CLI
+namespace AudioRepeaterManager.NET4_6.TUI
 {
   internal class Program
   {
