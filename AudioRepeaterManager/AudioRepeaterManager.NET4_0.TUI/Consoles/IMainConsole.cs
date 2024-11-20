@@ -8,18 +8,18 @@
     bool EnableAllDevices { get; set; }
     bool EnableAllRepeaterDevices { get; set; }
     bool StartAllRepeaters { get; set; }
-    bool IgnoreMissingDependencies { get; set; }
     bool IgnoreWarnings { get; set; }
+    bool ParseAudioRepeaterPathName { get; set; }
     string AudioRepeaterPathName { get; set; }
     string FilePath { get; set; }
     string[] Arguments { get; set; }
-    string[] ChildConsoles { get; } 
+    string[] ChildConsoles { get; }
 
     #endregion
 
     #region Logic
 
-    void ParseArguments(string[] arguments);
+    void Main(string[] arguments);
 
     #endregion
   }

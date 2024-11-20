@@ -4,7 +4,7 @@
   {
     #region Logic
 
-    void Exit();
+    void Exit(int code);
 
     void Initialize();
 

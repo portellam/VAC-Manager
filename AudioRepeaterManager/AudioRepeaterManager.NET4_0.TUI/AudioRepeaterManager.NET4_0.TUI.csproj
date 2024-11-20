@@ -51,6 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consoles\DeviceConsole.cs" />
+    <Compile Include="Consoles\RepeaterConsole.cs" />
+    <Compile Include="Consoles\HelpConsole.cs" />
+    <Compile Include="Consoles\FileConsole.cs" />
+    <Compile Include="Consoles\AboutConsole.cs" />
+    <Compile Include="Consoles\IAboutConsole.cs" />
+    <Compile Include="Consoles\IConsole.cs" />
+    <Compile Include="Consoles\IChildConsole.cs" />
+    <Compile Include="Consoles\IDeviceConsole.cs" />
+    <Compile Include="Consoles\IFileConsole.cs" />
+    <Compile Include="Consoles\IHelpConsole.cs" />
+    <Compile Include="Consoles\IMainConsole.cs" />
+    <Compile Include="Consoles\IRepeaterConsole.cs" />
     <Compile Include="Consoles\MainConsole.cs" />
     <Compile Include="ConsoleWindow.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
