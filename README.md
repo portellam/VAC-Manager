@@ -13,11 +13,13 @@ with Microsoft Windows 2000 to Windows 11.
   - [1.2. Real-World Equivalent](#12-real-world-equivalent)
 - [2. Features](#2-features)
 - [3. Requirements](#3-requirements)
-    - [3.1. Example](#31-example)
-    - [3.2. Operating System Requirements](#32-operating-system-requirements)
+  - [3.1. Example](#31-example)
+  - [3.2. Operating System Requirements](#32-operating-system-requirements)
 - [4. Download](#4-download)
 - [5. Usage](#5-usage)
-    - [5.1. Install](#51-install)
+  - [5.1. Install](#51-install)
+  - [5.2. Graphics User Interface (GUI)](#52-graphics-user-interface-gui)
+  - [5.3. Terminal User Interface (TUI)](#53-terminal-user-interface-tui)
 - [6. Contact](#6-contact)
 - [7. References](#7-references)
   - [7.1. Multiplexing](#71-multiplexing)
@@ -96,7 +98,7 @@ faciliate [multiplexing](#71-multiplexing).
 ### 3.2. Operating System Requirements
 | Minimum OS version                 | CPU architecture | .NET version      |
 | :---                               | :---:            | :---:             |
-| Windows 10 ver. 1809, Server 2019  | 32-bit or 64-bit | Core 8.0  	    |
+| Windows 10 ver. 1809, Server 2019  | 32-bit or 64-bit | Core 8.0  	      |
 | Windows 7 SP1, Server 2008 R2      | 32-bit or 64-bit | Framework 4.8     |
 | Windows Vista SP2, Server 2008 SP2 | 32-bit or 64-bit | Framework 4.6     |
 | Windows XP SP3, Server 2003 SP2    | 32-bit           | Framework 4.0     |
@@ -115,17 +117,13 @@ Reference: [Wikipedia](#72-net-framework-version-history)
 
 ## 5. Usage
 ### 5.1. Install
-TODO: add details here.
+WIP
 
-### 5.2. Graphics User Interface (GUI) version
-TODO:
-- add details here.
-- make `VACARM-GUI.exe`
+### 5.2. Graphics User Interface (GUI)
+WIP
 
-### 5.3. Terminal User Interface version
-TODO:
-- explain console version input parameters.
-- make `VACARM-TUI.exe`
+### 5.3. Terminal User Interface (TUI)
+WIP
 
 ## 6. Contact
 Did you encounter a bug? Do you need help? Please visit the
