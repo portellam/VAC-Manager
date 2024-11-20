@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 
 namespace AudioRepeaterManager.NET4_0.Backend.Consoles
 {
@@ -264,12 +265,18 @@ namespace AudioRepeaterManager.NET4_0.Backend.Consoles
     /// <param name="option">The option</param>
     private void ParseThisOption(string option)
     {
-      switch (option)
+      if (ParseAudioRepeaterPathName)
       {
+        AudioRepeaterPathName = option;
 
+        if (!Path.IsPathRooted(AudioRepeaterPathName))
+        {
 
+        }
       }
     }
+
+    public bool IsRepeater
 
     public void Exit(int code)
     {
