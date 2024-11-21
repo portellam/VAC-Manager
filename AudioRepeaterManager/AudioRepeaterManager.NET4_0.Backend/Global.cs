@@ -27,13 +27,13 @@ namespace AudioRepeaterManager.NET4_0.Backend
     /// <summary>
     /// Typically "C:\Program Files\Virtual Audio Cable\audiorepeater.exe".
     /// </summary>
-    private static string executablePathNameForMatchedProcessAndSystem =
+    private static string executablePathNameForBitMatchedProcessAndSystem =
       $"{systemRootPathName}Program Files\\{firstParentPathNameForExecutable}";
 
     /// <summary>
     /// Typically "C:\Program Files (x86)\Virtual Audio Cable\audiorepeater.exe".
     /// </summary>
-    private static string executablePathNameForUnmatchedProcessAndSystem =
+    private static string executablePathNameForBitUnmatchedProcessAndSystem =
       $"{systemRootPathName}Program Files (x86)\\{firstParentPathNameForExecutable}";
 
     /// <summary>
@@ -53,6 +53,9 @@ namespace AudioRepeaterManager.NET4_0.Backend
         )
       );
 
+    private static bool doesProcessAndSystemBitMatch =
+      Environment.Is64BitProcess == Environment.Is64BitOperatingSystem;
+
     /// <summary>
     /// The expected executable full path name.
     /// </summary>
@@ -60,12 +63,12 @@ namespace AudioRepeaterManager.NET4_0.Backend
     {
       get
       {
-        if (Environment.Is64BitProcess == Environment.Is64BitOperatingSystem)
+        if (doesProcessAndSystemBitMatch)
         {
-          return executablePathNameForMatchedProcessAndSystem;
+          return executablePathNameForBitMatchedProcessAndSystem;
         }
 
-        return executablePathNameForUnmatchedProcessAndSystem;
+        return executablePathNameForBitUnmatchedProcessAndSystem;
       }
     }
 
@@ -77,11 +80,6 @@ namespace AudioRepeaterManager.NET4_0.Backend
     {
       get
       {
-        if (systemRootPathName is null)
-        {
-          return false;
-        }
-
         return File.Exists(ExpectedExecutableFullPathName);
       }
     }
