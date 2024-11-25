@@ -1,14 +1,11 @@
-﻿using AudioSwitcher.AudioApi.CoreAudio;
-using NAudio.CoreAudioApi;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using AudioRepeaterManager.NET4_0.Backend.Models;
 using AudioRepeaterManager.NET4_0.Backend.Repositories;
 
-namespace AudioRepeaterManager.NET4_0.Backend.Controllers
+namespace AudioRepeaterManager.NET4_0.GUI.Controllers
 {
   public class DeviceController :
     IDeviceController,
@@ -16,9 +13,7 @@ namespace AudioRepeaterManager.NET4_0.Backend.Controllers
   {
     #region Parameters
 
-    private CoreAudioController coreAudioController;
     private DeviceRepository DeviceRepository;
-    private MMDeviceRepository mMDeviceRepository;
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -33,9 +28,7 @@ namespace AudioRepeaterManager.NET4_0.Backend.Controllers
     [ExcludeFromCodeCoverage]
     public DeviceController(DeviceRepository deviceRepository)
     {
-      coreAudioController = new CoreAudioController();
-      DeviceRepository = deviceRepository;
-      mMDeviceRepository = new MMDeviceRepository();
+      DeviceRepository = deviceRepository;      
     }
 
     /// <summary>
@@ -164,24 +157,12 @@ namespace AudioRepeaterManager.NET4_0.Backend.Controllers
     }
 
     /// <summary>
-    /// Get the actual device.
-    /// </summary>
-    /// <param name="actualId">the actual device ID</param>
-    /// <returns>The actual device to get.</returns>
-    public MMDevice GetActual(string actualId)
-    {
-      return
-        mMDeviceRepository
-          .Get(actualId);
-    }
-
-    /// <summary>
     /// Disable the actual device.
     /// </summary>
     /// <param name="actualId">The actual device ID</param>
     public void DisableActual(string actualId)
     {
-      mMDeviceRepository.Disable(actualId);
+      DeviceRepository.EnableActual(actualId);
     }
 
     /// <summary>
@@ -190,17 +171,7 @@ namespace AudioRepeaterManager.NET4_0.Backend.Controllers
     /// <param name="actualId">The actual device ID</param>
     public void EnableActual(string actualId)
     {
-      mMDeviceRepository.Enable(actualId);
-    }
-
-    /// <summary>
-    /// Add the actual device.
-    /// </summary>
-    /// <param name="mMDevice">The actual device to add.</param>
-    public void Insert(MMDevice mMDevice)
-    {
-      DeviceRepository
-        .Insert(mMDevice);
+      DeviceRepository.EnableActual(actualId);
     }
 
     /// <summary>
@@ -250,48 +221,6 @@ namespace AudioRepeaterManager.NET4_0.Backend.Controllers
       DeviceRepository
         .Remove(actualId);
     }
-
-    /// <summary>
-    /// Set the device as default.
-    /// </summary>
-    /// <param name="actualId">the actual device ID</param>
-    public void SetAsDefault(string actualId) //NOTE: will only for Windows Vista?
-    {
-      MMDevice mMDevice = GetActual(actualId);
-
-      if (mMDevice is null)
-      {
-        return;
-      }
-
-      CoreAudioDevice coreAudioDevice = coreAudioController
-        .GetAudioDevice
-        (
-          Guid.Parse(actualId)
-        );
-
-      coreAudioDevice.SetAsDefault();
-    }
-
-    /// <summary>
-    /// Update the device.
-    /// </summary>
-    /// <param name="id">The device ID</param>
-    /// <param name="mMDevice">The actual device</param>
-    public void Update
-    (
-      uint? id,
-      MMDevice mMDevice
-    )
-    {
-      DeviceRepository
-        .Update
-        (
-          id,
-          mMDevice
-        );
-    }
-
     #endregion
   }
 }
