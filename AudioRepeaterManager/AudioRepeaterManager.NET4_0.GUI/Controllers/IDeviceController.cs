@@ -19,8 +19,8 @@ namespace AudioRepeaterManager.NET4_0.GUI.Controllers
     List<DeviceModel> GetAll();
     List<DeviceModel> GetAllAbsent();
     List<DeviceModel> GetAllDisabled();
-    List<DeviceModel> GetAllEnabled();
     List<DeviceModel> GetAllDuplex();
+    List<DeviceModel> GetAllEnabled();
     List<DeviceModel> GetAllInput();
     List<DeviceModel> GetAllOutput();
     List<DeviceModel> GetAllPresent();

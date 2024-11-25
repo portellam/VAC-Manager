@@ -100,6 +100,39 @@ namespace AudioRepeaterManager.NET4_0.GUI.Controllers
     }
 
     /// <summary>
+    /// Get the disabled device list.
+    /// </summary>
+    /// <returns>The disabled device list.</returns>
+    public List<DeviceModel> GetAllDisabled()
+    {
+      return
+        DeviceRepository
+          .GetAllDisabled();
+    }
+
+    /// <summary>
+    /// Get the duplex device list.
+    /// </summary>
+    /// <returns>The duplex device list.</returns>
+    public List<DeviceModel> GetAllDuplex()
+    {
+      return
+        DeviceRepository
+          .GetAllDuplex();
+    }
+
+    /// <summary>
+    /// Get the enabled device list.
+    /// </summary>
+    /// <returns>The enabled device list.</returns>
+    public List<DeviceModel> GetAllEnabled()
+    {
+      return
+        DeviceRepository
+          .GetAllEnabled();
+    }
+
+    /// <summary>
     /// Get the input device list.
     /// </summary>
     /// <returns>The input device list.</returns>
