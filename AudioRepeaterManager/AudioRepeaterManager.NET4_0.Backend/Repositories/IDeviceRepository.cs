@@ -25,6 +25,8 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
     List<DeviceModel> GetAllPresent();
     List<DeviceModel> GetRange(List<string> actualIdList);
     List<DeviceModel> GetRange(List<uint?> idList);
+    void DisableActual(string actualId);
+    void EnableActual(string actualId);
     void Insert(DeviceModel deviceModel);
     void Insert(MMDevice mMDevice);
 
@@ -40,6 +42,7 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
     void Remove(uint? Id);
     void Remove(string actualId);
     void RemoveRange(string name);
+    void SetAsDefault(string actualId);
     void Update(DeviceModel deviceModel);
 
     void Update

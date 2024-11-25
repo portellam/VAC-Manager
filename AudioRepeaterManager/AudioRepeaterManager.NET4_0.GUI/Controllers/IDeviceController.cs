@@ -1,5 +1,4 @@
-﻿using NAudio.CoreAudioApi;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using AudioRepeaterManager.NET4_0.Backend.Models;
 
@@ -27,9 +26,6 @@ namespace AudioRepeaterManager.NET4_0.Backend.Controllers
     List<DeviceModel> GetAllPresent();
     List<DeviceModel> GetRange(List<string> actualIdList);
     List<DeviceModel> GetRange(List<uint?> idList);
-    void DisableActual(string actualId);
-    void EnableActual(string actualId);
-    void Insert(MMDevice mMDevice);
 
     void Insert
     (
@@ -43,14 +39,6 @@ namespace AudioRepeaterManager.NET4_0.Backend.Controllers
     void Remove(uint? id);
 
     void Remove(string actualId);
-
-    void SetAsDefault(string actualId);
-
-    void Update
-    (
-      uint? id,
-      MMDevice mMDevice
-    );
 
     #endregion
   }
