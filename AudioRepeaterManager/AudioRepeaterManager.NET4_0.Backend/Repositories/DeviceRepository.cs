@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AudioRepeaterManager.NET4_0.Backend.Models;
+using AudioSwitcher.AudioApi.CoreAudio;
 
 /*
  * TODO:
@@ -27,9 +28,19 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
     #region Parameters
 
     /// <summary>
+    /// The controller of actual devices.
+    /// </summary>
+    private CoreAudioController coreAudioController;
+
+    /// <summary>
     /// The collection of devices.
     /// </summary>
     private HashSet<DeviceModel> DeviceModelHashSet;
+
+    /// <summary>
+    /// The collection of actual devices.
+    /// </summary>
+    private MMDeviceRepository MMDeviceRepository;
 
     /// <summary>
     /// The list of device IDs.
@@ -71,8 +82,10 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
     /// Constructor
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public DeviceRepository(List<MMDevice> mMDeviceList)
+    public DeviceRepository(List<MMDevice> mMDeviceList)  //FIXME: mMDeviceList
     {
+      coreAudioController = new CoreAudioController();
+      MMDeviceRepository = new MMDeviceRepository();
       DeviceModelHashSet = new HashSet<DeviceModel>();
       uint id = 0;
 
@@ -120,11 +133,11 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
       return new DeviceModel
       (
         id,
-        x.ID,
-        x.FriendlyName,
-        x.DataFlow == DataFlow.Capture,
-        x.DataFlow == DataFlow.Render,
-        IsPresent(x.State)
+        mMDevice.ID,
+        mMDevice.FriendlyName,
+        mMDevice.DataFlow == DataFlow.Capture,
+        mMDevice.DataFlow == DataFlow.Render,
+        IsPresent(mMDevice.State)
       );
     }
 
@@ -473,6 +486,24 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
     }
 
     /// <summary>
+    /// Disable the actual device.
+    /// </summary>
+    /// <param name="actualId">The actual device ID</param>
+    public void DisableActual(string actualId)
+    {
+      MMDeviceRepository.Disable(actualId);
+    }
+
+    /// <summary>
+    /// Enable the actual device.
+    /// </summary>
+    /// <param name="actualId">The actual device ID</param>
+    public void EnableActual(string actualId)
+    {
+      MMDeviceRepository.Enable(actualId);
+    }
+
+    /// <summary>
     /// Insert a device.
     /// </summary>
     /// <param name="deviceModel">The device</param>
@@ -715,6 +746,28 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
           count
         )
       );
+    }
+
+    /// <summary>
+    /// Set the actual device as default.
+    /// </summary>
+    /// <param name="actualId">the actual device ID</param>
+    public void SetAsDefault(string actualId)
+    {
+      MMDevice mMDevice = MMDeviceRepository.Get(actualId);
+
+      if (mMDevice is null)
+      {
+        return;
+      }
+
+      CoreAudioDevice coreAudioDevice = coreAudioController
+        .GetDevice
+        (
+          Guid.Parse(actualId)
+        );
+
+      coreAudioDevice.SetAsDefault();
     }
 
     /// <summary>
