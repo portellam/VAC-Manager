@@ -49,6 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\IDeviceController.cs" />
+    <Compile Include="Controllers\IRepeaterController.cs" />
+    <Compile Include="Controllers\RepeaterController.cs" />
     <Compile Include="GraphicsWindow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="UserControl1.cs">
@@ -93,6 +97,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AudioRepeaterManager.NET4_0.Backend\AudioRepeaterManager.NET4_0.Backend.csproj">
+      <Project>{b5b16153-9c97-4a5c-a524-27f2f7067bd2}</Project>
+      <Name>AudioRepeaterManager.NET4_0.Backend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AudioRepeaterManager.NET4_0.Extensions\AudioRepeaterManager.NET4_0.Extensions.csproj">
+      <Project>{b8548226-b266-4521-93f4-0217a1fdcf7d}</Project>
+      <Name>AudioRepeaterManager.NET4_0.Extensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
