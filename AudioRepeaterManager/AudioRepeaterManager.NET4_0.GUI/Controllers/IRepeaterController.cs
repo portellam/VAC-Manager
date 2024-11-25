@@ -1,10 +1,9 @@
-﻿using NAudio.CoreAudioApi;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using AudioRepeaterManager.NET4_0.Backend.Models;
 using AudioRepeaterManager.NET4_0.Backend.Structs;
 
-namespace AudioRepeaterManager.NET4_0.Backend.Controllers
+namespace AudioRepeaterManager.NET4_0.GUI.Controllers
 {
   public interface IRepeaterController
   {

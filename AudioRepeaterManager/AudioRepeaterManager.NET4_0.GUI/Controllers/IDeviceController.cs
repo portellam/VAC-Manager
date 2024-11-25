@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using AudioRepeaterManager.NET4_0.Backend.Models;
 
-namespace AudioRepeaterManager.NET4_0.Backend.Controllers
+namespace AudioRepeaterManager.NET4_0.GUI.Controllers
 {
   public interface IDeviceController
   {
