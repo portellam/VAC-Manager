@@ -142,7 +142,7 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
     }
 
     /// <summary>
-    /// Is present.
+    /// Is a device present.
     /// </summary>
     /// <param name="deviceState">The device state</param>
     /// <returns>True/false is the device present.</returns>
@@ -282,6 +282,43 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
     }
 
     /// <summary>
+    /// Get the disabled device list.
+    /// </summary>
+    /// <returns>The disabled device list.</returns>
+    public List<DeviceModel> GetAllDisabled()
+    {
+      if (MMDeviceRepository is null)
+      {
+        Debug.WriteLine
+        (
+          "Failed to get disabled device(s)." +
+          "Actual device collection is null."
+        );
+
+        return new List<DeviceModel>();
+      }
+
+      List<string> actualIdList = MMDeviceRepository
+        .GetAllDisabled()
+        .Select(x => x.ID)
+        .ToList();  
+
+      List<DeviceModel> deviceModelList =
+        GetRange(actualIdList);
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got disabled device(s) => Count: {1}",
+          deviceModelList.Count()
+        )
+      );
+
+      return deviceModelList;
+    }
+
+    /// <summary>
     /// Get the duplex device list.
     /// </summary>
     /// <returns>The duplex device list.</returns>
@@ -302,6 +339,43 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
         string.Format
         (
           "Got duplex device(s) => Count: {1}",
+          deviceModelList.Count()
+        )
+      );
+
+      return deviceModelList;
+    }
+
+    /// <summary>
+    /// Get the enabled device list.
+    /// </summary>
+    /// <returns>The enabled device list.</returns>
+    public List<DeviceModel> GetAllEnabled()
+    {
+      if (MMDeviceRepository is null)
+      {
+        Debug.WriteLine
+        (
+          "Failed to get enabled device(s)." +
+          "Actual device collection is null."
+        );
+
+        return new List<DeviceModel>();
+      }
+
+      List<string> actualIdList = MMDeviceRepository
+        .GetAllEnabled()
+        .Select(x => x.ID)
+        .ToList();
+
+      List<DeviceModel> deviceModelList =
+        GetRange(actualIdList);
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got enabled device(s) => Count: {1}",
           deviceModelList.Count()
         )
       );

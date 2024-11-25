@@ -15,6 +15,8 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
     #region Logic
 
     List<MMDevice> GetAll();
+    List<MMDevice> GetAllDisabled();
+    List<MMDevice> GetAllEnabled();
     List<MMDevice> GetRange(List<string> idList);
     MMDevice Get(string id);
     void Disable(string id);

@@ -249,6 +249,82 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
     }
 
     /// <summary>
+    /// Get the list of disabled actual devices.
+    /// </summary>
+    /// <returns>The list of disabled actual devices.</returns>
+    public List<MMDevice> GetAllDisabled()
+    {
+      if
+      (
+        MMDeviceList is null
+        || MMDeviceList.Count == 0
+      )
+      {
+        Debug.WriteLine
+        (
+          "Failed to get disabled audio device(s). " +
+          "Audio device list is null or empty."
+        );
+
+        return new List<MMDevice>();
+      }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got audio disabled device(s) => Count: {1}",
+          MMDeviceList
+            .Where
+            (
+              x =>
+              x.State == DeviceState.Disabled
+            ).Count()
+        )
+      );
+
+      return MMDeviceList;
+    }
+
+    /// <summary>
+    /// Get the list of enabled actual devices.
+    /// </summary>
+    /// <returns>The list of enabled actual devices.</returns>
+    public List<MMDevice> GetAllEnabled()
+    {
+      if
+      (
+        MMDeviceList is null
+        || MMDeviceList.Count == 0
+      )
+      {
+        Debug.WriteLine
+        (
+          "Failed to get enabled audio device(s). " +
+          "Audio device list is null or empty."
+        );
+
+        return new List<MMDevice>();
+      }
+
+      Debug.WriteLine
+      (
+        string.Format
+        (
+          "Got audio enabled device(s) => Count: {1}",
+          MMDeviceList
+            .Where
+            (
+              x =>
+              x.State != DeviceState.Disabled
+            ).Count()
+        )
+      );
+
+      return MMDeviceList;
+    }
+
+    /// <summary>
     /// Get a list of actual devices.
     /// </summary>
     /// <param name="idList">the actual device ID list</param>
