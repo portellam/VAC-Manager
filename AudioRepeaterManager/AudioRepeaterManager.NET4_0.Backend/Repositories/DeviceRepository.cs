@@ -82,14 +82,65 @@ namespace AudioRepeaterManager.NET4_0.Backend.Repositories
     /// Constructor
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public DeviceRepository(List<MMDevice> mMDeviceList)  //FIXME: mMDeviceList
+    public DeviceRepository()
+    {
+      coreAudioController = new CoreAudioController();
+      DeviceModelHashSet = new HashSet<DeviceModel>();
+      MMDeviceRepository = new MMDeviceRepository();
+      uint id = 0;
+
+      MMDeviceRepository
+        .GetAll()
+        .ForEach
+        (
+          x =>
+          {
+            DeviceModel deviceModel =
+              new DeviceModel
+              (
+                id,
+                x.ID,
+                x.FriendlyName,
+                x.DataFlow == DataFlow.Capture,
+                x.DataFlow == DataFlow.Render,
+                IsPresent(x.State)
+              );
+
+            DeviceModelHashSet
+              .Add(deviceModel);
+
+            if (id == uint.MaxValue)
+            {
+              return;
+            }
+
+            id++;
+          }
+        );
+    }
+
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="deviceModelList">The device list</param>
+    [ExcludeFromCodeCoverage]
+    public DeviceRepository(List<DeviceModel> deviceModelList)
     {
       coreAudioController = new CoreAudioController();
       MMDeviceRepository = new MMDeviceRepository();
       DeviceModelHashSet = new HashSet<DeviceModel>();
-      uint id = 0;
 
-      mMDeviceList
+      deviceModelList
+        .ForEach
+        (
+          x =>
+          DeviceModelHashSet.Add(x)
+        );
+
+      uint id = NextId;
+
+      MMDeviceRepository
+        .GetAll()
         .ForEach
         (
           x =>
