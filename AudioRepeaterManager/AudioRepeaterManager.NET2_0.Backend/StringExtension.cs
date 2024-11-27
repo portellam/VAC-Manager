@@ -1,6 +1,6 @@
 ﻿namespace AudioRepeaterManager.NET2_0.Backend
 {
-  public class StringExtension
+  public static class StringExtension
   {
     /// <summary>
     /// Is string null, empty, and/or whitespace, or neither.
