@@ -538,19 +538,19 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      int count = 0;
+      List<RepeaterModel> repeaterModelList = RepeaterModelList;
 
-      RepeaterModelList
-        .ForEach
-        (
-          x =>
-          {
-            if (x.Id == id)
-            {
-              count++;
-            }
-          }
-        );
+      foreach (var x in repeaterModelList)
+      {
+        if (x.Id == id)
+        {
+          RepeaterModelList.Remove(x);
+          break;
+        }
+      }
+
+      int count = repeaterModelList.Count;
+      GC.Collect();
 
       if (count == 0)
       {
@@ -599,19 +599,28 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      int count = 0;
+      List<RepeaterModel> repeaterModelList = RepeaterModelList;
 
-      RepeaterModelList
-        .ForEach
+      foreach (var x in repeaterModelList)
+      {
+        if
         (
-          x =>
-          {
-            if (x.Id == repeaterModel.Id)
-            {
-              count++;
-            }
-          }
-        );
+          (
+            x.InputDeviceId == firstDeviceId
+            && x.OutputDeviceId == secondDeviceId
+          ) || (
+            x.InputDeviceId == secondDeviceId
+            && x.OutputDeviceId == firstDeviceId
+          )
+        )
+
+        {
+          RepeaterModelList.Remove(x);
+        }
+      }
+
+      int count = repeaterModelList.Count;
+      GC.Collect();
 
       if (count == 0)
       {
@@ -656,9 +665,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      int count = 0;
+      List<RepeaterModel> repeaterModelList = RepeaterModelList;
 
-      RepeaterModelList
+      repeaterModelList
         .ForEach
         (
           x =>
@@ -669,10 +678,13 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
               || x.OutputDeviceName == deviceName
             )
             {
-              count++;
+              RepeaterModelList.Remove(x);
             }
           }
         );
+
+      int count = repeaterModelList.Count;
+      GC.Collect();
 
       if (count == 0)
       {
