@@ -180,7 +180,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The actual device.</returns>
     public MMDevice Get(string id)
     {
-      if (string.IsNullOrWhiteSpace(id))
+      if (StringExtension.IsNullOrWhiteSpace(id))
       {
         Debug.WriteLine
         (

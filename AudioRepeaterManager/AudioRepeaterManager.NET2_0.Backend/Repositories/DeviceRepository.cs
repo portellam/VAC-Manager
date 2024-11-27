@@ -213,7 +213,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The device to get.</returns>
     public DeviceModel Get(string actualId)
     {
-      if (string.IsNullOrWhiteSpace(actualId))
+      if (StringExtension.IsNullOrWhiteSpace(actualId))
       {
         Debug.WriteLine
         (
@@ -771,7 +771,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="actualId">The actual device ID</param>
     public void Remove(string actualId)
     {
-      if (string.IsNullOrWhiteSpace(actualId))
+      if (StringExtension.IsNullOrWhiteSpace(actualId))
       {
         Debug.WriteLine
         (
@@ -815,7 +815,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="name">The device name</param>
     public void RemoveRange(string name)
     {
-      if (string.IsNullOrWhiteSpace(name))
+      if (StringExtension.IsNullOrWhiteSpace(name))
       {
         Debug.WriteLine
         (
