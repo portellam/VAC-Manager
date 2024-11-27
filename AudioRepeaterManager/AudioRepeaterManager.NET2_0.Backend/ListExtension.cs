@@ -92,7 +92,16 @@ namespace AudioRepeaterManager.NET2_0.Backend
       return count;
     }
 
-    public static List<Type> Select
+    /// <summary>
+    /// Projects the element of a sequence into a new form.
+    /// </summary>
+    /// <param name="list">The list</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <returns>
+    /// A list whose elements are the result of invoking the transform
+    /// function on each element of the source.
+    /// </returns>
+    public static List<object> Select
     (
       IList list,
       object valueToMatch
@@ -104,23 +113,33 @@ namespace AudioRepeaterManager.NET2_0.Backend
         || list.Count == 0
       )
       {
-        return new List<Type>();
+        return null;
       }
 
-      List<Type> selectedList = new List<Type>();
+      List<object> newList = null;
 
-      foreach (var x in list)
+      foreach (var item in list)
       {
-        if (x == valueToMatch)
+        if (item == valueToMatch)
         {
-          selectedList.Add(x);
+          newList.Add(item);
         }
       }
 
-      return selectedList;
+      return newList;
     }
 
-    public static List<Type> Select
+    /// <summary>
+    /// Projects the element of a sequence into a new form.
+    /// </summary>
+    /// <param name="list">The list</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <param name="propertyName">The property name</param>
+    /// <returns>
+    /// A list whose elements are the result of invoking the transform
+    /// function on each element of the source.
+    /// </returns>
+    public static List<object> Select
     (
       IList list,
       object valueToMatch,
@@ -133,31 +152,31 @@ namespace AudioRepeaterManager.NET2_0.Backend
         || list.Count == 0
       )
       {
-        return new List<Type>();
+        return null;
       }
 
-      List<Type> selectedList = new List<Type>();
+      List<object> newList = null;
 
-      foreach (var x in list)
+      foreach (var item in list)
       {
-        PropertyInfo propertyInfo = x
-        .GetType()
-        .GetProperty(propertyName);
+        PropertyInfo propertyInfo = item
+         .GetType()
+         .GetProperty(propertyName);
 
         object itemValue = propertyInfo
           .GetValue
           (
-            x,
+            item,
             null
           );
 
         if (itemValue == valueToMatch)
         {
-          selectedList.Add(itemValue);
+          newList.Add(item);
         }
       }
 
-      return selectedList;
+      return newList;
     }
 
     /// <summary>
