@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using AudioRepeaterManager.NET8_0.Backend.Models;
+﻿using System.ComponentModel;
+using AudioRepeaterManager.NET4_8.Backend.Models;
 
-namespace AudioRepeaterManager.NET8_0.Backend.Repositories
+namespace AudioRepeaterManager.NET4_8.Backend.Repositories
 {
   public interface IRepeaterRepository
   {

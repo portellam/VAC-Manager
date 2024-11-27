@@ -1,4 +1,4 @@
-﻿namespace AudioRepeaterManager.NET8_0.Backend.Structs
+﻿namespace AudioRepeaterManager.NET4_8.Backend.Structs
 {
     public enum Direction
     {

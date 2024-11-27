@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using AudioRepeaterManager.NET8_0.Backend.Structs;
+using AudioRepeaterManager.NET4_8.Backend.Structs;
 
-namespace AudioRepeaterManager.NET8_0.Backend.Models
+namespace AudioRepeaterManager.NET4_8.Backend.Models
 {
   public class DeviceModel :
     IDeviceModel,
