@@ -200,6 +200,85 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     }
 
     /// <summary>
+    /// Return the first element of a sequence.
+    /// </summary>
+    /// <param name="list">The sequence</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <returns>The value at the first position in the source sequence.</returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static object First
+    (
+      IList list,
+      object valueToMatch
+    )
+    {
+      if
+      (
+        list is null
+        || list.Count == 0
+      )
+      {
+        throw new ArgumentNullException();
+      }
+
+      foreach (var item in list)
+      {
+        if (item == valueToMatch)
+        {
+          return item;
+        }
+      }
+
+      return null;
+    }
+
+    /// <summary>
+    /// Return the first element of a sequence.
+    /// </summary>
+    /// <param name="list">The sequence</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <param name="propertyName">The property name</param>
+    /// <returns>The value at the first position in the source sequence.</returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static object First
+    (
+      IList list,
+      object valueToMatch,
+      string propertyName
+    )
+    {
+      if
+      (
+        list is null
+        || list.Count == 0
+      )
+      {
+        throw new ArgumentNullException();
+      }
+
+      foreach (var item in list)
+      {
+        PropertyInfo propertyInfo = item
+         .GetType()
+         .GetProperty(propertyName);
+
+        object itemValue = propertyInfo
+          .GetValue
+          (
+            item,
+            null
+          );
+
+        if (itemValue == valueToMatch)
+        {
+          return item;
+        }
+      }
+
+      return null;
+    }
+
+    /// <summary>
     /// Return the first element of a sequence,
     /// or a default value if the sequence contains no elements.
     /// </summary>
@@ -233,6 +312,95 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     }
 
     /// <summary>
+    /// Return the first element of a sequence,
+    /// or a default value if the sequence contains no elements.
+    /// </summary>
+    /// <param name="list">The sequence</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <returns>
+    /// Null if the source sequence is empty;
+    /// otherwise, the first element in the sequence.
+    /// </returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static object FirstOrDefault
+    (
+      IList list,
+      object valueToMatch
+    )
+    {
+      if (list is null)
+      {
+        throw new ArgumentNullException();
+      }
+
+      if (list.Count == 0)
+      {
+        return null;
+      }
+
+      foreach (var item in list)
+      {
+        if (item == valueToMatch)
+        {
+          return item;
+        }
+      }
+
+      return null;
+    }
+
+    /// <summary>
+    /// Return the first element of a sequence,
+    /// or a default value if the sequence contains no elements.
+    /// </summary>
+    /// <param name="list">The sequence</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <param name="propertyName">The property name</param>
+    /// <returns>
+    /// Null if the source sequence is empty;
+    /// otherwise, the first element in the sequence.
+    /// </returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static object FirstOrDefault
+    (
+      IList list,
+      object valueToMatch,
+      string propertyName
+    )
+    {
+      if (list is null)
+      {
+        throw new ArgumentNullException();
+      }
+
+      if (list.Count == 0)
+      {
+        return null;
+      }
+
+      foreach (var item in list)
+      {
+        PropertyInfo propertyInfo = item
+         .GetType()
+         .GetProperty(propertyName);
+
+        object itemValue = propertyInfo
+          .GetValue
+          (
+            item,
+            null
+          );
+
+        if (itemValue == valueToMatch)
+        {
+          return item;
+        }
+      }
+
+      return null;
+    }
+
+    /// <summary>
     /// Return the last element of a sequence.
     /// </summary>
     /// <param name="list">The sequence</param>
@@ -251,6 +419,93 @@ namespace AudioRepeaterManager.NET2_0.Extensions
 
       int lastIndex = list.Count + 1;
       return list[lastIndex];
+    }
+
+    /// <summary>
+    /// Return the last element of a sequence.
+    /// </summary>
+    /// <param name="list">The sequence</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <returns>The value at the last position in the source sequence.</returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static object Last
+    (
+      IList list,
+      object valueToMatch
+    )
+    {
+      if
+      (
+        list is null
+        || list.Count == 0
+      )
+      {
+        throw new ArgumentNullException();
+      }
+
+      int lastIndex = list.Count + 1;
+
+      for (int i = lastIndex; i >= 0; i--)
+      {
+        var item = list[i];
+
+        if (item == valueToMatch)
+        {
+          return item;
+        }
+      }
+
+      throw new ArgumentNullException();
+    }
+
+    /// <summary>
+    /// Return the last element of a sequence.
+    /// </summary>
+    /// <param name="list">The sequence</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <param name="propertyName">The property name</param>
+    /// <returns>The value at the last position in the source sequence.</returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static object Last
+    (
+      IList list,
+      object valueToMatch,
+      string propertyName
+    )
+    {
+      if
+      (
+        list is null
+        || list.Count == 0
+      )
+      {
+        throw new ArgumentNullException();
+      }
+
+      int lastIndex = list.Count + 1;
+
+      for (int i = lastIndex; i >= 0; i--)
+      {
+        var item = list[i];
+
+        PropertyInfo propertyInfo = item
+         .GetType()
+         .GetProperty(propertyName);
+
+        object itemValue = propertyInfo
+          .GetValue
+          (
+            item,
+            null
+          );
+
+        if (itemValue == valueToMatch)
+        {
+          return item;
+        }
+      }
+
+      throw new ArgumentNullException();
     }
 
     /// <summary>
@@ -282,6 +537,103 @@ namespace AudioRepeaterManager.NET2_0.Extensions
         var item = list[i];
 
         if (item != null)
+        {
+          return item;
+        }
+      }
+
+      return null;
+    }
+
+    /// <summary>
+    /// Return the last element of a sequence,
+    /// or a default value if the sequence contains no elements.
+    /// </summary>
+    /// <param name="list">The sequence</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <returns>
+    /// Null if the source sequence is empty;
+    /// otherwise, the last element in the sequence.
+    /// </returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static object LastOrDefault
+    (
+      IList list,
+      object valueToMatch
+    )
+    {
+      if (list is null)
+      {
+        throw new ArgumentNullException();
+      }
+
+      if (list.Count == 0)
+      {
+        return null;
+      }
+
+      int lastIndex = list.Count + 1;
+
+      for (int i = lastIndex; i >= 0; i--)
+      {
+        var item = list[i];
+
+        if (item == valueToMatch)
+        {
+          return item;
+        }
+      }
+
+      return null;
+    }
+
+    /// <summary>
+    /// Return the last element of a sequence,
+    /// or a default value if the sequence contains no elements.
+    /// </summary>
+    /// <param name="list">The sequence</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <param name="propertyName">The property name</param>
+    /// <returns>
+    /// Null if the source sequence is empty;
+    /// otherwise, the last element in the sequence.
+    /// </returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static object LastOrDefault
+    (
+      IList list,
+      object valueToMatch,
+      string propertyName
+    )
+    {
+      if (list is null)
+      {
+        throw new ArgumentNullException();
+      }
+
+      if (list.Count == 0)
+      {
+        return null;
+      }
+
+      int lastIndex = list.Count + 1;
+
+      for (int i = lastIndex; i >= 0; i--)
+      {
+        var item = list[i];
+
+        PropertyInfo propertyInfo = item
+         .GetType()
+         .GetProperty(propertyName);
+
+        object itemValue = propertyInfo
+          .GetValue
+          (
+            item,
+            null
+          );
+
+        if (itemValue == valueToMatch)
         {
           return item;
         }

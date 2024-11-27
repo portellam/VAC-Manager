@@ -57,5 +57,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AudioRepeaterManager.NET2_0.Extensions\AudioRepeaterManager.NET2_0.Extensions.csproj">
+      <Project>{a85a10f1-4e75-4e79-be66-07eb62177f37}</Project>
+      <Name>AudioRepeaterManager.NET2_0.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
