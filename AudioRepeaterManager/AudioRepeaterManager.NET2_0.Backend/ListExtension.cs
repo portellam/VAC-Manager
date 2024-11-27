@@ -1,10 +1,165 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace AudioRepeaterManager.NET2_0.Backend
 {
   public static class ListExtension
   {
+    /// <summary>
+    /// Remove all elements that match the conditions defined by the specified
+    /// predicate.
+    /// </summary>
+    /// <param name="list">The list</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <returns>The number of elements removed from the list.</returns>
+    public static int RemoveAll
+    (
+      ref IList list,
+      object valueToMatch
+    )
+    {
+      if
+      (
+        list == null
+        || list.Count == 0
+      )
+      {
+        return 0;
+      }
+
+      int count = 0;
+
+      foreach(var item in list)
+      {
+        if (item == valueToMatch)
+        {
+          list.Remove(item);
+          count++;
+        }
+      }
+
+      return count;
+    }
+
+    /// <summary>
+    /// Remove all elements that match the conditions defined by the specified
+    /// predicate.
+    /// </summary>
+    /// <param name="list">The list</param>
+    /// <param name="valueToMatch">The value to match</param>
+    /// <param name="propertyName">The property name</param>
+    /// <returns></returns>
+    public static int RemoveAll
+    (
+      ref IList list,
+      object valueToMatch,
+      string propertyName
+    )
+    {
+      if
+      (
+        list == null
+        || list.Count == 0
+      )
+      {
+        return 0;
+      }
+
+      int count = 0;
+
+      foreach (var item in list)
+      {
+        PropertyInfo propertyInfo = item
+         .GetType()
+         .GetProperty(propertyName);
+
+        object itemValue = propertyInfo
+          .GetValue
+          (
+            item,
+            null
+          );
+
+        if (itemValue == valueToMatch)
+        {
+          list.Remove(item);
+          count++;
+        }
+      }
+
+      return count;
+    }
+
+    public static List<Type> Select
+    (
+      IList list,
+      object valueToMatch
+    )
+    {
+      if
+      (
+        list == null
+        || list.Count == 0
+      )
+      {
+        return new List<Type>();
+      }
+
+      List<Type> selectedList = new List<Type>();
+
+      foreach (var x in list)
+      {
+        if (x == valueToMatch)
+        {
+          selectedList.Add(x);
+        }
+      }
+
+      return selectedList;
+    }
+
+    public static List<Type> Select
+    (
+      IList list,
+      object valueToMatch,
+      string propertyName
+    )
+    {
+      if
+      (
+        list == null
+        || list.Count == 0
+      )
+      {
+        return new List<Type>();
+      }
+
+      List<Type> selectedList = new List<Type>();
+
+      foreach (var x in list)
+      {
+        PropertyInfo propertyInfo = x
+        .GetType()
+        .GetProperty(propertyName);
+
+        object itemValue = propertyInfo
+          .GetValue
+          (
+            x,
+            null
+          );
+
+        if (itemValue == valueToMatch)
+        {
+          selectedList.Add(itemValue);
+        }
+      }
+
+      return selectedList;
+    }
+
     /// <summary>
     /// Return the first element of a sequence.
     /// </summary>
