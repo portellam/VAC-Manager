@@ -854,28 +854,6 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     }
 
     /// <summary>
-    /// Set the actual device as default.
-    /// </summary>
-    /// <param name="actualId">the actual device ID</param>
-    public void SetAsDefault(string actualId)
-    {
-      MMDevice mMDevice = MMDeviceRepository.Get(actualId);
-
-      if (mMDevice is null)
-      {
-        return;
-      }
-
-      CoreAudioDevice coreAudioDevice = coreAudioController
-        .GetDevice
-        (
-          Guid.Parse(actualId)
-        );
-
-      coreAudioDevice.SetAsDefault();
-    }
-
-    /// <summary>
     /// Update a device.
     /// </summary>
     /// <param name="deviceModel">The device</param>
