@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace AudioRepeaterManager.NET2_0.Backend
+namespace AudioRepeaterManager.NET2_0.Extensions
 {
-  public static class ListExtension
+  public static class LinqExtension
   {
     /// <summary>
     /// Remove all elements that match the conditions defined by the specified

@@ -330,8 +330,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return new List<DeviceModel>();
       }
 
-      List<string> actualIdList = MMDeviceRepository
-        .GetAllDisabled()
+      List<string> actualIdList = 
         .Select(x => x.ID)
         ;  
 

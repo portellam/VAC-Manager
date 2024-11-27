@@ -43,7 +43,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 
     void Remove(uint? Id);
     void Remove(string actualId);
-    void RemoveRange(string name);
+    void RemoveRange(string name)
     void Update(DeviceModel deviceModel);
 
     void Update
