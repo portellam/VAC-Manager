@@ -51,6 +51,7 @@
     <Compile Include="Repositories\IRepeaterRepository.cs" />
     <Compile Include="Repositories\MMDeviceRepository.cs" />
     <Compile Include="Repositories\RepeaterRepository.cs" />
+    <Compile Include="StringExtension.cs" />
     <Compile Include="Structs\Channel.cs" />
     <Compile Include="Structs\ChannelConfig.cs" />
   </ItemGroup>
