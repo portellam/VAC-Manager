@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+using AudioRepeaterManager.NET2_0.Extensions;
 
 namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 {
@@ -24,6 +23,8 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// The enumerator of actual devices.
     /// </summary>
     private MMDeviceEnumerator mMDeviceEnumerator;
+
+    private readonly string IdPropertyName = "ID";
 
     #endregion
 
@@ -91,7 +92,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         ("Reset audio devices.");
 
       mMDevice
-        .AudioSessionManager
+        .AudioSessionManager //FIXME
         .RefreshSessions();
 
       Debug
@@ -191,8 +192,15 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return null;
       }
 
-      MMDevice mMDevice = MMDeviceList
-        .FirstOrDefault(x => x.ID == id);
+      var mMDevice = LinqExtension
+        .FirstOrDefault
+        (
+          MMDeviceList,
+          id,
+          IdPropertyName
+        );
+
+      MMDevice newMMDevice = (MMDevice)mMDevice;
 
       if (mMDevice is null)
       {
@@ -206,12 +214,12 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
           string.Format
           (
             "Got audio device\t=> ID: '{1}'",
-            mMDevice.ID
+            (mMDevice as MMDevice).ID
           )
         );
       }
 
-      return mMDevice;
+      return newMMDevice;
     }
 
     /// <summary>
@@ -240,7 +248,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         string.Format
         (
           "Got audio device(s) => Count: {1}",
-          MMDeviceList.Count()
+          MMDeviceList.Count
         )
       );
 
@@ -278,7 +286,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
             (
               x =>
               x.State == DeviceState.Disabled
-            ).Count()
+            ).Count
         )
       );
 
@@ -316,7 +324,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
             (
               x =>
               x.State != DeviceState.Disabled
-            ).Count()
+            ).Count
         )
       );
 
@@ -363,7 +371,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         string.Format
         (
           "Got audio device(s) => Count: {1}",
-          mMDeviceList.Count()
+          mMDeviceList.Count
         )
       );
 
