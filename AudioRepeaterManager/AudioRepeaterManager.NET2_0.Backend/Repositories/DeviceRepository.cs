@@ -30,10 +30,13 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       get
       {
-        List<uint> list =
-          DeviceModelList
-            .Select(x => x.Id)
-            .ToList();
+        List<uint> list = new List<uint>();
+
+        DeviceModelList
+          .ForEach
+          (
+            x => list.Add(x.Id)
+          );
 
         list.Sort();
         return list;
@@ -47,7 +50,8 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       get
       {
-        uint id = IdList.LastOrDefault();
+        int lastIndex = IdList.Count - 1;
+        uint id = IdList[lastIndex];
         id++;
         return id;
       }
@@ -208,7 +212,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// </summary>
     /// <param name="actualId">the actual device ID</param>
     /// <returns>The device to get.</returns>
-    public DeviceModel Get(string actualId)
+    public DeviceModel Get(string actualId) //FIXME
     {
       if (StringExtension.IsNullOrWhiteSpace(actualId))
       {
@@ -231,7 +235,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// </summary>
     /// <param name="id">the device ID</param>
     /// <returns>The device to get.</returns>
-    public DeviceModel Get(uint? id)
+    public DeviceModel Get(uint? id) //FIXME
     {
       if (id is null)
       {
@@ -272,7 +276,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// Get the device list.
     /// </summary>
     /// <returns>The device list.</returns>
-    public List<DeviceModel> GetAll()
+    public List<DeviceModel> GetAll() //FIXME
     {
       if (DeviceModelList is null)
       {
@@ -285,18 +289,18 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         string.Format
         (
           "Got device(s) => Count: {1}",
-          DeviceModelList.Count()
+          DeviceModelList.Count
         )
       );
 
-      return DeviceModelList.ToList();
+      return DeviceModelList;
     }
 
     /// <summary>
     /// Get the absent device list.
     /// </summary>
     /// <returns>The absent device list.</returns>
-    public List<DeviceModel> GetAllAbsent()
+    public List<DeviceModel> GetAllAbsent() //FIXME
     {
       if (DeviceModelList is null)
       {
@@ -306,14 +310,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
       return
         DeviceModelList
           .Where(x => !x.IsPresent)
-          .ToList();
+          ;
     }
 
     /// <summary>
     /// Get the disabled device list.
     /// </summary>
     /// <returns>The disabled device list.</returns>
-    public List<DeviceModel> GetAllDisabled()
+    public List<DeviceModel> GetAllDisabled() //FIXME
     {
       if (MMDeviceRepository is null)
       {
@@ -329,7 +333,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
       List<string> actualIdList = MMDeviceRepository
         .GetAllDisabled()
         .Select(x => x.ID)
-        .ToList();  
+        ;  
 
       List<DeviceModel> deviceModelList =
         GetRange(actualIdList);
@@ -339,7 +343,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         string.Format
         (
           "Got disabled device(s) => Count: {1}",
-          deviceModelList.Count()
+          deviceModelList.Count
         )
       );
 
@@ -350,7 +354,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// Get the duplex device list.
     /// </summary>
     /// <returns>The duplex device list.</returns>
-    public List<DeviceModel> GetAllDuplex()
+    public List<DeviceModel> GetAllDuplex() //FIXME
     {
       if (DeviceModelList is null)
       {
@@ -360,14 +364,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 
       List<DeviceModel> deviceModelList = DeviceModelList
         .Where(x => x.IsDuplex)
-        .ToList();
+        ;
 
       Debug.WriteLine
       (
         string.Format
         (
           "Got duplex device(s) => Count: {1}",
-          deviceModelList.Count()
+          deviceModelList.Count
         )
       );
 
@@ -378,7 +382,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// Get the enabled device list.
     /// </summary>
     /// <returns>The enabled device list.</returns>
-    public List<DeviceModel> GetAllEnabled()
+    public List<DeviceModel> GetAllEnabled() //FIXME
     {
       if (MMDeviceRepository is null)
       {
@@ -394,7 +398,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
       List<string> actualIdList = MMDeviceRepository
         .GetAllEnabled()
         .Select(x => x.ID)
-        .ToList();
+        ;
 
       List<DeviceModel> deviceModelList =
         GetRange(actualIdList);
@@ -404,7 +408,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         string.Format
         (
           "Got enabled device(s) => Count: {1}",
-          deviceModelList.Count()
+          deviceModelList.Count
         )
       );
 
@@ -415,7 +419,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// Get the input device list.
     /// </summary>
     /// <returns>The input device list.</returns>
-    public List<DeviceModel> GetAllInput()
+    public List<DeviceModel> GetAllInput() //FIXME
     {
       if (DeviceModelList is null)
       {
@@ -425,14 +429,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 
       List<DeviceModel> deviceModelList = DeviceModelList
         .Where(x => x.IsInput)
-        .ToList();
+        ;
 
       Debug.WriteLine
       (
         string.Format
         (
           "Got input device(s) => Count: {1}",
-          deviceModelList.Count()
+          deviceModelList.Count
         )
       );
 
@@ -443,7 +447,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// Get the output device list.
     /// </summary>
     /// <returns>The output device list.</returns>
-    public List<DeviceModel> GetAllOutput()
+    public List<DeviceModel> GetAllOutput() //FIXME
     {
       if (DeviceModelList is null)
       {
@@ -453,14 +457,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 
       List<DeviceModel> deviceModelList = DeviceModelList
         .Where(x => x.IsOutput)
-        .ToList();
+        ;
 
       Debug.WriteLine
       (
         string.Format
         (
           "Got output device(s) => Count: {1}",
-          deviceModelList.Count()
+          deviceModelList.Count
         )
       );
 
@@ -471,7 +475,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// Get the present device list.
     /// </summary>
     /// <returns>The present device list.</returns>
-    public List<DeviceModel> GetAllPresent()
+    public List<DeviceModel> GetAllPresent() //FIXME
     {
       if (DeviceModelList is null)
       {
@@ -481,14 +485,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 
       List<DeviceModel> deviceModelList = DeviceModelList
         .Where(x => x.IsPresent)
-        .ToList();
+        ;
 
       Debug.WriteLine
       (
         string.Format
         (
           "Got present device(s) => Count: {1}",
-          deviceModelList.Count()
+          deviceModelList.Count
         )
       );
 
@@ -507,7 +511,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         DeviceModelList is null
         || DeviceModelList.Count == 0
         || actualIdList is null
-        || actualIdList.Count() == 0
+        || actualIdList.Count == 0
       )
       {
         Debug.WriteLine
@@ -580,7 +584,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         string.Format
         (
           "Got device(s) => Count: {1}",
-          deviceModelList.Count()
+          deviceModelList.Count
         )
       );
 
@@ -617,7 +621,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      if (DeviceModelList.Count() >= Global.MaxEndpointCount)
+      if (DeviceModelList.Count >= Global.MaxEndpointCount)
       {
         Console.WriteLine
         (
@@ -647,7 +651,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         id = NextId;
       }
 
-      if (!DeviceModelList.Add(deviceModel))
+      DeviceModelList.Add(deviceModel);
+
+      if (!DeviceModelList.Contains(deviceModel))
       {
         Debug.WriteLine
         (
@@ -735,8 +741,19 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      int count = DeviceModelList
-        .RemoveWhere(x => x.Id == id);
+      List<DeviceModel> deviceModelList = DeviceModelList;
+
+      foreach (var x in deviceModelList)
+      {
+        if (x.Id == id)
+        {
+          DeviceModelList.Remove(x);
+          break;
+        }
+      }
+
+      int count = deviceModelList.Count;
+      GC.Collect();
 
       if (count == 0)
       {
@@ -779,8 +796,19 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      int count = DeviceModelList
-        .RemoveWhere(x => x.ActualId == actualId);
+      List<DeviceModel> deviceModelList = DeviceModelList;
+
+      foreach (var x in deviceModelList)
+      {
+        if (x.ActualId == actualId)
+        {
+          DeviceModelList.Remove(x);
+          break;
+        }
+      }
+
+      int count = deviceModelList.Count;
+      GC.Collect();
 
       if (count == 0)
       {
@@ -823,8 +851,22 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      int count = DeviceModelList
-        .RemoveWhere(x => x.Name == name);
+      List<DeviceModel> deviceModelList = DeviceModelList;
+
+      deviceModelList
+        .ForEach
+        (
+          x =>
+          {
+            if(x.Name == name)
+            {
+              DeviceModelList.Remove(x);
+            }
+          }
+        );
+
+      int count = deviceModelList.Count;
+      GC.Collect();
 
       if (count == 0)
       {
@@ -862,12 +904,24 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      if
-      (
-        DeviceModelList
-          .RemoveWhere
-          (x => x.Id == deviceModel.Id) == 0
-      )
+      List<DeviceModel> deviceModelList = DeviceModelList;
+
+      deviceModelList
+        .ForEach
+        (
+          x =>
+          {
+            if (x.Id == deviceModel.Id)
+            {
+              DeviceModelList.Remove(x);
+            }
+          }
+        );
+
+      int count = deviceModelList.Count;
+      GC.Collect();
+
+      if (count == DeviceModelList.Count)
       {
         Debug.WriteLine
         (
@@ -881,7 +935,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      if (!DeviceModelList.Add(deviceModel))
+      DeviceModelList.Add(deviceModel);
+
+      if (count != DeviceModelList.Count)
       {
         Debug.WriteLine
         (
