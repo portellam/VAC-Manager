@@ -154,6 +154,12 @@ namespace AudioRepeaterManager.NET2_0.Extensions
         return null;
       }
 
+      if (list[0].GetType() != keyValue.GetType())
+      {
+        throw new InvalidOperationException
+          ("List type does not match key type.");
+      }
+
       List<object> newList = null;
 
       foreach (var item in list)
@@ -224,27 +230,7 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if (list[0].GetType() != keyValue.GetType())
       {
         throw new InvalidOperationException
-          (
-            string.Format
-            (
-              "List type '{1}' does not match type of key '{2}'.",
-              list[0].GetType(),
-              typeof(object)
-            )
-          );
-      }
-
-      if (list[0].GetType() != keyValue.GetType())
-      {
-        throw new InvalidOperationException
-          (
-            string.Format
-            (
-              "List type '{1}' does not match type of key '{2}'.",
-              list[0].GetType(),
-              typeof(object)
-            )
-          );
+          ("List type does not match key type.");
       }
 
       foreach (var item in list)
@@ -287,14 +273,7 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if (list[0].GetType() != keyValue.GetType())
       {
         throw new InvalidOperationException
-          (
-            string.Format
-            (
-              "List type '{1}' does not match type of key '{2}'.",
-              list[0].GetType(),
-              typeof(object)
-            )
-          );
+          ("List type does not match key type.");
       }
 
       foreach (var item in list)
@@ -383,14 +362,7 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if (list[0].GetType() != keyValue.GetType())
       {
         throw new InvalidOperationException
-          (
-            string.Format
-            (
-              "List type '{1}' does not match type of key '{2}'.",
-              list[0].GetType(),
-              typeof(object)
-            )
-          );
+          ("List type does not match key type.");
       }
 
       foreach (var item in list)
@@ -441,14 +413,7 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if (list[0].GetType() != keyValue.GetType())
       {
         throw new InvalidOperationException
-          (
-            string.Format
-            (
-              "List type '{1}' does not match type of key '{2}'.",
-              list[0].GetType(),
-              typeof(object)
-            )
-          );
+          ("List type does not match key type.");
       }
 
       foreach (var item in list)
@@ -520,14 +485,7 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if (list[0].GetType() != keyValue.GetType())
       {
         throw new InvalidOperationException
-          (
-            string.Format
-            (
-              "List type '{1}' does not match type of key '{2}'.",
-              list[0].GetType(),
-              typeof(object)
-            )
-          );
+          ("List type does not match key type.");
       }
 
       int lastIndex = list.Count + 1;
@@ -574,14 +532,7 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if (list[0].GetType() != keyValue.GetType())
       {
         throw new InvalidOperationException
-          (
-            string.Format
-            (
-              "List type '{1}' does not match type of key '{2}'.",
-              list[0].GetType(),
-              typeof(object)
-            )
-          );
+          ("List type does not match key type.");
       }
 
       int lastIndex = list.Count + 1;
@@ -678,14 +629,7 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if (list[0].GetType() != keyValue.GetType())
       {
         throw new InvalidOperationException
-          (
-            string.Format
-            (
-              "List type '{1}' does not match type of key '{2}'.",
-              list[0].GetType(),
-              typeof(object)
-            )
-          );
+          ("List type does not match key type.");
       }
 
       int lastIndex = list.Count + 1;
@@ -740,14 +684,7 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if (list[0].GetType() != keyValue.GetType())
       {
         throw new InvalidOperationException
-          (
-            string.Format
-            (
-              "List type '{1}' does not match type of key '{2}'.",
-              list[0].GetType(),
-              typeof(object)
-            )
-          );
+          ("List type does not match key type.");
       }
 
       int lastIndex = list.Count + 1;
