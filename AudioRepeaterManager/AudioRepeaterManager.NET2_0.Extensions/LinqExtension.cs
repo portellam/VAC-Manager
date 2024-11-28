@@ -19,16 +19,23 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       object keyValue
     )
     {
-      if
-      (
-        list == null
-        || list.Count == 0
-      )
+      if (list == null)
       {
-        return 0;
+        throw new NullReferenceException();
+      }
+
+      if (list[0].GetType() != keyValue.GetType())
+      {
+        throw new InvalidOperationException
+          ("List type does not match key type.");
       }
 
       int count = 0;
+
+      if (list.Count == 0)
+      {
+        return count;
+      }
 
       foreach (var item in list)
       {
@@ -60,13 +67,24 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if
       (
         list == null
-        || list.Count == 0
+        || StringExtension.IsNullOrWhiteSpace(keyName)
       )
       {
-        return 0;
+        throw new NullReferenceException();
+      }
+
+      if (list[0].GetType() != keyValue.GetType())
+      {
+        throw new InvalidOperationException
+          ("List type does not match key type.");
       }
 
       int count = 0;
+
+      if (list.Count == 0)
+      {
+        return count;
+      }
 
       foreach (var item in list)
       {
@@ -106,16 +124,23 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       object keyValue
     )
     {
-      if
-      (
-        list == null
-        || list.Count == 0
-      )
+      if (list == null)
       {
-        return null;
+        throw new NullReferenceException();
+      }
+
+      if (list[0].GetType() != keyValue.GetType())
+      {
+        throw new InvalidOperationException
+          ("List type does not match key type.");
       }
 
       List<object> newList = null;
+
+      if (list.Count == 0)
+      {
+        return newList;
+      }
 
       foreach (var item in list)
       {
@@ -148,10 +173,10 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if
       (
         list == null
-        || list.Count == 0
+        || StringExtension.IsNullOrWhiteSpace(keyName)
       )
       {
-        return null;
+        throw new NullReferenceException();
       }
 
       if (list[0].GetType() != keyValue.GetType())
@@ -161,6 +186,11 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       }
 
       List<object> newList = null;
+
+      if (list.Count == 0)
+      {
+        return newList;
+      }
 
       foreach (var item in list)
       {
