@@ -750,9 +750,9 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     /// <param name="keyName">The key name</param>
     /// <returns>A list whose elements are sorted by a key.</returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static List<object> OrderBy
+    public static List<T> OrderBy<T>
     (
-      List<object> list,
+      List<T> list,
       string keyName
     )
     {
@@ -770,7 +770,7 @@ namespace AudioRepeaterManager.NET2_0.Extensions
         return list;
       }
 
-      List<object> propertyList = new List<object>();
+      List<T> propertyList = new List<T>();
 
       foreach (var item in list)
       {
@@ -778,14 +778,14 @@ namespace AudioRepeaterManager.NET2_0.Extensions
          .GetType()
          .GetProperty(keyName);
 
-        object itemkeyValue = propertyInfo
+        var itemkeyValue = propertyInfo
           .GetValue
           (
             item,
             null
           );
 
-        propertyList.Add(itemkeyValue);
+        propertyList.Add((T)itemkeyValue);
       }
 
       propertyList.Sort();

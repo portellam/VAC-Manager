@@ -403,15 +403,21 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// </summary>
     public void Update()
     {
-      MMDeviceList = mMDeviceEnumerator
-        .EnumerateAudioEndPoints
+      MMDeviceList.AddRange
         (
-          DataFlow.All,
-          DeviceState.All
-        )
-        .Distinct()
-        .OrderBy(x => x.ID)
-        .ToList();
+          mMDeviceEnumerator.EnumerateAudioEndPoints
+            (
+              DataFlow.All,
+              DeviceState.All
+            )
+        );
+
+      MMDeviceList = LinqExtension
+        .OrderBy
+        (
+          MMDeviceList,
+          IdPropertyName
+        );
 
       Debug
         .WriteLine("Updated audio devices.");
