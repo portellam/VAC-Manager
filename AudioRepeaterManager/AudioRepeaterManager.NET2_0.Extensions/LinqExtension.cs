@@ -212,14 +212,13 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       object keyValue
     )
     {
-      if (list is null)
+      if
+      (
+        list is null
+        || list.Count == 0
+      )
       {
         throw new ArgumentNullException();
-      }
-
-      if (list.Count == 0)
-      {
-        return null;
       }
 
       if (list[0].GetType() != keyValue.GetType())
@@ -278,15 +277,11 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if
       (
         list is null
+        || list.Count == 0
         || StringExtension.IsNullOrWhiteSpace(keyName)
       )
       {
         throw new ArgumentNullException();
-      }
-
-      if (list.Count == 0)
-      {
-        return null;
       }
 
       if (list[0].GetType() != keyValue.GetType())
