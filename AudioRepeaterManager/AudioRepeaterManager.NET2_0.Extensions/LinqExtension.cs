@@ -109,6 +109,8 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       return count;
     }
 
+
+
     /// <summary>
     /// Projects the element of a sequence into a new form.
     /// </summary>
@@ -215,6 +217,67 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     }
 
     /// <summary>
+    /// Returns distinct elements from a sequence.
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="source">The sequence</param>
+    /// <returns>
+    /// An <typeparamref name="IEnumerable"/>&lt;<see langword="out"/>
+    /// <typeparamref name="T"/>&gt; that contains distinct elements from the
+    /// source sequence.
+    /// </returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="NotImplementedException"></exception>
+    public static IEnumerable<T> Distinct<T>(IEnumerable<T> source)
+    {
+      if (source is null)
+      {
+        throw new ArgumentNullException(nameof(source));
+      }
+
+      if (!(source is List<T> list))
+      {
+        throw new NotImplementedException();
+      }
+
+      if (list.Count == 0)
+      {
+        return list;
+      }
+
+      List<T> newList = new List<T>();
+
+      foreach(var item in list)
+      {
+        if(newList.Contains(item))
+        {
+          continue;
+        }
+
+        newList.Add(item);
+      }
+
+      return newList;
+    }
+
+    /// <summary>
+    /// Returns distinct elements from a sequence.
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="source">The sequence</param>
+    /// <returns>
+    /// An <typeparamref name="List"/>&lt;<see langword="out"/> 
+    /// <typeparamref name="T"/>&gt; that contains distinct elements from the
+    /// source sequence.
+    /// </returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="NotImplementedException"></exception>
+    public static List<T> Distinct<T>(List<T> source)
+    {
+      return (List<T>)Distinct(source as IEnumerable<T>);
+    }
+
+    /// <summary>
     /// Return the first element of a sequence.
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
@@ -254,7 +317,8 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     /// <returns>
     /// <see langword="default"/>(TSource) if the source sequence is empty;
     /// otherwise, the first element in the
-    /// <typeparamref name="IEnumerable"/>&lt;out <typeparamref name="TSource"/>&gt;.
+    /// <typeparamref name="IEnumerable"/>&lt;<see langword="out"/>
+    /// <typeparamref name="TSource"/>&gt;.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotImplementedException"></exception>
@@ -321,7 +385,8 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     /// <returns>
     /// <see langword="default"/>(TSource) if the source sequence is empty;
     /// otherwise, the last element in the
-    /// <typeparamref name="IEnumerable"/>&lt;out <typeparamref name="TSource"/>&gt;.
+    /// <typeparamref name="IEnumerable"/>&lt;<see langword="out"/>
+    /// <typeparamref name="TSource"/>&gt;.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotImplementedException"></exception>
