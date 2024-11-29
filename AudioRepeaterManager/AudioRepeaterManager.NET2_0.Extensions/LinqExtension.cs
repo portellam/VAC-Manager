@@ -217,255 +217,67 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     /// <summary>
     /// Return the first element of a sequence.
     /// </summary>
-    /// <param name="list">The sequence</param>
-    /// <returns>The value at thefirst position in the source sequence.</returns>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="source">The sequence</param>
+    /// <returns>The value at the first position in the source sequence.</returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static object First(List<object> list)
+    /// <exception cref="NotImplementedException"></exception>
+    /// <exception cref="InvalidOperationException"></exception>
+    public static TSource First<TSource>(IEnumerable<TSource> source)
     {
-      if
-      (
-        list is null
-        || list.Count == 0
-      )
+      if (source is null)
       {
-        throw new ArgumentNullException();
+        throw new ArgumentNullException(nameof(source));
+      }
+
+      if (!(source is IList<TSource> list))
+      {
+        throw new NotImplementedException();
+      }
+
+      int count = list.Count;
+
+      if (count == 0)
+      {
+        throw new InvalidOperationException();
       }
 
       return list[0];
     }
 
     /// <summary>
-    /// Return the first element of a sequence.
-    /// </summary>
-    /// <param name="list">The sequence</param>
-    /// <param name="keyValue">The key value</param>
-    /// <returns>The value at thefirst position in the source sequence.</returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="InvalidOperationException"></exception>
-    public static object First
-    (
-      List<object> list,
-      object keyValue
-    )
-    {
-      if
-      (
-        list is null
-        || list.Count == 0
-      )
-      {
-        throw new ArgumentNullException();
-      }
-
-      if (list[0].GetType() != keyValue.GetType())
-      {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
-      }
-
-      foreach (var item in list)
-      {
-        if (item == keyValue)
-        {
-          return item;
-        }
-      }
-
-      return null;
-    }
-
-    /// <summary>
-    /// Return the first element of a sequence.
-    /// </summary>
-    /// <param name="list">The sequence</param>
-    /// <param name="keyValue">The key value</param>
-    /// <param name="keyName">The key name</param>
-    /// <returns>The value at thefirst position in the source sequence.</returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="InvalidOperationException"></exception>
-    public static object First
-    (
-      List<object> list,
-      object keyValue,
-      string keyName
-    )
-    {
-      if
-      (
-        list is null
-        || list.Count == 0
-        || StringExtension.IsNullOrWhiteSpace(keyName)
-      )
-      {
-        throw new ArgumentNullException();
-      }
-
-      if (list[0].GetType() != keyValue.GetType())
-      {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
-      }
-
-      foreach (var item in list)
-      {
-        PropertyInfo propertyInfo = item
-         .GetType()
-         .GetProperty(keyName);
-
-        object itemkeyValue = propertyInfo
-          .GetValue
-          (
-            item,
-            null
-          );
-
-        if (itemkeyValue == keyValue)
-        {
-          return item;
-        }
-      }
-
-      return null;
-    }
-
-    /// <summary>
     /// Return the first element of a sequence,
-    /// or a default keyValue if the sequence contains no elements.
+    /// or a default value if the sequence contains no elements.
     /// </summary>
-    /// <param name="list">The sequence</param>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="source">The sequence</param>
     /// <returns>
-    /// Null if the source sequence is empty;
-    /// otherwise, the first element in the sequence.
+    /// <see langword="default"/>(TSource) if the source sequence is empty;
+    /// otherwise, the first element in the
+    /// <typeparamref name="IEnumerable"/>&lt;out <typeparamref name="TSource"/>&gt;.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static object FirstOrDefault(List<object> list)
+    /// <exception cref="NotImplementedException"></exception>
+    public static TSource FirstOrDefault<TSource>(IEnumerable<TSource> source)
     {
-      if (list is null)
+      if (source is null)
       {
-        throw new ArgumentNullException();
+        throw new ArgumentNullException(nameof(source));
       }
 
-      if (list.Count == 0)
+      if (!(source is IList<TSource> list))
       {
-        return null;
+        throw new NotImplementedException();
       }
 
-      foreach (var item in list)
+      int count = list.Count;
+
+      if (count == 0)
       {
-        if (item != null)
-        {
-          return item;
-        }
+        return default;
       }
 
-      return null;
-    }
-
-    /// <summary>
-    /// Return the first element of a sequence,
-    /// or a default keyValue if the sequence contains no elements.
-    /// </summary>
-    /// <param name="list">The sequence</param>
-    /// <param name="keyValue">The key value</param>
-    /// <returns>
-    /// Null if the source sequence is empty;
-    /// otherwise, the first element in the sequence.
-    /// </returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="InvalidOperationException"></exception>
-    public static object FirstOrDefault
-    (
-      List<object> list,
-      object keyValue
-    )
-    {
-      if (list is null)
-      {
-        throw new ArgumentNullException();
-      }
-
-      if (list.Count == 0)
-      {
-        return null;
-      }
-
-      if (list[0].GetType() != keyValue.GetType())
-      {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
-      }
-
-      foreach (var item in list)
-      {
-        if (item == keyValue)
-        {
-          return item;
-        }
-      }
-
-      return null;
-    }
-
-    /// <summary>
-    /// Return the first element of a sequence,
-    /// or a default keyValue if the sequence contains no elements.
-    /// </summary>
-    /// <param name="list">The sequence</param>
-    /// <param name="keyValue">The key value</param>
-    /// <param name="keyName">The key name</param>
-    /// <returns>
-    /// Null if the source sequence is empty;
-    /// otherwise, the first element in the sequence.
-    /// </returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="InvalidOperationException"></exception>
-    public static object FirstOrDefault
-    (
-      List<object> list,
-      object keyValue,
-      string keyName
-    )
-    {
-      if
-      (
-        list is null
-        || StringExtension.IsNullOrWhiteSpace(keyName)
-      )
-      {
-        throw new ArgumentNullException();
-      }
-
-      if (list.Count == 0)
-      {
-        return null;
-      }
-
-      if (list[0].GetType() != keyValue.GetType())
-      {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
-      }
-
-      foreach (var item in list)
-      {
-        PropertyInfo propertyInfo = item
-         .GetType()
-         .GetProperty(keyName);
-
-        object itemkeyValue = propertyInfo
-          .GetValue
-          (
-            item,
-            null
-          );
-
-        if (itemkeyValue == keyValue)
-        {
-          return item;
-        }
-      }
-
-      return null;
+      return list[0];
     }
 
     /// <summary>
