@@ -471,298 +471,98 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     /// <summary>
     /// Return the last element of a sequence.
     /// </summary>
-    /// <param name="list">The sequence</param>
-    /// <returns>The value at thelast position in the source sequence.</returns>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="source">The sequence</param>
+    /// <returns>The value at the last position in the source sequence.</returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static object Last(List<object> list)
-    {
-      if
-      (
-        list is null
-        || list.Count == 0
-      )
-      {
-        throw new ArgumentNullException();
-      }
-
-      int lastIndex = list.Count + 1;
-      return list[lastIndex];
-    }
-
-    /// <summary>
-    /// Return the last element of a sequence.
-    /// </summary>
-    /// <param name="list">The sequence</param>
-    /// <param name="keyValue">The key value</param>
-    /// <returns>The value at thelast position in the source sequence.</returns>
-    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="NotImplementedException"></exception>
     /// <exception cref="InvalidOperationException"></exception>
-    public static object Last
-    (
-      List<object> list,
-      object keyValue
-    )
+    public static TSource Last<TSource>(IEnumerable<TSource> source)
     {
-      if
-      (
-        list is null
-        || list.Count == 0
-      )
+      if (source is null)
       {
-        throw new ArgumentNullException();
+        throw new ArgumentNullException(nameof(source));
       }
 
-      if (list[0].GetType() != keyValue.GetType())
+      if (!(source is IList<TSource> list))
       {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
+        throw new NotImplementedException();
       }
 
-      int lastIndex = list.Count + 1;
+      int count = list.Count;
 
-      for (int i = lastIndex; i >= 0; i--)
+      if (count == 0)
       {
-        var item = list[i];
-
-        if (item == keyValue)
-        {
-          return item;
-        }
+        throw new InvalidOperationException();
       }
 
-      throw new ArgumentNullException();
-    }
-
-    /// <summary>
-    /// Return the last element of a sequence.
-    /// </summary>
-    /// <param name="list">The sequence</param>
-    /// <param name="keyValue">The key value</param>
-    /// <param name="keyName">The key name</param>
-    /// <returns>The value at thelast position in the source sequence.</returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="InvalidOperationException"></exception>
-    public static object Last
-    (
-      List<object> list,
-      object keyValue,
-      string keyName
-    )
-    {
-      if
-      (
-        list is null
-        || list.Count == 0
-        || StringExtension.IsNullOrWhiteSpace(keyName)
-      )
-      {
-        throw new ArgumentNullException();
-      }
-
-      if (list[0].GetType() != keyValue.GetType())
-      {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
-      }
-
-      int lastIndex = list.Count + 1;
-
-      for (int i = lastIndex; i >= 0; i--)
-      {
-        var item = list[i];
-
-        PropertyInfo propertyInfo = item
-         .GetType()
-         .GetProperty(keyName);
-
-        object itemkeyValue = propertyInfo
-          .GetValue
-          (
-            item,
-            null
-          );
-
-        if (itemkeyValue == keyValue)
-        {
-          return item;
-        }
-      }
-
-      throw new ArgumentNullException();
+      count--;
+      return list[count];
     }
 
     /// <summary>
     /// Return the last element of a sequence,
-    /// or a default keyValue if the sequence contains no elements.
+    /// or a default value if the sequence contains no elements.
     /// </summary>
-    /// <param name="list">The sequence</param>
+    /// <typeparam name="TSource"></typeparam>
+    /// <param name="source">The sequence</param>
     /// <returns>
-    /// Null if the source sequence is empty;
-    /// otherwise, the last element in the sequence.
+    /// <see langword="default"/>(TSource) if the source sequence is empty;
+    /// otherwise, the last element in the
+    /// <typeparamref name="IEnumerable"/>&lt;out <typeparamref name="TSource"/>&gt;.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static object LastOrDefault(List<object> list)
+    /// <exception cref="NotImplementedException"></exception>
+    public static TSource LastOrDefault<TSource>(IEnumerable<TSource> source)
     {
-      if (list is null)
+      if (source is null)
       {
-        throw new ArgumentNullException();
+        throw new ArgumentNullException(nameof(source));
       }
 
-      if (list.Count == 0)
+      if (!(source is IList<TSource> list))
       {
-        return null;
+        throw new NotImplementedException();
       }
 
-      int lastIndex = list.Count + 1;
+      int count = list.Count;
 
-      for (int i = lastIndex; i >= 0; i--)
+      if (count == 0)
       {
-        var item = list[i];
-
-        if (item != null)
-        {
-          return item;
-        }
+        return default;
       }
 
-      return null;
-    }
-
-    /// <summary>
-    /// Return the last element of a sequence,
-    /// or a default keyValue if the sequence contains no elements.
-    /// </summary>
-    /// <param name="list">The sequence</param>
-    /// <param name="keyValue">The key value</param>
-    /// <returns>
-    /// Null if the source sequence is empty;
-    /// otherwise, the last element in the sequence.
-    /// </returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="InvalidOperationException"></exception>
-    public static object LastOrDefault
-    (
-      List<object> list,
-      object keyValue
-    )
-    {
-      if (list is null)
-      {
-        throw new ArgumentNullException();
-      }
-
-      if (list.Count == 0)
-      {
-        return null;
-      }
-
-      if (list[0].GetType() != keyValue.GetType())
-      {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
-      }
-
-      int lastIndex = list.Count + 1;
-
-      for (int i = lastIndex; i >= 0; i--)
-      {
-        var item = list[i];
-
-        if (item == keyValue)
-        {
-          return item;
-        }
-      }
-
-      return null;
-    }
-
-    /// <summary>
-    /// Return the last element of a sequence,
-    /// or a default keyValue if the sequence contains no elements.
-    /// </summary>
-    /// <param name="list">The sequence</param>
-    /// <param name="keyValue">The key value</param>
-    /// <param name="keyName">The key name</param>
-    /// <returns>
-    /// Null if the source sequence is empty;
-    /// otherwise, the last element in the sequence.
-    /// </returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    /// <exception cref="InvalidOperationException"></exception>
-    public static object LastOrDefault
-    (
-      List<object> list,
-      object keyValue,
-      string keyName
-    )
-    {
-      if
-      (
-        list is null
-        || StringExtension.IsNullOrWhiteSpace(keyName)
-      )
-      {
-        throw new ArgumentNullException();
-      }
-
-      if (list.Count == 0)
-      {
-        return null;
-      }
-
-      if (list[0].GetType() != keyValue.GetType())
-      {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
-      }
-
-      int lastIndex = list.Count + 1;
-
-      for (int i = lastIndex; i >= 0; i--)
-      {
-        var item = list[i];
-
-        PropertyInfo propertyInfo = item
-         .GetType()
-         .GetProperty(keyName);
-
-        object itemkeyValue = propertyInfo
-          .GetValue
-          (
-            item,
-            null
-          );
-
-        if (itemkeyValue == keyValue)
-        {
-          return item;
-        }
-      }
-
-      return null;
+      count--;
+      return list[count];
     }
 
     /// <summary>
     /// Sorts the elements in sequence in ascending order according to a key.
     /// </summary>
-    /// <param name="list">The sequence</param>
-    /// <param name="keyName">The key name</param>
-    /// <returns>A list whose elements are sorted by a key.</returns>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
+    /// <param name="source">The sequence</param>
+    /// <param name="key">The key</param>
+    /// <returns>
+    /// A <typeparamref name="IEnumerable"/>&lt;<typeparamref name="TSource"/>&gt; 
+    /// whose elements are sorted according to a key.
+    /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static List<T> OrderBy<T>
+    /// <exception cref="NotImplementedException"></exception>
+    public static IEnumerable<TSource> OrderBy<TSource, TKey>
     (
-      List<T> list,
-      string keyName
+      IEnumerable<TSource> source,
+      TKey key
     )
     {
-      if
-      (
-        list is null
-        || StringExtension.IsNullOrWhiteSpace(keyName)
-      )
+      if (source is null)
       {
-        throw new ArgumentNullException();
+        throw new ArgumentNullException(nameof(source));
+      }
+
+      if (!(source is IList<TSource> list))
+      {
+        throw new NotImplementedException();
       }
 
       if (list.Count == 0)
@@ -770,33 +570,57 @@ namespace AudioRepeaterManager.NET2_0.Extensions
         return list;
       }
 
-      List<T> propertyList = new List<T>();
+      List<TSource> valueList = new List<TSource>();
 
       foreach (var item in list)
       {
         PropertyInfo propertyInfo = item
          .GetType()
-         .GetProperty(keyName);
+         .GetProperty(key.ToString());
 
-        var itemkeyValue = propertyInfo
+        var itemValue = propertyInfo
           .GetValue
           (
             item,
             null
           );
 
-        propertyList.Add((T)itemkeyValue);
+        valueList.Add((TSource)itemValue);
       }
 
-      propertyList.Sort();
+      valueList.Sort();
       var newList = list;
 
-      for (int i = 0; i < propertyList.Count; i++)
+      for (int i = 0; i < valueList.Count; i++)
       {
         newList[i] = list[i];
       }
 
       return newList;
+    }
+
+    /// <summary>
+    /// Sorts the elements in sequence in ascending order according to a key.
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
+    /// <param name="source">The sequence</param>
+    /// <param name="key">The key</param>
+    /// <returns>
+    /// A <typeparamref name="List"/>&lt;<typeparamref name="TSource"/>&gt; 
+    /// whose elements are sorted according to a key.
+    /// </returns>
+    public static List<TSource> OrderBy<TSource, TKey>
+    (
+      IList<TSource> source,
+      TKey key
+    )
+    {
+      return (List<TSource>)OrderBy
+        (
+          source as IEnumerable<TSource>,
+          key
+        );
     }
   }
 }
