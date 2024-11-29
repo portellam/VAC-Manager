@@ -219,12 +219,11 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     /// <summary>
     /// Returns distinct elements from a sequence.
     /// </summary>
-    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="T"></typeparam>
     /// <param name="source">The sequence</param>
     /// <returns>
-    /// An <typeparamref name="IEnumerable"/>&lt;<see langword="out"/>
-    /// <typeparamref name="T"/>&gt; that contains distinct elements from the
-    /// source sequence.
+    /// An <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
+    /// that contains distinct elements from the source sequence.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotImplementedException"></exception>
@@ -263,12 +262,11 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     /// <summary>
     /// Returns distinct elements from a sequence.
     /// </summary>
-    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="T"></typeparam>
     /// <param name="source">The sequence</param>
     /// <returns>
-    /// An <typeparamref name="List"/>&lt;<see langword="out"/> 
-    /// <typeparamref name="T"/>&gt; that contains distinct elements from the
-    /// source sequence.
+    /// An <typeparamref name="List"/>&lt;<typeparamref name="T"/>&gt;
+    /// that contains distinct elements from the source sequence.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotImplementedException"></exception>
@@ -317,8 +315,7 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     /// <returns>
     /// <see langword="default"/>(TSource) if the source sequence is empty;
     /// otherwise, the first element in the
-    /// <typeparamref name="IEnumerable"/>&lt;<see langword="out"/>
-    /// <typeparamref name="TSource"/>&gt;.
+    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="TSource"/>&gt;.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotImplementedException"></exception>
@@ -385,8 +382,7 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     /// <returns>
     /// <see langword="default"/>(TSource) if the source sequence is empty;
     /// otherwise, the last element in the
-    /// <typeparamref name="IEnumerable"/>&lt;<see langword="out"/>
-    /// <typeparamref name="TSource"/>&gt;.
+    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="TSource"/>&gt;.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotImplementedException"></exception>
