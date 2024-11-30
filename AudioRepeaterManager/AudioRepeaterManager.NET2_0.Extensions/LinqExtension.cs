@@ -10,13 +10,16 @@ namespace AudioRepeaterManager.NET2_0.Extensions
 
     /// <summary>
     /// Removes all elements that match the conditions defined by the specified
-    /// predicate from a
+    /// key and value from a
     /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
     /// collection.
     /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="T"></typeparam>
-    /// <param name="source">The sequence</param>
-    /// <param name="match">The predicate</param>
+    /// <param name="enumerable">The collection</param>
+    /// <param name="key">the key</param>
+    /// <param name="value">the value</param>
     /// <returns>
     /// The number of elements that were removed from the
     /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
@@ -24,87 +27,99 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotImplementedException"></exception>
-    public static int RemoveWhere<TSource, TKey>
+    public static int RemoveWhere<TSource, TKey, T>
     (
-      ref IEnumerable<TSource> source,
-      Predicate<TKey> match
+      ref IEnumerable<TSource> enumerable,
+      TKey key,
+      T value
     )
     {
-      if (source is null)
+      if (enumerable is null)
       {
-        throw new ArgumentNullException(nameof(source));
+        throw new ArgumentNullException(nameof(enumerable));
       }
 
-      if (match is null)
+      if (key == null)
       {
-        throw new ArgumentNullException(nameof(match));
+        throw new ArgumentNullException(nameof(key));
       }
 
-      if (!(source is IList<TSource> list))
+      if (value == null)
+      {
+        throw new ArgumentNullException(nameof(value));
+      }
+
+
+      if (!(enumerable is IList<TSource> list))
       {
         throw new NotImplementedException();
       }
 
-      foreach (var item in list)
+      foreach (var source in list)
       {
-        PropertyInfo propertyInfo = item
+        PropertyInfo propertyInfo = source
          .GetType()
-         .GetProperty(match.ToString());
+         .GetProperty(key.ToString());
 
-        object value = propertyInfo
+        object thisValue = propertyInfo
           .GetValue
           (
-            item,
+            source,
             null
           );
 
         if
         (
-          value is null
-          || !(value is TSource key)
-          || !list.Contains(key)
+          thisValue is null
+          || !value.Equals(thisValue)
         )
         {
           continue;
         }
 
-        list.Remove(key);
+        list.Remove(source);
       }
 
-      source = list;
+      enumerable = list;
       return list.Count;
     }
 
     /// <summary>
     /// Removes all elements that match the conditions defined by the specified
-    /// predicate from a
-    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
+    /// key and value from a
+    /// <typeparamref name="List"/>&lt;<typeparamref name="T"/>&gt;
     /// collection.
     /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="T"></typeparam>
-    /// <param name="source">The sequence</param>
-    /// <param name="match">The predicate</param>
+    /// <param name="list">The collection</param>
+    /// <param name="key">the key</param>
+    /// <param name="value">the value</param>
     /// <returns>
     /// The number of elements that were removed from the
-    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
+    /// <typeparamref name="List"/>&lt;<typeparamref name="T"/>&gt;
     /// collection.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static int RemoveWhere<TSource, TKey>
+    /// <exception cref="NotImplementedException"></exception>
+    public static int RemoveWhere<TSource, TKey, T>
     (
-      ref IList<TSource> source,
-      Predicate<TKey> match
+      ref List<TSource> list,
+      TKey key,
+      T value
     )
     {
-      IEnumerable<TSource> enumerable = source;
+      IEnumerable<TSource> enumerable = list;
 
       int count = RemoveWhere
         (
           ref enumerable,
-          match
+          key,
+          value
         );
 
-      source = (IList<TSource>)enumerable;
+      list = (List<TSource>)enumerable;
       return count;
     }
 
