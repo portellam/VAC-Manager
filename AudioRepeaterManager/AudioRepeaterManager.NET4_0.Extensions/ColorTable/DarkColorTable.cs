@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace AudioRepeaterManager.NET4_0.Extensions.ColorTable
+namespace AudioRepeaterManager.NET4_0.GUI.Extensions.ColorTable
 {
   public class DarkColorTable : ProfessionalColorTable
   {

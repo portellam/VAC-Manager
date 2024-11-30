@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 
-namespace AudioRepeaterManager.NET4_0.Extensions
+namespace AudioRepeaterManager.NET4_0.GUI.Extensions
 {
   public class RegistryKeyPropertyGetter
   {

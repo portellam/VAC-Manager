@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using AudioRepeaterManager.NET4_0.Extensions.ColorTable;
+using AudioRepeaterManager.NET4_0.GUI.Extensions.ColorTable;
 
 namespace AudioRepeaterManager.NET4_0.Backend.ViewModels.Renderer
 {

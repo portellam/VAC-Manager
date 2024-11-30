@@ -1,4 +1,4 @@
-﻿namespace AudioRepeaterManager.NET4_0.Extensions.PropertyValueChanged
+﻿namespace AudioRepeaterManager.NET4_0.GUI.Extensions.PropertyValueChanged
 {
   #region Delegates
 

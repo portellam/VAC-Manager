@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using AudioRepeaterManager.NET4_0.Extensions.PropertyValueChanged;
+using AudioRepeaterManager.NET4_0.GUI.Extensions.PropertyValueChanged;
 
-namespace AudioRepeaterManager.NET4_0.Extensions
+namespace AudioRepeaterManager.NET4_0.GUI.Extensions
 {
   public class LightThemeValidator
   {
