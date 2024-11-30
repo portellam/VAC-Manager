@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using AudioRepeaterManager.NET2_0.Extensions;
+using System.Xml.Serialization;
+using System;
+using System.Linq;
 
 namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 {
@@ -286,7 +289,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
             (
               x =>
               x.State == DeviceState.Disabled
-            ).Count
+            ).Count()
         )
       );
 
@@ -403,21 +406,15 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// </summary>
     public void Update()
     {
-      MMDeviceList.AddRange
+      MMDeviceList = mMDeviceEnumerator
+        .EnumerateAudioEndPoints
         (
-          mMDeviceEnumerator.EnumerateAudioEndPoints
-            (
-              DataFlow.All,
-              DeviceState.All
-            )
-        );
-
-      MMDeviceList = LinqExtension
-        .OrderBy
-        (
-          MMDeviceList,
-          IdPropertyName
-        );
+          DataFlow.All,
+          DeviceState.All
+        )
+        .Distinct()
+        .OrderBy(x => x.ID)
+        .ToList();
 
       Debug
         .WriteLine("Updated audio devices.");

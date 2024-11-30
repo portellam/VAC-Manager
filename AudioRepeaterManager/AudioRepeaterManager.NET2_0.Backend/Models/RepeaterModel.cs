@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using AudioRepeaterManager.NET2_0.Backend.Structs;
 
 namespace AudioRepeaterManager.NET2_0.Backend.Models
