@@ -6,106 +6,105 @@ namespace AudioRepeaterManager.NET2_0.Extensions
 {
   public static class LinqExtension
   {
-    /// <summary>
-    /// Remove all elements that match the conditions defined by the specified
-    /// predicate.
-    /// </summary>
-    /// <param name="list">The list</param>
-    /// <param name="keyValue">The key value</param>
-    /// <returns>The number of elements removed from the list.</returns>
-    public static int RemoveAll
-    (
-      List<object> list,
-      object keyValue
-    )
-    {
-      if (list == null)
-      {
-        throw new NullReferenceException();
-      }
-
-      if (list[0].GetType() != keyValue.GetType())
-      {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
-      }
-
-      int count = 0;
-
-      if (list.Count == 0)
-      {
-        return count;
-      }
-
-      foreach (var item in list)
-      {
-        if (item == keyValue)
-        {
-          list.Remove(item);
-          count++;
-        }
-      }
-
-      return count;
-    }
+    // TODO: make sure all input params and summaries match actual methods!
 
     /// <summary>
-    /// Remove all elements that match the conditions defined by the specified
-    /// predicate.
+    /// Removes all elements that match the conditions defined by the specified
+    /// predicate from a
+    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
+    /// collection.
     /// </summary>
-    /// <param name="list">The list</param>
-    /// <param name="keyValue">The key value</param>
-    /// <param name="keyName">The key name</param>
-    /// <returns></returns>
-    public static int RemoveAll
+    /// <typeparam name="T"></typeparam>
+    /// <param name="source">The sequence</param>
+    /// <param name="match">The predicate</param>
+    /// <returns>
+    /// The number of elements that were removed from the
+    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
+    /// collection.
+    /// </returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="NotImplementedException"></exception>
+    public static int RemoveWhere<TSource, TKey>
     (
-      List<object> list,
-      object keyValue,
-      string keyName
+      ref IEnumerable<TSource> source,
+      Predicate<TKey> match
     )
     {
-      if
-      (
-        list == null
-        || StringExtension.IsNullOrWhiteSpace(keyName)
-      )
+      if (source is null)
       {
-        throw new NullReferenceException();
+        throw new ArgumentNullException(nameof(source));
       }
 
-      if (list[0].GetType() != keyValue.GetType())
+      if (match is null)
       {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
+        throw new ArgumentNullException(nameof(match));
       }
 
-      int count = 0;
-
-      if (list.Count == 0)
+      if (!(source is IList<TSource> list))
       {
-        return count;
+        throw new NotImplementedException();
       }
 
       foreach (var item in list)
       {
         PropertyInfo propertyInfo = item
          .GetType()
-         .GetProperty(keyName);
+         .GetProperty(match.ToString());
 
-        object itemkeyValue = propertyInfo
+        object value = propertyInfo
           .GetValue
           (
             item,
             null
           );
 
-        if (itemkeyValue == keyValue)
+        if
+        (
+          value is null
+          || !(value is TSource key)
+          || !list.Contains(key)
+        )
         {
-          list.Remove(item);
-          count++;
+          continue;
         }
+
+        list.Remove(key);
       }
 
+      source = list;
+      return list.Count;
+    }
+
+    /// <summary>
+    /// Removes all elements that match the conditions defined by the specified
+    /// predicate from a
+    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
+    /// collection.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="source">The sequence</param>
+    /// <param name="match">The predicate</param>
+    /// <returns>
+    /// The number of elements that were removed from the
+    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
+    /// collection.
+    /// </returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static int RemoveWhere<TSource, TKey>
+    (
+      ref IList<TSource> source,
+      Predicate<TKey> match
+    )
+    {
+      IEnumerable<TSource> enumerable = source;
+
+      int count = RemoveWhere
+        (
+          ref enumerable,
+          match
+        );
+
+      source = (IList<TSource>)enumerable;
       return count;
     }
 
