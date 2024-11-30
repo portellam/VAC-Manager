@@ -1,4 +1,4 @@
-﻿namespace AudioRepeaterManager.NET8_0.Extensions.PropertyValueChanged
+﻿namespace AudioRepeaterManager.NET8_0.GUI.Extensions.PropertyValueChanged
 {
   public class PropertyValueChangedEventArgs : System.EventArgs
   {

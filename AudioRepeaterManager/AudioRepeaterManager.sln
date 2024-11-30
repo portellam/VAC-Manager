@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_8.GUI.Extensions", "AudioRepeaterManager.NET4_8.GUI.Extensions\AudioRepeaterManager.NET4_8.GUI.Extensions.csproj", "{89577933-445E-485E-9885-D5E05B925372}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AudioRepeaterManager.NET8_0.Extensions", "AudioRepeaterManager.NET8_0.Extensions\AudioRepeaterManager.NET8_0.Extensions.csproj", "{B5B5B219-E162-42EC-A69F-3185BC9D569A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AudioRepeaterManager.NET8_0.GUI.Extensions", "AudioRepeaterManager.NET8_0.GUI.Extensions\AudioRepeaterManager.NET8_0.GUI.Extensions.csproj", "{B5B5B219-E162-42EC-A69F-3185BC9D569A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AudioRepeaterManager.NET8_0.Backend", "AudioRepeaterManager.NET8_0.Backend\AudioRepeaterManager.NET8_0.Backend.csproj", "{FE4618C7-7931-4219-8325-58CE221E8AC9}"
 EndProject
