@@ -7,8 +7,8 @@
     <ProjectGuid>{A85A10F1-4E75-4E79-BE66-07EB62177F37}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AudioRepeaterManager.NET2_0.Extensions</RootNamespace>
-    <AssemblyName>AudioRepeaterManager.NET2_0.Extensions</AssemblyName>
+    <RootNamespace>AudioRepeaterManager.NET2_0.Backend.Extensions</RootNamespace>
+    <AssemblyName>AudioRepeaterManager.NET2_0.Backend.Extensions</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

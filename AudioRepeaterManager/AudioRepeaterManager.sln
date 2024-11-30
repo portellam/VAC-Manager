@@ -47,7 +47,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET2_0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET2_0.GUI", "AudioRepeaterManager.NET2_0.GUI\AudioRepeaterManager.NET2_0.GUI.csproj", "{207C48BC-9821-446E-90BE-CCFEC33460DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET2_0.Extensions", "AudioRepeaterManager.NET2_0.Extensions\AudioRepeaterManager.NET2_0.Extensions.csproj", "{A85A10F1-4E75-4E79-BE66-07EB62177F37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET2_0.Backend.Extensions", "AudioRepeaterManager.NET2_0.Extensions\AudioRepeaterManager.NET2_0.Backend.Extensions.csproj", "{A85A10F1-4E75-4E79-BE66-07EB62177F37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET2_0.GUI.Extensions", "AudioRepeaterManager.NET2_0.GUI.Extensions\AudioRepeaterManager.NET2_0.GUI.Extensions.csproj", "{37F78A22-C819-4701-ACB7-1A2968F763D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -390,6 +392,22 @@ Global
 		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Release|x64.Build.0 = Release|Any CPU
 		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Release|x86.ActiveCfg = Release|Any CPU
 		{A85A10F1-4E75-4E79-BE66-07EB62177F37}.Release|x86.Build.0 = Release|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Debug|x64.Build.0 = Debug|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Debug|x86.Build.0 = Debug|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Release|ARM64.Build.0 = Release|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Release|x64.ActiveCfg = Release|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Release|x64.Build.0 = Release|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Release|x86.ActiveCfg = Release|Any CPU
+		{37F78A22-C819-4701-ACB7-1A2968F763D3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

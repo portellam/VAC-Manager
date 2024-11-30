@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using AudioRepeaterManager.NET2_0.Extensions;
+using AudioRepeaterManager.NET2_0.BackendExtensions;
 
 namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 {
