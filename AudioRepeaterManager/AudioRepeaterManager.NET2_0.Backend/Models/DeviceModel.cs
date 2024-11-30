@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using AudioRepeaterManager.NET2_0.Backend.Structs;
 
 namespace AudioRepeaterManager.NET2_0.Backend.Models

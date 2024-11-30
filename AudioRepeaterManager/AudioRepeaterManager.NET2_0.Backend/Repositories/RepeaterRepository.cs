@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using AudioRepeaterManager.NET2_0.Backend.Models;
 using AudioRepeaterManager.NET2_0.Extensions;
 
@@ -16,7 +17,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <summary>
     /// The collection of repeaters.
     /// </summary>
-    private List<RepeaterModel> RepeaterModelList;  //TODO: add logic to treat like HashSet (clear of duplicates?)
+    private List<RepeaterModel> RepeaterModelList;
 
     /// <summary>
     /// The list of repeater IDs.
@@ -25,13 +26,10 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       get
       {
-        List<uint> list = new List<uint>();
-
-        RepeaterModelList
-          .ForEach
-          (
-            x => list.Add(x.Id)
-          );
+        List<uint> list =
+          RepeaterModelList
+            .Select(x => x.Id)
+            .ToList();
 
         list.Sort();
         return list;
@@ -45,8 +43,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       get
       {
-        int lastIndex = IdList.Count - 1;
-        uint id = IdList[lastIndex];
+        uint id = IdList.LastOrDefault();
         id++;
         return id;
       }
@@ -179,16 +176,8 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return null;
       }
 
-      RepeaterModel repeaterModel = null;
-
-      foreach (var x in RepeaterModelList)
-      {
-        if (x.Id == id)
-        {
-          repeaterModel = x;
-          break;
-        }
-      }
+      RepeaterModel repeaterModel = RepeaterModelList
+        .FirstOrDefault(x => x.Id == id);
 
       if (repeaterModel is null)
       {
@@ -237,12 +226,10 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return null;
       }
 
-      RepeaterModel repeaterModel = null;
-
-      foreach (var x in RepeaterModelList)
-      {
-        if
+      RepeaterModel repeaterModel = RepeaterModelList
+        .FirstOrDefault
         (
+          x =>
           (
             x.InputDeviceId == firstDeviceId
             && x.OutputDeviceId == secondDeviceId
@@ -250,12 +237,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
             x.InputDeviceId == secondDeviceId
             && x.OutputDeviceId == firstDeviceId
           )
-        )
-        {
-          repeaterModel = x;
-          break;
-        }
-      }
+        );
 
       if (repeaterModel is null)
       {
@@ -294,11 +276,11 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         string.Format
         (
           "Got repeater(s) => Count: {1}",
-          RepeaterModelList.Count
+          RepeaterModelList.Count()
         )
       );
 
-      return RepeaterModelList;
+      return RepeaterModelList.ToList();
     }
 
     /// <summary>
@@ -324,6 +306,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
       List<RepeaterModel> repeaterModelList = new List<RepeaterModel>();
 
       RepeaterModelList
+        .ToList()
         .ForEach
         (
           x =>
@@ -349,7 +332,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         string.Format
         (
           "Got repeater(s) => Count: {1}",
-          repeaterModelList.Count
+          repeaterModelList.Count()
         )
       );
 
@@ -396,7 +379,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         string.Format
         (
           "Got repeater(s) => Count: {1}",
-          repeaterModelList.Count
+          repeaterModelList.Count()
         )
       );
 
@@ -415,7 +398,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      if (RepeaterModelList.Count >= Global.MaxRepeaterCount)
+      if (RepeaterModelList.Count() >= Global.MaxRepeaterCount)
       {
         Console.WriteLine
         (
@@ -539,19 +522,8 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      List<RepeaterModel> repeaterModelList = RepeaterModelList;
-
-      foreach (var x in repeaterModelList)
-      {
-        if (x.Id == id)
-        {
-          RepeaterModelList.Remove(x);
-          break;
-        }
-      }
-
-      int count = repeaterModelList.Count;
-      GC.Collect();
+      int count = RepeaterModelList
+        .RemoveAll(x => x.Id == id);
 
       if (count == 0)
       {
@@ -600,28 +572,8 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      List<RepeaterModel> repeaterModelList = RepeaterModelList;
-
-      foreach (var x in repeaterModelList)
-      {
-        if
-        (
-          (
-            x.InputDeviceId == firstDeviceId
-            && x.OutputDeviceId == secondDeviceId
-          ) || (
-            x.InputDeviceId == secondDeviceId
-            && x.OutputDeviceId == firstDeviceId
-          )
-        )
-
-        {
-          RepeaterModelList.Remove(x);
-        }
-      }
-
-      int count = repeaterModelList.Count;
-      GC.Collect();
+      int count = RepeaterModelList
+        .RemoveAll(x => x.Id == repeaterModel.Id);
 
       if (count == 0)
       {
@@ -666,26 +618,13 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      List<RepeaterModel> repeaterModelList = RepeaterModelList;
-
-      repeaterModelList
-        .ForEach
+      int count = RepeaterModelList
+        .RemoveAll
         (
           x =>
-          {
-            if
-            (
-              x.InputDeviceName == deviceName
-              || x.OutputDeviceName == deviceName
-            )
-            {
-              RepeaterModelList.Remove(x);
-            }
-          }
+          x.InputDeviceName == deviceName
+          || x.OutputDeviceName == deviceName
         );
-
-      int count = repeaterModelList.Count;
-      GC.Collect();
 
       if (count == 0)
       {
@@ -724,24 +663,12 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return;
       }
 
-      List<RepeaterModel> repeaterModelList = RepeaterModelList;
-
-      repeaterModelList
-        .ForEach
-        (
-          x =>
-          {
-            if (x.Id == repeaterModel.Id)
-            {
-              RepeaterModelList.Remove(x);
-            }
-          }
-        );
-
-      int count = repeaterModelList.Count;
-      GC.Collect();
-
-      if (count == RepeaterModelList.Count)
+      if
+      (
+        RepeaterModelList
+          .RemoveAll
+          (x => x.Id == repeaterModel.Id) == 0
+      )
       {
         Debug.WriteLine
         (
@@ -757,7 +684,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 
       RepeaterModelList.Add(repeaterModel);
 
-      if (count != RepeaterModelList.Count)
+      if (!RepeaterModelList.Contains(repeaterModel))
       {
         Debug.WriteLine
         (

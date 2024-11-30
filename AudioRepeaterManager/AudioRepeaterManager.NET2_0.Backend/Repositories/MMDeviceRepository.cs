@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using AudioRepeaterManager.NET2_0.Extensions;
-using System.Xml.Serialization;
-using System;
 using System.Linq;
+using AudioRepeaterManager.NET2_0.Extensions;
 
 namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 {
@@ -26,8 +24,6 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// The enumerator of actual devices.
     /// </summary>
     private MMDeviceEnumerator mMDeviceEnumerator;
-
-    private readonly string IdPropertyName = "ID";
 
     #endregion
 
@@ -94,14 +90,8 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         .WriteLine
         ("Reset audio devices.");
 
-      mMDevice
-        .AudioSessionManager //FIXME
-        .RefreshSessions();
-
-      Debug
-        .WriteLine
-        ("Refreshed audio devices.");
-    }
+      //TODO: add logic to refresh audio devices?
+    }  
 
     /// <summary>
     /// Enable an actual device.
@@ -146,13 +136,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
           )
         );
 
-      mMDevice
-        .AudioSessionManager
-        .RefreshSessions();
-
-      Debug
-        .WriteLine
-        ("Refreshed audio devices.");
+      //TODO: add logic to refresh audio devices?
     }
 
     /// <summary>
@@ -195,15 +179,8 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         return null;
       }
 
-      var mMDevice = LinqExtension
-        .FirstOrDefault
-        (
-          MMDeviceList,
-          id,
-          IdPropertyName
-        );
-
-      MMDevice newMMDevice = (MMDevice)mMDevice;
+      MMDevice mMDevice = MMDeviceList
+        .FirstOrDefault(x => x.ID == id);
 
       if (mMDevice is null)
       {
@@ -217,12 +194,12 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
           string.Format
           (
             "Got audio device\t=> ID: '{1}'",
-            (mMDevice as MMDevice).ID
+            mMDevice.ID
           )
         );
       }
 
-      return newMMDevice;
+      return mMDevice;
     }
 
     /// <summary>
@@ -251,7 +228,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         string.Format
         (
           "Got audio device(s) => Count: {1}",
-          MMDeviceList.Count
+          MMDeviceList.Count()
         )
       );
 
@@ -327,7 +304,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
             (
               x =>
               x.State != DeviceState.Disabled
-            ).Count
+            ).Count()
         )
       );
 
@@ -374,7 +351,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         string.Format
         (
           "Got audio device(s) => Count: {1}",
-          mMDeviceList.Count
+          mMDeviceList.Count()
         )
       );
 
@@ -415,6 +392,8 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         .Distinct()
         .OrderBy(x => x.ID)
         .ToList();
+
+      var item = MMDeviceList.Select(x => x.ID);
 
       Debug
         .WriteLine("Updated audio devices.");
