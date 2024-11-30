@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using AudioRepeaterManager.NET2_0.Backend.Models;
-using AudioRepeaterManager.NET2_0.BackendExtensions;
+using AudioRepeaterManager.NET2_0.Backend.Extensions;
 
 namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 {
