@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace AudioRepeaterManager.NET4_8.Extensions
+namespace AudioRepeaterManager.NET4_8.GUI.Extensions
 {
   public class FormColorUpdater
   {
