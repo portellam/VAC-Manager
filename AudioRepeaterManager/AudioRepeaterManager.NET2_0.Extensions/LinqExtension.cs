@@ -6,7 +6,19 @@ namespace AudioRepeaterManager.NET2_0.Extensions
 {
   public static class LinqExtension
   {
-    // TODO: make sure all input params and summaries match actual methods!
+    /*
+     * [ ] TODO: make sure all input params and summaries match actual methods!
+     * [ ] TODO: develop the following:
+     * - [x] Distinct
+     * - [ ] First
+     * - [ ] FirstOrDefault
+     * - [ ] Last
+     * - [ ] LastOrDefault
+     * - [ ] OrderBy
+     * - [ ] RemoveWhere
+     * - [ ] Select
+     */
+    // 
 
     /// <summary>
     /// Returns distinct elements from a sequence.
