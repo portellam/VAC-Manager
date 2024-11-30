@@ -9,118 +9,62 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     // TODO: make sure all input params and summaries match actual methods!
 
     /// <summary>
-    /// Removes all elements that match the conditions defined by the specified
-    /// key and value from a
-    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
-    /// collection.
+    /// Returns distinct elements from a sequence.
     /// </summary>
-    /// <typeparam name="TSource"></typeparam>
-    /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="T"></typeparam>
-    /// <param name="enumerable">The collection</param>
-    /// <param name="key">the key</param>
-    /// <param name="value">the value</param>
+    /// <param name="source">The sequence</param>
     /// <returns>
-    /// The number of elements that were removed from the
-    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
-    /// collection.
+    /// An <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
+    /// that contains distinct elements from the source sequence.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotImplementedException"></exception>
-    public static int RemoveWhere<TSource, TKey, T>
-    (
-      ref IEnumerable<TSource> enumerable,
-      TKey key,
-      T value
-    )
+    public static IEnumerable<T> Distinct<T>(IEnumerable<T> source)
     {
-      if (enumerable is null)
+      if (source is null)
       {
-        throw new ArgumentNullException(nameof(enumerable));
+        throw new ArgumentNullException(nameof(source));
       }
 
-      if (key == null)
-      {
-        throw new ArgumentNullException(nameof(key));
-      }
-
-      if (value == null)
-      {
-        throw new ArgumentNullException(nameof(value));
-      }
-
-
-      if (!(enumerable is IList<TSource> list))
+      if (!(source is List<T> list))
       {
         throw new NotImplementedException();
       }
 
-      foreach (var source in list)
+      if (list.Count == 0)
       {
-        PropertyInfo propertyInfo = source
-         .GetType()
-         .GetProperty(key.ToString());
+        return list;
+      }
 
-        object thisValue = propertyInfo
-          .GetValue
-          (
-            source,
-            null
-          );
+      List<T> newList = new List<T>();
 
-        if
-        (
-          thisValue is null
-          || !value.Equals(thisValue)
-        )
+      foreach (var item in list)
+      {
+        if (newList.Contains(item))
         {
           continue;
         }
 
-        list.Remove(source);
+        newList.Add(item);
       }
 
-      enumerable = list;
-      return list.Count;
+      return newList;
     }
 
     /// <summary>
-    /// Removes all elements that match the conditions defined by the specified
-    /// key and value from a
-    /// <typeparamref name="List"/>&lt;<typeparamref name="T"/>&gt;
-    /// collection.
+    /// Returns distinct elements from a sequence.
     /// </summary>
-    /// <typeparam name="TSource"></typeparam>
-    /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="T"></typeparam>
-    /// <param name="list">The collection</param>
-    /// <param name="key">the key</param>
-    /// <param name="value">the value</param>
+    /// <param name="source">The sequence</param>
     /// <returns>
-    /// The number of elements that were removed from the
-    /// <typeparamref name="List"/>&lt;<typeparamref name="T"/>&gt;
-    /// collection.
+    /// An <typeparamref name="List"/>&lt;<typeparamref name="T"/>&gt;
+    /// that contains distinct elements from the source sequence.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotImplementedException"></exception>
-    public static int RemoveWhere<TSource, TKey, T>
-    (
-      ref List<TSource> list,
-      TKey key,
-      T value
-    )
+    public static List<T> Distinct<T>(List<T> source)
     {
-      IEnumerable<TSource> enumerable = list;
-
-      int count = RemoveWhere
-        (
-          ref enumerable,
-          key,
-          value
-        );
-
-      list = (List<TSource>)enumerable;
-      return count;
+      return (List<T>)Distinct(source as IEnumerable<T>);
     }
 
     /// <summary>
@@ -213,62 +157,117 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     }
 
     /// <summary>
-    /// Returns distinct elements from a sequence.
+    /// Removes all elements that match the conditions defined by the specified
+    /// key and value from a
+    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
+    /// collection.
     /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="T"></typeparam>
-    /// <param name="source">The sequence</param>
+    /// <param name="enumerable">The collection</param>
+    /// <param name="key">the key</param>
+    /// <param name="value">the value</param>
     /// <returns>
-    /// An <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
-    /// that contains distinct elements from the source sequence.
+    /// The number of elements that were removed from the
+    /// <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
+    /// collection.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotImplementedException"></exception>
-    public static IEnumerable<T> Distinct<T>(IEnumerable<T> source)
+    public static int RemoveWhere<TSource, TKey, T>
+    (
+      ref IEnumerable<TSource> enumerable,
+      TKey key,
+      T value
+    )
     {
-      if (source is null)
+      if (enumerable is null)
       {
-        throw new ArgumentNullException(nameof(source));
+        throw new ArgumentNullException(nameof(enumerable));
       }
 
-      if (!(source is List<T> list))
+      if (key == null)
+      {
+        throw new ArgumentNullException(nameof(key));
+      }
+
+      if (value == null)
+      {
+        throw new ArgumentNullException(nameof(value));
+      }
+
+      if (!(enumerable is IList<TSource> list))
       {
         throw new NotImplementedException();
       }
 
-      if (list.Count == 0)
+      foreach (var source in list)
       {
-        return list;
-      }
+        PropertyInfo propertyInfo = source
+         .GetType()
+         .GetProperty(key.ToString());
 
-      List<T> newList = new List<T>();
+        object thisValue = propertyInfo
+          .GetValue
+          (
+            source,
+            null
+          );
 
-      foreach (var item in list)
-      {
-        if (newList.Contains(item))
+        if
+        (
+          thisValue is null
+          || !value.Equals(thisValue)
+        )
         {
           continue;
         }
 
-        newList.Add(item);
+        list.Remove(source);
       }
 
-      return newList;
+      enumerable = list;
+      return list.Count;
     }
 
     /// <summary>
-    /// Returns distinct elements from a sequence.
+    /// Removes all elements that match the conditions defined by the specified
+    /// key and value from a
+    /// <typeparamref name="List"/>&lt;<typeparamref name="T"/>&gt;
+    /// collection.
     /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="T"></typeparam>
-    /// <param name="source">The sequence</param>
+    /// <param name="list">The collection</param>
+    /// <param name="key">the key</param>
+    /// <param name="value">the value</param>
     /// <returns>
-    /// An <typeparamref name="List"/>&lt;<typeparamref name="T"/>&gt;
-    /// that contains distinct elements from the source sequence.
+    /// The number of elements that were removed from the
+    /// <typeparamref name="List"/>&lt;<typeparamref name="T"/>&gt;
+    /// collection.
     /// </returns>
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="NotImplementedException"></exception>
-    public static List<T> Distinct<T>(List<T> source)
+    public static int RemoveWhere<TSource, TKey, T>
+    (
+      ref List<TSource> list,
+      TKey key,
+      T value
+    )
     {
-      return (List<T>)Distinct(source as IEnumerable<T>);
+      IEnumerable<TSource> enumerable = list;
+
+      int count = RemoveWhere
+        (
+          ref enumerable,
+          key,
+          value
+        );
+
+      list = (List<TSource>)enumerable;
+      return count;
     }
 
     /// <summary>
