@@ -109,47 +109,66 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       return count;
     }
 
-
-
     /// <summary>
     /// Projects the element of a sequence into a new form.
     /// </summary>
-    /// <param name="list">The list</param>
-    /// <param name="keyValue">The key value</param>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="source">The sequence</param>
+    /// <param name="result">The result</param>
     /// <returns>
-    /// A list whose elements are the result of invoking the transform
-    /// function on each element of the source.
+    /// An <typeparamref name="IEnumerable"/>&lt;<typeparamref name="T"/>&gt;
+    /// whose elements are the result of the property on each element of the source.
     /// </returns>
-    public static List<object> Select
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="NotImplementedException"></exception>
+    public static IEnumerable<TResult> Select<TSource, TResult>
     (
-      List<object> list,
-      object keyValue
+      IEnumerable<TSource> source,
+      TResult result
     )
     {
-      if (list == null)
+      if (source is null)
       {
-        throw new NullReferenceException();
+        throw new ArgumentNullException(nameof(source));
       }
 
-      if (list[0].GetType() != keyValue.GetType())
+      if (result == null)
       {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
+        throw new ArgumentNullException(nameof(result));
       }
 
-      List<object> newList = null;
-
-      if (list.Count == 0)
+      if (!(source is IList<TSource> list))
       {
-        return newList;
+        throw new NotImplementedException();
       }
+
+      List<TResult> newList = new List<TResult>();
 
       foreach (var item in list)
       {
-        if (item == keyValue)
+        PropertyInfo propertyInfo = item
+         .GetType()
+         .GetProperty(result.ToString());
+
+        object value = propertyInfo
+          .GetValue
+          (
+            item,
+            null
+          );
+
+        if
+        (
+          value is null
+          || !(value is TResult newResult)
+          || newList.Contains(newResult)
+        )
         {
-          newList.Add(item);
+          continue;
         }
+
+        newList.Add(newResult);
       }
 
       return newList;
@@ -158,62 +177,25 @@ namespace AudioRepeaterManager.NET2_0.Extensions
     /// <summary>
     /// Projects the element of a sequence into a new form.
     /// </summary>
-    /// <param name="list">The list</param>
-    /// <param name="keyValue">The key value</param>
-    /// <param name="keyName">The key name</param>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="source">The sequence</param>
+    /// <param name="result">The result</param>
     /// <returns>
-    /// A list whose elements are the result of invoking the transform
-    /// function on each element of the source.
-    /// </returns>
-    public static List<object> Select
+    /// A <typeparamref name="List"/>&lt;<typeparamref name="T"/>&gt;
+    /// whose elements are the result of the property on each element of the source.
+    /// </returns>    
+    public static List<TResult> Select<TSource, TResult>
     (
-      List<object> list,
-      object keyValue,
-      string keyName
+      IList<TSource> source,
+      TResult result
     )
     {
-      if
-      (
-        list == null
-        || StringExtension.IsNullOrWhiteSpace(keyName)
-      )
-      {
-        throw new NullReferenceException();
-      }
-
-      if (list[0].GetType() != keyValue.GetType())
-      {
-        throw new InvalidOperationException
-          ("List type does not match key type.");
-      }
-
-      List<object> newList = null;
-
-      if (list.Count == 0)
-      {
-        return newList;
-      }
-
-      foreach (var item in list)
-      {
-        PropertyInfo propertyInfo = item
-         .GetType()
-         .GetProperty(keyName);
-
-        object itemkeyValue = propertyInfo
-          .GetValue
-          (
-            item,
-            null
-          );
-
-        if (itemkeyValue == keyValue)
-        {
-          newList.Add(item);
-        }
-      }
-
-      return newList;
+      return (List<TResult>)Select
+        (
+          source as IEnumerable<TSource>,
+          result
+        );
     }
 
     /// <summary>
@@ -246,9 +228,9 @@ namespace AudioRepeaterManager.NET2_0.Extensions
 
       List<T> newList = new List<T>();
 
-      foreach(var item in list)
+      foreach (var item in list)
       {
-        if(newList.Contains(item))
+        if (newList.Contains(item))
         {
           continue;
         }
@@ -431,6 +413,11 @@ namespace AudioRepeaterManager.NET2_0.Extensions
       if (source is null)
       {
         throw new ArgumentNullException(nameof(source));
+      }
+
+      if (key == null)
+      {
+        throw new ArgumentNullException(nameof(key));
       }
 
       if (!(source is IList<TSource> list))
