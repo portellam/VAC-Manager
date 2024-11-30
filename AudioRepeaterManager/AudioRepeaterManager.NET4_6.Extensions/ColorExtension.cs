@@ -1,4 +1,4 @@
-﻿namespace AudioRepeaterManager.NET4_6.Extensions
+﻿namespace AudioRepeaterManager.NET4_6.GUI.Extensions
 {
   public static class ColorExtension
   {

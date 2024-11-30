@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_6.Extensions", "AudioRepeaterManager.NET4_6.Extensions\AudioRepeaterManager.NET4_6.Extensions.csproj", "{C9DF9B6B-EA9E-402B-86E9-7346495F4940}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_6.GUI.Extensions", "AudioRepeaterManager.NET4_6.GUI.Extensions\AudioRepeaterManager.NET4_6.GUI.Extensions.csproj", "{C9DF9B6B-EA9E-402B-86E9-7346495F4940}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRepeaterManager.NET4_6.GUI", "AudioRepeaterManager.NET4_6.GUI\AudioRepeaterManager.NET4_6.GUI.csproj", "{123DF575-D7E0-45E9-B8E1-C727779F2E35}"
 EndProject

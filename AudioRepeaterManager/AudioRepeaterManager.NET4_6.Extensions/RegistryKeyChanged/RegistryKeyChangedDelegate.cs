@@ -1,4 +1,4 @@
-﻿namespace AudioRepeaterManager.NET4_6.Extensions.RegistrySubKeyChanged
+﻿namespace AudioRepeaterManager.NET4_6.GUI.Extensions.RegistrySubKeyChanged
 {
   #region Delegates
 
