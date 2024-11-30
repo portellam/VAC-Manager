@@ -1,7 +1,6 @@
-﻿using System;
-using System.Diagnostics;
+﻿using AudioRepeaterManager.NET2_0.Extensions;
+using System;
 using System.IO;
-using System.Runtime.InteropServices;
 
 namespace AudioRepeaterManager.NET2_0.Backend
 {
@@ -55,8 +54,14 @@ namespace AudioRepeaterManager.NET2_0.Backend
         )
       );
 
-    private static bool doesProcessAndSystemBitMatch =
-      is64BitProcess == is64BitOperatingSystem;
+    private static bool doesProcessAndSystemBitMatch
+    {
+      get
+      {
+        return EnvironmentExtension.Is64BitProcess
+          == EnvironmentExtension.Is64BitOperatingSystem;
+      }
+    }
 
     /// <summary>
     /// The expected executable full path name.
@@ -140,92 +145,6 @@ namespace AudioRepeaterManager.NET2_0.Backend
     public readonly static uint WindowsNT5MaxEndpointCount = 32;
 
     #endregion
-
-    #endregion
-
-    #region Environment
-
-    /// <summary>
-    /// True/false is 64-bit operating system.
-    /// </summary>
-    private static bool is64BitOperatingSystem
-    {
-      get
-      {
-        return is64BitProcess
-          || IsWoW64Application();
-      }
-    }
-
-    /// <summary>
-    /// True/false is 64-bit process.
-    /// </summary>
-    private static bool is64BitProcess
-    {
-      get
-      {
-        return IntPtr.Size == 8;
-      }
-    }
-
-    /// <summary>
-    /// Is application currently running on the Windows 32-bit on Windows 64-bit
-    /// (WoW64) subsystem.
-    /// </summary>
-    /// <returns>True/false if application is running in WoW64.</returns>
-    public static bool IsWoW64Application()
-    {
-      if
-      (
-        (
-          Environment.OSVersion.Version.Major == 5
-          && Environment.OSVersion.Version.Minor >= 1
-        ) || Environment.OSVersion.Version.Major >= 6)
-      {
-        using (Process p = Process.GetCurrentProcess())
-        {
-          bool returnValue;
-
-          if (
-            !IsWoW64Process
-            (
-              p.Handle,
-              out returnValue
-            )
-          )
-          {
-            return false;
-          }
-
-          return returnValue;
-        }
-      }
-      else
-      {
-        return false;
-      }
-    }
-
-    /// <summary>
-    /// Is process currently runnning on the Windows 32-bit on Windows 64-bit
-    /// (WoW64) subsystem.
-    /// </summary>
-    /// <param name="hProcess">The process handle</param>
-    /// <param name="wow64Process">True/false is a WoW64 process</param>
-    /// <returns></returns>
-    [DllImport
-      (
-        "kernel32.dll",
-        SetLastError = true,
-        CallingConvention = CallingConvention.Winapi
-      )
-    ]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool IsWoW64Process
-    (
-      [In] IntPtr hProcess,
-      [Out] out bool wow64Process
-    );
 
     #endregion
   }
