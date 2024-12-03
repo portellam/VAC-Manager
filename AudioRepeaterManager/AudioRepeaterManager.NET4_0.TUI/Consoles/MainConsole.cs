@@ -1,8 +1,10 @@
 ﻿using AudioRepeaterManager.NET4_0.TUI.Consoles;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace AudioRepeaterManager.NET4_0.Backend.Consoles
 {
@@ -119,6 +121,11 @@ namespace AudioRepeaterManager.NET4_0.Backend.Consoles
     {
       get
       {
+        if (string.IsNullOrWhiteSpace(audioRepeaterPathName))
+        {
+          return Global.ExpectedExecutableFullPathName;
+        }
+
         return audioRepeaterPathName;
       }
       set
@@ -143,24 +150,11 @@ namespace AudioRepeaterManager.NET4_0.Backend.Consoles
       }
     }
 
-    public string[] ChildConsoles
-    {
-      get
-      {
-        return new string[]
-          {
-            nameof(AboutConsole),
-            nameof(DeviceConsole),
-            nameof(FileConsole),
-            nameof(HelpConsole),
-            nameof(RepeaterConsole),
-          };
-      }
-    }
+    
 
     #endregion
 
-    #region Logic
+      #region Logic
 
     public void Main(string[] arguments)
     {
@@ -276,7 +270,61 @@ namespace AudioRepeaterManager.NET4_0.Backend.Consoles
       }
     }
 
-    public bool IsRepeater
+    public void Show()
+    {
+      string output = "MENU:";
+
+      ChildConsoles.ChildConsoleTitleAndNamespace
+        .Keys
+        .ToList()
+        .ForEach
+        (
+          x =>
+          {
+            output +=
+              string.Format
+              (
+                "\n{1}{2}",
+                x.ToString()
+                  .ToUpper()
+                  .FirstOrDefault(),
+                x.ToString()
+                  .ToLower()
+                  .Substring
+                  (
+                    1,
+                    x.ToString()
+                      .Length
+                  )
+              );
+          }
+        );
+
+      output += "Select an option: ";
+
+      Console.WriteLine(output);
+      string input = Console.ReadLine();
+      string option = "";
+
+      ChildConsoles.ChildConsoleTitleAndNamespace
+        .ToList()
+        .FirstOrDefault
+        (
+          x =>
+          {
+            return x.Key.StartsWith
+            (
+              input.Substring
+              (
+                0,
+                1
+              )
+            );
+
+          }
+        );
+        
+    }
 
     public void Exit(int code)
     {

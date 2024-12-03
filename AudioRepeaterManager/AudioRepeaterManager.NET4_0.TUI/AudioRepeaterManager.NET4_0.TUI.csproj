@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consoles\ChildConsoles.cs" />
+    <Compile Include="Consoles\Console.cs" />
     <Compile Include="Consoles\DeviceConsole.cs" />
     <Compile Include="Consoles\RepeaterConsole.cs" />
     <Compile Include="Consoles\HelpConsole.cs" />

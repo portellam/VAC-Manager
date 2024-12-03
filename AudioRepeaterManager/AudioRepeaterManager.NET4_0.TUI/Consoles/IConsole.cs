@@ -7,6 +7,7 @@
     void Exit(int code);
 
     void Initialize();
+    void Show();
 
     #endregion
   }
