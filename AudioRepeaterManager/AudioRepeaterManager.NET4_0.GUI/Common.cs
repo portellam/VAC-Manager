@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using AudioRepeaterManager.NET4_0.Backend.ViewModels.Accessors;
-using AudioRepeaterManager.NET4_0.Extensions;
+using AudioRepeaterManager.NET4_0.GUI.Extensions;
 
 namespace AudioRepeaterManager.NET4_0.Backend
 {

@@ -10,10 +10,10 @@ using AudioRepeaterManager.NET4_0.Backend.Models;
 using AudioRepeaterManager.NET4_0.Backend.ViewModels;
 using AudioRepeaterManager.NET4_0.Backend.ViewModels.Accessors;
 using AudioRepeaterManager.NET4_0.Backend.ViewModels.ColorTable;
-using AudioRepeaterManager.NET4_0.Extensions;
-using AudioRepeaterManager.NET4_0.Extensions.PropertyValueChanged;
+using AudioRepeaterManager.NET4_0.GUI.Extensions;
+using AudioRepeaterManager.NET4_0.GUI.Extensions.PropertyValueChanged;
 using PropertyValueChangedEventArgs =
-    AudioRepeaterManager.NET4_0.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
+    AudioRepeaterManager.NET4_0.GUI.Extensions.PropertyValueChanged.PropertyValueChangedEventArgs;
 
 namespace AudioRepeaterManager.NET4_0.Backend.Views
 {
