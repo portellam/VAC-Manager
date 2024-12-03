@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AudioRepeaterManager.NET4_0.Backend">
+      <HintPath>..\AudioRepeaterManager.NET4_0.Backend\bin\Debug\AudioRepeaterManager.NET4_0.Backend.dll</HintPath>
+    </Reference>
     <Reference Include="PagedControl, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedControl.2.2.0\lib\net35\PagedControl.dll</HintPath>
     </Reference>
@@ -97,16 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AudioRepeaterManager.NET4_0.Backend\AudioRepeaterManager.NET4_0.Backend.csproj">
-      <Project>{b5b16153-9c97-4a5c-a524-27f2f7067bd2}</Project>
-      <Name>AudioRepeaterManager.NET4_0.Backend</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AudioRepeaterManager.NET4_0.Extensions\AudioRepeaterManager.NET4_0.Extensions.csproj">
-      <Project>{b8548226-b266-4521-93f4-0217a1fdcf7d}</Project>
-      <Name>AudioRepeaterManager.NET4_0.Extensions</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
