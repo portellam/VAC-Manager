@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace AudioRepeaterManager.NET2_0.Backend.Extensions
+namespace ARM.NET2_0.Backend.Extensions
 {
   public class EnvironmentExtension
   {

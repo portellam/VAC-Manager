@@ -5,9 +5,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using AudioRepeaterManager.NET2_0.Backend.Structs;
+using ARM.NET2_0.Backend.Structs;
 
-namespace AudioRepeaterManager.NET2_0.Backend.Models
+namespace ARM.NET2_0.Backend.Models
 {
   public class RepeaterModel :
     INotifyPropertyChanged,

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using AudioRepeaterManager.NET2_0.Backend.Structs;
+using ARM.NET2_0.Backend.Structs;
 
-namespace AudioRepeaterManager.NET2_0.Backend.Models
+namespace ARM.NET2_0.Backend.Models
 {
   public interface IRepeaterModel
   {

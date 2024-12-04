@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
-using AudioRepeaterManager.NET2_0.Backend.Structs;
+using ARM.NET2_0.Backend.Structs;
 
-namespace AudioRepeaterManager.NET2_0.Backend.Models
+namespace ARM.NET2_0.Backend.Models
 {
   public class DeviceModel :
     IDeviceModel,
