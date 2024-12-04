@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace ARM.NET2_0.GUI
+namespace AudioRepeaterManager.NET2_0.GUI
 {
     static class Program
     {

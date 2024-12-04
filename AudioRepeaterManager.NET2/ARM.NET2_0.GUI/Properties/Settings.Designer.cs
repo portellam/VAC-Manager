@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ARM.NET2_0.GUI.Properties
+namespace AudioRepeaterManager.NET2_0.GUI.Properties
 {
 
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ARM.NET2_0.GUI.Properties
+namespace AudioRepeaterManager.NET2_0.GUI.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace ARM.NET2_0.GUI.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ARM.NET2_0.GUI.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AudioRepeaterManager.NET2_0.GUI.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

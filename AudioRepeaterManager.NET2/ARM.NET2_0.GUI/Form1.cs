@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ARM.NET2_0.GUI
+namespace AudioRepeaterManager.NET2_0.GUI
 {
     public partial class Form1 : Form
     {

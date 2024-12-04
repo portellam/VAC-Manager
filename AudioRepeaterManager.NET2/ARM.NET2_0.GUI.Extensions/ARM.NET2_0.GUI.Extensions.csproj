@@ -7,8 +7,8 @@
     <ProjectGuid>{C30F5F72-228E-4C7C-923C-2B37C3AF167F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ARM.NET2_0.GUI.Extensions</RootNamespace>
-    <AssemblyName>ARM.NET2_0.GUI.Extensions</AssemblyName>
+    <RootNamespace>AudioRepeaterManager.NET2_0.GUI.Extensions</RootNamespace>
+    <AssemblyName>AudioRepeaterManager.NET2_0.GUI.Extensions</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -1,4 +1,4 @@
-﻿namespace ARM.NET2_0.GUI
+﻿namespace AudioRepeaterManager.NET2_0.GUI
 {
     partial class Form1
     {

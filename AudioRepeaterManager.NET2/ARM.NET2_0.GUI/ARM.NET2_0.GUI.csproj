@@ -7,8 +7,8 @@
     <ProjectGuid>{44C38150-C2E2-4B35-9373-00772FC77604}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ARM.NET2_0.GUI</RootNamespace>
-    <AssemblyName>ARM.NET2_0.GUI</AssemblyName>
+    <RootNamespace>AudioRepeaterManager.NET2_0.GUI</RootNamespace>
+    <AssemblyName>AudioRepeaterManager.NET2_0.GUI</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

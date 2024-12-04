@@ -7,8 +7,8 @@
     <ProjectGuid>{F8217DB3-EE78-49CA-94A1-BB24CD2FC931}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ARM.NET2_0.Backend</RootNamespace>
-    <AssemblyName>ARM.NET2_0.Backend</AssemblyName>
+    <RootNamespace>AudioRepeaterManager.NET2_0.Backend</RootNamespace>
+    <AssemblyName>AudioRepeaterManager.NET2_0.Backend</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -61,9 +61,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ARM.NET2_0.Backend.Extensions\ARM.NET2_0.Backend.Extensions.csproj">
+    <ProjectReference Include="..\AudioRepeaterManager.NET2_0.Backend.Extensions\AudioRepeaterManager.NET2_0.Backend.Extensions.csproj">
       <Project>{fb9cae41-f195-4bfe-b19c-8dba69989739}</Project>
-      <Name>ARM.NET2_0.Backend.Extensions</Name>
+      <Name>AudioRepeaterManager.NET2_0.Backend.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

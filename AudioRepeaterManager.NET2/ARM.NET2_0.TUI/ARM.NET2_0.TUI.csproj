@@ -7,8 +7,8 @@
     <ProjectGuid>{70D05AAC-A56B-470F-9368-5EFB62540C8D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ARM.NET2_0.TUI</RootNamespace>
-    <AssemblyName>ARM.NET2_0.TUI</AssemblyName>
+    <RootNamespace>AudioRepeaterManager.NET2_0.TUI</RootNamespace>
+    <AssemblyName>AudioRepeaterManager.NET2_0.TUI</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
