@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AudioRepeaterManager.NET2_0.GUI.Extensions")]
-[assembly: AssemblyCopyright("Copyright ©  2024")]
+[assembly: AssemblyProduct("Audio Repeater Manager for Virtual Audio Cable")]
+[assembly: AssemblyCopyright("VAC Audio Repeater Manager Copyleft © 2024 Alexander Portell.\nVirtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

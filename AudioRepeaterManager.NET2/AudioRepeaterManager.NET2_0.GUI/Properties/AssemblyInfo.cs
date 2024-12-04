@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AudioRepeaterManager.NET2_0.GUI")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("VAC Audio Repeater Manager")]
+[assembly: AssemblyDescription("Graphical User Interface (GUI) to create, manage, and automate instances of Virtual Audio Cable (VAC) audio repeaters. This application version supports Microsoft Windows 2000 SP4 and newer.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AudioRepeaterManager.NET2_0.GUI")]
-[assembly: AssemblyCopyright("Copyright ©  2024")]
+[assembly: AssemblyProduct("Audio Repeater Manager for Virtual Audio Cable")]
+[assembly: AssemblyCopyright("VAC Audio Repeater Manager Copyleft © 2024 Alexander Portell.\nVirtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

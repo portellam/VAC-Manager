@@ -5,13 +5,15 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("VAC Audio Repeater Manager Backend")]
-[assembly: AssemblyDescription("Backend for VAC Audio Repeater Manager.")]
+[assembly: AssemblyTitle("AudioRepeaterManager.NET2_0.Backend")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Audio Repeater Manager for Virtual Audio Cable")]
 [assembly: AssemblyCopyright("VAC Audio Repeater Manager Copyleft © 2024 Alexander Portell.\nVirtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
 // COM, set the ComVisible attribute to true on that type.
