@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace ARM.NET2_0.Backend.Repositories
+namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 {
   public interface IMMDeviceRepository
   {

@@ -1,4 +1,4 @@
-﻿namespace ARM.NET2_0.Backend.Structs
+﻿namespace AudioRepeaterManager.NET2_0.Backend.Structs
 {
   /// <summary>
   /// The masks of speaker layout/channel amounts.

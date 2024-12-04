@@ -1,9 +1,9 @@
 ﻿using NAudio.CoreAudioApi;
 using System.Collections.Generic;
 using System.ComponentModel;
-using ARM.NET2_0.Backend.Models;
+using AudioRepeaterManager.NET2_0.Backend.Models;
 
-namespace ARM.NET2_0.Backend.Repositories
+namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 {
   public interface IDeviceRepository
   {

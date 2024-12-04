@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using ARM.NET2_0.Backend.Models;
-using ARM.NET2_0.Backend.Extensions;
+using AudioRepeaterManager.NET2_0.Backend.Models;
+using AudioRepeaterManager.NET2_0.Backend.Extensions;
 
-namespace ARM.NET2_0.Backend.Repositories
+namespace AudioRepeaterManager.NET2_0.Backend.Repositories
 {
   public class RepeaterRepository :
     INotifyPropertyChanged,

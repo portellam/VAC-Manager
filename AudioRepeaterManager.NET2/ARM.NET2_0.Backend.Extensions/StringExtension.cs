@@ -1,4 +1,4 @@
-﻿namespace ARM.NET2_0.Backend.Extensions
+﻿namespace AudioRepeaterManager.NET2_0.Backend.Extensions
 {
   public static class StringExtension
   {
