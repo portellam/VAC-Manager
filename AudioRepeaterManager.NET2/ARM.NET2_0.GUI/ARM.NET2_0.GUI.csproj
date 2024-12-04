@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>b4a16864-2b38-47d0-b1ab-fa0c6d6c45ff</ProjectGuid>
+    <ProjectGuid>{44C38150-C2E2-4B35-9373-00772FC77604}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ARM.NET2_0.GUI</RootNamespace>
