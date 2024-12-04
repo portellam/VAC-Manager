@@ -165,12 +165,12 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The repeater.</returns>
     public RepeaterModel Get(uint? id)
     {
-      if (id is null)
+      if (id == null)
       {
         Debug.WriteLine
         (
           "Failed to get repeater. " +
-          "Repeater ID is null."
+          "Repeater ID == null."
         );
 
         return null;
@@ -179,9 +179,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
       RepeaterModel repeaterModel = RepeaterModelList
         .FirstOrDefault(x => x.Id == id);
 
-      if (repeaterModel is null)
+      if (repeaterModel == null)
       {
-        Debug.WriteLine("Repeater is null.");
+        Debug.WriteLine("Repeater == null.");
       }
 
       else
@@ -213,14 +213,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       if
       (
-        firstDeviceId is null
-        && secondDeviceId is null
+        firstDeviceId == null
+        && secondDeviceId == null
       )
       {
         Debug.WriteLine
         (
           "Failed to get repeater. " +
-          "Either first device ID or second device ID is null."
+          "Either first device ID or second device ID == null."
         );
 
         return null;
@@ -239,9 +239,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
           )
         );
 
-      if (repeaterModel is null)
+      if (repeaterModel == null)
       {
-        Debug.WriteLine("Repeater is null.");
+        Debug.WriteLine("Repeater == null.");
       }
 
       else
@@ -265,9 +265,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The repeater list.</returns>
     public List<RepeaterModel> GetAll()
     {
-      if (RepeaterModelList is null)
+      if (RepeaterModelList == null)
       {
-        Debug.WriteLine("Failed to get repeater(s). Repeater collection is null.");
+        Debug.WriteLine("Failed to get repeater(s). Repeater collection == null.");
         return new List<RepeaterModel>();
       }
 
@@ -348,9 +348,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       if
       (
-        RepeaterModelList is null
+        RepeaterModelList == null
         || RepeaterModelList.Count == 0
-        || idList is null
+        || idList == null
         || idList.Count == 0
       )
       {
@@ -392,9 +392,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="repeaterModel">The repeater</param>
     public void Insert(RepeaterModel repeaterModel)
     {
-      if (repeaterModel is null)
+      if (repeaterModel == null)
       {
-        Debug.WriteLine("Failed to insert repeater. Repeater is null.");
+        Debug.WriteLine("Failed to insert repeater. Repeater == null.");
         return;
       }
 
@@ -516,9 +516,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="id">The repeater ID</param>
     public void Remove(uint? id)
     {
-      if (id is null)
+      if (id == null)
       {
-        Debug.WriteLine("Failed to remove repeater. Repeater ID is null.");
+        Debug.WriteLine("Failed to remove repeater. Repeater ID == null.");
         return;
       }
 
@@ -566,9 +566,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         secondDeviceId
       );
 
-      if (repeaterModel is null)
+      if (repeaterModel == null)
       {
-        Debug.WriteLine("Failed to remove repeater. Repeater is null.");
+        Debug.WriteLine("Failed to remove repeater. Repeater == null.");
         return;
       }
 
@@ -612,7 +612,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         Debug.WriteLine
         (
           "Failed to remove repeater. " +
-          "Input or output device name is null or whitespace."
+          "Input or output device name == null or whitespace."
         );
 
         return;
@@ -657,9 +657,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="repeaterModel">The repeater to update.</param>
     public void Update(RepeaterModel repeaterModel)
     {
-      if (repeaterModel is null)
+      if (repeaterModel == null)
       {
-        Debug.WriteLine("Failed to update repeater. Repeater is null.");
+        Debug.WriteLine("Failed to update repeater. Repeater == null.");
         return;
       }
 
