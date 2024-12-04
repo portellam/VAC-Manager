@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.cs" />
     <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\IDeviceModel.cs" />
     <Compile Include="Models\IRepeaterModel.cs" />
@@ -58,6 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ARM.NET2_0.Backend.Extensions\ARM.NET2_0.Backend.Extensions.csproj">
+      <Project>{fb9cae41-f195-4bfe-b19c-8dba69989739}</Project>
+      <Name>ARM.NET2_0.Backend.Extensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
