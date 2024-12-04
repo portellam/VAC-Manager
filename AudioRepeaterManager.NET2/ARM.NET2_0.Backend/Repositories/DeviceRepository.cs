@@ -235,12 +235,12 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The device to get.</returns>
     public DeviceModel Get(uint? id)
     {
-      if (id is null)
+      if (id == null)
       {
         Debug.WriteLine
         (
           "Failed to get device. " +
-          "Device ID is null."
+          "Device ID == null."
         );
 
         return null;
@@ -250,9 +250,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         .FirstOrDefault(x => x.Id == id);
 
 
-      if (deviceModel is null)
+      if (deviceModel == null)
       {
-        Debug.WriteLine("Device is null.");
+        Debug.WriteLine("Device == null.");
       }
 
       else
@@ -276,9 +276,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The device list.</returns>
     public List<DeviceModel> GetAll()
     {
-      if (DeviceModelList is null)
+      if (DeviceModelList == null)
       {
-        Debug.WriteLine("Failed to get device(s). Device collection is null.");
+        Debug.WriteLine("Failed to get device(s). Device collection == null.");
         return new List<DeviceModel>();
       }
 
@@ -300,7 +300,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The absent device list.</returns>
     public List<DeviceModel> GetAllAbsent()
     {
-      if (DeviceModelList is null)
+      if (DeviceModelList == null)
       {
         return new List<DeviceModel>();
       }
@@ -317,12 +317,12 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The disabled device list.</returns>
     public List<DeviceModel> GetAllDisabled()
     {
-      if (MMDeviceRepository is null)
+      if (MMDeviceRepository == null)
       {
         Debug.WriteLine
         (
           "Failed to get disabled device(s)." +
-          "Actual device collection is null."
+          "Actual device collection == null."
         );
 
         return new List<DeviceModel>();
@@ -354,9 +354,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The duplex device list.</returns>
     public List<DeviceModel> GetAllDuplex()
     {
-      if (DeviceModelList is null)
+      if (DeviceModelList == null)
       {
-        Debug.WriteLine("Failed to get duplex device(s). Device collection is null.");
+        Debug.WriteLine("Failed to get duplex device(s). Device collection == null.");
         return new List<DeviceModel>();
       }
 
@@ -382,12 +382,12 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The enabled device list.</returns>
     public List<DeviceModel> GetAllEnabled()
     {
-      if (MMDeviceRepository is null)
+      if (MMDeviceRepository == null)
       {
         Debug.WriteLine
         (
           "Failed to get enabled device(s)." +
-          "Actual device collection is null."
+          "Actual device collection == null."
         );
 
         return new List<DeviceModel>();
@@ -419,9 +419,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The input device list.</returns>
     public List<DeviceModel> GetAllInput()
     {
-      if (DeviceModelList is null)
+      if (DeviceModelList == null)
       {
-        Debug.WriteLine("Failed to get input device(s). Device collection is null.");
+        Debug.WriteLine("Failed to get input device(s). Device collection == null.");
         return new List<DeviceModel>();
       }
 
@@ -447,9 +447,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The output device list.</returns>
     public List<DeviceModel> GetAllOutput()
     {
-      if (DeviceModelList is null)
+      if (DeviceModelList == null)
       {
-        Debug.WriteLine("Failed to get output device(s). Device collection is null.");
+        Debug.WriteLine("Failed to get output device(s). Device collection == null.");
         return new List<DeviceModel>();
       }
 
@@ -475,9 +475,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <returns>The present device list.</returns>
     public List<DeviceModel> GetAllPresent()
     {
-      if (DeviceModelList is null)
+      if (DeviceModelList == null)
       {
-        Debug.WriteLine("Failed to get present device(s). Device collection is null.");
+        Debug.WriteLine("Failed to get present device(s). Device collection == null.");
         return new List<DeviceModel>();
       }
 
@@ -506,9 +506,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       if
       (
-        DeviceModelList is null
+        DeviceModelList == null
         || DeviceModelList.Count == 0
-        || actualIdList is null
+        || actualIdList == null
         || actualIdList.Count() == 0
       )
       {
@@ -531,7 +531,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
           {
             DeviceModel deviceModel = Get(x);
 
-            if (!(deviceModel is null))
+            if (!(deviceModel == null))
             {
               deviceModelList
                 .Add(deviceModel);
@@ -551,9 +551,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       if
       (
-        idList is null
+        idList == null
         || idList.Count == 0
-        || DeviceModelList is null
+        || DeviceModelList == null
         || DeviceModelList.Count == 0
       )
       {
@@ -613,9 +613,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="deviceModel">The device</param>
     public void Insert(DeviceModel deviceModel)
     {
-      if (deviceModel is null)
+      if (deviceModel == null)
       {
-        Debug.WriteLine("Failed to insert device. Device is null.");
+        Debug.WriteLine("Failed to insert device. Device == null.");
         return;
       }
 
@@ -681,9 +681,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="mMDevice">The actual device</param>
     public void Insert(MMDevice mMDevice)
     {
-      if (mMDevice is null)
+      if (mMDevice == null)
       {
-        Debug.WriteLine("Failed to update actual device. Device is null.");
+        Debug.WriteLine("Failed to update actual device. Device == null.");
         return;
       }
 
@@ -733,9 +733,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="id">The device ID</param>
     public void Remove(uint? id)
     {
-      if (id is null)
+      if (id == null)
       {
-        Debug.WriteLine("Failed to remove device. Device ID is null.");
+        Debug.WriteLine("Failed to remove device. Device ID == null.");
         return;
       }
 
@@ -777,7 +777,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         Debug.WriteLine
         (
           "Failed to remove device. " +
-          "Actual device ID is null or whitespace."
+          "Actual device ID == null or whitespace."
         );
 
         return;
@@ -821,7 +821,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
         Debug.WriteLine
         (
           "Failed to remove device. " +
-          "Device name is null or whitespace."
+          "Device name == null or whitespace."
         );
 
         return;
@@ -860,9 +860,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="deviceModel">The device</param>
     public void Update(DeviceModel deviceModel)
     {
-      if (deviceModel is null)
+      if (deviceModel == null)
       {
-        Debug.WriteLine("Failed to update device. Device is null.");
+        Debug.WriteLine("Failed to update device. Device == null.");
         return;
       }
 
@@ -924,14 +924,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       if
       (
-        mMDevice is null
+        mMDevice == null
       )
       {
         Debug.WriteLine
         (
           string.Format
           (
-            "Failed to update device. Actual device is null\t=> Id: '{1}'",
+            "Failed to update device. Actual device == null\t=> Id: '{1}'",
             id
           )
         );

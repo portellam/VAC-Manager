@@ -65,7 +65,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Models
       }
       set
       {
-        if (isInput is null)
+        if (isInput == null)
         {
           return;
         }
@@ -83,7 +83,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Models
       }
       set
       {
-        if (isOutput is null)
+        if (isOutput == null)
         {
           return;
         }
@@ -101,7 +101,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Models
       }
       set
       {
-        if (isPresent is null)
+        if (isPresent == null)
         {
           return;
         }

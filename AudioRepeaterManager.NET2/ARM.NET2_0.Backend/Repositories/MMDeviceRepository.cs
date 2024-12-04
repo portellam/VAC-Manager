@@ -44,9 +44,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="mMDevice">the actual device</param>
     private void Disable(MMDevice mMDevice)
     {
-      if (mMDevice is null)
+      if (mMDevice == null)
       {
-        Debug.WriteLine("Failed to get audio device. Audio device is null.");
+        Debug.WriteLine("Failed to get audio device. Audio device == null.");
         return;
       }
 
@@ -99,9 +99,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="mMDevice">the actual device</param>
     private void Enable(MMDevice mMDevice)
     {
-      if (mMDevice is null)
+      if (mMDevice == null)
       {
-        Debug.WriteLine("Failed to get audio device. Audio device is null.");
+        Debug.WriteLine("Failed to get audio device. Audio device == null.");
         return;
       }
 
@@ -182,9 +182,9 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
       MMDevice mMDevice = MMDeviceList
         .FirstOrDefault(x => x.ID == id);
 
-      if (mMDevice is null)
+      if (mMDevice == null)
       {
-        Debug.WriteLine("Audio device is null.");
+        Debug.WriteLine("Audio device == null.");
       }
 
       else
@@ -210,14 +210,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       if
       (
-        MMDeviceList is null
+        MMDeviceList == null
         || MMDeviceList.Count == 0
       )
       {
         Debug.WriteLine
         (
           "Failed to get audio device(s). " +
-          "Audio device list is null or empty."
+          "Audio device list == null or empty."
         );
 
         return new List<MMDevice>();
@@ -243,14 +243,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       if
       (
-        MMDeviceList is null
+        MMDeviceList == null
         || MMDeviceList.Count == 0
       )
       {
         Debug.WriteLine
         (
           "Failed to get disabled audio device(s). " +
-          "Audio device list is null or empty."
+          "Audio device list == null or empty."
         );
 
         return new List<MMDevice>();
@@ -281,14 +281,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       if
       (
-        MMDeviceList is null
+        MMDeviceList == null
         || MMDeviceList.Count == 0
       )
       {
         Debug.WriteLine
         (
           "Failed to get enabled audio device(s). " +
-          "Audio device list is null or empty."
+          "Audio device list == null or empty."
         );
 
         return new List<MMDevice>();
@@ -320,17 +320,17 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     {
       if
       (
-        idList is null
+        idList == null
         || idList.Count == 0
-        || MMDeviceList is null
+        || MMDeviceList == null
         || MMDeviceList.Count == 0
       )
       {
         Debug.WriteLine
         (
           "Failed to get audio device(s). " +
-          "Either actual ID list is null or empty, " +
-          "or audio device list is null or empty."
+          "Either actual ID list == null or empty, " +
+          "or audio device list == null or empty."
         );
 
         return new List<MMDevice>();

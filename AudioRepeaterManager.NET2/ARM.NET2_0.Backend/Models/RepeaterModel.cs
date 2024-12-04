@@ -187,7 +187,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Models
     {
       get
       {
-        if (ChannelList is null)
+        if (ChannelList == null)
         {
           return 0;
         }
@@ -717,19 +717,19 @@ namespace AudioRepeaterManager.NET2_0.Backend.Models
     public string ToCommand()
     {
       return
-        $"start " +
-        $"/min \"audiorepeater\" \"{PathName}\" " +
-        $"/Input:\"{InputDeviceName}\" " +
-        $"/Output:\"{OutputDeviceName}\" " +
-        $"/SampleRate:{SampleRateKHz} " +
-        $"/BitsPerSample:{BitsPerSample} " +
-        $"/Channels:{ChannelList.Count} " +
-        $"/ChanCfg:custom={ChannelMask} " +
-        $"/BufferMs:{BufferDurationMs} " +
-        $"/Prefill:{PrefillPercentage} " +
-        $"/ResyncAt:{ResyncAtPercentage} " +
-        $"/WindowName:\"{WindowName}\" " +
-        $"/AutoStart";
+        "start " +
+        "/min \"audiorepeater\" \"" + PathName + "\" " +
+        "/Input:\"" + InputDeviceName + "\" " +
+        "/Output:\"" + OutputDeviceName + "\" " +
+        "/SampleRate:" + SampleRateKHz + "\" " +
+        "/BitsPerSample:" + BitsPerSample + "\" " +
+        "/Channels:" + ChannelList.Count + "\" " +
+        "/ChanCfg:custom=" + ChannelMask + "\" " +
+        "/BufferMs:" + BufferDurationMs + "\" " +
+        "/Prefill:" + PrefillPercentage + "\" " +
+        "/ResyncAt:" + ResyncAtPercentage + "\" " +
+        "/WindowName:\"" + WindowName + "\" " +
+        "/AutoStart";
     }
 
     /// <summary>
@@ -757,7 +757,7 @@ namespace AudioRepeaterManager.NET2_0.Backend.Models
     {
       if
       (
-        infoList is null
+        infoList == null
         || !byte.TryParse(infoList[5], out byte bitsPerSample)
         || !ushort.TryParse(infoList[4], out ushort bufferDurationMs)
         || !int.TryParse(infoList[3], out int channelConfig)
