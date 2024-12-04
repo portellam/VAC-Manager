@@ -142,11 +142,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Repositories
     /// <param name="propertyName">The property name</param>
     private void OnPropertyChanged(string propertyName)
     {
-      PropertyChanged?.Invoke
-      (
-        this,
-        new PropertyChangedEventArgs(propertyName)
-      );
+      if (PropertyChanged != null)
+      {
+          PropertyChanged.Invoke
+          (
+            this,
+            new PropertyChangedEventArgs(propertyName)
+          );
+      }
 
       Debug.WriteLine
       (
