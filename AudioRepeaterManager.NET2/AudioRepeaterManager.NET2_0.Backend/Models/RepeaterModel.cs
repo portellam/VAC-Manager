@@ -693,11 +693,14 @@ namespace AudioRepeaterManager.NET2_0.Backend.Models
     /// <param name="propertyName">The property name</param>
     private void OnPropertyChanged(string propertyName)
     {
-      PropertyChanged?.Invoke
-      (
-        this,
-        new PropertyChangedEventArgs(propertyName)
-      );
+      if (PropertyChanged != null )
+      {
+        PropertyChanged.Invoke
+        (
+          this,
+          new PropertyChangedEventArgs(propertyName)
+        );
+      }
 
       Debug.WriteLine
       (
@@ -716,20 +719,33 @@ namespace AudioRepeaterManager.NET2_0.Backend.Models
     /// <returns>The terminal command</returns>
     public string ToCommand()
     {
-      return
-        "start " +
-        "/min \"audiorepeater\" \"" + PathName + "\" " +
-        "/Input:\"" + InputDeviceName + "\" " +
-        "/Output:\"" + OutputDeviceName + "\" " +
-        "/SampleRate:" + SampleRateKHz + "\" " +
-        "/BitsPerSample:" + BitsPerSample + "\" " +
-        "/Channels:" + ChannelList.Count + "\" " +
-        "/ChanCfg:custom=" + ChannelMask + "\" " +
-        "/BufferMs:" + BufferDurationMs + "\" " +
-        "/Prefill:" + PrefillPercentage + "\" " +
-        "/ResyncAt:" + ResyncAtPercentage + "\" " +
-        "/WindowName:\"" + WindowName + "\" " +
-        "/AutoStart";
+      return String.Format
+        (
+          "start " +
+          "/min \"audiorepeater\" \"{1}\"" +
+          "/Input:\"{2}\"" +
+          "/Output:\"{3}\"" +
+          "/SampleRate:\"{4}\"" +
+          "/BitsPerSample:\"{5}\"" +
+          "/Channels:\"{6}\"" +
+          "/ChanCfg:custom={7}\"" +
+          "/BufferMs:\"{8}\"" +
+          "/Prefill:\"{9}\"" +
+          "/ResyncAt:\"{0}\"" +
+          "/WindowName:\"{10}\"" +
+          "/AutoStart",
+          PathName,
+          InputDeviceName,
+          OutputDeviceName,
+          SampleRateKHz,
+          BitsPerSample,
+          ChannelList.Count,
+          ChannelMask,
+          BufferDurationMs,
+          PrefillPercentage,
+          ResyncAtPercentage,
+          WindowName
+        );
     }
 
     /// <summary>
@@ -738,15 +754,18 @@ namespace AudioRepeaterManager.NET2_0.Backend.Models
     /// <returns>The output</returns>
     public override string ToString()
     {
-      return
-        $"{SampleRateKHz}\n" +
-        $"{BitsPerSample}\n" +
-        $"{ChannelMask}\n" +
-        $"{(int)ChannelConfig}\n" +
-        $"{BufferDurationMs}\n" +
-        $"{BufferAmount}\n" +
-        $"{PrefillPercentage}\n" +
-        $"{ResyncAtPercentage}";
+      return String.Format
+        (
+          "{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n{9}\n{10}",
+          SampleRateKHz,
+          BitsPerSample,
+          ChannelMask,
+          (int)ChannelConfig,
+          BufferDurationMs,
+          BufferAmount,
+          PrefillPercentage,
+          ResyncAtPercentage
+        );
     }
 
     /// <summary>
@@ -755,16 +774,27 @@ namespace AudioRepeaterManager.NET2_0.Backend.Models
     /// <param name="infoList">The info list</param>
     public void Set(List<string> infoList)
     {
+      byte  bitsPerSample,
+            prefillPercentage,
+            resyncAtPercentage;
+
+      int channelConfig;
+
+      uint  channelMask,
+            sampleRateKHz;
+
+      ushort bufferDurationMs;
+
       if
       (
         infoList == null
-        || !byte.TryParse(infoList[5], out byte bitsPerSample)
-        || !ushort.TryParse(infoList[4], out ushort bufferDurationMs)
-        || !int.TryParse(infoList[3], out int channelConfig)
-        || !uint.TryParse(infoList[2], out uint channelMask)
-        || !byte.TryParse(infoList[6], out byte prefillPercentage)
-        || !byte.TryParse(infoList[7], out byte resyncAtPercentage)
-        || !uint.TryParse(infoList[0], out uint sampleRateKHz)
+        || !byte.TryParse(infoList[5], out bitsPerSample)
+        || !ushort.TryParse(infoList[4], out bufferDurationMs)
+        || !int.TryParse(infoList[3], out channelConfig)
+        || !uint.TryParse(infoList[2], out channelMask)
+        || !byte.TryParse(infoList[6], out prefillPercentage)
+        || !byte.TryParse(infoList[7], out resyncAtPercentage)
+        || !uint.TryParse(infoList[0], out sampleRateKHz)
       )
       {
         return;
