@@ -29,19 +29,34 @@ namespace AudioRepeaterManager.NET2_0.Backend
     /// Typically "C:\Program Files\Virtual Audio Cable\audiorepeater.exe".
     /// </summary>
     private static string executablePathNameForBitMatchedProcessAndSystem =
-      $"{systemRootPathName}Program Files\\{firstParentPathNameForExecutable}";
+      string.Format
+      (
+        "{1}Program Files\\{2}",
+        systemRootPathName,
+        firstParentPathNameForExecutable
+      );
 
     /// <summary>
     /// Typically "C:\Program Files (x86)\Virtual Audio Cable\audiorepeater.exe".
     /// </summary>
     private static string executablePathNameForBitUnmatchedProcessAndSystem =
-      $"{systemRootPathName}Program Files (x86)\\{firstParentPathNameForExecutable}";
+      string.Format
+      (
+        "{1}Program Files (x86)\\{2}",
+        systemRootPathName,
+        firstParentPathNameForExecutable
+      );
 
     /// <summary>
     /// Typically "Virtual Audio Cable\audiorepeater.exe".
     /// </summary>
     private readonly static string firstParentPathNameForExecutable =
-      $"{ReferencedApplicationName}\\{executableName}";
+      string.Format
+      (
+        "{1}\\{2}",
+        ReferencedApplicationName,
+        executableName
+      );
 
     /// <summary>
     /// Typically "C:\".
