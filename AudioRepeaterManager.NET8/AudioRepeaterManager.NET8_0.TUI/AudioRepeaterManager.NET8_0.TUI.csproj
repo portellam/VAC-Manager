@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <Title>Audio Repeater Manager for Virtual Audio Cable</Title>
+    <Title>VAC Audio Repeater Manager</Title>
     <Copyright>VAC Audio Repeater Manager Copyleft © 2024 Alexander Portell.\nVirtual Audio Cable Copyright © 1998-2024 Eugene V. Muzychenko.</Copyright>
     <PackageProjectUrl>https://www.github.com/portellam/vac-manager</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
