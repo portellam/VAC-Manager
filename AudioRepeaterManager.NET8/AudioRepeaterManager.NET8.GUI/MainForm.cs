@@ -1,4 +1,5 @@
 using AudioRepeaterManager.NET8.GUI.Helpers;
+using System.Reflection;
 
 namespace AudioRepeaterManager.NET8.GUI
 {
@@ -6,6 +7,11 @@ namespace AudioRepeaterManager.NET8.GUI
   {
     public MainForm()
     {
+      //this.Name = Assembly
+      //  .GetEntryAssembly()
+      //  .GetCustomAttribute<AssemblyTitleAttribute>()
+      //  .Title;
+
       InitializeComponent();
     }
 
@@ -24,15 +30,6 @@ namespace AudioRepeaterManager.NET8.GUI
 
     #region File logic
 
-    private void closeToolStripMenuItem_Click
-    (
-      object sender,
-      EventArgs eventArgs
-    )
-    {
-
-    }
-
     private void closeAllToolStripMenuItem_Click
     (
       object sender,
@@ -50,6 +47,16 @@ namespace AudioRepeaterManager.NET8.GUI
     {
 
     }
+
+    private void closeToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs eventArgs
+    )
+    {
+
+    }
+
 
     private void exitToolStripMenuItem_Click
     (
@@ -75,7 +82,27 @@ namespace AudioRepeaterManager.NET8.GUI
       EventArgs eventArgs
     )
     {
+      OpenFileDialog openFileDialog = new OpenFileDialog()
+      {
+        AddExtension = true,
+        DefaultExt = ".vacarm",
+        CheckFileExists = true,
+        CheckPathExists = true,
+        InitialDirectory = "C:\\",
+        Multiselect = true,
+        OkRequiresInteraction = true,
+        ShowPreview = true,
 
+      };
+
+      openFileDialog.ShowDialog();
+
+      string fileName = openFileDialog.FileName;
+      //send to FileController?
+      //file controller populates an instance of the repositories?
+
+      openFileDialog.AddToRecent = true;
+      openFileDialog.ShowPreview = true;
     }
 
     private void openContainingFolderToolStripMenuItem_Click
