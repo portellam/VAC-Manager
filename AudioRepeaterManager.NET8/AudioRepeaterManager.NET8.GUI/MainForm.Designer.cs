@@ -1,4 +1,6 @@
-﻿namespace AudioRepeaterManager.NET8.GUI
+﻿using System.Reflection;
+
+namespace AudioRepeaterManager.NET8.GUI
 {
   partial class MainForm
   {
@@ -38,11 +40,28 @@
       // 
       // MainForm
       // 
-      AutoScaleDimensions = new SizeF(7F, 15F);
+      
+      AutoScaleDimensions = new SizeF
+        (
+          7F,
+          15F
+        );
+      
       AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(800, 450);
-      Name = "MainForm";
-      Text = "MainForm";
+      
+      ClientSize = new Size
+        (
+          800,
+          450
+        );
+
+      Name = Assembly
+        .GetEntryAssembly()
+        .GetCustomAttribute<AssemblyProductAttribute>()
+        .Product;
+
+      Text = Name;
+
       ResumeLayout(false);
     }
 
