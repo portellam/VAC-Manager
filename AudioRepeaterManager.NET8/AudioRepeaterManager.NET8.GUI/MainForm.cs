@@ -66,5 +66,21 @@ namespace AudioRepeaterManager.NET8.GUI
     {
 
     }
+
+    private void toolStripMenuItem1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void MainForm_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      new AboutForm()
+        .ShowDialog();
+    }
   }
 }
