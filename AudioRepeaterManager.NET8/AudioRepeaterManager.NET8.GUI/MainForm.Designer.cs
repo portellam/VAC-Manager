@@ -107,7 +107,7 @@ namespace AudioRepeaterManager.NET8.GUI
       viewToolStripSeparator1 = new ToolStripSeparator();
       preferDarkThemeToolStripMenuItem = new ToolStripMenuItem();
       preferSystemThemeToolStripMenuItem = new ToolStripMenuItem();
-      toolStripButton1 = new ToolStripDropDownButton();
+      settingsToolStripButton = new ToolStripDropDownButton();
       startAllRepeatersOnLoadToolStripMenuItem = new ToolStripMenuItem();
       settingsToolStripSeparator1 = new ToolStripSeparator();
       preferX86Application32bitToolStripMenuItem = new ToolStripMenuItem();
@@ -115,12 +115,12 @@ namespace AudioRepeaterManager.NET8.GUI
       setApplicationPathToolStripMenuItem = new ToolStripMenuItem();
       settingsToolStripSeparator2 = new ToolStripSeparator();
       toggleBogusModeToolStripMenuItem = new ToolStripMenuItem();
-      overrideSafeMaximumValuesToolStripMenuItem = new ToolStripMenuItem();
-      toolStripDropDownButton2 = new ToolStripDropDownButton();
+      toggleSafeModeToolStripMenuItem = new ToolStripMenuItem();
+      windowToolStripDropDownButton = new ToolStripDropDownButton();
       sortByToolStripMenuItem = new ToolStripMenuItem();
       windowsToolStripMenuItem = new ToolStripMenuItem();
       windowToolStripSeparator1 = new ToolStripSeparator();
-      toolStripDropDownButton1 = new ToolStripDropDownButton();
+      commandLineArgumentsToolStripDropDownButton = new ToolStripDropDownButton();
       commandLineArgumentsToolStripMenuItem = new ToolStripMenuItem();
       helpToolStripSeparator1 = new ToolStripSeparator();
       websiteToolStripMenuItem = new ToolStripMenuItem();
@@ -132,7 +132,7 @@ namespace AudioRepeaterManager.NET8.GUI
       // 
       // toolStrip1
       // 
-      toolStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripLabel, deviceToolStripLabel, repeaterToolStripDropDownButton, viewToolStripLabel, toolStripButton1, toolStripDropDownButton2, toolStripDropDownButton1 });
+      toolStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripLabel, deviceToolStripLabel, repeaterToolStripDropDownButton, viewToolStripLabel, settingsToolStripButton, windowToolStripDropDownButton, commandLineArgumentsToolStripDropDownButton });
       toolStrip1.Location = new Point(0, 0);
       toolStrip1.Name = "toolStrip1";
       toolStrip1.Size = new Size(800, 25);
@@ -573,16 +573,15 @@ namespace AudioRepeaterManager.NET8.GUI
       preferSystemThemeToolStripMenuItem.Size = new Size(203, 22);
       preferSystemThemeToolStripMenuItem.Text = "Prefer System Theme";
       // 
-      // toolStripButton1
+      // settingsToolStripButton
       // 
-      toolStripButton1.AutoToolTip = false;
-      toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
-      toolStripButton1.DropDownItems.AddRange(new ToolStripItem[] { startAllRepeatersOnLoadToolStripMenuItem, settingsToolStripSeparator1, preferX86Application32bitToolStripMenuItem, preferX64Application64bitToolStripMenuItem, setApplicationPathToolStripMenuItem, settingsToolStripSeparator2, toggleBogusModeToolStripMenuItem, overrideSafeMaximumValuesToolStripMenuItem });
-      toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-      toolStripButton1.ImageTransparentColor = Color.Magenta;
-      toolStripButton1.Name = "toolStripButton1";
-      toolStripButton1.Size = new Size(62, 22);
-      toolStripButton1.Text = "Settings";
+      settingsToolStripButton.AutoToolTip = false;
+      settingsToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+      settingsToolStripButton.DropDownItems.AddRange(new ToolStripItem[] { startAllRepeatersOnLoadToolStripMenuItem, settingsToolStripSeparator1, preferX86Application32bitToolStripMenuItem, preferX64Application64bitToolStripMenuItem, setApplicationPathToolStripMenuItem, settingsToolStripSeparator2, toggleBogusModeToolStripMenuItem, toggleSafeModeToolStripMenuItem });
+      settingsToolStripButton.ImageTransparentColor = Color.Magenta;
+      settingsToolStripButton.Name = "settingsToolStripButton";
+      settingsToolStripButton.Size = new Size(62, 22);
+      settingsToolStripButton.Text = "Settings";
       // 
       // startAllRepeatersOnLoadToolStripMenuItem
       // 
@@ -596,7 +595,7 @@ namespace AudioRepeaterManager.NET8.GUI
       settingsToolStripSeparator1.Name = "settingsToolStripSeparator1";
       settingsToolStripSeparator1.Size = new Size(229, 6);
       // 
-      // toolStripMenuItem1
+      // preferX86Application32bitToolStripMenuItem
       // 
       preferX86Application32bitToolStripMenuItem.CheckOnClick = true;
       preferX86Application32bitToolStripMenuItem.Name = "preferX86Application32bitToolStripMenuItem";
@@ -629,26 +628,25 @@ namespace AudioRepeaterManager.NET8.GUI
       toggleBogusModeToolStripMenuItem.Size = new Size(232, 22);
       toggleBogusModeToolStripMenuItem.Text = "Toggle Bogus Mode";
       // 
-      // overrideSafeMaximumValuesToolStripMenuItem
+      // toggleSafeModeToolStripMenuItem
       // 
-      overrideSafeMaximumValuesToolStripMenuItem.Checked = true;
-      overrideSafeMaximumValuesToolStripMenuItem.CheckOnClick = true;
-      overrideSafeMaximumValuesToolStripMenuItem.CheckState = CheckState.Checked;
-      overrideSafeMaximumValuesToolStripMenuItem.Name = "overrideSafeMaximumValuesToolStripMenuItem";
-      overrideSafeMaximumValuesToolStripMenuItem.Size = new Size(232, 22);
-      overrideSafeMaximumValuesToolStripMenuItem.Text = "Toggle Safe Mode";
+      toggleSafeModeToolStripMenuItem.Checked = true;
+      toggleSafeModeToolStripMenuItem.CheckOnClick = true;
+      toggleSafeModeToolStripMenuItem.CheckState = CheckState.Checked;
+      toggleSafeModeToolStripMenuItem.Name = "toggleSafeModeToolStripMenuItem";
+      toggleSafeModeToolStripMenuItem.Size = new Size(232, 22);
+      toggleSafeModeToolStripMenuItem.Text = "Toggle Safe Mode";
       // 
-      // toolStripDropDownButton2
+      // windowToolStripDropDownButton
       // 
-      toolStripDropDownButton2.AutoToolTip = false;
-      toolStripDropDownButton2.DisplayStyle = ToolStripItemDisplayStyle.Text;
-      toolStripDropDownButton2.DropDownItems.AddRange(new ToolStripItem[] { sortByToolStripMenuItem, windowsToolStripMenuItem, windowToolStripSeparator1 });
-      toolStripDropDownButton2.Image = (Image)resources.GetObject("toolStripDropDownButton2.Image");
-      toolStripDropDownButton2.ImageTransparentColor = Color.Magenta;
-      toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-      toolStripDropDownButton2.Size = new Size(64, 22);
-      toolStripDropDownButton2.Text = "Window";
-      toolStripDropDownButton2.Click += toolStripDropDownButton2_Click;
+      windowToolStripDropDownButton.AutoToolTip = false;
+      windowToolStripDropDownButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+      windowToolStripDropDownButton.DropDownItems.AddRange(new ToolStripItem[] { sortByToolStripMenuItem, windowsToolStripMenuItem, windowToolStripSeparator1 });
+      windowToolStripDropDownButton.ImageTransparentColor = Color.Magenta;
+      windowToolStripDropDownButton.Name = "windowToolStripDropDownButton";
+      windowToolStripDropDownButton.Size = new Size(64, 22);
+      windowToolStripDropDownButton.Text = "Window";
+      windowToolStripDropDownButton.Click += windowToolStripDropDownButton_Click;
       // 
       // sortByToolStripMenuItem
       // 
@@ -667,16 +665,15 @@ namespace AudioRepeaterManager.NET8.GUI
       windowToolStripSeparator1.Name = "windowToolStripSeparator1";
       windowToolStripSeparator1.Size = new Size(129, 6);
       // 
-      // toolStripDropDownButton1
+      // commandLineArgumentsToolStripDropDownButton
       // 
-      toolStripDropDownButton1.AutoToolTip = false;
-      toolStripDropDownButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
-      toolStripDropDownButton1.DropDownItems.AddRange(new ToolStripItem[] { commandLineArgumentsToolStripMenuItem, helpToolStripSeparator1, websiteToolStripMenuItem, vacWebsiteToolStripMenuItem, helpToolStripSeparator2, aboutToolStripMenuItem });
-      toolStripDropDownButton1.Image = (Image)resources.GetObject("toolStripDropDownButton1.Image");
-      toolStripDropDownButton1.ImageTransparentColor = Color.Magenta;
-      toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-      toolStripDropDownButton1.Size = new Size(45, 22);
-      toolStripDropDownButton1.Text = "Help";
+      commandLineArgumentsToolStripDropDownButton.AutoToolTip = false;
+      commandLineArgumentsToolStripDropDownButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+      commandLineArgumentsToolStripDropDownButton.DropDownItems.AddRange(new ToolStripItem[] { commandLineArgumentsToolStripMenuItem, helpToolStripSeparator1, websiteToolStripMenuItem, vacWebsiteToolStripMenuItem, helpToolStripSeparator2, aboutToolStripMenuItem });
+      commandLineArgumentsToolStripDropDownButton.ImageTransparentColor = Color.Magenta;
+      commandLineArgumentsToolStripDropDownButton.Name = "commandLineArgumentsToolStripDropDownButton";
+      commandLineArgumentsToolStripDropDownButton.Size = new Size(45, 22);
+      commandLineArgumentsToolStripDropDownButton.Text = "Help";
       // 
       // commandLineArgumentsToolStripMenuItem
       // 
@@ -737,8 +734,8 @@ namespace AudioRepeaterManager.NET8.GUI
     private ToolStripDropDownButton fileToolStripLabel;
     private ToolStripDropDownButton deviceToolStripLabel;
     private ToolStripDropDownButton viewToolStripLabel;
-    private ToolStripDropDownButton toolStripButton1;
-    private ToolStripDropDownButton toolStripDropDownButton1;
+    private ToolStripDropDownButton settingsToolStripButton;
+    private ToolStripDropDownButton commandLineArgumentsToolStripDropDownButton;
     private ToolStripMenuItem commandLineArgumentsToolStripMenuItem;
     private ToolStripMenuItem newToolStripMenuItem;
     private ToolStripMenuItem openToolStripMenuItem;
@@ -787,7 +784,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private ToolStripSeparator viewToolStripSeparator1;
     private ToolStripSeparator helpToolStripSeparator1;
     private ToolStripSeparator helpToolStripSeparator2;
-    private ToolStripDropDownButton toolStripDropDownButton2;
+    private ToolStripDropDownButton windowToolStripDropDownButton;
     private ToolStripMenuItem sortByToolStripMenuItem;
     private ToolStripMenuItem windowsToolStripMenuItem;
     private ToolStripSeparator windowToolStripSeparator1;
@@ -815,7 +812,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private ToolStripMenuItem vacWebsiteToolStripMenuItem;
     private ToolStripMenuItem preferX86Application32bitToolStripMenuItem;
     private ToolStripMenuItem preferX64Application64bitToolStripMenuItem;
-    private ToolStripMenuItem overrideSafeMaximumValuesToolStripMenuItem;
+    private ToolStripMenuItem toggleSafeModeToolStripMenuItem;
     private ToolStripMenuItem startAllRepeatersOnLoadToolStripMenuItem;
     private ToolStripMenuItem setApplicationPathToolStripMenuItem;
     private ToolStripSeparator settingsToolStripSeparator1;

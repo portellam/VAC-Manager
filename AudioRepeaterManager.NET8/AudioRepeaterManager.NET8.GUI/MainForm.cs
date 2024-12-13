@@ -44,7 +44,7 @@ namespace AudioRepeaterManager.NET8.GUI
 
     }
 
-    private void toolStripDropDownButton2_Click(object sender, EventArgs e)
+    private void windowToolStripDropDownButton_Click(object sender, EventArgs e)
     {
 
     }
