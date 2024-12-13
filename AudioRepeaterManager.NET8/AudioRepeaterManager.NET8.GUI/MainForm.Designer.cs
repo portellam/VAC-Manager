@@ -36,7 +36,6 @@ namespace AudioRepeaterManager.NET8.GUI
     /// </summary>
     private void InitializeComponent()
     {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
       toolStrip1 = new ToolStrip();
       fileToolStripLabel = new ToolStripDropDownButton();
       newToolStripMenuItem = new ToolStripMenuItem();
@@ -147,7 +146,6 @@ namespace AudioRepeaterManager.NET8.GUI
       fileToolStripLabel.Name = "fileToolStripLabel";
       fileToolStripLabel.Size = new Size(38, 22);
       fileToolStripLabel.Text = "File";
-      fileToolStripLabel.Click += toolStripLabel1_Click;
       // 
       // newToolStripMenuItem
       // 
@@ -235,7 +233,6 @@ namespace AudioRepeaterManager.NET8.GUI
       deviceToolStripLabel.Name = "deviceToolStripLabel";
       deviceToolStripLabel.Size = new Size(55, 22);
       deviceToolStripLabel.Text = "Device";
-      deviceToolStripLabel.Click += deviceToolStripLabel_Click;
       // 
       // undoToolStripMenuItem
       // 
@@ -538,7 +535,6 @@ namespace AudioRepeaterManager.NET8.GUI
       viewToolStripLabel.Name = "viewToolStripLabel";
       viewToolStripLabel.Size = new Size(45, 22);
       viewToolStripLabel.Text = "View";
-      viewToolStripLabel.Click += toolStripLabel4_Click;
       // 
       // alwaysOnTopToolStripMenuItem
       // 
@@ -646,24 +642,25 @@ namespace AudioRepeaterManager.NET8.GUI
       windowToolStripDropDownButton.Name = "windowToolStripDropDownButton";
       windowToolStripDropDownButton.Size = new Size(64, 22);
       windowToolStripDropDownButton.Text = "Window";
-      windowToolStripDropDownButton.Click += windowToolStripDropDownButton_Click;
       // 
       // sortByToolStripMenuItem
       // 
       sortByToolStripMenuItem.Name = "sortByToolStripMenuItem";
-      sortByToolStripMenuItem.Size = new Size(132, 22);
+      sortByToolStripMenuItem.Size = new Size(180, 22);
       sortByToolStripMenuItem.Text = "Sort By";
+      sortByToolStripMenuItem.Click += sortByToolStripMenuItem_Click;
       // 
       // windowsToolStripMenuItem
       // 
       windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
-      windowsToolStripMenuItem.Size = new Size(132, 22);
+      windowsToolStripMenuItem.Size = new Size(180, 22);
       windowsToolStripMenuItem.Text = "Windows...";
+      windowsToolStripMenuItem.Click += windowsToolStripMenuItem_Click;
       // 
       // windowToolStripSeparator1
       // 
       windowToolStripSeparator1.Name = "windowToolStripSeparator1";
-      windowToolStripSeparator1.Size = new Size(129, 6);
+      windowToolStripSeparator1.Size = new Size(177, 6);
       // 
       // commandLineArgumentsToolStripDropDownButton
       // 
