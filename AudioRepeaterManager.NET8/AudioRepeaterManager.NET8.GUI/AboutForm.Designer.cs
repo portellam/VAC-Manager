@@ -40,6 +40,7 @@ namespace AudioRepeaterManager.NET8.GUI
         new System
         .ComponentModel
         .ComponentResourceManager(typeof(AboutForm));
+
       tableLayoutPanel = new TableLayoutPanel();
       logoPictureBox = new PictureBox();
       labelProductName = new Label();
