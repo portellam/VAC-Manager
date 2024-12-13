@@ -229,5 +229,185 @@ namespace AudioRepeaterManager.NET8.GUI
     }
 
     #endregion
+
+    private void repeaterExportToClipboardToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void repeaterExportToScriptToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void repeaterExportToXMLToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void repeaterImportFromClipboardToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void repeaterImportFromScriptToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void repeaterImportFromXMLToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void repeaterRedoToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void repeaterSelectToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void repeaterSelectAllToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void repeaterUndoToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void restartToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void selectAllWithAbsentDevicesToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void selectAllWithDisabledDevicesToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void selectAllWithEnabledDevicesToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void selectAllWithPresentDevicesToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void selectDevicesToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void selectInputDeviceToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void selectOutputDeviceToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void startToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void stopToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
   }
 }
