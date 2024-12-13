@@ -7,10 +7,10 @@ namespace AudioRepeaterManager.NET8.GUI
   {
     public MainForm()
     {
-      //this.Name = Assembly
-      //  .GetEntryAssembly()
-      //  .GetCustomAttribute<AssemblyTitleAttribute>()
-      //  .Title;
+      Text = Assembly
+        .GetEntryAssembly()
+        .GetCustomAttribute<AssemblyTitleAttribute>()
+        .Title;
 
       InitializeComponent();
     }
