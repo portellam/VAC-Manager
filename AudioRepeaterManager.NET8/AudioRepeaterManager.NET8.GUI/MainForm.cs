@@ -14,7 +14,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void MainForm_Load
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -27,7 +27,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void closeToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -36,7 +36,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void closeAllToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -45,7 +45,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void closeMultipleToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -54,7 +54,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void exitToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -63,7 +63,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void newToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -72,7 +72,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void openToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -81,7 +81,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void openContainingFolderToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -90,7 +90,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void saveToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -99,7 +99,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void saveAsToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -108,7 +108,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void saveACopyAsToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -117,7 +117,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void saveAllToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -130,7 +130,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void deviceExportToClipboardToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -139,7 +139,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void deviceExportToXMLToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -148,7 +148,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void deviceImportFromClipboardToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -157,7 +157,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void deviceImportFromXMLToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -166,7 +166,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void deviceRedoToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -175,7 +175,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void deviceSelectToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -184,7 +184,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void deviceSelectAllToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -193,7 +193,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void disableToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -202,7 +202,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void enableToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -211,7 +211,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void refreshToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -220,7 +220,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void setAsDefaultToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -229,7 +229,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectAllDisabledToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -238,7 +238,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectAllDuplexToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -247,7 +247,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectAllEnabledToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -256,7 +256,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectAllInputsToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -265,7 +265,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectAllOutputsToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -274,7 +274,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectDefaultInputToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -283,7 +283,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectDefaultOutputToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -292,7 +292,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void undoToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -305,7 +305,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void repeaterExportToClipboardToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -314,7 +314,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void repeaterExportToScriptToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -323,7 +323,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void repeaterExportToXMLToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -332,7 +332,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void repeaterImportFromClipboardToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -341,7 +341,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void repeaterImportFromScriptToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -350,7 +350,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void repeaterImportFromXMLToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -359,7 +359,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void repeaterRedoToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -368,7 +368,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void repeaterSelectToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -377,7 +377,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void repeaterSelectAllToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -386,7 +386,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void repeaterUndoToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -395,7 +395,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void restartToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -404,7 +404,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectAllWithAbsentDevicesToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -413,7 +413,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectAllWithDisabledDevicesToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -422,7 +422,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectAllWithEnabledDevicesToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -431,7 +431,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectAllWithPresentDevicesToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -440,7 +440,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectDevicesToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -449,7 +449,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectInputDeviceToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -458,7 +458,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void selectOutputDeviceToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -467,7 +467,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void startToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -476,7 +476,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void stopToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -489,7 +489,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void alwaysOnTopToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -498,7 +498,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void preferSystemThemeToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -507,7 +507,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void preferDarkThemeToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -516,7 +516,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void toggleFullScreenModeToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -529,7 +529,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void preferX64Application64bitToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -538,7 +538,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void preferX86Application32bitToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -547,7 +547,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void setApplicationPathToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -556,7 +556,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void startAllRepeatersOnLoadToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -565,7 +565,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void toggleBogusModeToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -574,7 +574,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void toggleSafeModeToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -587,7 +587,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void aboutToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
       new AboutForm()
@@ -596,7 +596,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void commandLineArgumentsToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -605,7 +605,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void vacWebsiteToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
       string url = "https://vac.muzychenko.net";
@@ -615,7 +615,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void websiteToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
       string url = "https://www.github.com/portellam/vac-audio-repeater-manager";
@@ -629,7 +629,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void sortByToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -638,7 +638,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void windowsToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
@@ -647,7 +647,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private void windowToolStripMenuItem_Click
     (
       object sender,
-      EventArgs e
+      EventArgs eventArgs
     )
     {
 
