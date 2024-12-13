@@ -23,6 +23,106 @@ namespace AudioRepeaterManager.NET8.GUI
     #endregion
 
     #region File logic
+
+    private void closeToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void closeAllToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void closeMultipleToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void exitToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void newToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void openToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void openContainingFolderToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void saveToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void saveAsToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void saveACopyAsToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void saveAllToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
     #endregion
 
     #region Device logic

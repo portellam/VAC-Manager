@@ -62,11 +62,11 @@ namespace AudioRepeaterManager.NET8.GUI
       deviceFindToolStripMenuItem = new ToolStripMenuItem();
       deviceSelectToolStripMenuItem = new ToolStripMenuItem();
       deviceSelectAllToolStripMenuItem = new ToolStripMenuItem();
-      selectAllDisabledToolStripMenuItem = new ToolStripMenuItem();
       selectAllEnabledToolStripMenuItem = new ToolStripMenuItem();
-      selectAllDuplexToolStripMenuItem = new ToolStripMenuItem();
+      selectAllDisabledToolStripMenuItem = new ToolStripMenuItem();
       selectAllInputsToolStripMenuItem = new ToolStripMenuItem();
       selectAllOutputsToolStripMenuItem = new ToolStripMenuItem();
+      selectAllDuplexToolStripMenuItem = new ToolStripMenuItem();
       selectDefaultInputToolStripMenuItem = new ToolStripMenuItem();
       selectDefaultOutputToolStripMenuItem = new ToolStripMenuItem();
       deviceToolStripSeparator3 = new ToolStripSeparator();
@@ -153,6 +153,7 @@ namespace AudioRepeaterManager.NET8.GUI
       newToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.N;
       newToolStripMenuItem.Size = new Size(201, 22);
       newToolStripMenuItem.Text = "New";
+      newToolStripMenuItem.Click += newToolStripMenuItem_Click;
       // 
       // openToolStripMenuItem
       // 
@@ -160,12 +161,14 @@ namespace AudioRepeaterManager.NET8.GUI
       openToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
       openToolStripMenuItem.Size = new Size(201, 22);
       openToolStripMenuItem.Text = "Open...";
+      openToolStripMenuItem.Click += openToolStripMenuItem_Click;
       // 
       // openContainingFolderToolStripMenuItem
       // 
       openContainingFolderToolStripMenuItem.Name = "openContainingFolderToolStripMenuItem";
       openContainingFolderToolStripMenuItem.Size = new Size(201, 22);
       openContainingFolderToolStripMenuItem.Text = "Open Containing Folder";
+      openContainingFolderToolStripMenuItem.Click += openContainingFolderToolStripMenuItem_Click;
       // 
       // saveToolStripMenuItem
       // 
@@ -173,6 +176,7 @@ namespace AudioRepeaterManager.NET8.GUI
       saveToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
       saveToolStripMenuItem.Size = new Size(201, 22);
       saveToolStripMenuItem.Text = "Save";
+      saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
       // 
       // saveAsToolStripMenuItem
       // 
@@ -180,18 +184,21 @@ namespace AudioRepeaterManager.NET8.GUI
       saveAsToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Alt | Keys.S;
       saveAsToolStripMenuItem.Size = new Size(201, 22);
       saveAsToolStripMenuItem.Text = "Save As...";
+      saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
       // 
       // saveACopyAsToolStripMenuItem
       // 
       saveACopyAsToolStripMenuItem.Name = "saveACopyAsToolStripMenuItem";
       saveACopyAsToolStripMenuItem.Size = new Size(201, 22);
       saveACopyAsToolStripMenuItem.Text = "Save a Copy As...";
+      saveACopyAsToolStripMenuItem.Click += saveACopyAsToolStripMenuItem_Click;
       // 
       // saveAllToolStripMenuItem
       // 
       saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
       saveAllToolStripMenuItem.Size = new Size(201, 22);
       saveAllToolStripMenuItem.Text = "Save All";
+      saveAllToolStripMenuItem.Click += saveAllToolStripMenuItem_Click;
       // 
       // closeToolStripMenuItem
       // 
@@ -199,6 +206,7 @@ namespace AudioRepeaterManager.NET8.GUI
       closeToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.W;
       closeToolStripMenuItem.Size = new Size(201, 22);
       closeToolStripMenuItem.Text = "Close";
+      closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
       // 
       // closeAllToolStripMenuItem
       // 
@@ -206,12 +214,14 @@ namespace AudioRepeaterManager.NET8.GUI
       closeAllToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.W;
       closeAllToolStripMenuItem.Size = new Size(201, 22);
       closeAllToolStripMenuItem.Text = "Close All";
+      closeAllToolStripMenuItem.Click += closeAllToolStripMenuItem_Click;
       // 
       // closeMultipleToolStripMenuItem
       // 
       closeMultipleToolStripMenuItem.Name = "closeMultipleToolStripMenuItem";
       closeMultipleToolStripMenuItem.Size = new Size(201, 22);
       closeMultipleToolStripMenuItem.Text = "Close Multiple...";
+      closeMultipleToolStripMenuItem.Click += closeMultipleToolStripMenuItem_Click;
       // 
       // fileToolStripSeparator1
       // 
@@ -224,6 +234,7 @@ namespace AudioRepeaterManager.NET8.GUI
       exitToolStripMenuItem.ShortcutKeys = Keys.Alt | Keys.F4;
       exitToolStripMenuItem.Size = new Size(201, 22);
       exitToolStripMenuItem.Text = "Exit";
+      exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
       // 
       // deviceToolStripLabel
       // 
@@ -306,13 +317,6 @@ namespace AudioRepeaterManager.NET8.GUI
       deviceSelectAllToolStripMenuItem.Text = "Select All";
       deviceSelectAllToolStripMenuItem.Click += deviceSelectAllToolStripMenuItem_Click;
       // 
-      // selectAllDisabledToolStripMenuItem
-      // 
-      selectAllDisabledToolStripMenuItem.Name = "selectAllDisabledToolStripMenuItem";
-      selectAllDisabledToolStripMenuItem.Size = new Size(192, 22);
-      selectAllDisabledToolStripMenuItem.Text = "Select All Disabled";
-      selectAllDisabledToolStripMenuItem.Click += selectAllDisabledToolStripMenuItem_Click;
-      // 
       // selectAllEnabledToolStripMenuItem
       // 
       selectAllEnabledToolStripMenuItem.Name = "selectAllEnabledToolStripMenuItem";
@@ -320,12 +324,12 @@ namespace AudioRepeaterManager.NET8.GUI
       selectAllEnabledToolStripMenuItem.Text = "Select All Enabled";
       selectAllEnabledToolStripMenuItem.Click += selectAllEnabledToolStripMenuItem_Click;
       // 
-      // selectAllDuplexToolStripMenuItem
+      // selectAllDisabledToolStripMenuItem
       // 
-      selectAllDuplexToolStripMenuItem.Name = "selectAllDuplexToolStripMenuItem";
-      selectAllDuplexToolStripMenuItem.Size = new Size(192, 22);
-      selectAllDuplexToolStripMenuItem.Text = "Select All Duplex";
-      selectAllDuplexToolStripMenuItem.Click += selectAllDuplexToolStripMenuItem_Click;
+      selectAllDisabledToolStripMenuItem.Name = "selectAllDisabledToolStripMenuItem";
+      selectAllDisabledToolStripMenuItem.Size = new Size(192, 22);
+      selectAllDisabledToolStripMenuItem.Text = "Select All Disabled";
+      selectAllDisabledToolStripMenuItem.Click += selectAllDisabledToolStripMenuItem_Click;
       // 
       // selectAllInputsToolStripMenuItem
       // 
@@ -340,6 +344,13 @@ namespace AudioRepeaterManager.NET8.GUI
       selectAllOutputsToolStripMenuItem.Size = new Size(192, 22);
       selectAllOutputsToolStripMenuItem.Text = "Select All Outputs";
       selectAllOutputsToolStripMenuItem.Click += selectAllOutputsToolStripMenuItem_Click;
+      // 
+      // selectAllDuplexToolStripMenuItem
+      // 
+      selectAllDuplexToolStripMenuItem.Name = "selectAllDuplexToolStripMenuItem";
+      selectAllDuplexToolStripMenuItem.Size = new Size(192, 22);
+      selectAllDuplexToolStripMenuItem.Text = "Select All Duplex";
+      selectAllDuplexToolStripMenuItem.Click += selectAllDuplexToolStripMenuItem_Click;
       // 
       // selectDefaultInputToolStripMenuItem
       // 
