@@ -1,3 +1,5 @@
+using AudioRepeaterManager.NET8.GUI.Helpers;
+
 namespace AudioRepeaterManager.NET8.GUI
 {
   public partial class MainForm : Form
@@ -64,7 +66,8 @@ namespace AudioRepeaterManager.NET8.GUI
 
     private void toolStripMenuItem3_Click(object sender, EventArgs e)
     {
-
+      string url = "https://www.github.com/portellam/vac-audio-repeater-manager";
+      UrlRedirectHelper.GoToSite(url);
     }
 
     private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -81,6 +84,12 @@ namespace AudioRepeaterManager.NET8.GUI
     {
       new AboutForm()
         .ShowDialog();
+    }
+
+    private void vacWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      string url = "https://vac.muzychenko.net";
+      UrlRedirectHelper.GoToSite(url);
     }
   }
 }

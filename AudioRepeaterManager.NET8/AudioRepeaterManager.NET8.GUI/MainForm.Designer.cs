@@ -653,19 +653,19 @@ namespace AudioRepeaterManager.NET8.GUI
       // sortByToolStripMenuItem
       // 
       sortByToolStripMenuItem.Name = "sortByToolStripMenuItem";
-      sortByToolStripMenuItem.Size = new Size(180, 22);
+      sortByToolStripMenuItem.Size = new Size(132, 22);
       sortByToolStripMenuItem.Text = "Sort By";
       // 
       // windowsToolStripMenuItem
       // 
       windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
-      windowsToolStripMenuItem.Size = new Size(180, 22);
+      windowsToolStripMenuItem.Size = new Size(132, 22);
       windowsToolStripMenuItem.Text = "Windows...";
       // 
       // windowToolStripSeparator1
       // 
       windowToolStripSeparator1.Name = "windowToolStripSeparator1";
-      windowToolStripSeparator1.Size = new Size(177, 6);
+      windowToolStripSeparator1.Size = new Size(129, 6);
       // 
       // toolStripDropDownButton1
       // 
@@ -702,6 +702,7 @@ namespace AudioRepeaterManager.NET8.GUI
       vacWebsiteToolStripMenuItem.Name = "vacWebsiteToolStripMenuItem";
       vacWebsiteToolStripMenuItem.Size = new Size(218, 22);
       vacWebsiteToolStripMenuItem.Text = "VAC Website";
+      vacWebsiteToolStripMenuItem.Click += vacWebsiteToolStripMenuItem_Click;
       // 
       // helpToolStripSeparator2
       // 
