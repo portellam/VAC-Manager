@@ -17,6 +17,7 @@
     <Title>VAC Audio Repeater Manager GUI</Title>
     <Product>VAC Audio Repeater Manager</Product>
     <Authors>Alexander Portell</Authors>
+    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
