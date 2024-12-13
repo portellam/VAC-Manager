@@ -542,6 +542,7 @@ namespace AudioRepeaterManager.NET8.GUI
       alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
       alwaysOnTopToolStripMenuItem.Size = new Size(203, 22);
       alwaysOnTopToolStripMenuItem.Text = "Always on Top";
+      alwaysOnTopToolStripMenuItem.Click += alwaysOnTopToolStripMenuItem_Click;
       // 
       // toggleFullScreenModeToolStripMenuItem
       // 
@@ -549,6 +550,7 @@ namespace AudioRepeaterManager.NET8.GUI
       toggleFullScreenModeToolStripMenuItem.Name = "toggleFullScreenModeToolStripMenuItem";
       toggleFullScreenModeToolStripMenuItem.Size = new Size(203, 22);
       toggleFullScreenModeToolStripMenuItem.Text = "Toggle Full Screen Mode";
+      toggleFullScreenModeToolStripMenuItem.Click += toggleFullScreenModeToolStripMenuItem_Click;
       // 
       // viewToolStripSeparator1
       // 
@@ -561,6 +563,7 @@ namespace AudioRepeaterManager.NET8.GUI
       preferDarkThemeToolStripMenuItem.Name = "preferDarkThemeToolStripMenuItem";
       preferDarkThemeToolStripMenuItem.Size = new Size(203, 22);
       preferDarkThemeToolStripMenuItem.Text = "Prefer Dark Theme";
+      preferDarkThemeToolStripMenuItem.Click += preferDarkThemeToolStripMenuItem_Click;
       // 
       // preferSystemThemeToolStripMenuItem
       // 
@@ -568,6 +571,7 @@ namespace AudioRepeaterManager.NET8.GUI
       preferSystemThemeToolStripMenuItem.Name = "preferSystemThemeToolStripMenuItem";
       preferSystemThemeToolStripMenuItem.Size = new Size(203, 22);
       preferSystemThemeToolStripMenuItem.Text = "Prefer System Theme";
+      preferSystemThemeToolStripMenuItem.Click += preferSystemThemeToolStripMenuItem_Click;
       // 
       // settingsToolStripButton
       // 

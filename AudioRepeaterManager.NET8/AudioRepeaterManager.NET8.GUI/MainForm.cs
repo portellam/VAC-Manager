@@ -60,6 +60,43 @@ namespace AudioRepeaterManager.NET8.GUI
     #endregion
 
     #region View logic
+
+    private void alwaysOnTopToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void preferSystemThemeToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void preferDarkThemeToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void toggleFullScreenModeToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
     #endregion
 
     #region Settings logic
