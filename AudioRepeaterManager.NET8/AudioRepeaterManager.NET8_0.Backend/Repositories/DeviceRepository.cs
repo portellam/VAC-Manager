@@ -3,9 +3,9 @@ using NAudio.CoreAudioApi;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using AudioRepeaterManager.NET4_8.Backend.Models;
+using AudioRepeaterManager.NET8_0.Backend.Models;
 
-namespace AudioRepeaterManager.NET4_8.Backend.Repositories
+namespace AudioRepeaterManager.NET8_0.Backend.Repositories
 {
   public class DeviceRepository :
     IDeviceRepository,
@@ -156,29 +156,6 @@ namespace AudioRepeaterManager.NET4_8.Backend.Repositories
     }
 
     /// <summary>
-    /// Construct a device.
-    /// </summary>
-    /// <param name="id">The device ID</param>
-    /// <param name="mMDevice"></param>
-    /// <returns></returns>
-    private DeviceModel Construct
-    (
-      uint id,
-      MMDevice mMDevice
-    )
-    {
-      return new DeviceModel
-      (
-        id,
-        mMDevice.ID,
-        mMDevice.FriendlyName,
-        mMDevice.DataFlow == DataFlow.Capture,
-        mMDevice.DataFlow == DataFlow.Render,
-        IsPresent(mMDevice.State)
-      );
-    }
-
-    /// <summary>
     /// Is a device present.
     /// </summary>
     /// <param name="deviceState">The device state</param>
@@ -188,28 +165,6 @@ namespace AudioRepeaterManager.NET4_8.Backend.Repositories
       return deviceState == DeviceState.Active
         || deviceState == DeviceState.Disabled
         || deviceState == DeviceState.Unplugged;
-    }
-
-    /// <summary>
-    /// Logs event when property has changed.
-    /// </summary>
-    /// <param name="propertyName">The property name</param>
-    private void OnPropertyChanged(string propertyName)
-    {
-      PropertyChanged?.Invoke
-      (
-        this,
-        new PropertyChangedEventArgs(propertyName)
-      );
-
-      Debug.WriteLine
-      (
-        string.Format
-        (
-          "PropertyChanged: '{1}'" +
-          propertyName
-        )
-      );
     }
 
     /// <summary>

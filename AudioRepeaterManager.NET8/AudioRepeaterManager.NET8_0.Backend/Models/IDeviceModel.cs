@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace AudioRepeaterManager.NET4_8.Backend.Models
+namespace AudioRepeaterManager.NET8_0.Backend.Models
 {
   public interface IDeviceModel
   {

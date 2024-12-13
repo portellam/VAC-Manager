@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
-namespace AudioRepeaterManager.NET4_8.Backend.Repositories
+namespace AudioRepeaterManager.NET8_0.Backend.Repositories
 {
   public class MMDeviceRepository :
     IMMDeviceRepository,
@@ -148,28 +148,6 @@ namespace AudioRepeaterManager.NET4_8.Backend.Repositories
       Debug
         .WriteLine
         ("Refreshed audio devices.");
-    }
-
-    /// <summary>
-    /// Logs event when property has changed.
-    /// </summary>
-    /// <param name="propertyName">The property name</param>
-    private void OnPropertyChanged(string propertyName)
-    {
-      PropertyChanged?.Invoke
-      (
-        this,
-        new PropertyChangedEventArgs(propertyName)
-      );
-
-      Debug.WriteLine
-      (
-        string.Format
-        (
-          "PropertyChanged: '{1}'" +
-          propertyName
-        )
-      );
     }
 
     /// <summary>

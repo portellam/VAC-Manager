@@ -1,8 +1,8 @@
 ﻿using NAudio.CoreAudioApi;
 using System.ComponentModel;
-using AudioRepeaterManager.NET4_8.Backend.Models;
+using AudioRepeaterManager.NET8_0.Backend.Models;
 
-namespace AudioRepeaterManager.NET4_8.Backend.Repositories
+namespace AudioRepeaterManager.NET8_0.Backend.Repositories
 {
   public interface IDeviceRepository
   {

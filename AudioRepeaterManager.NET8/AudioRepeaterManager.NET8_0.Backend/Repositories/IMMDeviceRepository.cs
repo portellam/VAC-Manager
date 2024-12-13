@@ -1,7 +1,7 @@
 ﻿using NAudio.CoreAudioApi;
 using System.ComponentModel;
 
-namespace AudioRepeaterManager.NET4_8.Backend.Repositories
+namespace AudioRepeaterManager.NET8_0.Backend.Repositories
 {
   public interface IMMDeviceRepository
   {

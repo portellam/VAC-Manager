@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace AudioRepeaterManager.NET4_8.Backend
+namespace AudioRepeaterManager.NET8_0.Backend
 {
   /// <summary>
   /// Global parameters
