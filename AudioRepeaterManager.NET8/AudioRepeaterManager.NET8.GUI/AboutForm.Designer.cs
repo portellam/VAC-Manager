@@ -97,12 +97,7 @@ namespace AudioRepeaterManager.NET8.GUI
       labelProductName.Location = new Point(167, 0);
       labelProductName.Margin = new Padding(7, 0, 4, 0);
       labelProductName.MaximumSize = new Size(0, 20);
-
-      labelProductName.Name = Assembly
-        .GetEntryAssembly()
-        .GetCustomAttribute<AssemblyProductAttribute>()
-        .Product;
-      
+      labelProductName.Name = "labelProductName";
       labelProductName.Size = new Size(316, 20);
       labelProductName.TabIndex = 19;
       labelProductName.Text = "Product Name";
@@ -114,12 +109,7 @@ namespace AudioRepeaterManager.NET8.GUI
       labelVersion.Location = new Point(167, 30);
       labelVersion.Margin = new Padding(7, 0, 4, 0);
       labelVersion.MaximumSize = new Size(0, 20);
-
-      labelVersion.Name = Assembly
-        .GetEntryAssembly()
-        .GetCustomAttribute<AssemblyVersionAttribute>()
-        .Version;
-
+      labelVersion.Name = "labelVersion";
       labelVersion.Size = new Size(316, 20);
       labelVersion.TabIndex = 0;
       labelVersion.Text = "Version";
@@ -131,12 +121,7 @@ namespace AudioRepeaterManager.NET8.GUI
       labelCopyright.Location = new Point(167, 60);
       labelCopyright.Margin = new Padding(7, 0, 4, 0);
       labelCopyright.MaximumSize = new Size(0, 20);
-
-      labelCopyright.Name = Assembly
-        .GetEntryAssembly()
-        .GetCustomAttribute<AssemblyCopyrightAttribute>()
-        .Copyright;
-
+      labelCopyright.Name = "labelCopyright";
       labelCopyright.Size = new Size(316, 20);
       labelCopyright.TabIndex = 21;
       labelCopyright.Text = "Copyright";
@@ -148,12 +133,7 @@ namespace AudioRepeaterManager.NET8.GUI
       labelCompanyName.Location = new Point(167, 90);
       labelCompanyName.Margin = new Padding(7, 0, 4, 0);
       labelCompanyName.MaximumSize = new Size(0, 20);
-
-      labelCompanyName.Name = Assembly
-        .GetEntryAssembly()
-        .GetCustomAttribute<AssemblyCompanyAttribute>()
-        .Company;
-
+      labelCompanyName.Name = "labelCompanyName";
       labelCompanyName.Size = new Size(316, 20);
       labelCompanyName.TabIndex = 22;
       labelCompanyName.Text = "Company Name";
@@ -165,12 +145,7 @@ namespace AudioRepeaterManager.NET8.GUI
       textBoxDescription.Location = new Point(167, 123);
       textBoxDescription.Margin = new Padding(7, 3, 4, 3);
       textBoxDescription.Multiline = true;
-
-      textBoxDescription.Name = Assembly
-        .GetEntryAssembly()
-        .GetCustomAttribute<AssemblyDescriptionAttribute>()
-        .Description;
-
+      textBoxDescription.Name = "textBoxDescription";
       textBoxDescription.ReadOnly = true;
       textBoxDescription.ScrollBars = ScrollBars.Both;
       textBoxDescription.Size = new Size(316, 147);
