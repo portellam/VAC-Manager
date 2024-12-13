@@ -16,6 +16,7 @@
     <PackageIcon>vac-arm-icon.png</PackageIcon>
     <Title>VAC Audio Repeater Manager GUI</Title>
     <Product>VAC Audio Repeater Manager</Product>
+    <Authors>Alexander Portell</Authors>
   </PropertyGroup>
 
   <ItemGroup>
