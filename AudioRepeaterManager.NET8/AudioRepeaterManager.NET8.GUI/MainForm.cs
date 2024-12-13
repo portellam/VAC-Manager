@@ -10,7 +10,7 @@ namespace AudioRepeaterManager.NET8.GUI
     }
 
     #region Main logic
-    
+
     private void MainForm_Load
     (
       object sender,
@@ -64,7 +64,52 @@ namespace AudioRepeaterManager.NET8.GUI
 
     #region Settings logic
 
+    private void preferX64Application64bitToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
     private void preferX86Application32bitToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void setApplicationPathToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void startAllRepeatersOnLoadToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void toggleBogusModeToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs e
+    )
+    {
+
+    }
+
+    private void toggleSafeModeToolStripMenuItem_Click
     (
       object sender,
       EventArgs e

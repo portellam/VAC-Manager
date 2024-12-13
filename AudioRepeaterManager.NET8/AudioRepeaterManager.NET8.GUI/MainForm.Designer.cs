@@ -585,6 +585,7 @@ namespace AudioRepeaterManager.NET8.GUI
       startAllRepeatersOnLoadToolStripMenuItem.Name = "startAllRepeatersOnLoadToolStripMenuItem";
       startAllRepeatersOnLoadToolStripMenuItem.Size = new Size(232, 22);
       startAllRepeatersOnLoadToolStripMenuItem.Text = "Start All Repeaters on Load";
+      startAllRepeatersOnLoadToolStripMenuItem.Click += startAllRepeatersOnLoadToolStripMenuItem_Click;
       // 
       // settingsToolStripSeparator1
       // 
@@ -605,12 +606,14 @@ namespace AudioRepeaterManager.NET8.GUI
       preferX64Application64bitToolStripMenuItem.Name = "preferX64Application64bitToolStripMenuItem";
       preferX64Application64bitToolStripMenuItem.Size = new Size(232, 22);
       preferX64Application64bitToolStripMenuItem.Text = "Prefer x64 Application (64-bit)";
+      preferX64Application64bitToolStripMenuItem.Click += preferX64Application64bitToolStripMenuItem_Click;
       // 
       // setApplicationPathToolStripMenuItem
       // 
       setApplicationPathToolStripMenuItem.Name = "setApplicationPathToolStripMenuItem";
       setApplicationPathToolStripMenuItem.Size = new Size(232, 22);
       setApplicationPathToolStripMenuItem.Text = "Set Application Path";
+      setApplicationPathToolStripMenuItem.Click += setApplicationPathToolStripMenuItem_Click;
       // 
       // settingsToolStripSeparator2
       // 
@@ -623,6 +626,7 @@ namespace AudioRepeaterManager.NET8.GUI
       toggleBogusModeToolStripMenuItem.Name = "toggleBogusModeToolStripMenuItem";
       toggleBogusModeToolStripMenuItem.Size = new Size(232, 22);
       toggleBogusModeToolStripMenuItem.Text = "Toggle Bogus Mode";
+      toggleBogusModeToolStripMenuItem.Click += toggleBogusModeToolStripMenuItem_Click;
       // 
       // toggleSafeModeToolStripMenuItem
       // 
@@ -632,6 +636,7 @@ namespace AudioRepeaterManager.NET8.GUI
       toggleSafeModeToolStripMenuItem.Name = "toggleSafeModeToolStripMenuItem";
       toggleSafeModeToolStripMenuItem.Size = new Size(232, 22);
       toggleSafeModeToolStripMenuItem.Text = "Toggle Safe Mode";
+      toggleSafeModeToolStripMenuItem.Click += toggleSafeModeToolStripMenuItem_Click;
       // 
       // windowToolStripDropDownButton
       // 
@@ -646,21 +651,21 @@ namespace AudioRepeaterManager.NET8.GUI
       // sortByToolStripMenuItem
       // 
       sortByToolStripMenuItem.Name = "sortByToolStripMenuItem";
-      sortByToolStripMenuItem.Size = new Size(180, 22);
+      sortByToolStripMenuItem.Size = new Size(132, 22);
       sortByToolStripMenuItem.Text = "Sort By";
       sortByToolStripMenuItem.Click += sortByToolStripMenuItem_Click;
       // 
       // windowsToolStripMenuItem
       // 
       windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
-      windowsToolStripMenuItem.Size = new Size(180, 22);
+      windowsToolStripMenuItem.Size = new Size(132, 22);
       windowsToolStripMenuItem.Text = "Windows...";
       windowsToolStripMenuItem.Click += windowsToolStripMenuItem_Click;
       // 
       // windowToolStripSeparator1
       // 
       windowToolStripSeparator1.Name = "windowToolStripSeparator1";
-      windowToolStripSeparator1.Size = new Size(177, 6);
+      windowToolStripSeparator1.Size = new Size(129, 6);
       // 
       // commandLineArgumentsToolStripDropDownButton
       // 
