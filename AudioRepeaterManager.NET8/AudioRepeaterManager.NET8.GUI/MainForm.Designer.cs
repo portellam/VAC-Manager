@@ -229,7 +229,7 @@ namespace AudioRepeaterManager.NET8.GUI
       // 
       deviceToolStripLabel.AutoToolTip = false;
       deviceToolStripLabel.DisplayStyle = ToolStripItemDisplayStyle.Text;
-      deviceToolStripLabel.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, deviceToolStripSeparator1, setAsDefaultToolStripMenuItem, refreshToolStripMenuItem, enableToolStripMenuItem, disableToolStripMenuItem, deviceToolStripSeparator2, deviceFindToolStripMenuItem, deviceSelectToolStripMenuItem, deviceSelectAllToolStripMenuItem, selectAllDisabledToolStripMenuItem, selectAllEnabledToolStripMenuItem, selectAllDuplexToolStripMenuItem, selectAllInputsToolStripMenuItem, selectAllOutputsToolStripMenuItem, selectDefaultInputToolStripMenuItem, selectDefaultOutputToolStripMenuItem, deviceToolStripSeparator3, deviceImportFromClipboardToolStripMenuItem, deviceImportFromXMLToolStripMenuItem, deviceExportToClipboardToolStripMenuItem, deviceExportToXMLToolStripMenuItem });
+      deviceToolStripLabel.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, deviceToolStripSeparator1, setAsDefaultToolStripMenuItem, refreshToolStripMenuItem, enableToolStripMenuItem, disableToolStripMenuItem, deviceToolStripSeparator2, deviceFindToolStripMenuItem, deviceSelectToolStripMenuItem, deviceSelectAllToolStripMenuItem, selectAllEnabledToolStripMenuItem, selectAllDisabledToolStripMenuItem, selectAllInputsToolStripMenuItem, selectAllOutputsToolStripMenuItem, selectAllDuplexToolStripMenuItem, selectDefaultInputToolStripMenuItem, selectDefaultOutputToolStripMenuItem, deviceToolStripSeparator3, deviceImportFromClipboardToolStripMenuItem, deviceImportFromXMLToolStripMenuItem, deviceExportToClipboardToolStripMenuItem, deviceExportToXMLToolStripMenuItem });
       deviceToolStripLabel.Name = "deviceToolStripLabel";
       deviceToolStripLabel.Size = new Size(55, 22);
       deviceToolStripLabel.Text = "Device";
@@ -239,12 +239,14 @@ namespace AudioRepeaterManager.NET8.GUI
       undoToolStripMenuItem.Name = "undoToolStripMenuItem";
       undoToolStripMenuItem.Size = new Size(192, 22);
       undoToolStripMenuItem.Text = "Undo";
+      undoToolStripMenuItem.Click += undoToolStripMenuItem_Click;
       // 
       // redoToolStripMenuItem
       // 
       redoToolStripMenuItem.Name = "redoToolStripMenuItem";
       redoToolStripMenuItem.Size = new Size(192, 22);
       redoToolStripMenuItem.Text = "Redo";
+      redoToolStripMenuItem.Click += deviceRedoToolStripMenuItem_Click;
       // 
       // deviceToolStripSeparator1
       // 
@@ -256,12 +258,14 @@ namespace AudioRepeaterManager.NET8.GUI
       setAsDefaultToolStripMenuItem.Name = "setAsDefaultToolStripMenuItem";
       setAsDefaultToolStripMenuItem.Size = new Size(192, 22);
       setAsDefaultToolStripMenuItem.Text = "Set As Default";
+      setAsDefaultToolStripMenuItem.Click += setAsDefaultToolStripMenuItem_Click;
       // 
       // refreshToolStripMenuItem
       // 
       refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
       refreshToolStripMenuItem.Size = new Size(192, 22);
       refreshToolStripMenuItem.Text = "Refresh";
+      refreshToolStripMenuItem.Click += refreshToolStripMenuItem_Click;
       // 
       // enableToolStripMenuItem
       // 
@@ -293,24 +297,28 @@ namespace AudioRepeaterManager.NET8.GUI
       deviceSelectToolStripMenuItem.Name = "deviceSelectToolStripMenuItem";
       deviceSelectToolStripMenuItem.Size = new Size(192, 22);
       deviceSelectToolStripMenuItem.Text = "Select";
+      deviceSelectToolStripMenuItem.Click += deviceSelectToolStripMenuItem_Click;
       // 
       // deviceSelectAllToolStripMenuItem
       // 
       deviceSelectAllToolStripMenuItem.Name = "deviceSelectAllToolStripMenuItem";
       deviceSelectAllToolStripMenuItem.Size = new Size(192, 22);
       deviceSelectAllToolStripMenuItem.Text = "Select All";
+      deviceSelectAllToolStripMenuItem.Click += deviceSelectAllToolStripMenuItem_Click;
       // 
       // selectAllDisabledToolStripMenuItem
       // 
       selectAllDisabledToolStripMenuItem.Name = "selectAllDisabledToolStripMenuItem";
       selectAllDisabledToolStripMenuItem.Size = new Size(192, 22);
       selectAllDisabledToolStripMenuItem.Text = "Select All Disabled";
+      selectAllDisabledToolStripMenuItem.Click += selectAllDisabledToolStripMenuItem_Click;
       // 
       // selectAllEnabledToolStripMenuItem
       // 
       selectAllEnabledToolStripMenuItem.Name = "selectAllEnabledToolStripMenuItem";
       selectAllEnabledToolStripMenuItem.Size = new Size(192, 22);
       selectAllEnabledToolStripMenuItem.Text = "Select All Enabled";
+      selectAllEnabledToolStripMenuItem.Click += selectAllEnabledToolStripMenuItem_Click;
       // 
       // selectAllDuplexToolStripMenuItem
       // 
@@ -324,24 +332,28 @@ namespace AudioRepeaterManager.NET8.GUI
       selectAllInputsToolStripMenuItem.Name = "selectAllInputsToolStripMenuItem";
       selectAllInputsToolStripMenuItem.Size = new Size(192, 22);
       selectAllInputsToolStripMenuItem.Text = "Select All Inputs";
+      selectAllInputsToolStripMenuItem.Click += selectAllInputsToolStripMenuItem_Click;
       // 
       // selectAllOutputsToolStripMenuItem
       // 
       selectAllOutputsToolStripMenuItem.Name = "selectAllOutputsToolStripMenuItem";
       selectAllOutputsToolStripMenuItem.Size = new Size(192, 22);
       selectAllOutputsToolStripMenuItem.Text = "Select All Outputs";
+      selectAllOutputsToolStripMenuItem.Click += selectAllOutputsToolStripMenuItem_Click;
       // 
       // selectDefaultInputToolStripMenuItem
       // 
       selectDefaultInputToolStripMenuItem.Name = "selectDefaultInputToolStripMenuItem";
       selectDefaultInputToolStripMenuItem.Size = new Size(192, 22);
       selectDefaultInputToolStripMenuItem.Text = "Select Default Input";
+      selectDefaultInputToolStripMenuItem.Click += selectDefaultInputToolStripMenuItem_Click;
       // 
       // selectDefaultOutputToolStripMenuItem
       // 
       selectDefaultOutputToolStripMenuItem.Name = "selectDefaultOutputToolStripMenuItem";
       selectDefaultOutputToolStripMenuItem.Size = new Size(192, 22);
       selectDefaultOutputToolStripMenuItem.Text = "Select Default Output";
+      selectDefaultOutputToolStripMenuItem.Click += selectDefaultOutputToolStripMenuItem_Click;
       // 
       // deviceToolStripSeparator3
       // 
@@ -353,24 +365,28 @@ namespace AudioRepeaterManager.NET8.GUI
       deviceImportFromClipboardToolStripMenuItem.Name = "deviceImportFromClipboardToolStripMenuItem";
       deviceImportFromClipboardToolStripMenuItem.Size = new Size(192, 22);
       deviceImportFromClipboardToolStripMenuItem.Text = "Import from clipboard";
+      deviceImportFromClipboardToolStripMenuItem.Click += deviceImportFromClipboardToolStripMenuItem_Click;
       // 
       // deviceImportFromXMLToolStripMenuItem
       // 
       deviceImportFromXMLToolStripMenuItem.Name = "deviceImportFromXMLToolStripMenuItem";
       deviceImportFromXMLToolStripMenuItem.Size = new Size(192, 22);
       deviceImportFromXMLToolStripMenuItem.Text = "Import from XML";
+      deviceImportFromXMLToolStripMenuItem.Click += deviceImportFromXMLToolStripMenuItem_Click;
       // 
       // deviceExportToClipboardToolStripMenuItem
       // 
       deviceExportToClipboardToolStripMenuItem.Name = "deviceExportToClipboardToolStripMenuItem";
       deviceExportToClipboardToolStripMenuItem.Size = new Size(192, 22);
       deviceExportToClipboardToolStripMenuItem.Text = "Export to clipboard";
+      deviceExportToClipboardToolStripMenuItem.Click += deviceExportToClipboardToolStripMenuItem_Click;
       // 
       // deviceExportToXMLToolStripMenuItem
       // 
       deviceExportToXMLToolStripMenuItem.Name = "deviceExportToXMLToolStripMenuItem";
       deviceExportToXMLToolStripMenuItem.Size = new Size(192, 22);
       deviceExportToXMLToolStripMenuItem.Text = "Export to XML";
+      deviceExportToXMLToolStripMenuItem.Click += deviceExportToXMLToolStripMenuItem_Click;
       // 
       // repeaterToolStripDropDownButton
       // 
