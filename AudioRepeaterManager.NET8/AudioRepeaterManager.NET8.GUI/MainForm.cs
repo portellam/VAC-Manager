@@ -54,23 +54,7 @@ namespace AudioRepeaterManager.NET8.GUI
 
     }
 
-    private void helpToolStripSeparator2_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void helpToolStripSeparator1_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void toolStripMenuItem3_Click(object sender, EventArgs e)
-    {
-      string url = "https://www.github.com/portellam/vac-audio-repeater-manager";
-      UrlRedirectHelper.GoToSite(url);
-    }
-
-    private void toolStripMenuItem1_Click(object sender, EventArgs e)
+    private void preferX86Application32bitToolStripMenuItem_Click(object sender, EventArgs e)
     {
 
     }
@@ -80,10 +64,16 @@ namespace AudioRepeaterManager.NET8.GUI
 
     }
 
+    #region Help view logic
+
     private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
       new AboutForm()
         .ShowDialog();
+    }
+    private void commandLineArgumentsToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+
     }
 
     private void vacWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -91,5 +81,13 @@ namespace AudioRepeaterManager.NET8.GUI
       string url = "https://vac.muzychenko.net";
       UrlRedirectHelper.GoToSite(url);
     }
+
+    private void websiteToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      string url = "https://www.github.com/portellam/vac-audio-repeater-manager";
+      UrlRedirectHelper.GoToSite(url);
+    }
+
+    #endregion
   }
 }

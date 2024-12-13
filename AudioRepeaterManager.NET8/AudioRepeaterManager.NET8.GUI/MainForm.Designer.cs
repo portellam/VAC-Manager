@@ -110,7 +110,7 @@ namespace AudioRepeaterManager.NET8.GUI
       toolStripButton1 = new ToolStripDropDownButton();
       startAllRepeatersOnLoadToolStripMenuItem = new ToolStripMenuItem();
       settingsToolStripSeparator1 = new ToolStripSeparator();
-      toolStripMenuItem1 = new ToolStripMenuItem();
+      preferX86Application32bitToolStripMenuItem = new ToolStripMenuItem();
       preferX64Application64bitToolStripMenuItem = new ToolStripMenuItem();
       setApplicationPathToolStripMenuItem = new ToolStripMenuItem();
       settingsToolStripSeparator2 = new ToolStripSeparator();
@@ -577,7 +577,7 @@ namespace AudioRepeaterManager.NET8.GUI
       // 
       toolStripButton1.AutoToolTip = false;
       toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
-      toolStripButton1.DropDownItems.AddRange(new ToolStripItem[] { startAllRepeatersOnLoadToolStripMenuItem, settingsToolStripSeparator1, toolStripMenuItem1, preferX64Application64bitToolStripMenuItem, setApplicationPathToolStripMenuItem, settingsToolStripSeparator2, toggleBogusModeToolStripMenuItem, overrideSafeMaximumValuesToolStripMenuItem });
+      toolStripButton1.DropDownItems.AddRange(new ToolStripItem[] { startAllRepeatersOnLoadToolStripMenuItem, settingsToolStripSeparator1, preferX86Application32bitToolStripMenuItem, preferX64Application64bitToolStripMenuItem, setApplicationPathToolStripMenuItem, settingsToolStripSeparator2, toggleBogusModeToolStripMenuItem, overrideSafeMaximumValuesToolStripMenuItem });
       toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
       toolStripButton1.ImageTransparentColor = Color.Magenta;
       toolStripButton1.Name = "toolStripButton1";
@@ -598,11 +598,11 @@ namespace AudioRepeaterManager.NET8.GUI
       // 
       // toolStripMenuItem1
       // 
-      toolStripMenuItem1.CheckOnClick = true;
-      toolStripMenuItem1.Name = "toolStripMenuItem1";
-      toolStripMenuItem1.Size = new Size(232, 22);
-      toolStripMenuItem1.Text = "Prefer x86 Application (32-bit)";
-      toolStripMenuItem1.Click += toolStripMenuItem1_Click;
+      preferX86Application32bitToolStripMenuItem.CheckOnClick = true;
+      preferX86Application32bitToolStripMenuItem.Name = "preferX86Application32bitToolStripMenuItem";
+      preferX86Application32bitToolStripMenuItem.Size = new Size(232, 22);
+      preferX86Application32bitToolStripMenuItem.Text = "Prefer x86 Application (32-bit)";
+      preferX86Application32bitToolStripMenuItem.Click += preferX86Application32bitToolStripMenuItem_Click;
       // 
       // preferX64Application64bitToolStripMenuItem
       // 
@@ -683,19 +683,19 @@ namespace AudioRepeaterManager.NET8.GUI
       commandLineArgumentsToolStripMenuItem.Name = "commandLineArgumentsToolStripMenuItem";
       commandLineArgumentsToolStripMenuItem.Size = new Size(218, 22);
       commandLineArgumentsToolStripMenuItem.Text = "Command Line Arguments";
+      commandLineArgumentsToolStripMenuItem.Click += commandLineArgumentsToolStripMenuItem_Click;
       // 
       // helpToolStripSeparator1
       // 
       helpToolStripSeparator1.Name = "helpToolStripSeparator1";
       helpToolStripSeparator1.Size = new Size(215, 6);
-      helpToolStripSeparator1.Click += helpToolStripSeparator1_Click;
       // 
       // websiteToolStripMenuItem
       // 
       websiteToolStripMenuItem.Name = "websiteToolStripMenuItem";
       websiteToolStripMenuItem.Size = new Size(218, 22);
       websiteToolStripMenuItem.Text = "VACARM Website";
-      websiteToolStripMenuItem.Click += toolStripMenuItem3_Click;
+      websiteToolStripMenuItem.Click += websiteToolStripMenuItem_Click;
       // 
       // vacWebsiteToolStripMenuItem
       // 
@@ -708,7 +708,6 @@ namespace AudioRepeaterManager.NET8.GUI
       // 
       helpToolStripSeparator2.Name = "helpToolStripSeparator2";
       helpToolStripSeparator2.Size = new Size(215, 6);
-      helpToolStripSeparator2.Click += helpToolStripSeparator2_Click;
       // 
       // aboutToolStripMenuItem
       // 
@@ -814,7 +813,7 @@ namespace AudioRepeaterManager.NET8.GUI
     private ToolStripMenuItem aboutToolStripMenuItem;
     private ToolStripMenuItem websiteToolStripMenuItem;
     private ToolStripMenuItem vacWebsiteToolStripMenuItem;
-    private ToolStripMenuItem toolStripMenuItem1;
+    private ToolStripMenuItem preferX86Application32bitToolStripMenuItem;
     private ToolStripMenuItem preferX64Application64bitToolStripMenuItem;
     private ToolStripMenuItem overrideSafeMaximumValuesToolStripMenuItem;
     private ToolStripMenuItem startAllRepeatersOnLoadToolStripMenuItem;
