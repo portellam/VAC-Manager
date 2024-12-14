@@ -1,4 +1,4 @@
-namespace AudioRepeaterManager.NET8.GUI
+namespace AudioRepeaterManager.NET8_0.GUI
 {
   internal static class Program
   {

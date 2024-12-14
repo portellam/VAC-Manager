@@ -1,7 +1,7 @@
-﻿using AudioRepeaterManager.NET8.GUI.Accessors;
+﻿using AudioRepeaterManager.NET8_0.GUI.Accessors;
 using AudioRepeaterManager.NET8_0.Backend;
 
-namespace AudioRepeaterManager.NET8.GUI
+namespace AudioRepeaterManager.NET8_0.GUI
 {
   partial class AboutForm : Form
   {
