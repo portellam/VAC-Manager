@@ -1,5 +1,5 @@
 using AudioRepeaterManager.NET8.GUI.Helpers;
-using System.Reflection;
+using AudioRepeaterManager.NET8_0.Backend;
 
 namespace AudioRepeaterManager.NET8.GUI
 {
@@ -7,12 +7,37 @@ namespace AudioRepeaterManager.NET8.GUI
   {
     public MainForm()
     {
-      Text = Assembly
-        .GetEntryAssembly()
-        .GetCustomAttribute<AssemblyTitleAttribute>()
-        .Title;
-
       InitializeComponent();
+
+      Text = Global.ApplicationPartialAbbreviatedName;
+
+      aboutToolStripMenuItem.Text = string.Format
+        (
+          "About {0}",
+          Global.ApplicationPartialAbbreviatedName
+        );
+
+      applicationWebsiteToolStripMenuItem.Text = string.Format
+        (
+          "{0} Website",
+          Global.ReferencedApplicationName
+        );
+
+
+      websiteToolStripMenuItem.Text = string.Format
+        (
+          "{0} Website",
+          Global.ApplicationPartialAbbreviatedName
+        );
+
+      windowToolStripDropDownButton.DropDownItems
+        .Add
+        (
+          new ToolStripMenuItem()
+          {
+            Text = "1: Test Window"
+          }
+        );
     }
 
     #region Main logic
@@ -559,7 +584,6 @@ namespace AudioRepeaterManager.NET8.GUI
       EventArgs eventArgs
     )
     {
-
     }
 
     private void preferX86Application32bitToolStripMenuItem_Click
@@ -629,14 +653,18 @@ namespace AudioRepeaterManager.NET8.GUI
 
     }
 
-    private void vacWebsiteToolStripMenuItem_Click
+    private void applicationWebsiteToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
     )
     {
-      string url = "https://vac.muzychenko.net";
-      UrlRedirectHelper.GoToSite(url);
+      try
+      {
+        UrlRedirectHelper.GoToSite("https://vac.muzychenko.net");
+      }
+      catch
+      { }
     }
 
     private void websiteToolStripMenuItem_Click
@@ -645,8 +673,41 @@ namespace AudioRepeaterManager.NET8.GUI
       EventArgs eventArgs
     )
     {
-      string url = "https://www.github.com/portellam/vac-audio-repeater-manager";
-      UrlRedirectHelper.GoToSite(url);
+      string projectName = "vac-audio-repeater-manager";
+
+      try
+      {
+        UrlRedirectHelper
+          .GoToSite
+          (
+            string.Format
+            (
+              "https://www.github.com/portellam/{0}",
+              projectName
+            )
+          );
+
+        return;
+      }
+      catch
+      { }
+
+      try
+      {
+        UrlRedirectHelper
+          .GoToSite
+          (
+            string.Format
+            (
+              "https://www.codeberg.org/portellam/{0}",
+              projectName
+            )
+          );
+
+        return;
+      }
+      catch
+      { }
     }
 
     #endregion
