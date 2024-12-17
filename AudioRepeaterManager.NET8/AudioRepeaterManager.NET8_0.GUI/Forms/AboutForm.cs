@@ -5,12 +5,16 @@ namespace AudioRepeaterManager.NET8_0.GUI
 {
   partial class AboutForm : Form
   {
+    #region Logic
+
     public AboutForm()
     {
       InitializeComponent();
+      SetComponentsTextProperties();
+    }
 
-      #region Logic
-
+    private void SetComponentsTextProperties()
+    {
       this.labelCopyright.Text = AssemblyInformationAccessor.AssemblyCopyright;
       this.labelCompanyName.Text = AssemblyInformationAccessor.AssemblyCompany;
       this.labelProductName.Text = AssemblyInformationAccessor.AssemblyProduct;
@@ -29,8 +33,8 @@ namespace AudioRepeaterManager.NET8_0.GUI
         );
 
       this.textBoxDescription.Text = AssemblyInformationAccessor.AssemblyDescription;
-
-      #endregion
     }
+
+    #endregion
   }
 }
