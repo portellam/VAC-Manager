@@ -67,6 +67,10 @@
       deviceToolStripSeparator2 = new ToolStripSeparator();
       deviceFindToolStripMenuItemDropDown = new ToolStripMenuItem();
       deviceSelectToolStripMenuItem = new ToolStripMenuItem();
+      deviceSelectToolStripMenuItemDropDown = new ToolStripMenuItem();
+      deviceSelectInputToolStripMenuItem = new ToolStripMenuItem();
+      deviceSelectOutputToolStripMenuItem = new ToolStripMenuItem();
+      deviceSelectDuplexToolStripMenuItem = new ToolStripMenuItem();
       deviceSelectAllToolStripMenuItem = new ToolStripMenuItem();
       deviceSelectAllEnabledToolStripMenuItem = new ToolStripMenuItem();
       deviceSelectAllDisabledToolStripMenuItem = new ToolStripMenuItem();
@@ -133,7 +137,6 @@
       helpApplicationWebsiteToolStripMenuItem = new ToolStripMenuItem();
       helpToolStripSeparator2 = new ToolStripSeparator();
       helpAboutToolStripMenuItem = new ToolStripMenuItem();
-      deviceSelectToolStripMenuItemDropDown = new ToolStripMenuItem();
       toolStrip1.SuspendLayout();
       SuspendLayout();
       // 
@@ -334,6 +337,7 @@
       deviceFindToolStripMenuItemDropDown.ShortcutKeys = Keys.Control | Keys.F;
       deviceFindToolStripMenuItemDropDown.Size = new Size(192, 22);
       deviceFindToolStripMenuItemDropDown.Text = "Find...";
+      deviceFindToolStripMenuItemDropDown.Click += deviceFindToolStripMenuItemDropDown_Click;
       // 
       // deviceSelectToolStripMenuItem
       // 
@@ -343,6 +347,32 @@
       deviceSelectToolStripMenuItem.Size = new Size(192, 22);
       deviceSelectToolStripMenuItem.Text = "Select";
       deviceSelectToolStripMenuItem.Click += deviceSelectToolStripMenuItem_Click;
+      // 
+      // deviceSelectToolStripMenuItemDropDown
+      // 
+      deviceSelectToolStripMenuItemDropDown.DisplayStyle = ToolStripItemDisplayStyle.Text;
+      deviceSelectToolStripMenuItemDropDown.DropDownItems.AddRange(new ToolStripItem[] { deviceSelectInputToolStripMenuItem, deviceSelectOutputToolStripMenuItem, deviceSelectDuplexToolStripMenuItem });
+      deviceSelectToolStripMenuItemDropDown.Name = "deviceSelectToolStripMenuItemDropDown";
+      deviceSelectToolStripMenuItemDropDown.Size = new Size(192, 22);
+      deviceSelectToolStripMenuItemDropDown.Text = "Select...";
+      // 
+      // deviceSelectInputToolStripMenuItem
+      // 
+      deviceSelectInputToolStripMenuItem.Name = "deviceSelectInputToolStripMenuItem";
+      deviceSelectInputToolStripMenuItem.Size = new Size(121, 22);
+      deviceSelectInputToolStripMenuItem.Text = "Input...";
+      // 
+      // deviceSelectOutputToolStripMenuItem
+      // 
+      deviceSelectOutputToolStripMenuItem.Name = "deviceSelectOutputToolStripMenuItem";
+      deviceSelectOutputToolStripMenuItem.Size = new Size(121, 22);
+      deviceSelectOutputToolStripMenuItem.Text = "Output...";
+      // 
+      // deviceSelectDuplexToolStripMenuItem
+      // 
+      deviceSelectDuplexToolStripMenuItem.Name = "deviceSelectDuplexToolStripMenuItem";
+      deviceSelectDuplexToolStripMenuItem.Size = new Size(121, 22);
+      deviceSelectDuplexToolStripMenuItem.Text = "Duplex...";
       // 
       // deviceSelectAllToolStripMenuItem
       // 
@@ -867,13 +897,6 @@
       helpAboutToolStripMenuItem.Text = "About Application";
       helpAboutToolStripMenuItem.Click += helpAboutToolStripMenuItem_Click;
       // 
-      // deviceSelectToolStripMenuItemDropDown
-      // 
-      deviceSelectToolStripMenuItemDropDown.DisplayStyle = ToolStripItemDisplayStyle.Text;
-      deviceSelectToolStripMenuItemDropDown.Name = "deviceSelectToolStripMenuItemDropDown";
-      deviceSelectToolStripMenuItemDropDown.Size = new Size(192, 22);
-      deviceSelectToolStripMenuItemDropDown.Text = "Select...";
-      // 
       // MainForm
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
@@ -985,6 +1008,9 @@
     private ToolStripSeparator windowToolStripSeparator1;
     private ToolStripMenuItem repeaterSelectToolStripMenuItemDropDown;
     private ToolStripMenuItem deviceSelectToolStripMenuItemDropDown;
+    private ToolStripMenuItem deviceSelectInputToolStripMenuItem;
+    private ToolStripMenuItem deviceSelectOutputToolStripMenuItem;
+    private ToolStripMenuItem deviceSelectDuplexToolStripMenuItem;
   }
 
   #endregion

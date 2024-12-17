@@ -1,11 +1,47 @@
 using AudioRepeaterManager.NET8_0.GUI.Helpers;
 using AudioRepeaterManager.NET8_0.Backend;
+using AudioRepeaterManager.NET8_0.Backend.Repositories;
 
 namespace AudioRepeaterManager.NET8_0.GUI
 {
   public partial class MainForm : Form
   {
     #region Parameters
+
+    private bool? deviceToolStripMenuItemsAbility
+    {
+      set
+      {
+        if (value is null)
+        {
+          return;
+        }
+
+        bool result = value.Value;
+
+        deviceDisableToolStripMenuItem.Enabled = result;
+        deviceEnableToolStripMenuItem.Enabled = result;
+        deviceSetAsDefaultToolStripMenuItem.Enabled = result;
+
+        deviceExportToClipboardToolStripMenuItem.Enabled = result;
+        deviceExportToXMLToolStripMenuItem.Enabled = result;
+
+        deviceRedoToolStripMenuItem.Enabled = result;
+        deviceUndoToolStripMenuItem.Enabled = result;
+
+        deviceFindToolStripMenuItemDropDown.Enabled = result;
+        deviceSelectAllToolStripMenuItem.Enabled = result;
+        deviceSelectAllDisabledToolStripMenuItem.Enabled = result;
+        deviceSelectAllDuplexToolStripMenuItem.Enabled = result;
+        deviceSelectAllEnabledToolStripMenuItem.Enabled = result;
+        deviceSelectAllOutputsToolStripMenuItem.Enabled = result;
+        deviceSelectAllInputsToolStripMenuItem.Enabled = result;
+        deviceSelectDefaultInputToolStripMenuItem.Enabled = result;
+        deviceSelectDefaultOutputToolStripMenuItem.Enabled = result;
+        deviceSelectToolStripMenuItem.Enabled = result;
+        deviceSelectToolStripMenuItemDropDown.Enabled = result;
+      }
+    }
 
     private bool preferX64
     {
@@ -60,13 +96,15 @@ namespace AudioRepeaterManager.NET8_0.GUI
       }
     }
 
+    private HashSet<DeviceRepository> deviceRepositoryHashSet;
+
     #endregion
 
     public MainForm()
     {
       InitializeComponent();
+      SetDeviceRepositories();
       PostInitializeComponent();
-
 
       windowWindowToolStripDropDownButton.DropDownItems //note: this is a test.
         .Add
@@ -82,12 +120,15 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     private void PostInitializeComponent()
     {
+      SetDeviceComponentsItemList();
       SetComponentsAbilityProperties();
       SetComponentsTextProperties();
     }
 
     private void SetComponentsAbilityProperties()
     {
+      SetDeviceComponentsAbilityProperties();
+
       if (Environment.OSVersion.Version.Major < 6)
       {
         viewPreferSystemThemeToolStripMenuItem.Enabled = false;
@@ -138,6 +179,113 @@ namespace AudioRepeaterManager.NET8_0.GUI
         viewPreferSystemThemeToolStripMenuItem.Text =
           featureNotAvailableMessage
           + viewPreferSystemThemeToolStripMenuItem;
+      }
+    }
+
+    /// <summary>
+    /// The selected device repository index.
+    /// Import device repository by system or text file.
+    /// </summary>
+    private int selectedDeviceRepositoryindex = 0;
+
+    private void SetDeviceComponentsItemList()
+    {
+      SetDeviceRepositories();
+
+      deviceRepositoryHashSet.Add
+        (
+          new DeviceRepository()
+        );
+
+      deviceRepositoryHashSet
+        .ElementAtOrDefault(selectedDeviceRepositoryindex)
+        .GetAll()
+        .ForEach
+        (
+          x =>
+          {
+            string text = string.Format
+              (
+                "{0,-6} {1,9}  {2}",
+                $"{x.Id} ",
+                $"({x.Availability})",
+                x.Name
+              );
+
+            ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem(text);
+
+            if (x.IsInput)
+            {
+              deviceSelectInputToolStripMenuItem
+                .DropDownItems
+                .Add(toolStripMenuItem);
+            }
+
+            else if (x.IsOutput)
+            {
+              deviceSelectOutputToolStripMenuItem
+                .DropDownItems
+                .Add(toolStripMenuItem);
+            }
+
+            else
+            {
+              deviceSelectDuplexToolStripMenuItem
+                .DropDownItems
+                .Add(toolStripMenuItem);
+            }
+          }
+        );
+    }
+
+    private void SetDeviceComponentsAbilityProperties()
+    {
+      var deviceRepository =
+        deviceRepositoryHashSet.ElementAtOrDefault(selectedDeviceRepositoryindex);
+
+      deviceToolStripMenuItemsAbility = false;
+
+      if
+      (
+        deviceRepositoryHashSet is null
+        || deviceRepositoryHashSet.Count == 0
+        || deviceRepository is null
+        || deviceRepository.GetAll().Count == 0
+      )
+      {
+        return;
+      }
+
+      deviceToolStripMenuItemsAbility = true;
+
+      if (deviceRepository.GetAllDuplex().Count == 0)
+      {
+        deviceSelectAllDuplexToolStripMenuItem.Enabled = false;
+        deviceSelectDuplexToolStripMenuItem.Enabled = false;
+      }
+
+      if (deviceRepository.GetAllInput().Count == 0)
+      {
+        deviceSelectAllInputsToolStripMenuItem.Enabled = false;
+        deviceSelectInputToolStripMenuItem.Enabled = false;
+      }
+
+      if (deviceRepository.GetAllOutput().Count == 0)
+      {
+        deviceSelectAllOutputsToolStripMenuItem.Enabled = false;
+        deviceSelectOutputToolStripMenuItem.Enabled = false;
+      }
+    }
+
+    private void SetDeviceRepositories()
+    {
+      if
+      (
+        deviceRepositoryHashSet is null
+        || deviceRepositoryHashSet.Count == 0
+      )
+      {
+        deviceRepositoryHashSet = new HashSet<DeviceRepository>();
       }
     }
 
@@ -875,5 +1023,85 @@ namespace AudioRepeaterManager.NET8_0.GUI
     }
 
     #endregion
+
+    private void deviceFindToolStripMenuItemDropDown_Click
+    (
+      object sender,
+      EventArgs eventArgs
+    )
+    {
+      if (sender is null)
+      {
+        return;
+      }
+
+      string result = string.Empty;
+
+      InputBox("Find Device", "Find a device by name:", ref result);
+    }
+
+    public static DialogResult InputBox
+    (
+      string title,
+      string promptText,
+      ref string value
+    )
+    {
+      Button buttonOk = new Button()
+      {
+        DialogResult = DialogResult.OK,
+        Text = "OK"
+      };
+
+      buttonOk.SetBounds(228, 160, 160, 60);
+
+      Button buttonCancel = new Button()
+      {
+        DialogResult = DialogResult.Cancel,
+        Text = "Cancel"
+      };
+
+      buttonCancel.SetBounds(400, 160, 160, 60);
+
+      Form form = new Form()
+      {
+        AcceptButton = buttonOk,
+        CancelButton = buttonCancel,
+        ClientSize = new Size(796,307),
+        FormBorderStyle = FormBorderStyle.FixedDialog,
+        MinimizeBox = false,
+        MaximizeBox = false,
+        StartPosition = FormStartPosition.CenterScreen,
+        Text = title
+      };
+
+      Label label = new Label()
+      {
+        AutoSize = true,
+        Text = promptText
+      };
+
+      label.SetBounds(36, 36, 372, 13);
+
+      TextBox textBox = new TextBox();
+      textBox.SetBounds(36, 86, 700, 20);
+
+      form
+        .Controls
+        .AddRange
+        (
+          new Control[]
+          {
+            label,
+            textBox,
+            buttonOk,
+            buttonCancel
+          }
+        );
+
+      DialogResult dialogResult = form.ShowDialog();
+      value = textBox.Text;
+      return dialogResult;
+    }
   }
 }
