@@ -5,32 +5,70 @@ namespace AudioRepeaterManager.NET8_0.GUI
 {
   public partial class MainForm : Form
   {
+    #region Parameters
+
+    private bool preferX64
+    {
+      get
+      {
+        return settingsPreferX64Application64bitToolStripMenuItem.Checked;
+      }
+      set
+      {
+        settingsPreferX64Application64bitToolStripMenuItem.Checked = value;
+        settingsPreferX86Application32bitToolStripMenuItem.Checked = !value;
+      }
+    }
+
+    private bool preferX86
+    {
+      get
+      {
+        return settingsPreferX86Application32bitToolStripMenuItem.Checked;
+      }
+      set
+      {
+        settingsPreferX86Application32bitToolStripMenuItem.Checked = value;
+        settingsPreferX64Application64bitToolStripMenuItem.Checked = !value;
+      }
+    }
+
+    private bool preferDarkTheme
+    {
+      get
+      {
+        return viewPreferDarkThemeToolStripMenuItem.Checked;
+      }
+      set
+      {
+        viewPreferDarkThemeToolStripMenuItem.Checked = value;
+        viewPreferSystemThemeToolStripMenuItem.Checked = !value;
+      }
+    }
+
+    private bool preferSystemTheme
+    {
+      get
+      {
+        return viewPreferSystemThemeToolStripMenuItem.Checked;
+      }
+      set
+      {
+
+        viewPreferSystemThemeToolStripMenuItem.Checked = value;
+        viewPreferDarkThemeToolStripMenuItem.Checked = !value;
+      }
+    }
+
+    #endregion
+
     public MainForm()
     {
       InitializeComponent();
-
-      Text = Global.ApplicationPartialAbbreviatedName;
-
-      aboutToolStripMenuItem.Text = string.Format
-        (
-          "About {0}",
-          Global.ApplicationPartialAbbreviatedName
-        );
-
-      applicationWebsiteToolStripMenuItem.Text = string.Format
-        (
-          "{0} Website",
-          Global.ReferencedApplicationName
-        );
+      PostInitializeComponent();
 
 
-      websiteToolStripMenuItem.Text = string.Format
-        (
-          "{0} Website",
-          Global.ApplicationPartialAbbreviatedName
-        );
-
-      windowToolStripDropDownButton.DropDownItems
+      windowWindowToolStripDropDownButton.DropDownItems //note: this is a test.
         .Add
         (
           new ToolStripMenuItem()
@@ -39,6 +77,71 @@ namespace AudioRepeaterManager.NET8_0.GUI
           }
         );
     }
+
+    #region Presentation logic
+
+    private void PostInitializeComponent()
+    {
+      SetComponentsAbilityProperties();
+      SetComponentsTextProperties();
+    }
+
+    private void SetComponentsAbilityProperties()
+    {
+      if (Environment.OSVersion.Version.Major < 6)
+      {
+        viewPreferSystemThemeToolStripMenuItem.Enabled = false;
+      }
+
+      if (!Environment.Is64BitOperatingSystem)
+      {
+        settingsPreferX64Application64bitToolStripMenuItem.Enabled = false;
+        settingsPreferX86Application32bitToolStripMenuItem.Enabled = false;
+        preferX86 = true;
+      }
+    }
+
+    private void SetComponentsTextProperties()
+    {
+      Text = Global.ApplicationPartialAbbreviatedName;
+
+      helpAboutToolStripMenuItem.Text = string.Format
+        (
+          "About {0}",
+          Global.ApplicationPartialAbbreviatedName
+        );
+
+      helpApplicationWebsiteToolStripMenuItem.Text = string.Format
+        (
+          "{0} Website",
+          Global.ReferencedApplicationName
+        );
+
+
+      helpWebsiteToolStripMenuItem.Text = string.Format
+        (
+          "{0} Website",
+          Global.ApplicationPartialAbbreviatedName
+        );
+
+      string featureNotAvailableMessage = "N/A: ";
+
+      if (!settingsPreferX64Application64bitToolStripMenuItem.Enabled)
+      {
+        settingsPreferX64Application64bitToolStripMenuItem.Text =
+          featureNotAvailableMessage
+          + settingsPreferX64Application64bitToolStripMenuItem;
+      }
+
+      if (!viewPreferSystemThemeToolStripMenuItem.Enabled)
+      {
+        viewPreferSystemThemeToolStripMenuItem.Text =
+          featureNotAvailableMessage
+          + viewPreferSystemThemeToolStripMenuItem;
+      }
+    }
+
+    #endregion
 
     #region Main logic
 
@@ -55,7 +158,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     #region File logic
 
-    private void closeAllToolStripMenuItem_Click
+    private void fileCloseAllToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -64,7 +167,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void closeMultipleToolStripMenuItem_Click
+    private void fileCloseMultipleToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -73,7 +176,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void closeToolStripMenuItem_Click
+    private void fileCloseToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -83,7 +186,18 @@ namespace AudioRepeaterManager.NET8_0.GUI
     }
 
 
-    private void exitToolStripMenuItem_Click
+    private void fileExitToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs eventArgs
+    )
+    {
+      // check if it is safe to exit.
+
+      Environment.Exit(0);
+    }
+
+    private void fileNewToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -92,16 +206,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void newToolStripMenuItem_Click
-    (
-      object sender,
-      EventArgs eventArgs
-    )
-    {
-
-    }
-
-    private void openToolStripMenuItem_Click
+    private void fileOpenToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -130,7 +235,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
       openFileDialog.ShowPreview = true;
     }
 
-    private void openContainingFolderToolStripMenuItem_Click
+    private void fileOpenContainingFolderToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -139,7 +244,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void saveToolStripMenuItem_Click
+    private void fileSaveToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -148,7 +253,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void saveAsToolStripMenuItem_Click
+    private void fileSaveAsToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -157,7 +262,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void saveACopyAsToolStripMenuItem_Click
+    private void fileSaveACopyAsToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -166,7 +271,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void saveAllToolStripMenuItem_Click
+    private void fileSaveAllToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -242,7 +347,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void disableToolStripMenuItem_Click
+    private void deviceDisableToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -251,7 +356,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void enableToolStripMenuItem_Click
+    private void deviceEnableToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -260,7 +365,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void refreshToolStripMenuItem_Click
+    private void deviceRefreshToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -269,7 +374,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void setAsDefaultToolStripMenuItem_Click
+    private void deviceSetAsDefaultToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -278,7 +383,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectAllDisabledToolStripMenuItem_Click
+    private void deviceSelectAllDisabledToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -287,7 +392,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectAllDuplexToolStripMenuItem_Click
+    private void deviceSelectAllDuplexToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -296,7 +401,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectAllEnabledToolStripMenuItem_Click
+    private void deviceSelectAllEnabledToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -305,7 +410,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectAllInputsToolStripMenuItem_Click
+    private void deviceSelectAllInputsToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -314,7 +419,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectAllOutputsToolStripMenuItem_Click
+    private void deviceSelectAllOutputsToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -323,7 +428,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectDefaultInputToolStripMenuItem_Click
+    private void deviceSelectDefaultInputToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -332,7 +437,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectDefaultOutputToolStripMenuItem_Click
+    private void deviceSelectDefaultOutputToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -444,7 +549,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void restartToolStripMenuItem_Click
+    private void repeaterRestartToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -453,7 +558,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectAllWithAbsentDevicesToolStripMenuItem_Click
+    private void repeaterSelectAllWithAbsentDevicesToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -480,7 +585,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectAllWithPresentDevicesToolStripMenuItem_Click
+    private void repeaterSelectAllWithPresentDevicesToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -489,7 +594,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectDevicesToolStripMenuItem_Click
+    private void repeaterSelectDevicesToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -498,7 +603,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectInputDeviceToolStripMenuItem_Click
+    private void repeaterSelectInputDeviceToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -507,7 +612,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void selectOutputDeviceToolStripMenuItem_Click
+    private void repeaterSelectOutputDeviceToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -516,7 +621,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void startToolStripMenuItem_Click
+    private void repeaterStartToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -525,7 +630,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void stopToolStripMenuItem_Click
+    private void repeaterStopToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -538,7 +643,34 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     #region View logic
 
-    private void alwaysOnTopToolStripMenuItem_Click
+    private void viewAlwaysOnTopToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs eventArgs
+    )
+    {
+
+    }
+    private void viewPreferSystemThemeToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs eventArgs
+    )
+    {
+      if (sender is null)
+      {
+        return;
+      }
+
+      if (Environment.OSVersion.Version.Major < 6)
+      {
+        viewPreferSystemThemeToolStripMenuItem.Enabled = false;
+      }
+
+      preferSystemTheme = true;
+    }
+
+    private void viewPreferDarkThemeToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -547,25 +679,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void preferSystemThemeToolStripMenuItem_Click
-    (
-      object sender,
-      EventArgs eventArgs
-    )
-    {
-
-    }
-
-    private void preferDarkThemeToolStripMenuItem_Click
-    (
-      object sender,
-      EventArgs eventArgs
-    )
-    {
-
-    }
-
-    private void toggleFullScreenModeToolStripMenuItem_Click
+    private void viewToggleFullScreenModeToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -578,15 +692,43 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     #region Settings logic
 
-    private void preferX64Application64bitToolStripMenuItem_Click
+    private void settingsPreferX64Application64bitToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
     )
     {
+      if
+      (
+        !Environment.Is64BitOperatingSystem
+        || sender is null
+      )
+      {
+        return;
+      }
+
+      preferX64 = true;
     }
 
-    private void preferX86Application32bitToolStripMenuItem_Click
+    private void settingsPreferX86Application32bitToolStripMenuItem_Click
+    (
+      object sender,
+      EventArgs eventArgs
+    )
+    {
+      if
+      (
+        !Environment.Is64BitOperatingSystem
+        || sender is null
+      )
+      {
+        return;
+      }
+
+      preferX86 = true;
+    }
+
+    private void settingsSetApplicationPathToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -595,7 +737,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void setApplicationPathToolStripMenuItem_Click
+    private void settingsStartAllRepeatersOnLoadToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -604,7 +746,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void startAllRepeatersOnLoadToolStripMenuItem_Click
+    private void settingsToggleBogusModeToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -613,16 +755,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void toggleBogusModeToolStripMenuItem_Click
-    (
-      object sender,
-      EventArgs eventArgs
-    )
-    {
-
-    }
-
-    private void toggleSafeModeToolStripMenuItem_Click
+    private void settingsToggleSafeModeToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -635,7 +768,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     #region Help logic
 
-    private void aboutToolStripMenuItem_Click
+    private void helpAboutToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -644,7 +777,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
       new AboutForm()
         .ShowDialog();
     }
-    private void commandLineArgumentsToolStripMenuItem_Click
+    private void helpCommandLineArgumentsToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -653,7 +786,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void applicationWebsiteToolStripMenuItem_Click
+    private void helpApplicationWebsiteToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -667,7 +800,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
       { }
     }
 
-    private void websiteToolStripMenuItem_Click
+    private void helpWebsiteToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -714,7 +847,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     #region Window logic
 
-    private void sortByToolStripMenuItem_Click
+    private void windowSortByToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
@@ -723,7 +856,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     }
 
-    private void windowsToolStripMenuItem_Click
+    private void windowWindowsToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
