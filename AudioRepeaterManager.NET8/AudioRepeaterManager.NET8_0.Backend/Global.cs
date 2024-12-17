@@ -83,7 +83,7 @@ namespace AudioRepeaterManager.NET8_0.Backend
               string.Format
               (
                 "Failed to determine script file extension."
-                + "Operating System '{0}' is not supported.",
+                + "Operating System {0} is not supported.",
                RuntimeInformation.OSDescription
               )
             );

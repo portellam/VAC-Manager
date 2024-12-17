@@ -87,7 +87,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Found input device => Name: {1}",
+            "Found input device => Name: {0}",
             deviceName
           )
         );
@@ -105,7 +105,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Found output device => Name: {1}",
+            "Found output device => Name: {0}",
             deviceName
           )
         );
@@ -123,7 +123,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Found duplex device => Name: {1}",
+            "Found duplex device => Name: {0}",
             deviceName
           )
         );
@@ -166,7 +166,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Got repeater\t=> Id: '{1}'",
+            "Got repeater\t=> Id: {0}",
             repeaterModel.Id
           )
         );
@@ -226,7 +226,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Got repeater\t=> Id: '{1}'",
+            "Got repeater\t=> Id: {0}",
             repeaterModel.Id
           )
         );
@@ -251,7 +251,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got repeater(s) => Count: {1}",
+          "Got repeater(s) => Count: {0}",
           RepeaterModelHashSet.Count()
         )
       );
@@ -307,7 +307,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got repeater(s) => Count: {1}",
+          "Got repeater(s) => Count: {0}",
           repeaterModelList.Count()
         )
       );
@@ -354,7 +354,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got repeater(s) => Count: {1}",
+          "Got repeater(s) => Count: {0}",
           repeaterModelList.Count()
         )
       );
@@ -380,7 +380,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to insert repeater. Repeater list will exceed maximum of {1}.",
+            "Failed to insert repeater. Repeater list will exceed maximum of {0}.",
             Global.MaxRepeaterCount
           )
         );
@@ -396,7 +396,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Repeater ID is not valid\t=> Id: '{1}'",
+            "Repeater ID is not valid\t=> Id: {0}",
             id
           )
         );
@@ -410,7 +410,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to insert repeater\t=> Id: '{1}'",
+            "Failed to insert repeater\t=> Id: {0}",
             id
           )
         );
@@ -422,7 +422,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Inserted repeater\t=> Id: '{1}'",
+          "Inserted repeater\t=> Id: {0}",
           id
         )
       );
@@ -505,7 +505,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to remove repeater. Repeater does not exist\t=> Id: '{1}'",
+            "Failed to remove repeater. Repeater does not exist\t=> Id: {0}",
             id
           )
         );
@@ -517,7 +517,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Removed repeater\t=> Id: '{1}'",
+          "Removed repeater\t=> Id: {0}",
           id
         )
       );
@@ -556,7 +556,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
           string.Format
           (
             "Failed to remove Repeater. " +
-            "Repeater does not exist\t=> FirstDeviceId: '{1}', SecondDeviceId '{2}'",
+            "Repeater does not exist\t=> FirstDeviceId: {0}, SecondDeviceId {1}",
             firstDeviceId,
             secondDeviceId
           )
@@ -569,7 +569,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Removed repeater(s)\t=> Count: '{1}'",
+          "Removed repeater(s)\t=> Count: {0}",
           count
         )
       );
@@ -607,7 +607,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
           string.Format
           (
             "Failed to remove repeater. " +
-            "Repeater name does not exist\t=> DeviceName: '{1}'",
+            "Repeater name does not exist\t=> DeviceName: {0}",
             deviceName
           )
         );
@@ -619,7 +619,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Removed repeater(s)\t=> Count: '{1}'",
+          "Removed repeater(s)\t=> Count: {0}",
           count
         )
       );
@@ -648,7 +648,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to update repeater. Repeater does not exist\t=> Id: '{1}'",
+            "Failed to update repeater. Repeater does not exist\t=> Id: {0}",
             repeaterModel.Id
           )
         );
@@ -662,7 +662,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to update repeater\t=> Id: '{1}'",
+            "Failed to update repeater\t=> Id: {0}",
             repeaterModel.Id
           )
         );
@@ -674,7 +674,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Updated repeater\t=> Id: '{1}'",
+          "Updated repeater\t=> Id: {0}",
           repeaterModel.Id
         )
       );

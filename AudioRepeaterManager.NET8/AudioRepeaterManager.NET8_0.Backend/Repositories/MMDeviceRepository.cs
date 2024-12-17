@@ -57,7 +57,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
             string
             .Format
             (
-              "Audio '{1}' device is already disabled.",
+              "Audio {0} device is already disabled.",
               mMDevice.FriendlyName
             )
           );
@@ -75,7 +75,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
           string
           .Format
           (
-            "Audio '{1}' device disabled.",
+            "Audio {0} device disabled.",
             mMDevice.FriendlyName
           )
         );
@@ -118,7 +118,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
             string
             .Format
             (
-              "Audio '{1}' device is already enabled.",
+              "Audio {0} device is already enabled.",
               mMDevice.FriendlyName
             )
           );
@@ -136,7 +136,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
           string
           .Format
           (
-            "Audio '{1}' device enabled.",
+            "Audio {0} device enabled.",
             mMDevice.FriendlyName
           )
         );
@@ -182,7 +182,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Got audio device\t=> ID: '{1}'",
+            "Got audio device\t=> ID: {0}",
             mMDevice.ID
           )
         );
@@ -216,7 +216,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got audio device(s) => Count: {1}",
+          "Got audio device(s) => Count: {0}",
           MMDeviceList.Count()
         )
       );
@@ -249,7 +249,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got audio disabled device(s) => Count: {1}",
+          "Got audio disabled device(s) => Count: {0}",
           MMDeviceList
             .Where
             (
@@ -287,7 +287,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got audio enabled device(s) => Count: {1}",
+          "Got audio enabled device(s) => Count: {0}",
           MMDeviceList
             .Where
             (
@@ -339,7 +339,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got audio device(s) => Count: {1}",
+          "Got audio device(s) => Count: {0}",
           mMDeviceList.Count()
         )
       );

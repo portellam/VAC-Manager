@@ -17,7 +17,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Models
     public byte defaultPrefillPercentage = PrefillOptions[2];
     public byte defaultResyncAtPercentage = ResyncAtOptions[3];
     //public string defaultPathName = Common.ExpectedExecutableFullPath; //FIXME
-    public string defaultWindowName = "{0} to {1}";
+    public string defaultWindowName = "{0} to {0}";
     public uint defaultSampleRateKHz = SampleRateOptions[5];
     public ushort defaultBufferDurationMs = BufferMsOptions[2];
 
@@ -702,7 +702,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Models
       (
         string.Format
         (
-          "PropertyChanged: '{1}'" +
+          "PropertyChanged: {0}",
           propertyName
         )
       );
