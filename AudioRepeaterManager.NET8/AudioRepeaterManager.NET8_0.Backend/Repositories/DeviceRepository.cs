@@ -1,5 +1,5 @@
-﻿using AudioSwitcher.AudioApi.CoreAudio;
-using NAudio.CoreAudioApi;
+﻿using NAudio.CoreAudioApi;
+using AudioSwitcher.AudioApi.CoreAudio;                                         // NAudio Issue #421: AudioSwitcher must succeed NAudio.
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -70,9 +70,9 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
     [ExcludeFromCodeCoverage]
     public DeviceRepository()
     {
-      coreAudioController = new CoreAudioController();
       DeviceModelHashSet = new HashSet<DeviceModel>();
       MMDeviceRepository = new MMDeviceRepository();
+      coreAudioController = new CoreAudioController();                          // NAudio Issue #421: AudioSwitcher must succeed NAudio.
       uint id = 0;
 
       MMDeviceRepository
@@ -87,8 +87,8 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
                 id,
                 x.ID,
                 x.FriendlyName,
-                x.DataFlow == DataFlow.Capture,
-                x.DataFlow == DataFlow.Render,
+                x.DataFlow is DataFlow.Capture,
+                x.DataFlow is DataFlow.Render,
                 IsPresent(x.State)
               );
 
@@ -223,7 +223,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Got device\t=> Id: '{1}'",
+            "Got device\t=> Id: {0}",
             deviceModel.Id
           )
         );
@@ -248,7 +248,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got device(s) => Count: {1}",
+          "Got device(s) => Count: {0}",
           DeviceModelHashSet.Count()
         )
       );
@@ -302,7 +302,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got disabled device(s) => Count: {1}",
+          "Got disabled device(s) => Count: {0}",
           deviceModelList.Count()
         )
       );
@@ -330,7 +330,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got duplex device(s) => Count: {1}",
+          "Got duplex device(s) => Count: {0}",
           deviceModelList.Count()
         )
       );
@@ -367,7 +367,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got enabled device(s) => Count: {1}",
+          "Got enabled device(s) => Count: {0}",
           deviceModelList.Count()
         )
       );
@@ -395,7 +395,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got input device(s) => Count: {1}",
+          "Got input device(s) => Count: {0}",
           deviceModelList.Count()
         )
       );
@@ -423,7 +423,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got output device(s) => Count: {1}",
+          "Got output device(s) => Count: {0}",
           deviceModelList.Count()
         )
       );
@@ -451,7 +451,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got present device(s) => Count: {1}",
+          "Got present device(s) => Count: {0}",
           deviceModelList.Count()
         )
       );
@@ -543,7 +543,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Got device(s) => Count: {1}",
+          "Got device(s) => Count: {0}",
           deviceModelList.Count()
         )
       );
@@ -587,7 +587,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to insert device. Device list will exceed maximum of {1}.",
+            "Failed to insert device. Device list will exceed maximum of {0}.",
             Global.MaxEndpointCount
           )
         );
@@ -603,7 +603,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Device ID is not valid\t=> Id: '{1}'",
+            "Device ID is not valid\t=> Id: {0}",
             id
           )
         );
@@ -617,7 +617,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to insert device\t=> Id: '{1}'",
+            "Failed to insert device\t=> Id: {0}",
             id
           )
         );
@@ -629,7 +629,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Inserted device\t=> Id: '{1}'",
+          "Inserted device\t=> Id: {0}",
           id
         )
       );
@@ -708,7 +708,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to remove device. Device does not exist\t=> Id: '{1}'",
+            "Failed to remove device. Device does not exist\t=> Id: {0}",
             id
           )
         );
@@ -720,7 +720,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Removed device\t=> Id: '{1}'",
+          "Removed device\t=> Id: {0}",
           id
         )
       );
@@ -752,7 +752,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to remove device. Device does not exist\t=> ActualId: '{1}'",
+            "Failed to remove device. Device does not exist\t=> ActualId: {0}",
             actualId
           )
         );
@@ -764,7 +764,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Removed device(s)\t=> Count: '{1}'",
+          "Removed device(s)\t=> Count: {0}",
           count
         )
       );
@@ -796,7 +796,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to remove device. Device does not exist\t=> Name: '{1}'",
+            "Failed to remove device. Device does not exist\t=> Name: {0}",
             name
           )
         );
@@ -808,7 +808,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Removed device(s)\t=> Count: '{1}'",
+          "Removed device(s)\t=> Count: {0}",
           count
         )
       );
@@ -859,7 +859,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to update device. Device does not exist\t=> Id: '{1}'",
+            "Failed to update device. Device does not exist\t=> Id: {0}",
             deviceModel.Id
           )
         );
@@ -873,7 +873,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to update device\t=> Id: '{1}'",
+            "Failed to update device\t=> Id: {0}",
             deviceModel.Id
           )
         );
@@ -885,7 +885,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
       (
         string.Format
         (
-          "Updated device\t=> Id: '{1}'",
+          "Updated device\t=> Id: {0}",
           deviceModel.Id
         )
       );
@@ -911,7 +911,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Repositories
         (
           string.Format
           (
-            "Failed to update device. Actual device is null\t=> Id: '{1}'",
+            "Failed to update device. Actual device is null\t=> Id: {0}",
             id
           )
         );

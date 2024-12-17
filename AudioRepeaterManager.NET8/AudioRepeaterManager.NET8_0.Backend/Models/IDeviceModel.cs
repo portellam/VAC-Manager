@@ -22,6 +22,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Models
     bool IsPresent { get; set; }
     event PropertyChangedEventHandler PropertyChanged;
     string Name { get; set; }
+    string Availability { get; }
 
     #endregion
 

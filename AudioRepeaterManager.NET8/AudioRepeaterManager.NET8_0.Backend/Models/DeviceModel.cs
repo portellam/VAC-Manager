@@ -50,6 +50,9 @@ namespace AudioRepeaterManager.NET8_0.Backend.Models
       }
     }
 
+    /// <summary>
+    /// Is both Input and Output.
+    /// </summary>
     public bool IsDuplex
     {
       get
@@ -62,11 +65,16 @@ namespace AudioRepeaterManager.NET8_0.Backend.Models
     {
       get
       {
-        return isInput.Value;
+        if (isInput is null)
+        {
+          return false;
+        }
+
+        return (bool)isInput;
       }
       set
       {
-        if (isInput is null)
+        if ((bool?)value is null)
         {
           return;
         }
@@ -80,11 +88,16 @@ namespace AudioRepeaterManager.NET8_0.Backend.Models
     {
       get
       {
-        return isOutput.Value;
+        if (isOutput is null)
+        {
+          return false;
+        }
+
+        return (bool)isOutput;
       }
       set
       {
-        if (isOutput is null)
+        if ((bool?)value is null)
         {
           return;
         }
@@ -98,11 +111,16 @@ namespace AudioRepeaterManager.NET8_0.Backend.Models
     {
       get
       {
-        return isPresent.Value;
+        if (isPresent is null)
+        {
+          return false;
+        }
+
+        return (bool)isPresent;
       }
       set
       {
-        if (isPresent is null)
+        if ((bool?)value is null)
         {
           return;
         }
@@ -124,6 +142,23 @@ namespace AudioRepeaterManager.NET8_0.Backend.Models
       {
         name = value;
         OnPropertyChanged(nameof(ChannelConfig));
+      }
+    }
+
+    public string Availability
+    { 
+      get
+      {
+        if
+        (
+          isPresent is null
+          || isPresent.Value
+        )
+        {
+          return "Absent";
+        }
+
+        return "Present";
       }
     }
 
@@ -154,9 +189,9 @@ namespace AudioRepeaterManager.NET8_0.Backend.Models
       Id = id;
       ActualId = actualId;
       Name = name;
-      IsInput = isInput.Value;
-      IsOutput = isOutput.Value;
-      IsPresent = isPresent.Value;
+      IsInput = (bool)isInput;
+      IsOutput = (bool)isOutput;
+      IsPresent = (bool)isPresent;
     }
 
     /// <summary>
@@ -203,7 +238,7 @@ namespace AudioRepeaterManager.NET8_0.Backend.Models
       (
         string.Format
         (
-          "PropertyChanged: '{1}'" +
+          "PropertyChanged: {0}",
           propertyName
         )
       );
