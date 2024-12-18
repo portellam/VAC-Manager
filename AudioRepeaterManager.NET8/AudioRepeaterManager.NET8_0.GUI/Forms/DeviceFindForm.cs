@@ -24,6 +24,8 @@
       }
     }
 
+    private readonly int maxHeight = 187;
+
     #endregion
 
     #region Presentation Logic
@@ -33,6 +35,7 @@
     /// </summary>
     public DeviceFindForm()
     {
+      PreInitializeComponent();
       InitializeComponent();
       PostInitializeComponent();
     }
@@ -42,77 +45,86 @@
       SetComponentsAbilityProperties();
       this.Refresh();
     }
+    private void PreInitializeComponent()
+    {
+      SetFormMaxSize();
+    }
 
     private void SetComponentsAbilityProperties()
     {
       areDeviceFindArrowButtonsEnabled = true;
     }
 
+    private void SetFormMaxSize()
+    {
+      this.MaximumSize = new Size(Int32.MaxValue, maxHeight);
+    }
+
     #endregion
 
     #region Find logic
 
-    private void deviceFindForm_Load(object sender, EventArgs e)
+    private void deviceFindForm_Load(object sender, EventArgs eventArgsventArgs)
     {
 
     }
 
-    private void deviceFindCloseButton_Click(object sender, EventArgs e)
+    private void deviceFindCloseButton_Click(object sender, EventArgs eventArgs)
     {
       Close();
     }
 
-    private void deviceFindComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    private void deviceFindComboBox_SelectedIndexChanged(object sender, EventArgs eventArgs)
     {
 
     }
 
-    private void deviceFindCountButton_Click(object sender, EventArgs e)
+    private void deviceFindCountButton_Click(object sender, EventArgs eventArgs)
     {
 
     }
 
-    private void deviceFindDirectionArrowCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void deviceFindDirectionArrowCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
     {
       areDeviceFindArrowButtonsEnabled = !areDeviceFindArrowButtonsEnabled;
     }
 
-    private void deviceFindEnabledCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void deviceFindEnabledCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
     {
 
     }
 
-    private void deviceFindInputCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void deviceFindInputCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
     {
 
     }
 
-    private void deviceFindNextArrowButton_Click(object sender, EventArgs e)
+    private void deviceFindNextArrowButton_Click(object sender, EventArgs eventArgs)
     {
 
     }
 
-    private void deviceFindNextButton_Click(object sender, EventArgs e)
+    private void deviceFindNextButton_Click(object sender, EventArgs eventArgs)
     {
 
     }
 
-    private void deviceFindOutputCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void deviceFindOutputCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
     {
 
     }
 
-    private void deviceFindInSelectionCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void deviceFindInSelectionCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
     {
 
     }
 
-    private void deviceFindPresentCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void deviceFindPresentCheckBox_CheckedChanged(object sender, EventArgs eventArgs)
     {
 
     }
 
-    private void deviceFindPreviousArrowButton_Click(object sender, EventArgs e)
+    private void deviceFindPreviousArrowButton_Click(object sender, EventArgs eventArgs)
     {
 
     }

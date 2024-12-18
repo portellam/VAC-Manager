@@ -100,7 +100,7 @@
       // 
       // deviceFindInSelectionCheckBox
       // 
-      deviceFindInSelectionCheckBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+      deviceFindInSelectionCheckBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       deviceFindInSelectionCheckBox.AutoSize = true;
       deviceFindInSelectionCheckBox.Location = new Point(239, 49);
       deviceFindInSelectionCheckBox.Name = "deviceFindInSelectionCheckBox";
