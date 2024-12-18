@@ -1,6 +1,9 @@
 using AudioRepeaterManager.NET8_0.GUI.Helpers;
 using AudioRepeaterManager.NET8_0.Backend;
 using AudioRepeaterManager.NET8_0.Backend.Repositories;
+using AudioRepeaterManager.NET8_0.GUI.Extensions;
+using System.ComponentModel;
+using AudioRepeaterManager.NET8_0.GUI.Forms;
 
 namespace AudioRepeaterManager.NET8_0.GUI
 {
@@ -29,7 +32,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
         deviceRedoToolStripMenuItem.Enabled = result;
         deviceUndoToolStripMenuItem.Enabled = result;
 
-        deviceFindToolStripMenuItemDropDown.Enabled = result;
+        deviceFindToolStripMenuItem.Enabled = result;
         deviceSelectAllToolStripMenuItem.Enabled = result;
         deviceSelectAllDisabledToolStripMenuItem.Enabled = result;
         deviceSelectAllDuplexToolStripMenuItem.Enabled = result;
@@ -100,6 +103,11 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     #endregion
 
+    #region Presentation logic
+
+    /// <summary>
+    /// The constructor.
+    /// </summary>
     public MainForm()
     {
       InitializeComponent();
@@ -116,11 +124,9 @@ namespace AudioRepeaterManager.NET8_0.GUI
         );
     }
 
-    #region Presentation logic
-
     private void PostInitializeComponent()
     {
-      SetDeviceComponentsItemList();
+      SetComponentsItemLists();
       SetComponentsAbilityProperties();
       SetComponentsTextProperties();
     }
@@ -188,7 +194,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
     /// </summary>
     private int selectedDeviceRepositoryindex = 0;
 
-    private void SetDeviceComponentsItemList()
+    private void SetComponentsItemLists()
     {
       SetDeviceRepositories();
 
@@ -212,7 +218,10 @@ namespace AudioRepeaterManager.NET8_0.GUI
                 x.Name
               );
 
-            ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem(text);
+            ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem(text)
+            {
+              ToolTipText = x.Name
+            };
 
             if (x.IsInput)
             {
@@ -1024,20 +1033,14 @@ namespace AudioRepeaterManager.NET8_0.GUI
 
     #endregion
 
-    private void deviceFindToolStripMenuItemDropDown_Click
+    private void deviceFindToolStripMenuItem_Click
     (
       object sender,
       EventArgs eventArgs
     )
     {
-      if (sender is null)
-      {
-        return;
-      }
-
-      string result = string.Empty;
-
-      InputBox("Find Device", "Find a device by name:", ref result);
+      new DeviceFindForm()
+        .ShowDialog();
     }
 
     public static DialogResult InputBox
@@ -1067,7 +1070,7 @@ namespace AudioRepeaterManager.NET8_0.GUI
       {
         AcceptButton = buttonOk,
         CancelButton = buttonCancel,
-        ClientSize = new Size(796,307),
+        ClientSize = new Size(796, 307),
         FormBorderStyle = FormBorderStyle.FixedDialog,
         MinimizeBox = false,
         MaximizeBox = false,

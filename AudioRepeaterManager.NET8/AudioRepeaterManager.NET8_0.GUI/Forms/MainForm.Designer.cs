@@ -65,7 +65,7 @@
       deviceDisableToolStripMenuItem = new ToolStripMenuItem();
       deviceRefreshToolStripMenuItem = new ToolStripMenuItem();
       deviceToolStripSeparator2 = new ToolStripSeparator();
-      deviceFindToolStripMenuItemDropDown = new ToolStripMenuItem();
+      deviceFindToolStripMenuItem = new ToolStripMenuItem();
       deviceSelectToolStripMenuItem = new ToolStripMenuItem();
       deviceSelectToolStripMenuItemDropDown = new ToolStripMenuItem();
       deviceSelectInputToolStripMenuItem = new ToolStripMenuItem();
@@ -261,7 +261,7 @@
       // 
       deviceToolStripLabel.AutoToolTip = false;
       deviceToolStripLabel.DisplayStyle = ToolStripItemDisplayStyle.Text;
-      deviceToolStripLabel.DropDownItems.AddRange(new ToolStripItem[] { deviceUndoToolStripMenuItem, deviceRedoToolStripMenuItem, deviceToolStripSeparator1, deviceSetAsDefaultToolStripMenuItem, deviceEnableToolStripMenuItem, deviceDisableToolStripMenuItem, deviceRefreshToolStripMenuItem, deviceToolStripSeparator2, deviceFindToolStripMenuItemDropDown, deviceSelectToolStripMenuItem, deviceSelectToolStripMenuItemDropDown, deviceSelectAllToolStripMenuItem, deviceSelectAllEnabledToolStripMenuItem, deviceSelectAllDisabledToolStripMenuItem, deviceSelectAllInputsToolStripMenuItem, deviceSelectAllOutputsToolStripMenuItem, deviceSelectAllDuplexToolStripMenuItem, deviceSelectDefaultInputToolStripMenuItem, deviceSelectDefaultOutputToolStripMenuItem, deviceToolStripSeparator3, deviceImportFromClipboardToolStripMenuItem, deviceImportFromXMLToolStripMenuItem, deviceExportToClipboardToolStripMenuItem, deviceExportToXMLToolStripMenuItem });
+      deviceToolStripLabel.DropDownItems.AddRange(new ToolStripItem[] { deviceUndoToolStripMenuItem, deviceRedoToolStripMenuItem, deviceToolStripSeparator1, deviceSetAsDefaultToolStripMenuItem, deviceEnableToolStripMenuItem, deviceDisableToolStripMenuItem, deviceRefreshToolStripMenuItem, deviceToolStripSeparator2, deviceFindToolStripMenuItem, deviceSelectToolStripMenuItem, deviceSelectToolStripMenuItemDropDown, deviceSelectAllToolStripMenuItem, deviceSelectAllEnabledToolStripMenuItem, deviceSelectAllDisabledToolStripMenuItem, deviceSelectAllInputsToolStripMenuItem, deviceSelectAllOutputsToolStripMenuItem, deviceSelectAllDuplexToolStripMenuItem, deviceSelectDefaultInputToolStripMenuItem, deviceSelectDefaultOutputToolStripMenuItem, deviceToolStripSeparator3, deviceImportFromClipboardToolStripMenuItem, deviceImportFromXMLToolStripMenuItem, deviceExportToClipboardToolStripMenuItem, deviceExportToXMLToolStripMenuItem });
       deviceToolStripLabel.Name = "deviceToolStripLabel";
       deviceToolStripLabel.Size = new Size(55, 22);
       deviceToolStripLabel.Text = "Device";
@@ -330,14 +330,13 @@
       deviceToolStripSeparator2.Name = "deviceToolStripSeparator2";
       deviceToolStripSeparator2.Size = new Size(189, 6);
       // 
-      // deviceFindToolStripMenuItemDropDown
+      // deviceFindToolStripMenuItem
       // 
-      deviceFindToolStripMenuItemDropDown.DisplayStyle = ToolStripItemDisplayStyle.Text;
-      deviceFindToolStripMenuItemDropDown.Name = "deviceFindToolStripMenuItemDropDown";
-      deviceFindToolStripMenuItemDropDown.ShortcutKeys = Keys.Control | Keys.F;
-      deviceFindToolStripMenuItemDropDown.Size = new Size(192, 22);
-      deviceFindToolStripMenuItemDropDown.Text = "Find...";
-      deviceFindToolStripMenuItemDropDown.Click += deviceFindToolStripMenuItemDropDown_Click;
+      deviceFindToolStripMenuItem.Name = "deviceFindToolStripMenuItem";
+      deviceFindToolStripMenuItem.Size = new Size(192, 22);
+      deviceFindToolStripMenuItem.Text = "Find...";
+      deviceFindToolStripMenuItem.ToolTipText = "Find Device";
+      deviceFindToolStripMenuItem.Click += deviceFindToolStripMenuItem_Click;
       // 
       // deviceSelectToolStripMenuItem
       // 
@@ -903,6 +902,7 @@
       AutoScaleMode = AutoScaleMode.Font;
       ClientSize = new Size(800, 450);
       Controls.Add(toolStrip1);
+      DoubleBuffered = true;
       Name = "MainForm";
       Text = "MainForm";
       Load += MainForm_Load;
@@ -932,7 +932,6 @@
     private ToolStripMenuItem helpCommandLineArgumentsToolStripMenuItem;
     private ToolStripMenuItem deviceExportToClipboardToolStripMenuItem;
     private ToolStripMenuItem deviceExportToXMLToolStripMenuItem;
-    private ToolStripMenuItem deviceFindToolStripMenuItemDropDown;
     private ToolStripMenuItem deviceImportFromClipboardToolStripMenuItem;
     private ToolStripMenuItem deviceImportFromXMLToolStripMenuItem;
     private ToolStripMenuItem deviceSelectAllToolStripMenuItem;
@@ -1011,6 +1010,7 @@
     private ToolStripMenuItem deviceSelectInputToolStripMenuItem;
     private ToolStripMenuItem deviceSelectOutputToolStripMenuItem;
     private ToolStripMenuItem deviceSelectDuplexToolStripMenuItem;
+    private ToolStripMenuItem deviceFindToolStripMenuItem;
   }
 
   #endregion

@@ -165,6 +165,7 @@
       AutoScaleMode = AutoScaleMode.Font;
       ClientSize = new Size(507, 327);
       Controls.Add(tableLayoutPanel);
+      DoubleBuffered = true;
       FormBorderStyle = FormBorderStyle.FixedDialog;
       Margin = new Padding(4, 3, 4, 3);
       MaximizeBox = false;
